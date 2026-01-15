@@ -49,7 +49,7 @@
     .container {
       position: relative;
       z-index: 1;
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
     }
 
@@ -82,57 +82,85 @@
       font-size: 1rem;
       font-weight: 600;
       color: var(--accent-teal);
-      margin: 3rem 0 1rem 0;
+      margin: 3rem 0 1.5rem 0;
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
 
-    .card-grid {
+    .tile-grid {
       display: grid;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
     }
 
-    .card {
+    .tile {
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
       border-radius: 12px;
-      padding: 1.5rem;
+      padding: 2rem;
       text-decoration: none;
       color: inherit;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: all 0.2s ease;
+      flex-direction: column;
+      align-items: flex-start;
+      transition: all 0.3s ease;
       cursor: pointer;
+      position: relative;
+      overflow: hidden;
     }
 
-    .card:hover {
+    .tile::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-teal));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .tile:hover::before {
+      transform: scaleX(1);
+    }
+
+    .tile:hover {
       border-color: var(--accent-blue);
-      transform: translateX(4px);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(59, 130, 246, 0.2);
     }
 
-    .card-content h3 {
-      font-size: 1.15rem;
-      font-weight: 600;
+    .tile-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .tile h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
       color: var(--text-primary);
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.5rem;
     }
 
-    .card-content p {
+    .tile p {
       font-size: 0.95rem;
       color: var(--text-secondary);
+      line-height: 1.5;
+      flex: 1;
     }
 
-    .arrow {
+    .tile-badge {
+      margin-top: 1rem;
+      padding: 0.35rem 0.85rem;
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-family: 'JetBrains Mono', monospace;
       color: var(--accent-blue);
-      font-size: 1.5rem;
-      opacity: 0.5;
-      transition: opacity 0.2s;
-    }
-
-    .card:hover .arrow {
-      opacity: 1;
     }
 
     .footer {
@@ -161,85 +189,81 @@
       h1 {
         font-size: 2.5rem;
       }
+
+      .tile-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="label">CONDITIONSPORTAL IMPLEMENTATION GUIDE</div>
+    <div class="label">CONDITIONS PORTAL</div>
     <h1>🎯 Strategy Hub</h1>
-    <p class="subtitle">35 Tickets • Full Specifications • Dependency Management</p>
+    <p class="subtitle">Complete Implementation Guide from POC to Production</p>
 
     <div class="section-title">📋 Core Documentation</div>
-    <div class="card-grid">
-      <a href="tracts/tract-01-detailed-features.html" class="card">
-        <div class="card-content">
-          <h3>Complete Feature Specs</h3>
-          <p>35 tickets with acceptance criteria, APIs, and fields</p>
-        </div>
-        <div class="arrow">→</div>
+    <div class="tile-grid">
+      <a href="tracts/tract-01-detailed-features.html" class="tile">
+        <div class="tile-icon">📋</div>
+        <h3>Complete Feature Specs</h3>
+        <p>All 35 tickets with acceptance criteria, API endpoints, field specifications, and data models</p>
+        <span class="tile-badge">35 TICKETS</span>
       </a>
 
-      <a href="tracts/tract-01-dependency-management.html" class="card">
-        <div class="card-content">
-          <h3>Dependency Strategy</h3>
-          <p>3-tier breakdown (Platform → Role → Feature)</p>
-        </div>
-        <div class="arrow">→</div>
+      <a href="tracts/tract-01-dependency-management.html" class="tile">
+        <div class="tile-icon">🎯</div>
+        <h3>Dependency Strategy</h3>
+        <p>Three-tier breakdown approach to minimize blocking dependencies and enable parallel work</p>
+        <span class="tile-badge">STRATEGY</span>
       </a>
 
-      <a href="tracts/TICKET-MAPPING-MASTER.md" class="card">
-        <div class="card-content">
-          <h3>Ticket Mapping</h3>
-          <p>Complete dependency chains and parallel work</p>
-        </div>
-        <div class="arrow">→</div>
+      <a href="#data-models" class="tile">
+        <div class="tile-icon">🗄️</div>
+        <h3>Data Models</h3>
+        <p>Entity relationships, field definitions, and database schema for Conditions Portal</p>
+        <span class="tile-badge">REFERENCE</span>
       </a>
     </div>
 
-    <div class="section-title">🔌 Workflow & Strategy</div>
-    <div class="card-grid">
-      <a href="plugin-discussion.html" class="card">
-        <div class="card-content">
-          <h3>Plugin Discussion</h3>
-          <p>60-minute meeting on Claude Code integration</p>
-        </div>
-        <div class="arrow">→</div>
+    <div class="section-title">🔌 Workflow & Process</div>
+    <div class="tile-grid">
+      <a href="plugin-discussion.html" class="tile">
+        <div class="tile-icon">🚀</div>
+        <h3>Plugin Discussion</h3>
+        <p>60-minute team meeting on Claude Code plugin architecture and GitHub integration</p>
+        <span class="tile-badge">60 MIN</span>
       </a>
 
-      <a href="deep-dive.html" class="card">
-        <div class="card-content">
-          <h3>Deep Dive Analysis</h3>
-          <p>Technical Q&A and implementation details</p>
-        </div>
-        <div class="arrow">→</div>
+      <a href="deep-dive.html" class="tile">
+        <div class="tile-icon">🔍</div>
+        <h3>Deep Dive Analysis</h3>
+        <p>Technical Q&A, label lifecycle, and detailed implementation workflows</p>
+        <span class="tile-badge">TECHNICAL</span>
       </a>
     </div>
 
     <div class="section-title">📚 Resources</div>
-    <div class="card-grid">
-      <a href="tracts/index.html" class="card">
-        <div class="card-content">
-          <h3>Tracts Library</h3>
-          <p>Browse all implementation guides</p>
-        </div>
-        <div class="arrow">→</div>
+    <div class="tile-grid">
+      <a href="tracts/index.html" class="tile">
+        <div class="tile-icon">📚</div>
+        <h3>Tracts Library</h3>
+        <p>Browse all implementation guides and focused strategy documents</p>
+        <span class="tile-badge">LIBRARY</span>
       </a>
 
-      <a href="https://conditions-portal-pr-ahby.bolt.host/" target="_blank" class="card">
-        <div class="card-content">
-          <h3>Live POC Demo</h3>
-          <p>Interactive prototype with test scenarios</p>
-        </div>
-        <div class="arrow">→</div>
+      <a href="https://conditions-portal-pr-ahby.bolt.host/" target="_blank" class="tile">
+        <div class="tile-icon">🌐</div>
+        <h3>Live POC Demo</h3>
+        <p>Interactive prototype with scenario selector and pre-staged test data</p>
+        <span class="tile-badge">EXTERNAL</span>
       </a>
 
-      <a href="transcript.txt" target="_blank" class="card">
-        <div class="card-content">
-          <h3>Meeting Transcript</h3>
-          <p>Full 60-minute discussion verbatim</p>
-        </div>
-        <div class="arrow">→</div>
+      <a href="transcript.txt" target="_blank" class="tile">
+        <div class="tile-icon">💬</div>
+        <h3>Meeting Transcript</h3>
+        <p>Complete 60-minute discussion transcript with all Q&A</p>
+        <span class="tile-badge">TEXT</span>
       </a>
     </div>
 

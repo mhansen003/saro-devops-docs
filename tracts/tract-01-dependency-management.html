@@ -637,350 +637,114 @@
                 </div>
             </div>
 
-            <!-- Ticket Examples -->
+            <!-- Ticket Template Examples -->
             <div class="section">
-                <h2 class="section-title">🎫 Ticket Structure Examples</h2>
+                <h2 class="section-title">🎫 Ticket Structure Templates by Tier</h2>
 
-                <h3 class="subsection-title">Tier 1: Platform Foundation Ticket</h3>
-                <div class="ticket">
-                    <div class="ticket-header">
-                        <div class="ticket-id">#CP-001</div>
-                        <div class="ticket-labels">
-                            <span class="label label-platform">Platform</span>
-                            <span class="label label-size-large">Large</span>
-                            <span class="label label-priority-high">Priority: High</span>
-                        </div>
-                    </div>
-                    <div class="ticket-title">Conditions Portal - Platform Foundation (Read-Only Grid)</div>
-                    <div class="ticket-description">
-                        <strong>Summary:</strong>
-                        <p>Create the foundational platform for the Conditions Portal, including a read-only grid/table that displays condition data for all user roles. This establishes the core infrastructure, data models, API contracts, and UI framework that all subsequent role and feature work will build upon.</p>
+                <p style="margin-bottom: 30px; color: #b8bcc8;">The following templates show <strong>what to include</strong> at each tier level. These are <em>conceptual templates</em>, not actual ticket specifications. For complete ticket details, see <a href="tract-01-detailed-features.html" style="color: #8b9eff;">Tract 01: Detailed Features</a>.</p>
 
-                        <strong style="display: block; margin-top: 15px;">Scope:</strong>
-                        <ul style="margin-left: 30px;">
-                            <li>Data model for conditions (id, type, status, assigned_to, due_date, description, etc.)</li>
-                            <li>API endpoints: GET /conditions, GET /conditions/{id}</li>
-                            <li>Grid component displaying conditions data (sortable, filterable)</li>
-                            <li>Basic authentication and session management</li>
-                            <li>Top-level navigation structure (placeholder for roles)</li>
-                            <li>Empty state handling</li>
-                            <li>Responsive layout foundation</li>
-                        </ul>
-
-                        <strong style="display: block; margin-top: 15px;">Acceptance Criteria:</strong>
-                        <ul style="margin-left: 30px;">
-                            <li>✓ User can log in and see the conditions grid</li>
-                            <li>✓ Grid displays all conditions with columns: ID, Type, Status, Assigned To, Due Date, Description</li>
-                            <li>✓ Grid supports sorting by any column</li>
-                            <li>✓ Grid supports filtering by status and assigned user</li>
-                            <li>✓ Clicking a row shows condition details in a read-only detail panel</li>
-                            <li>✓ No action buttons or edit capabilities (read-only)</li>
-                            <li>✓ API returns JSON with consistent structure documented</li>
-                            <li>✓ Works on desktop and mobile viewports</li>
-                        </ul>
-
-                        <strong style="display: block; margin-top: 15px;">Out of Scope:</strong>
-                        <ul style="margin-left: 30px;">
-                            <li>Any create, update, or delete operations</li>
-                            <li>Role-specific views or features</li>
-                            <li>Document upload/download</li>
-                            <li>Notifications or alerts</li>
-                        </ul>
-                    </div>
-                    <div class="ticket-dependencies">
-                        <strong>Dependencies:</strong> None (Foundation ticket)<br>
-                        <strong>Blocks:</strong>
-                        <span class="dependency-link">#CP-100</span>
-                        <span class="dependency-link">#CP-200</span>
-                        <span class="dependency-link">#CP-300</span>
-                    </div>
+                <h3 class="subsection-title">Template: Tier 1 (Platform Foundation)</h3>
+                <div class="callout">
+                    <div class="callout-title">What Belongs in a Platform Ticket</div>
+                    <ul style="margin-left: 30px; margin-top: 10px;">
+                        <li><strong>Data Models:</strong> Complete entity definitions with fields, types, and relationships</li>
+                        <li><strong>API Contracts:</strong> Core read endpoints (GET /resource, GET /resource/{id})</li>
+                        <li><strong>Base UI Components:</strong> Grid/table, detail panels, navigation shell</li>
+                        <li><strong>Authentication:</strong> Login, session management, role detection</li>
+                        <li><strong>Read-Only Scope:</strong> Display data only, no create/update/delete operations</li>
+                        <li><strong>Infrastructure:</strong> Logging, error handling, performance patterns</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>Dependencies:</strong> None (this IS the foundation)</p>
+                    <p><strong>Blocks:</strong> All Tier 2 role scaffolding tickets</p>
                 </div>
 
-                <h3 class="subsection-title">Tier 2: Role Scaffolding Ticket</h3>
-                <div class="ticket">
-                    <div class="ticket-header">
-                        <div class="ticket-id">#CP-100</div>
-                        <div class="ticket-labels">
-                            <span class="label label-role">Role</span>
-                            <span class="label label-size-medium">Medium</span>
-                            <span class="label label-priority-high">Priority: High</span>
-                        </div>
-                    </div>
-                    <div class="ticket-title">Processor Role Shell - UI Scaffolding & Navigation</div>
-                    <div class="ticket-description">
-                        <strong>Summary:</strong>
-                        <p>Create the Processor role-specific view and navigation shell. This establishes the UI container and action panel framework where processor-specific features will be implemented, but does not include feature business logic yet.</p>
-
-                        <strong style="display: block; margin-top: 15px;">Scope:</strong>
-                        <ul style="margin-left: 30px;">
-                            <li>Processor-specific view of the conditions grid (filtered to show processor-assigned items)</li>
-                            <li>Action panel on the right side with placeholder sections for future features</li>
-                            <li>Navigation to toggle between "My Conditions" and "All Conditions"</li>
-                            <li>Permission checks: user must have "processor" role to access this view</li>
-                            <li>Empty states for each action section (e.g., "Document actions will appear here")</li>
-                        </ul>
-
-                        <strong style="display: block; margin-top: 15px;">Acceptance Criteria:</strong>
-                        <ul style="margin-left: 30px;">
-                            <li>✓ Processor sees grid filtered to their assigned conditions by default</li>
-                            <li>✓ Action panel displays on right side with labeled sections: "Document Requests", "Review Actions", "Decision Actions"</li>
-                            <li>✓ Each action section shows placeholder text (no functional buttons yet)</li>
-                            <li>✓ Navigation allows toggle between "My Conditions" and "All Conditions"</li>
-                            <li>✓ Non-processor users cannot access this view (permission check)</li>
-                            <li>✓ Selecting a condition highlights it and updates action panel context</li>
-                        </ul>
-
-                        <strong style="display: block; margin-top: 15px;">Out of Scope:</strong>
-                        <ul style="margin-left: 30px;">
-                            <li>Any functional action buttons (request docs, accept/reject, etc.)</li>
-                            <li>API endpoints for processor actions</li>
-                            <li>Document upload/download functionality</li>
-                        </ul>
-                    </div>
-                    <div class="ticket-dependencies">
-                        <strong>Depends On:</strong> <span class="dependency-link">#CP-001</span> (Platform Foundation)<br>
-                        <strong>Blocks:</strong>
-                        <span class="dependency-link">#CP-101</span>
-                        <span class="dependency-link">#CP-102</span>
-                        <span class="dependency-link">#CP-103</span>
-                    </div>
+                <h3 class="subsection-title">Template: Tier 2 (Role Scaffolding)</h3>
+                <div class="callout">
+                    <div class="callout-title">What Belongs in a Role Scaffolding Ticket</div>
+                    <ul style="margin-left: 30px; margin-top: 10px;">
+                        <li><strong>Role-Specific Views:</strong> Filtered data display, customized layouts for the role</li>
+                        <li><strong>Action Panel Shell:</strong> Empty containers with labeled sections for future features</li>
+                        <li><strong>Navigation Patterns:</strong> Role-specific menu items, view toggles</li>
+                        <li><strong>Permission Boundaries:</strong> Access control checks, role-based rendering</li>
+                        <li><strong>Placeholder States:</strong> "Actions will appear here" messages, no functional buttons</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>Dependencies:</strong> Platform Foundation (Tier 1) must be complete</p>
+                    <p><strong>Blocks:</strong> All features for this specific role</p>
                 </div>
 
-                <h3 class="subsection-title">Tier 3: Feature Implementation Ticket</h3>
-                <div class="ticket">
-                    <div class="ticket-header">
-                        <div class="ticket-id">#CP-101</div>
-                        <div class="ticket-labels">
-                            <span class="label label-feature">Feature</span>
-                            <span class="label label-size-small">Small</span>
-                            <span class="label label-priority-medium">Priority: Medium</span>
-                        </div>
-                    </div>
-                    <div class="ticket-title">Processor Feature - Request Documents from Borrower</div>
-                    <div class="ticket-description">
-                        <strong>Summary:</strong>
-                        <p>Implement the "Request Documents" feature for Processor role. Processor can select a condition, specify which documents are needed, and send a request to the borrower. Borrower receives notification and sees the request in their view.</p>
+                <h3 class="subsection-title">Template: Tier 3 (Feature Implementation)</h3>
+                <div class="callout">
+                    <div class="callout-title">What Belongs in a Feature Ticket</div>
+                    <ul style="margin-left: 30px; margin-top: 10px;">
+                        <li><strong>Single Capability:</strong> One user action (e.g., "Request Documents", "Clear Condition")</li>
+                        <li><strong>Complete Vertical Slice:</strong> UI button/form + API endpoint + business logic + data persistence</li>
+                        <li><strong>BDD Acceptance Criteria:</strong> Given/When/Then format describing all scenarios</li>
+                        <li><strong>Field Specifications:</strong> Exact field names, types, validation rules, API payload structure</li>
+                        <li><strong>Error Handling:</strong> What happens when operations fail, user feedback</li>
+                        <li><strong>Integration Points:</strong> Notifications sent, audit logs created, related systems updated</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>Dependencies:</strong> Role scaffolding (Tier 2) for this role</p>
+                    <p><strong>Blocks:</strong> Typically nothing (features are independent within a role)</p>
+                </div>
 
-                        <strong style="display: block; margin-top: 15px;">Scope:</strong>
-                        <ul style="margin-left: 30px;">
-                            <li>Add "Request Documents" button in Processor action panel (Document Requests section)</li>
-                            <li>Modal dialog to select document types and add custom message</li>
-                            <li>API endpoint: POST /conditions/{id}/document-requests</li>
-                            <li>Update condition status to "Documents Requested"</li>
-                            <li>Send notification to borrower (email + in-app)</li>
-                            <li>Log action in condition activity history</li>
-                        </ul>
-
-                        <strong style="display: block; margin-top: 15px;">Acceptance Criteria:</strong>
-                        <ul style="margin-left: 30px;">
-                            <li>✓ Given a processor has selected a condition, when they click "Request Documents", then a modal opens with document type checkboxes and message field</li>
-                            <li>✓ Given the processor submits the request, when the API call succeeds, then the condition status updates to "Documents Requested"</li>
-                            <li>✓ Given a document request is submitted, when the borrower logs in, then they see the request in their conditions view</li>
-                            <li>✓ Given a document request is submitted, then the borrower receives an email notification with document list and deadline</li>
-                            <li>✓ Given a request is submitted, then it appears in the condition's activity history with timestamp and processor name</li>
-                        </ul>
-
-                        <strong style="display: block; margin-top: 15px;">Data Mapping:</strong>
-                        <ul style="margin-left: 30px;">
-                            <li>Document types: enum (PayStub, BankStatement, TaxReturn, EmploymentLetter, Other)</li>
-                            <li>API payload: { condition_id, requested_documents: [{ type, description, due_date }], message }</li>
-                            <li>Notification: Use Docs notification service with template "document-request"</li>
-                        </ul>
-                    </div>
-                    <div class="ticket-dependencies">
-                        <strong>Depends On:</strong> <span class="dependency-link">#CP-100</span> (Processor Role Shell)<br>
-                        <strong>Related:</strong> <span class="dependency-link">#CP-301</span> (Borrower must be able to view requests)
-                    </div>
+                <div class="callout" style="margin-top: 30px; background: #2d2440; border-left-color: #9c27b0;">
+                    <div class="callout-title" style="color: #9c27b0;">📋 Complete Ticket Specifications</div>
+                    <p>These templates show the <strong>structure and strategy</strong>. For the complete Conditions Portal specification with all 35 tickets including full acceptance criteria, API endpoints, and field mappings, see:</p>
+                    <p style="margin-top: 10px;"><strong><a href="tract-01-detailed-features.html" style="color: #8b9eff;">→ Tract 01: Detailed Features (All 35 Tickets)</a></strong></p>
                 </div>
             </div>
 
-            <!-- Scaffolding Outline -->
+            <!-- Scaffolding Template Table -->
             <div class="section">
-                <h2 class="section-title">📐 Complete Scaffolding for Conditions Portal</h2>
+                <h2 class="section-title">📐 Scaffolding Template: How to Structure ANY Project</h2>
+
+                <p style="margin-bottom: 20px; color: #b8bcc8;">This table shows the <strong>dependency scaffolding pattern</strong> you can apply to any complex project. The Conditions Portal uses this exact structure with 35 total tickets.</p>
 
                 <table>
                     <thead>
                         <tr>
-                            <th>Ticket ID</th>
                             <th>Tier</th>
-                            <th>Title</th>
-                            <th>Size</th>
-                            <th>Depends On</th>
-                            <th>Blocks</th>
+                            <th>Ticket Pattern</th>
+                            <th>Purpose</th>
+                            <th>Example Count (Conditions Portal)</th>
+                            <th>Typical Dependencies</th>
                         </tr>
                     </thead>
                     <tbody>
                         <!-- Platform -->
                         <tr style="background: #f3e5f5;">
-                            <td><strong>#CP-001</strong></td>
-                            <td><span class="label label-platform">Platform</span></td>
-                            <td><strong>Conditions Grid Platform (Read-Only)</strong></td>
-                            <td><span class="label label-size-large">Large</span></td>
-                            <td>—</td>
-                            <td>#CP-100, #CP-200, #CP-300</td>
+                            <td><span class="label label-platform">Tier 1</span></td>
+                            <td><strong>Platform Foundation</strong></td>
+                            <td>Establish data models, API contracts, base UI framework (read-only)</td>
+                            <td><strong>1 ticket</strong><br><small>(CP-001)</small></td>
+                            <td>None - this is the starting point</td>
                         </tr>
 
-                        <!-- Processor Role -->
+                        <!-- Role Scaffolding -->
                         <tr style="background: #fff3e0;">
-                            <td><strong>#CP-100</strong></td>
-                            <td><span class="label label-role">Role</span></td>
-                            <td><strong>Processor Role Shell</strong></td>
-                            <td><span class="label label-size-medium">Medium</span></td>
-                            <td>#CP-001</td>
-                            <td>#CP-101, #CP-102, #CP-103</td>
-                        </tr>
-                        <tr>
-                            <td>#CP-101</td>
-                            <td><span class="label label-feature">Feature</span></td>
-                            <td>Request Documents from Borrower</td>
-                            <td><span class="label label-size-small">Small</span></td>
-                            <td>#CP-100</td>
-                            <td>—</td>
-                        </tr>
-                        <tr>
-                            <td>#CP-102</td>
-                            <td><span class="label label-feature">Feature</span></td>
-                            <td>Review Submitted Documents</td>
-                            <td><span class="label label-size-small">Small</span></td>
-                            <td>#CP-100, #CP-302</td>
-                            <td>—</td>
-                        </tr>
-                        <tr>
-                            <td>#CP-103</td>
-                            <td><span class="label label-feature">Feature</span></td>
-                            <td>Accept/Reject Documents</td>
-                            <td><span class="label label-size-small">Small</span></td>
-                            <td>#CP-100, #CP-102</td>
-                            <td>—</td>
-                        </tr>
-                        <tr>
-                            <td>#CP-104</td>
-                            <td><span class="label label-feature">Feature</span></td>
-                            <td>Add Comments/Notes to Condition</td>
-                            <td><span class="label label-size-small">Small</span></td>
-                            <td>#CP-100</td>
-                            <td>—</td>
-                        </tr>
-                        <tr>
-                            <td>#CP-105</td>
-                            <td><span class="label label-feature">Feature</span></td>
-                            <td>Reassign Condition to Another Processor</td>
-                            <td><span class="label label-size-small">Small</span></td>
-                            <td>#CP-100</td>
-                            <td>—</td>
+                            <td><span class="label label-role">Tier 2</span></td>
+                            <td><strong>Role Scaffolding</strong></td>
+                            <td>Create role-specific views, navigation, permission shells (no features yet)</td>
+                            <td><strong>3 tickets</strong><br><small>(CP-100, CP-200, CP-300)</small></td>
+                            <td>Platform Foundation (Tier 1)</td>
                         </tr>
 
-                        <!-- Underwriter Role -->
-                        <tr style="background: #fff3e0;">
-                            <td><strong>#CP-200</strong></td>
-                            <td><span class="label label-role">Role</span></td>
-                            <td><strong>Underwriter Role Shell</strong></td>
-                            <td><span class="label label-size-medium">Medium</span></td>
-                            <td>#CP-001</td>
-                            <td>#CP-201, #CP-202, #CP-203</td>
-                        </tr>
-                        <tr>
-                            <td>#CP-201</td>
-                            <td><span class="label label-feature">Feature</span></td>
-                            <td>Clear Condition (Mark as Satisfied)</td>
-                            <td><span class="label label-size-small">Small</span></td>
-                            <td>#CP-200</td>
-                            <td>—</td>
-                        </tr>
-                        <tr>
-                            <td>#CP-202</td>
-                            <td><span class="label label-feature">Feature</span></td>
-                            <td>Add New Stipulation to Loan</td>
-                            <td><span class="label label-size-medium">Medium</span></td>
-                            <td>#CP-200</td>
-                            <td>—</td>
-                        </tr>
-                        <tr>
-                            <td>#CP-203</td>
-                            <td><span class="label label-feature">Feature</span></td>
-                            <td>Provide Final Approval on Condition</td>
-                            <td><span class="label label-size-small">Small</span></td>
-                            <td>#CP-200, #CP-201</td>
-                            <td>—</td>
-                        </tr>
-                        <tr>
-                            <td>#CP-204</td>
-                            <td><span class="label label-feature">Feature</span></td>
-                            <td>Escalate Condition for Review</td>
-                            <td><span class="label label-size-small">Small</span></td>
-                            <td>#CP-200</td>
-                            <td>—</td>
-                        </tr>
-
-                        <!-- Borrower Role -->
-                        <tr style="background: #fff3e0;">
-                            <td><strong>#CP-300</strong></td>
-                            <td><span class="label label-role">Role</span></td>
-                            <td><strong>Borrower Role Shell</strong></td>
-                            <td><span class="label label-size-medium">Medium</span></td>
-                            <td>#CP-001</td>
-                            <td>#CP-301, #CP-302, #CP-303</td>
-                        </tr>
-                        <tr>
-                            <td>#CP-301</td>
-                            <td><span class="label label-feature">Feature</span></td>
-                            <td>View Required Documents List</td>
-                            <td><span class="label label-size-small">Small</span></td>
-                            <td>#CP-300</td>
-                            <td>—</td>
-                        </tr>
-                        <tr>
-                            <td>#CP-302</td>
-                            <td><span class="label label-feature">Feature</span></td>
-                            <td>Upload Documents for Condition</td>
-                            <td><span class="label label-size-medium">Medium</span></td>
-                            <td>#CP-300, #CP-301</td>
-                            <td>—</td>
-                        </tr>
-                        <tr>
-                            <td>#CP-303</td>
-                            <td><span class="label label-feature">Feature</span></td>
-                            <td>Track Condition Status & Timeline</td>
-                            <td><span class="label label-size-small">Small</span></td>
-                            <td>#CP-300</td>
-                            <td>—</td>
-                        </tr>
-                        <tr>
-                            <td>#CP-304</td>
-                            <td><span class="label label-feature">Feature</span></td>
-                            <td>Receive Notifications for Updates</td>
-                            <td><span class="label label-size-small">Small</span></td>
-                            <td>#CP-300</td>
-                            <td>—</td>
-                        </tr>
-
-                        <!-- Cross-Cutting Features -->
+                        <!-- Features -->
                         <tr style="background: #e8f5e9;">
-                            <td>#CP-400</td>
-                            <td><span class="label label-feature">Feature</span></td>
-                            <td>Activity History & Audit Log</td>
-                            <td><span class="label label-size-medium">Medium</span></td>
-                            <td>#CP-001</td>
-                            <td>—</td>
-                        </tr>
-                        <tr style="background: #e8f5e9;">
-                            <td>#CP-401</td>
-                            <td><span class="label label-feature">Feature</span></td>
-                            <td>Email & SMS Notifications</td>
-                            <td><span class="label label-size-medium">Medium</span></td>
-                            <td>#CP-001</td>
-                            <td>—</td>
-                        </tr>
-                        <tr style="background: #e8f5e9;">
-                            <td>#CP-402</td>
-                            <td><span class="label label-feature">Feature</span></td>
-                            <td>Export Conditions Report (PDF/Excel)</td>
-                            <td><span class="label label-size-small">Small</span></td>
-                            <td>#CP-001</td>
-                            <td>—</td>
+                            <td><span class="label label-feature">Tier 3</span></td>
+                            <td><strong>Feature Implementation</strong></td>
+                            <td>Individual user capabilities within role context (full CRUD per feature)</td>
+                            <td><strong>31 tickets</strong><br><small>18 Processor + 4 Underwriter + 4 Borrower + 5 Cross-cutting</small></td>
+                            <td>Role Scaffolding for that role (Tier 2)</td>
                         </tr>
                     </tbody>
                 </table>
+
+                <div class="callout" style="margin-top: 30px;">
+                    <div class="callout-title">🔗 See the Complete Breakdown</div>
+                    <p>The Conditions Portal has <strong>35 tickets total</strong> following this exact pattern. To see every ticket with its specific dependencies, acceptance criteria, and field specs:</p>
+                    <p style="margin-top: 10px;"><strong><a href="tract-01-detailed-features.html" style="color: #8b9eff;">→ View Complete Ticket List (All 35 Tickets)</a></strong></p>
+                </div>
             </div>
 
             <!-- Implementation Guidelines -->

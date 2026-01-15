@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conditions Portal - Data Models</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0a0f1a;
+      --bg-secondary: #111827;
+      --bg-card: #1a2234;
+      --accent-blue: #3b82f6;
+      --accent-teal: #14b8a6;
+      --accent-amber: #f59e0b;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --border-subtle: rgba(255,255,255,0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: 60px 80px;
+      line-height: 1.6;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(ellipse at 20% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(20, 184, 166, 0.06) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .breadcrumb {
+      background: var(--bg-card);
+      padding: 15px 30px;
+      border-radius: 8px;
+      margin-bottom: 3rem;
+      font-size: 0.9em;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .breadcrumb a {
+      color: var(--accent-blue);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--accent-teal);
+    }
+
+    .breadcrumb .separator {
+      margin: 0 10px;
+      color: var(--text-muted);
+    }
+
+    .breadcrumb .current {
+      color: var(--text-secondary);
+    }
+
+    .label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent-blue);
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+
+    .subtitle {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      margin-bottom: 3rem;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent-teal);
+      margin: 3rem 0 1.5rem 0;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border-subtle);
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 2rem 0 1rem 0;
+    }
+
+    .entity-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .entity-card h3 {
+      margin-top: 0;
+      color: var(--accent-blue);
+    }
+
+    .field-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    .field-table th {
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid var(--border-subtle);
+      padding: 0.75rem;
+      text-align: left;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .field-table td {
+      border: 1px solid var(--border-subtle);
+      padding: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    .field-table tr:hover {
+      background: rgba(59, 130, 246, 0.05);
+    }
+
+    .field-name {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent-blue);
+      font-weight: 500;
+    }
+
+    .field-type {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent-teal);
+      font-size: 0.85rem;
+    }
+
+    .required-badge {
+      display: inline-block;
+      padding: 0.2rem 0.5rem;
+      background: rgba(245, 158, 11, 0.2);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent-amber);
+      margin-left: 0.5rem;
+    }
+
+    .relationship-box {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(20, 184, 166, 0.1));
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .relationship-box h4 {
+      color: var(--accent-teal);
+      margin-bottom: 0.75rem;
+      font-size: 1.1rem;
+    }
+
+    .relationship-box ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .relationship-box li {
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      color: var(--text-secondary);
+    }
+
+    .relationship-box li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent-blue);
+      font-weight: bold;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(59, 130, 246, 0.15);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+      color: var(--accent-blue);
+    }
+
+    .footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-subtle);
+      text-align: center;
+    }
+
+    .footer a {
+      color: var(--accent-blue);
+      text-decoration: none;
+      margin: 0 1rem;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 40px 30px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .field-table {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/dashboard.html">🏠 Dashboard</a>
+      <span class="separator">→</span>
+      <span class="current">Data Models</span>
+    </div>
+
+    <div class="label">CONDITIONS PORTAL</div>
+    <h1>🗄️ Data Models & Relationships</h1>
+    <p class="subtitle">Complete entity definitions, field specifications, and database schema</p>
+
+    <h2>Core Entities</h2>
+
+    <div class="entity-card">
+      <h3>Condition</h3>
+      <p>The primary entity representing a loan condition that must be satisfied before closing.</p>
+
+      <div class="relationship-box">
+        <h4>Relationships</h4>
+        <ul>
+          <li><strong>One Condition</strong> has many <code>DocumentRequest[]</code></li>
+          <li><strong>One Condition</strong> has many <code>Note[]</code></li>
+          <li><strong>One Condition</strong> has many <code>StatusHistory[]</code></li>
+          <li><strong>One Condition</strong> has many <code>Document[]</code> (uploaded files)</li>
+          <li><strong>One Condition</strong> has one optional <code>ExceptionRequest</code></li>
+          <li><strong>One Condition</strong> belongs to one <code>Loan</code></li>
+          <li><strong>One Condition</strong> has many <code>Flag[]</code> (user-specific)</li>
+        </ul>
+      </div>
+
+      <table class="field-table">
+        <thead>
+          <tr>
+            <th>Field Name</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="field-name">id</span></td>
+            <td><span class="field-type">UUID</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>Unique identifier (primary key)</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">loanId</span></td>
+            <td><span class="field-type">UUID</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>Foreign key to Loan entity</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">conditionNumber</span></td>
+            <td><span class="field-type">String</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>Category-based number (e.g., "INC-001")</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">name</span></td>
+            <td><span class="field-type">String(200)</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>Condition title/name</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">description</span></td>
+            <td><span class="field-type">Text(1000)</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>Detailed condition description</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">category</span></td>
+            <td><span class="field-type">Enum</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>One of 20+ categories (INC, ASSET, CRED, etc.)</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">status</span></td>
+            <td><span class="field-type">Enum</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>Current status (New, Requested, Cleared, etc.)</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">stage</span></td>
+            <td><span class="field-type">Enum</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>Loan stage: SUSP, PTD, PTF, PTP, POST, TRAIL</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">class</span></td>
+            <td><span class="field-type">Enum</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>"UW" (Underwriter) or "Processor III"</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">type</span></td>
+            <td><span class="field-type">Enum</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>"INT" (Internal) or "BRW" (Borrower-facing)</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">expirationDate</span></td>
+            <td><span class="field-type">Date</span></td>
+            <td>Optional</td>
+            <td>Date when condition expires</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">followUpDate</span></td>
+            <td><span class="field-type">Date</span></td>
+            <td>Optional</td>
+            <td>Date for follow-up action</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">createdAt</span></td>
+            <td><span class="field-type">DateTime</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>Timestamp of creation</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">createdBy</span></td>
+            <td><span class="field-type">UUID</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>User who created the condition</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">updatedAt</span></td>
+            <td><span class="field-type">DateTime</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>Timestamp of last update</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">updatedBy</span></td>
+            <td><span class="field-type">UUID</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>User who last updated the condition</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="entity-card">
+      <h3>DocumentRequest</h3>
+      <p>Represents a request for a specific document from the borrower to satisfy a condition.</p>
+
+      <div class="relationship-box">
+        <h4>Relationships</h4>
+        <ul>
+          <li><strong>Many DocumentRequests</strong> belong to one <code>Condition</code></li>
+          <li><strong>One DocumentRequest</strong> can have many <code>Document[]</code> (uploaded responses)</li>
+        </ul>
+      </div>
+
+      <table class="field-table">
+        <thead>
+          <tr>
+            <th>Field Name</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="field-name">id</span></td>
+            <td><span class="field-type">UUID</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>Unique identifier</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">conditionId</span></td>
+            <td><span class="field-type">UUID</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>Foreign key to Condition</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">documentType</span></td>
+            <td><span class="field-type">Enum</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>One of 16 types (Bank Statements, W-2, etc.)</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">requestedFrom</span></td>
+            <td><span class="field-type">String[]</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>Borrower names (array)</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">description</span></td>
+            <td><span class="field-type">RichText(1000)</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>Description for borrower (rich text)</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">status</span></td>
+            <td><span class="field-type">Enum</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>Pending, Received, Reviewed</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">requestDate</span></td>
+            <td><span class="field-type">DateTime</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>When the request was made</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">receivedDate</span></td>
+            <td><span class="field-type">DateTime</span></td>
+            <td>Optional</td>
+            <td>When document was received</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="entity-card">
+      <h3>Note</h3>
+      <p>Free-form notes attached to a condition by processors or underwriters.</p>
+
+      <div class="relationship-box">
+        <h4>Relationships</h4>
+        <ul>
+          <li><strong>Many Notes</strong> belong to one <code>Condition</code></li>
+        </ul>
+      </div>
+
+      <table class="field-table">
+        <thead>
+          <tr>
+            <th>Field Name</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="field-name">id</span></td>
+            <td><span class="field-type">UUID</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>Unique identifier</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">conditionId</span></td>
+            <td><span class="field-type">UUID</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>Foreign key to Condition</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">content</span></td>
+            <td><span class="field-type">RichText</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>Rich text note content</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">createdAt</span></td>
+            <td><span class="field-type">DateTime</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>Timestamp of creation</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">createdBy</span></td>
+            <td><span class="field-type">UUID</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>User who created the note</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="entity-card">
+      <h3>StatusHistory</h3>
+      <p>Audit trail of all status changes for a condition.</p>
+
+      <div class="relationship-box">
+        <h4>Relationships</h4>
+        <ul>
+          <li><strong>Many StatusHistory</strong> records belong to one <code>Condition</code></li>
+        </ul>
+      </div>
+
+      <table class="field-table">
+        <thead>
+          <tr>
+            <th>Field Name</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="field-name">id</span></td>
+            <td><span class="field-type">UUID</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>Unique identifier</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">conditionId</span></td>
+            <td><span class="field-type">UUID</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>Foreign key to Condition</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">fromStatus</span></td>
+            <td><span class="field-type">Enum</span></td>
+            <td>Optional</td>
+            <td>Previous status (null on creation)</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">toStatus</span></td>
+            <td><span class="field-type">Enum</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>New status</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">changedAt</span></td>
+            <td><span class="field-type">DateTime</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>Timestamp of change</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">changedBy</span></td>
+            <td><span class="field-type">UUID</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>User who made the change</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="entity-card">
+      <h3>ExceptionRequest</h3>
+      <p>Request to make an exception to standard underwriting rules for a condition.</p>
+
+      <div class="relationship-box">
+        <h4>Relationships</h4>
+        <ul>
+          <li><strong>One ExceptionRequest</strong> belongs to one <code>Condition</code> (optional, 0 or 1)</li>
+        </ul>
+      </div>
+
+      <table class="field-table">
+        <thead>
+          <tr>
+            <th>Field Name</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="field-name">id</span></td>
+            <td><span class="field-type">UUID</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>Unique identifier</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">conditionId</span></td>
+            <td><span class="field-type">UUID</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>Foreign key to Condition</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">reason</span></td>
+            <td><span class="field-type">Text</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>Reason for exception request</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">status</span></td>
+            <td><span class="field-type">Enum</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>Pending, Approved, Denied</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">requestedBy</span></td>
+            <td><span class="field-type">UUID</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>Processor who requested</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">requestedAt</span></td>
+            <td><span class="field-type">DateTime</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>Timestamp of request</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">reviewedBy</span></td>
+            <td><span class="field-type">UUID</span></td>
+            <td>Optional</td>
+            <td>Underwriter who reviewed</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">reviewedAt</span></td>
+            <td><span class="field-type">DateTime</span></td>
+            <td>Optional</td>
+            <td>Timestamp of review</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="entity-card">
+      <h3>Flag</h3>
+      <p>Personal flag set by a user to prioritize or categorize conditions (not shared).</p>
+
+      <div class="relationship-box">
+        <h4>Relationships</h4>
+        <ul>
+          <li><strong>Many Flags</strong> belong to one <code>Condition</code></li>
+          <li><strong>Each Flag</strong> is user-specific (scoped by userId)</li>
+        </ul>
+      </div>
+
+      <table class="field-table">
+        <thead>
+          <tr>
+            <th>Field Name</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="field-name">id</span></td>
+            <td><span class="field-type">UUID</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>Unique identifier</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">conditionId</span></td>
+            <td><span class="field-type">UUID</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>Foreign key to Condition</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">userId</span></td>
+            <td><span class="field-type">UUID</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>User who set the flag</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">color</span></td>
+            <td><span class="field-type">Enum</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>Red, Blue, Yellow, Green, None</td>
+          </tr>
+          <tr>
+            <td><span class="field-name">setAt</span></td>
+            <td><span class="field-type">DateTime</span></td>
+            <td><span class="required-badge">REQUIRED</span></td>
+            <td>When flag was set</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Enumerations</h2>
+
+    <div class="entity-card">
+      <h3>ConditionStatus</h3>
+      <p>The workflow status of a condition.</p>
+      <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+        <li><code>New</code> - Newly created condition</li>
+        <li><code>Need Brw Request</code> - Requires document request from borrower</li>
+        <li><code>Requested</code> - Documents requested from borrower</li>
+        <li><code>Processor to Review</code> - Documents received, needs processor review</li>
+        <li><code>Ready for UW</code> - Ready for underwriter approval</li>
+        <li><code>Cleared</code> - Approved by underwriter</li>
+        <li><code>Not Cleared</code> - Rejected by underwriter</li>
+      </ul>
+    </div>
+
+    <div class="entity-card">
+      <h3>ConditionStage</h3>
+      <p>The loan stage where the condition applies.</p>
+      <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+        <li><code>SUSP</code> - Suspended</li>
+        <li><code>PTD</code> - Prior to Docs</li>
+        <li><code>PTF</code> - Prior to Funding</li>
+        <li><code>PTP</code> - Prior to Purchase</li>
+        <li><code>POST</code> - Post-closing</li>
+        <li><code>TRAIL</code> - Trailing documents</li>
+      </ul>
+    </div>
+
+    <div class="entity-card">
+      <h3>ConditionCategory</h3>
+      <p>20+ predefined categories for organizing conditions.</p>
+      <ul style="margin-top: 1rem; padding-left: 1.5rem; columns: 2;">
+        <li><code>APP</code> - Appraisal</li>
+        <li><code>DISC</code> - Disclosures</li>
+        <li><code>CRED</code> - Credit</li>
+        <li><code>INC</code> - Income</li>
+        <li><code>ASSET</code> - Assets</li>
+        <li><code>PROP</code> - Property</li>
+        <li><code>MISC</code> - Miscellaneous</li>
+        <li><code>CLSNG</code> - Closing</li>
+        <li><code>TITLE</code> - Title</li>
+        <li><code>GOV</code> - Government</li>
+        <li><code>BOND</code> - Bond</li>
+        <li><code>SP</code> - Special Property</li>
+        <li><code>CONDO</code> - Condominium</li>
+        <li><code>NEW CONST</code> - New Construction</li>
+        <li><code>And 6 more...</code></li>
+      </ul>
+    </div>
+
+    <div class="entity-card">
+      <h3>DocumentType</h3>
+      <p>16 predefined document types for requests.</p>
+      <ul style="margin-top: 1rem; padding-left: 1.5rem; columns: 2;">
+        <li><code>Appraisal</code></li>
+        <li><code>Asset Statements</code></li>
+        <li><code>Bank Statements</code></li>
+        <li><code>Employment Verification</code></li>
+        <li><code>Government ID</code></li>
+        <li><code>Pay Stubs</code></li>
+        <li><code>Tax Returns</code></li>
+        <li><code>W-2 Forms</code></li>
+        <li><code>Insurance (various)</code></li>
+        <li><code>Purchase Agreement</code></li>
+        <li><code>And 6 more...</code></li>
+      </ul>
+    </div>
+
+    <h2>Database Schema Notes</h2>
+
+    <div class="entity-card">
+      <h3>Indexes</h3>
+      <p>Recommended indexes for query performance:</p>
+      <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+        <li><code>Condition.loanId</code> - Frequently queried to show all conditions for a loan</li>
+        <li><code>Condition.status</code> - Used for filtering (Active, Need to Request, etc.)</li>
+        <li><code>Condition.stage</code> - Used for grouping in the grid view</li>
+        <li><code>Condition.class</code> - Used for role-based filtering (UW vs Processor)</li>
+        <li><code>DocumentRequest.conditionId</code> - Foreign key join</li>
+        <li><code>Note.conditionId</code> - Foreign key join</li>
+        <li><code>StatusHistory.conditionId</code> - Foreign key join</li>
+        <li><code>Flag.userId, Flag.conditionId</code> - Composite index for user-specific flags</li>
+      </ul>
+    </div>
+
+    <div class="entity-card">
+      <h3>Soft Deletes</h3>
+      <p>Consider implementing soft deletes for audit purposes:</p>
+      <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+        <li>Add <code>deletedAt</code> (nullable DateTime) to Condition, DocumentRequest, Note</li>
+        <li>Filter out soft-deleted records in queries by default</li>
+        <li>Retain historical data for compliance and reporting</li>
+      </ul>
+    </div>
+
+    <div class="entity-card">
+      <h3>Integration Considerations</h3>
+      <p>External system references:</p>
+      <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+        <li><code>Loan.byteId</code> - Reference to Byte LOS system</li>
+        <li><code>Document.clearDocsId</code> - Reference to CLEAR Docs system</li>
+        <li><code>User.oktaId</code> - Reference to Okta authentication</li>
+      </ul>
+    </div>
+
+    <div class="footer">
+      <a href="/dashboard.html">🏠 Dashboard</a>
+      <a href="tracts/tract-01-detailed-features.html">📋 Complete Feature Specs</a>
+      <a href="https://github.com/mhansen003/saro-devops-docs" target="_blank">📂 GitHub</a>
+    </div>
+  </div>
+</body>
+</html>

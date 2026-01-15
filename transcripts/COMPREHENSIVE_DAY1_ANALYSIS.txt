@@ -1,0 +1,855 @@
+
+================================================================================
+CONDITIONS PORTAL - DAY 1 COMPREHENSIVE REQUIREMENTS ANALYSIS
+================================================================================
+
+BASED ON: Day 1 Part 1, Part 2, and Part 3 transcripts
+COMPILED: January 15, 2026
+
+================================================================================
+1. FEATURE REQUIREMENTS
+================================================================================
+
+1.1 CORE CONDITION MANAGEMENT
+------------------------------
+- **Unified Conditions Dashboard**: Single portal for viewing/managing all loan conditions
+  - Role-based filtering (Active, Cleared, Ready for Underwriting)
+  - Search by condition ID or keywords
+  - Filter by category, status, stage, flags
+  - Export conditions functionality
+
+- **Condition Management Operations**:
+  - Create conditions (including custom conditions)
+  - Edit condition details
+  - Link documents to conditions (MANY-TO-MANY relationship - deviation from Byte)
+  - Change condition status
+  - Add notes at condition level
+  - Set personal flags for organization
+  - Move conditions between stages (Prior to Docs, Prior to Funding, Prior to Closing, Post-Closing)
+
+- **Condition Statuses**:
+  - Need Bar Request
+  - Requested
+  - Active/Pending
+  - Cleared/Satisfied
+  - Ready for Underwriting
+
+1.2 DOCUMENT WORKFLOW
+---------------------
+- **Document Operations**:
+  - Upload documents
+  - Split documents
+  - Merge documents
+  - Rotate documents
+  - Associate documents to MULTIPLE conditions (many-to-many)
+
+- **Document Acceptance Workflow**:
+  - Accept document
+  - Reject document with reason
+  - Request clarification
+
+- **Clear Docs Integration**:
+  - Tab within Conditions Portal to access Clear Docs
+  - Shared document repository
+  - Keep all functionality within same browser/window
+
+- **Document Description Field**:
+  - Available during split/merge operations
+  - Need to verify implementation details
+
+1.3 AUTOMATED CONDITIONS ENGINE (RULES ENGINE)
+-----------------------------------------------
+- **Rules-Based Condition Generation**:
+  - Examines loan attributes to automatically assign conditions
+  - Can run on-demand (button trigger)
+  - Can add/remove conditions based on loan criteria
+  - Groups conditions by stage: Prior to Docs, Prior to Funding, Prior to Closing
+
+- **Open Question**: Should it auto-run when loan opens or require button click?
+  - Kelly/Product to decide trigger mechanism
+  - Consider performance implications
+
+- **Condition Categories**:
+  - Application (App)
+  - Credit
+  - Bar (Borrower) related
+  - Internal requirements
+  - External requirements
+
+1.4 BORROWER COMMUNICATION & EMAIL FUNCTIONALITY
+-------------------------------------------------
+- **AI-Generated Email Requests**:
+  - Draft borrower document request emails
+  - AI-assisted tone selection (formal, casual, friendly)
+  - Can regenerate with different tones
+  - Support for borrower (Bar) and non-bar requests
+
+- **Email Template Management**:
+  - Save custom email templates
+  - Manage template library
+  - Import signatures from Marketing Hub or Outlook
+  - Support multiple signature options (up to 5)
+  - Allow users to choose default signature
+  - HTML editor for signature creation/editing
+
+- **Auto-Reminder System**:
+  - Configurable follow-up reminders for outstanding document requests
+  - Set reminder intervals (e.g., every 3 days)
+  - Set maximum number of reminders
+  - Unified with existing email systems (Clear Docs, Needs List, Tasks)
+
+- **Document Request Tracking**:
+  - View document request history
+  - Track open vs. received requests
+  - Status updates when documents received
+
+- **Decision**: Remove "email tabs" feature to simplify UI
+
+1.5 NOTES SYSTEM
+----------------
+- **Three-Level Notes Structure**:
+  1. Loan-level notes (global to entire loan)
+  2. Condition-level notes (specific to each condition)
+  3. Document-level notes (specific to documents)
+
+- **Notes Features**:
+  - Read/unread indicators per user
+  - User attribution (who wrote the note)
+  - Timestamp for each note
+  - Bell icon notification system
+  - Moving from single text blob to structured notes with metadata
+
+- **No Save Button**:
+  - Auto-save functionality
+  - Terminal actions (accept, clear, reject) trigger saves
+  - Real-time updates
+
+1.6 USER EXPERIENCE & UI FEATURES
+----------------------------------
+- **Wizard Mode**:
+  - Step-through workflow for reviewing documents
+  - Guide users through clearing conditions
+  - Streamlined processing flow
+
+- **Custom Condition Lists**:
+  - Users can save frequently-used condition sets
+  - Examples: "Miami Condos," "FHA Loans"
+  - Allows for personal organization and efficiency
+
+- **Personal Flags**:
+  - User-specific color flags (not visible to others)
+  - Self-organization tool (not communication mechanism)
+  - Multiple flag colors available
+  - Filter/sort by flags
+
+- **Search & Filter**:
+  - Search by condition ID
+  - Keyword search (searches 7 fields)
+  - Filter by:
+    - Category (App, Credit, Bar, etc.)
+    - Status
+    - Stage (Prior to Docs, Funding, Closing)
+    - Flags (flagged/unflagged)
+    - Document requests (with/without)
+  - Sort ascending/descending by various categories
+
+- **Export Functionality**:
+  - Export conditions data
+  - No concerns raised about this feature
+
+- **Tags vs. Flags Discussion**:
+  - Concern about flag/tag sprawl if public
+  - If personal (persistent), less concern about constraints
+  - Decision: Start with flags, can expand to tags if needed
+  - Monitor for patterns to standardize
+
+1.7 INTEGRATION POINTS
+-----------------------
+- **Byte LOS Integration**:
+  - Opens within Byte via web control
+  - Receives loan context from Byte
+  - Bidirectional sync with ~30 second acceptable delay
+  - Conditions Portal is source of truth for its data
+  - Rollback/recovery mechanism needed for conflicts
+
+- **Clear Docs Integration**:
+  - Shared document repository and management
+  - Embedded as tab within Conditions Portal
+  - Same browser window, not side-by-side
+
+- **Candor Integration** (Jina Choi lead):
+  - Automated condition creation based on AUS results
+  - OCR-based document verification and clearance
+  - Acts as "mock underwriter" for automated processing
+  - Creates conditions that Candor signs off on
+  - Carlos Sanchez as CMG conduit for Candor
+
+- **Borrower Needs List**:
+  - Existing tool to be wired into Conditions Portal
+  - Email functionality should be unified
+
+1.8 ROLES & PERMISSIONS (HIGH PRIORITY - COMPLEX)
+--------------------------------------------------
+**Target: 5-7 base roles** (consolidate from 400+ Byte roles)
+
+**Base Roles Identified**:
+1. **Loan Officer (LO)** - View conditions, limited actions
+2. **LO Assistant** - May be identical to LO (need clarification)
+3. **Processor** (multiple types in Byte):
+   - Loan Processor
+   - Processor 2
+   - Processor 3 (can sign off on processor-level conditions)
+4. **Underwriter** (multiple types):
+   - Different exception request permissions
+   - Can create conditions, sign off on conditions
+   - Don't link docs to conditions (processors do that)
+5. **Post-Underwriting Roles**:
+   - Closers (wet state vs dry state distinction needed)
+   - Funders
+   - Post-Closing team
+   - QC (Quality Control)
+
+**Permission Concepts**:
+- **Class-Based Permissions**: If condition class matches user role, full access
+  - Processor can modify any field if condition class = "Processor"
+  - Underwriter can modify if condition class = "Underwriter"
+
+- **Field-Level Controls**:
+  - Description field: Controlled by "editable" flag at template level
+    - Not editable: No one can edit description
+    - Editable: Everyone can edit description
+    - Custom Question: CMG will start using this
+  - Responsibility field: **REMOVING ACCESS** per Kelly/Byte team
+  - Candor will use "Transaction" field instead of "Responsibility"
+
+- **Stage Movement**:
+  - Processors can move conditions to PTF (Prior to Funding)
+  - Can move conditions between stages based on permissions
+
+- **Condition Operations by Role**:
+  - Create condition
+  - Edit condition details
+  - Link documents to condition
+  - Change status
+  - Clear/satisfy condition
+  - Request documents from borrower
+
+**Open Items**:
+- Create role/permissions matrix (Josephine/Lauren) - HIGH PRIORITY
+- Map 400+ Byte roles to 7-8 base Conditions Portal roles (Andrew)
+- Confirm closer vs. funder role distinctions (Kelly/Lauren)
+- Exception Requests functionality deep dive (Product/Kelly)
+
+**Key Principle**: Only add new roles when there's a DIFFERENCE in functionality
+- Don't create multiple roles if they have identical permissions
+- Minimize complexity while supporting all use cases
+
+1.9 DOWNSTREAM DEPARTMENT SUPPORT
+----------------------------------
+**Requirement**: Support post-underwriting roles (funders, closers, post-closing, QC)
+
+**Challenge**: These teams support all channels and can't be isolated to beta
+- Can't create beta group that only sees new system
+- Hybrid approach needed
+
+**Solution Approach**:
+- Minimize to ~7 base roles that map from 400+ Byte roles
+- Support full value chain from LO to post-closing
+- Ensure no new unique functionality requirements from downstream
+  - Confirmed they do same operations: move conditions, clear conditions, etc.
+  - Use same base permissions with different access profiles
+
+================================================================================
+2. API & TECHNICAL REQUIREMENTS
+================================================================================
+
+2.1 API ENDPOINTS
+-----------------
+**Identified API Calls** (from Josephine's data model work):
+
+- **GET /loan-conditions**: Landing screen data
+  - Returns all conditions for a loan
+  - Includes condition details, status, linked documents
+  - Schema defined in Josephine's spreadsheet
+
+- **GET /condition-list**: List of condition templates
+  - Available condition types
+  - Template definitions
+
+- **Condition Operations**:
+  - Create condition
+  - Update condition
+  - Delete condition (likely)
+  - Link/unlink documents
+  - Change status
+  - Add notes
+
+2.2 DATA MODEL
+--------------
+**Key Data Model Decisions**:
+
+1. **Many-to-Many Document-Condition Relationship**:
+   - **DEVIATION FROM BYTE** (Byte is 1:1)
+   - Single document can link to multiple conditions
+   - Requires reconciliation logic
+   - More flexible and realistic workflow
+
+2. **Condition Fields**:
+   - Condition ID
+   - Description
+   - Category
+   - Status
+   - Stage (Prior to Docs, Funding, Closing, Post-Closing)
+   - Class (Processor, Underwriter, etc.)
+   - Transaction field (replaces Responsibility)
+   - Linked documents (array)
+   - Notes (array with metadata)
+   - Flags (user-specific)
+   - Created by/date
+   - Modified by/date (API shows server time, not individual user)
+
+3. **Editable Flag at Template Level**:
+   - Controls description field editability
+   - Set when condition template is created
+   - Three options: Not Editable, Editable, Custom Question
+
+4. **Hybrid Data Storage**:
+   - Core condition data lives in Byte
+   - Additional metadata lives in Clear database
+   - Full dataset = Byte data + Clear metadata (A + B)
+   - API merges data from both sources to render UI
+   - Must sync minimum Byte data to maintain Domo reports
+
+2.3 BYTE API INTEGRATION
+-------------------------
+**Challenges**:
+- API user attribution issue: Shows system account, not individual user
+- Modified datetime: Server time used when API updates, user time when UI updates
+- No history tracking in Byte (only current status, not status history)
+- ~30 second bidirectional sync delay is acceptable
+
+**Sync Strategy**:
+- Conditions Portal writes to Clear database
+- Sync relevant data back to Byte
+- Maintain backward compatibility
+- Support existing Domo reports
+
+2.4 AUDIT & LOGGING
+-------------------
+**Requirements**:
+- Log ALL changes to conditions
+  - Who made the change
+  - What changed
+  - When it changed
+  - Why (if applicable - notes)
+
+- **Audit Events**:
+  - Condition created
+  - Condition edited (field-level tracking)
+  - Status changed
+  - Document linked/unlinked
+  - Note added
+  - Condition cleared
+  - Flag added/removed
+
+- **Audit Access**:
+  - Domo reports for audit trail
+  - May not need dedicated audit UI in Clear
+  - Full data set required for rendering UI and auditing
+
+- **Purpose**: Regulatory compliance, troubleshooting, accountability
+
+2.5 AUTO-SAVE & REAL-TIME UPDATES
+----------------------------------
+- No explicit save button
+- Terminal actions trigger saves (accept, clear, reject, close)
+- Real-time updates to UI when changes made
+- Conflict resolution needed for concurrent edits
+
+================================================================================
+3. OPEN QUESTIONS & ISSUES
+================================================================================
+
+3.1 HIGH PRIORITY
+-----------------
+1. **Role/Permissions Matrix** (Josephine/Lauren)
+   - Define exactly what each of 7-8 roles can do
+   - Create Excel spreadsheet with permissions
+   - Due: TBD (end of January for requirements)
+
+2. **Byte Role Mapping** (Andrew - new employee)
+   - Map 400+ Byte roles to 7-8 Conditions Portal base roles
+   - Critical for security model
+   - Due: TBD
+
+3. **"Responsibility" Field Removal Impact** (Jina Choi/Kelly)
+   - Candor dependency on this field
+   - Coordinate with Byte team
+   - Use "Transaction" field instead
+   - Due: ASAP
+
+4. **Exception Requests Deep Dive** (Product/Kelly)
+   - How do exception requests work?
+   - Different permissions for underwriter roles based on exceptions
+   - Impacts role definition
+   - Due: TBD
+
+5. **Auto-Run Conditions Engine Trigger** (Product/Kelly)
+   - On loan open automatically, or button click?
+   - Performance implications
+   - User experience considerations
+   - Due: TBD
+
+6. **Loan-Level Beta Flag** (Rusty/Engineering)
+   - Flag to identify "Conditions Portal loans" vs legacy
+   - Allows hybrid operation during rollout
+   - Similar to GFE/Loan Estimate toggle pattern
+   - Due: TBD
+
+3.2 MEDIUM PRIORITY
+-------------------
+7. **Document Description Field in Split/Merge** (Tim/Engineering)
+   - Confirm field is available during document operations
+   - Due: TBD
+
+8. **Closer vs Funder Role Distinction** (Kelly/Lauren)
+   - Wet state vs dry state differences
+   - Permissions differences
+   - Due: TBD
+
+9. **Kelly's "Cardinal Rules"** (Leslie/Tim)
+   - Document constraints and requirements from Byte team
+   - Critical for compatibility
+   - Due: TBD
+
+10. **AI Document Auto-Indexing** (Leslie)
+    - Add Sato's document indexing tool to requirements
+    - Integration point
+    - Due: End of January
+
+11. **Email System Unification**
+    - Consolidate email across Conditions Portal, Needs List, Tasks, Clear Docs
+    - Single email screen for all experiences
+    - Auto-reminders controlling all doc requests
+    - Owner: Product/Engineering
+
+12. **Custom Conditions Governance**
+    - Allow users to create custom conditions
+    - Monitor for patterns to standardize
+    - Balance flexibility vs. standardization
+    - Risk: Undermines governance if uncontrolled
+
+================================================================================
+4. TECHNICAL DECISIONS MADE
+================================================================================
+
+| # | Decision | Rationale | Impact |
+|---|----------|-----------|--------|
+| 1 | **Documents can link to multiple conditions** | More realistic workflow, single doc can satisfy multiple requirements | Deviation from Byte 1:1; needs reconciliation logic |
+| 2 | **Flags are user-specific, not global** | Personal organization tool, not communication mechanism | Simplifies data model, no flag management needed |
+| 3 | **Remove "Responsibility" field** | Per Byte team direction | Candor uses "Transaction" field instead |
+| 4 | **Enhanced notes system** | Single blob insufficient | Structured notes with timestamps, user attribution, read/unread |
+| 5 | **No save button - auto-save** | Modern UX pattern | Terminal actions trigger saves |
+| 6 | **Kill email tabs feature** | Simplify UI | Single email generation, not multiple versions in tabs |
+| 7 | **Build in Clear, accessible from Byte** | Follow existing pattern | Like Clear Docs, Pipeline - embedded via web control |
+| 8 | **Support downstream roles** | Minimize disruption | ~7 base roles map from 400+ Byte roles |
+| 9 | **Hybrid data storage** | Byte compatibility + new features | Condition in Byte, metadata in Clear |
+| 10 | **Sync to Byte for Domo reports** | Don't break existing analytics | Maintain backward compatibility |
+| 11 | **Audit logging required** | Regulatory and troubleshooting | Log all changes with full metadata |
+
+================================================================================
+5. ROLLOUT STRATEGY
+================================================================================
+
+5.1 PHASED BETA APPROACH
+------------------------
+**Goal**: Minimize disruption while enabling thorough testing
+
+**Approach**:
+1. **Create loan-level flag** in Byte
+   - Identifies "Conditions Portal loans" vs legacy
+   - Similar to GFE/Loan Estimate toggle pattern
+
+2. **Select pilot group**
+   - FULL value chain: LOs, processors, underwriters, closers, funders, post-closing
+   - Avoid mid-loan handoff issues
+   - Problem: Some roles support all channels (can't isolate them)
+
+3. **Hybrid operation**
+   - Modify Byte conditions button to check loan flag
+   - Opens legacy or new portal based on flag
+   - Users may work in both systems depending on loan assignment
+   - Data stays synchronized between both
+
+4. **Beta considerations**:
+   - Downstream departments (post-closing, QC, funders) support all loans
+   - Can't isolate them to only beta loans
+   - Need loan-level flag so they see appropriate UI per loan
+   - Existing pipeline must remain operational
+
+5. **Monitor and fix**
+   - Run pilot for ~1 month
+   - Gather feedback
+   - Fix issues
+   - Company-wide rollout
+
+5.2 RISK MITIGATION
+-------------------
+- **Byte auto-save conflicts**: Implement rollback/recovery; Conditions Portal is source of truth
+- **Role complexity**: Consolidate to 5-7 base roles with mapping at login
+- **Downstream disruption**: Loan-level flag allows users to see both systems based on loan
+- **Data sync**: API handles sync; audit logging; Domo joins both sources
+- **Candor dependency**: Coordinate on "Responsibility" field removal, use "Transaction" instead
+
+================================================================================
+6. WORKFLOW RULES & BUSINESS LOGIC
+================================================================================
+
+6.1 CONDITION LIFECYCLE
+-----------------------
+1. **Creation**:
+   - Automatic via Rules Engine (based on loan attributes)
+   - Manual by underwriter
+   - Via Candor (AUS-triggered)
+
+2. **Assignment**:
+   - Grouped by stage (Prior to Docs, Funding, Closing, Post-Closing)
+   - Categorized (App, Credit, Bar, Internal, External)
+   - Class assigned (Processor, Underwriter, etc.)
+
+3. **Processing**:
+   - Processor uploads/links documents
+   - Processor requests documents from borrower (if Bar dependency)
+   - Documents can be split, merged, rotated
+   - Documents can link to multiple conditions
+
+4. **Review**:
+   - Underwriter reviews linked documents
+   - Can accept or reject
+   - Can add notes for clarification
+   - Wizard mode guides step-by-step
+
+5. **Clearance**:
+   - Appropriate role clears condition based on class
+   - Status changes to "Cleared"
+   - Audit trail created
+   - Can be undone if needed (check permissions)
+
+6. **Stage Progression**:
+   - Conditions move through stages as loan progresses
+   - Prior to Docs → Prior to Funding → Prior to Closing → Post-Closing
+   - Stage movement controlled by permissions
+
+6.2 DOCUMENT REQUEST WORKFLOW
+------------------------------
+1. **Identify needed documents**
+   - Review conditions with Bar dependency
+   - Status: "Need Bar Request"
+
+2. **Generate borrower email**:
+   - Select conditions needing documents
+   - Click "Send Bar Request"
+   - AI generates email with selected tone
+   - Can regenerate with different tone
+   - Can use saved template
+
+3. **Send and track**:
+   - Email sent to borrower
+   - Status changes to "Requested"
+   - Document request history maintained
+   - Auto-reminders trigger at configured intervals
+
+4. **Document receipt**:
+   - Borrower uploads document
+   - Status changes to "Received" or "Active"
+   - Document appears in Clear Docs
+   - Processor links document to conditions
+
+5. **Acceptance workflow**:
+   - Review document
+   - Accept, reject, or request clarification
+   - Update condition status accordingly
+
+6.3 RULES ENGINE WORKFLOW
+--------------------------
+1. **Trigger**: Loan opened OR button clicked (TBD)
+2. **Examine**: Loan attributes (loan type, property type, borrower info, etc.)
+3. **Apply Rules**: Match loan characteristics to condition templates
+4. **Generate**: Create applicable conditions automatically
+5. **Remove**: Remove conditions that no longer apply (if loan attributes change)
+6. **Group**: Organize by stage and category
+
+**Example Rules**:
+- If loan type = FHA → Add FHA-specific conditions
+- If property type = Condo → Add condo certification requirements
+- If self-employed borrower → Add income verification conditions
+- If high LTV → Add additional documentation requirements
+
+================================================================================
+7. ACCEPTANCE CRITERIA DETAILS
+================================================================================
+
+7.1 FUNCTIONAL ACCEPTANCE
+--------------------------
+- [ ] User can view all conditions for a loan
+- [ ] User can create new conditions (if permitted by role)
+- [ ] User can edit condition details (based on permissions)
+- [ ] User can link multiple documents to a single condition
+- [ ] User can link a single document to multiple conditions
+- [ ] User can change condition status
+- [ ] User can add notes at loan, condition, and document levels
+- [ ] User can set personal flags on conditions
+- [ ] User can search conditions by ID and keywords
+- [ ] User can filter by category, status, stage, flags
+- [ ] User can export conditions
+- [ ] Rules Engine automatically creates conditions based on loan attributes
+- [ ] AI generates borrower document request emails with tone options
+- [ ] Email templates can be saved and managed
+- [ ] Auto-reminders send follow-ups for outstanding requests
+- [ ] Document split/merge/rotate functionality works
+- [ ] Clear Docs embedded as tab within portal
+- [ ] Wizard mode guides through condition clearance
+- [ ] Custom condition lists can be saved
+- [ ] Real-time auto-save works without explicit save button
+
+7.2 INTEGRATION ACCEPTANCE
+---------------------------
+- [ ] Opens from Byte via web control with loan context
+- [ ] Syncs data bidirectionally with Byte (<30 sec delay)
+- [ ] Integrates with Clear Docs for document management
+- [ ] Integrates with Candor for automated condition creation
+- [ ] Works with Borrower Needs List
+- [ ] Email system unified across all tools
+
+7.3 SECURITY ACCEPTANCE
+------------------------
+- [ ] Role-based access control enforces permissions
+- [ ] 400+ Byte roles map correctly to 5-7 base roles
+- [ ] Processor 3 can sign off on processor-level conditions
+- [ ] Underwriters can create and clear conditions
+- [ ] Field-level permissions enforced (description, transaction, etc.)
+- [ ] Personal flags not visible to other users
+
+7.4 DATA ACCEPTANCE
+-------------------
+- [ ] Hybrid data model (Byte + Clear) works correctly
+- [ ] Many-to-many document-condition relationships maintained
+- [ ] Data syncs to Byte for Domo reporting
+- [ ] No existing Domo reports broken
+- [ ] Audit logging captures all changes with metadata
+- [ ] User attribution tracked correctly (despite API limitations)
+
+7.5 PERFORMANCE ACCEPTANCE
+---------------------------
+- [ ] Handles large condition lists (100+ conditions per loan)
+- [ ] Search/filter operations responsive
+- [ ] Real-time updates don't cause lag
+- [ ] API response times acceptable
+- [ ] Rules Engine runs efficiently
+
+7.6 ROLLOUT ACCEPTANCE
+-----------------------
+- [ ] Loan-level flag implemented in Byte
+- [ ] Byte conditions button checks flag and opens correct portal
+- [ ] Beta pilot group can be selected and flagged
+- [ ] Users can work in both systems based on loan assignments
+- [ ] Rollback mechanism works for conflicts
+- [ ] Existing pipeline remains operational during transition
+
+================================================================================
+8. FEATURES NOT IN CURRENT DOCUMENTATION
+================================================================================
+
+Based on transcript analysis, these features may not be fully documented:
+
+1. **Document Description Field During Split/Merge**
+   - Needs verification that field is available
+   - Important for document organization
+
+2. **Email Signature Management**
+   - Import from Marketing Hub or Outlook
+   - Support multiple signatures (up to 5)
+   - Choose default signature
+   - HTML editor for customization
+
+3. **Document Request History Tab**
+   - Track all document requests sent
+   - View status of open vs. received requests
+   - History of borrower communications
+
+4. **Loan History Tab**
+   - View all activity on loan
+   - May be separate from document request history
+
+5. **Export Conditions Functionality**
+   - Mentioned but not detailed
+   - Format (CSV, Excel, PDF?)
+   - What data included?
+
+6. **Custom Condition Lists**
+   - Save frequently-used sets
+   - Personal or shared?
+   - Examples: "Miami Condos," "FHA Loans"
+
+7. **Read/Unread Note Indicators**
+   - Per-user tracking
+   - Bell icon notification system
+   - How are notes marked as read?
+
+8. **Processor 3 Conditions**
+   - Special condition class that processor 3 can sign off on
+   - Other processor types cannot
+   - Needs clarification on what qualifies as "Processor 3 condition"
+
+9. **Exception Requests**
+   - Underwriter-specific functionality
+   - Affects role permissions
+   - Needs deep dive session
+
+10. **Final Stamp / Screen Check Feature**
+    - Lock documents so they can't be changed
+    - Only underwriters can uncheck
+    - Underwriter peace of mind
+    - Mentioned as potential Phase 2 feature
+
+11. **Borrowing Bar Dependency Flag**
+    - Conditions can be flagged as Bar-dependent
+    - Affects document request workflow
+    - Status: "Need Bar Request"
+
+12. **Transaction Field**
+    - Replacing "Responsibility" field
+    - Used by Candor integration
+    - Needs clarification on purpose and usage
+
+13. **Tone Selection for AI Emails**
+    - Formal, Casual, Friendly options
+    - Regenerate with different tone
+    - No token limits/concerns
+
+14. **Tag System** (Possible future addition)
+    - Discussed but not decided
+    - Concern about sprawl if public
+    - Start with flags, expand to tags if needed
+
+================================================================================
+9. ACCEPTANCE CRITERIA ADDITIONS
+================================================================================
+
+**From Email Functionality**:
+- [ ] User can import signature from Marketing Hub
+- [ ] User can import signature from Outlook
+- [ ] User can create up to 5 signatures
+- [ ] User can set default signature
+- [ ] User can choose signature per email
+- [ ] AI email generation supports formal, casual, friendly tones
+- [ ] User can regenerate email with different tone
+- [ ] No token limits on email generation
+
+**From Document Workflow**:
+- [ ] Document description field available during split operation
+- [ ] Document description field available during merge operation
+- [ ] Single document can be linked to multiple conditions
+- [ ] System handles many-to-many relationships correctly
+- [ ] Document request history tab shows all requests
+- [ ] Document status updates when received
+
+**From Roles**:
+- [ ] Processor 3 can sign off on Processor 3 class conditions
+- [ ] Processor 1 and 2 cannot sign off on processor conditions
+- [ ] Underwriters can create conditions
+- [ ] Processors cannot create conditions (only underwriters can)
+- [ ] Appropriate roles can move conditions between stages
+- [ ] Field-level permissions work: description, transaction, etc.
+
+**From Notes**:
+- [ ] Bell icon shows unread note count
+- [ ] Notes show at loan level
+- [ ] Notes show at condition level
+- [ ] Notes show at document level (needs verification)
+- [ ] Notes include timestamp
+- [ ] Notes include user attribution
+- [ ] Read/unread status tracked per user
+
+**From Audit**:
+- [ ] All condition changes logged
+- [ ] All status changes logged
+- [ ] All document links/unlinks logged
+- [ ] All note additions logged
+- [ ] Audit log includes who, what, when, why
+- [ ] Domo reports can access audit data
+
+================================================================================
+10. IMPLEMENTATION NOTES FOR DEVELOPMENT
+================================================================================
+
+**Critical Path Items**:
+1. Role/permissions matrix (BLOCKER)
+2. Byte role mapping (BLOCKER)
+3. Hybrid data model API design (HIGH)
+4. Many-to-many document-condition relationship (HIGH)
+5. Auto-save conflict resolution (HIGH)
+6. Audit logging infrastructure (HIGH)
+
+**Technical Debt to Avoid**:
+- Don't create multiple roles with identical permissions
+- Don't let flag/tag system get out of control
+- Don't skip audit logging
+- Don't ignore Domo reporting compatibility
+
+**Nice-to-Haves for Phase 2**:
+- Final stamp/screen check feature
+- Phase 2+ document locking
+- Advanced wizard mode enhancements
+- Custom condition pattern mining
+- Tag system (if flags insufficient)
+
+================================================================================
+11. KEY CONTACTS & OWNERS
+================================================================================
+
+**Product**:
+- Mark: Product Leadership, overall direction
+- Leslie Chang: AI Program Manager, POC Lead
+- Annie: Product
+- Josephine Yen: Product/Data Model lead
+
+**Design**:
+- Tim Borquez: Design lead
+
+**Engineering**:
+- Rusty: Engineering Lead
+- Kitt Holland: Engineering
+- Carlos Sanchez: Engineering (Candor integration)
+- Shailendra Sharma: Engineering/Product
+
+**SMEs**:
+- Toni: Mortgage SME
+- Kelly Mattox: Byte Platform Owner (Cardinal Rules)
+- Jina Choi: Candor Integration Lead
+
+**Operations**:
+- Lauren: Operations (not present but key stakeholder)
+
+**Executive**:
+- Susan Walker: CPO
+
+================================================================================
+12. TIMELINE & DELIVERABLES
+================================================================================
+
+- **Product Requirements**: Due end of January 2026
+- **GitHub Tickets**: Created using Sato's tool
+- **Day 2 Agenda** (January 14):
+  - Sato demo of SDLC tool (1:00-3:00 PM)
+  - Implementation strategy deep dive
+  - Engineering requirements discussion
+  - GitHub repo setup
+  - Create initial tickets
+
+**Expedite**:
+- Claude Code access for Josephine, Tim (this week)
+
+================================================================================
+END OF COMPREHENSIVE SUMMARY
+================================================================================

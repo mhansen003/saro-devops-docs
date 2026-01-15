@@ -1,0 +1,75 @@
+================================================================================
+ANALYSIS OF C:\Users\Mark Hansen\Desktop\saro\transcripts\part1_extracted.txt
+================================================================================
+
+
+FEATURES MENTIONED (8 items):
+--------------------------------------------------------------------------------
+[4:29] Leslie Chang: Thank you everybody for being here. Thank you. A special thank you for all the people that that flew out. I appreciate everyone's time. So I'm going to spend about 15 minutes and just give kind of an introduction and and like talk to you guys about.A little bit about conditions portal and a little bit about this session, but at the end of the day, please treat this as a as a kind of a working session. I know we don't always get to get together often, so just a couple of housekeeping items. Bathr
+
+[6:30] We have an escape room at: , 6:20 tonight, also across the street. So I have 640. Is it 620? 640. That's what you said in your invite. Whatever. Yeah, whatever my invite said. I think. I think we had a little bit of time to to get there to to catch up.And then afterwards, if you guys want to meet up for dinner or something, that's, you know, fine. Tomorrow we'
+
+[3:00] ll try to end around: for those who are traveling. And I think that's it. So I think the overall agenda today, the goal was just kind of a repeat of what we we talked about on Friday today.We want to Leslie was kind enough to make a kind of an agenda here. It's all about the requirements. I I want you guys to all leave here being experts at conditions portal. So why did it come about? What are the features? Who are the users? What are the what are the functions?What are we going to do? And then what features are we m
+
+[37:56] Leslie Chang: Sweet. Carlos will be Jina Choi's conduit at at CMG for Candor. So as Carlos gets up to speed, we'll have Jina Choi and Carlos's Candor experts in a nutshell from a conditions.Oral perspective, Candor will read the AUS results and it will create conditions that Candor will be responsible for signing off on through OCR and other things. So it's almost like a they call it like a almost like a.A private or a mock underwriter is doing all of the work as documents get uploaded. Let's say Candor creat
+
+[46:56] Carlos Sanchez: Uh.I don't. Yeah, I don't want to give you guys the the flu.
+
+[49:38] Leslie Chang: OK, perfect. So file received and then we also have the role here, processor and underwriter and this is posted on both sites, so you can access it via the URL if you want to play with it on your own time.So we're on the landing page and as Mark mentioned, we have the rules engine. So it's looking at the individual attributes of the loan and deciding what loan conditions need to be assigned to it. So these are grouped by you can see.Prior to docs, prior to funding, there's also prior to closing,
+
+[1:17:26] Leslie Chang: Yeah, the unintentional changes, Carlos, are real and they happen. We just need to. We need Keith to build a bite time machine like go back in 10 minutes. Anyway, keep going, Leslie. All right. Is this a quick pause? Is this helpful? Is this a good?Are you guys, are we going at the right depth or I'm trying to keep it like high, high level so you can understand it but also deep dive in where we need. But I I I don't want to necessarily go into a tunnel on anything until we get through the high l
+
+[1:29:35] Leslie Chang: All of the notes requirements, but there's a concept of, again, notes at a condition level and one at the loan level. So then if I add a note here, going to save it.How do you exit? Oh, OK.OK. And then how do you access the notes portal from? Oh, it's the bell icon. Oh, the bell icon. OK, notice for this we didn't have a save button. So we'll talk about that. Is the red symbol painting like a bolts thing or is that just the that was a bolt thing? OK, yeah, yeah, it should. When you close that co
+
+
+DECISIONS MADE (2 items):
+--------------------------------------------------------------------------------
+[47:02] Leslie Chang: We appreciate that.OK, so this is thought right. I was using, yeah, with a different model with, yeah, because you can select the models. So I just started building conditions for all of this, see what I'm doing. It's made a huge difference. I mean, well, it's.It should be remarkable. Yeah, I'll show you mine really quick. It's all gonna keep doing that like every every time they release a new model, it should, you know, there's gonna be differences in levels, but like they're now there getting 
+
+[1:29:35] Leslie Chang: All of the notes requirements, but there's a concept of, again, notes at a condition level and one at the loan level. So then if I add a note here, going to save it.How do you exit? Oh, OK.OK. And then how do you access the notes portal from? Oh, it's the bell icon. Oh, the bell icon. OK, notice for this we didn't have a save button. So we'll talk about that. Is the red symbol painting like a bolts thing or is that just the that was a bolt thing? OK, yeah, yeah, it should. When you close that co
+
+
+OPEN QUESTIONS/ISSUES (7 items):
+--------------------------------------------------------------------------------
+[3:41] Leslie Chang: Oh, not not yet. We were just sitting ready. Situated. Hi. Nice to see you again. So this is the team. I don't know who you've got. I can't introduce cause I don't know who knows who. So I'll leave that to you guys. I'm Leslie. Hi. Nice to meet you.
+
+[3:00] ll try to end around: for those who are traveling. And I think that's it. So I think the overall agenda today, the goal was just kind of a repeat of what we we talked about on Friday today.We want to Leslie was kind enough to make a kind of an agenda here. It's all about the requirements. I I want you guys to all leave here being experts at conditions portal. So why did it come about? What are the features? Who are the users? What are the what are the functions?What are we going to do? And then what features are we m
+
+[37:56] Leslie Chang: Sweet. Carlos will be Jina Choi's conduit at at CMG for Candor. So as Carlos gets up to speed, we'll have Jina Choi and Carlos's Candor experts in a nutshell from a conditions.Oral perspective, Candor will read the AUS results and it will create conditions that Candor will be responsible for signing off on through OCR and other things. So it's almost like a they call it like a almost like a.A private or a mock underwriter is doing all of the work as documents get uploaded. Let's say Candor creat
+
+[49:38] Leslie Chang: OK, perfect. So file received and then we also have the role here, processor and underwriter and this is posted on both sites, so you can access it via the URL if you want to play with it on your own time.So we're on the landing page and as Mark mentioned, we have the rules engine. So it's looking at the individual attributes of the loan and deciding what loan conditions need to be assigned to it. So these are grouped by you can see.Prior to docs, prior to funding, there's also prior to closing,
+
+[1:15:44] Leslie Chang: Final stamp and and so even if you sent the loan, let's say you've partially underwrote the loan and you you had like 8 docs that were good. You'd final stamp those. They're locked, but the other three go back to the processor. That way the processor can go fix that, but they can't actually change what was there that way the underwriter has.Peace of Mind, and they don't feel like they have to re underwrite the entire file because if it's screen checked only underwriters can uncheck it. So anyway
+
+[1:29:35] Leslie Chang: All of the notes requirements, but there's a concept of, again, notes at a condition level and one at the loan level. So then if I add a note here, going to save it.How do you exit? Oh, OK.OK. And then how do you access the notes portal from? Oh, it's the bell icon. Oh, the bell icon. OK, notice for this we didn't have a save button. So we'll talk about that. Is the red symbol painting like a bolts thing or is that just the that was a bolt thing? OK, yeah, yeah, it should. When you close that co
+
+[2:36:43] Carlos Sanchez: I don't. I am fading. I don't have any. No, I don't have any questions. It's a pretty good prototype and kind of getting the idea of what we're trying to do so.
+
+
+API/INTEGRATION MENTIONS (2 items):
+--------------------------------------------------------------------------------
+[49:38] Leslie Chang: OK, perfect. So file received and then we also have the role here, processor and underwriter and this is posted on both sites, so you can access it via the URL if you want to play with it on your own time.So we're on the landing page and as Mark mentioned, we have the rules engine. So it's looking at the individual attributes of the loan and deciding what loan conditions need to be assigned to it. So these are grouped by you can see.Prior to docs, prior to funding, there's also prior to closing,
+
+[1:29:35] Leslie Chang: All of the notes requirements, but there's a concept of, again, notes at a condition level and one at the loan level. So then if I add a note here, going to save it.How do you exit? Oh, OK.OK. And then how do you access the notes portal from? Oh, it's the bell icon. Oh, the bell icon. OK, notice for this we didn't have a save button. So we'll talk about that. Is the red symbol painting like a bolts thing or is that just the that was a bolt thing? OK, yeah, yeah, it should. When you close that co
+
+
+WORKFLOW DESCRIPTIONS (9 items):
+--------------------------------------------------------------------------------
+[4:29] Leslie Chang: Thank you everybody for being here. Thank you. A special thank you for all the people that that flew out. I appreciate everyone's time. So I'm going to spend about 15 minutes and just give kind of an introduction and and like talk to you guys about.A little bit about conditions portal and a little bit about this session, but at the end of the day, please treat this as a as a kind of a working session. I know we don't always get to get together often, so just a couple of housekeeping items. Bathr
+
+[6:30] We have an escape room at: , 6:20 tonight, also across the street. So I have 640. Is it 620? 640. That's what you said in your invite. Whatever. Yeah, whatever my invite said. I think. I think we had a little bit of time to to get there to to catch up.And then afterwards, if you guys want to meet up for dinner or something, that's, you know, fine. Tomorrow we'
+
+[3:00] ll try to end around: for those who are traveling. And I think that's it. So I think the overall agenda today, the goal was just kind of a repeat of what we we talked about on Friday today.We want to Leslie was kind enough to make a kind of an agenda here. It's all about the requirements. I I want you guys to all leave here being experts at conditions portal. So why did it come about? What are the features? Who are the users? What are the what are the functions?What are we going to do? And then what features are we m
+
+[37:56] Leslie Chang: Sweet. Carlos will be Jina Choi's conduit at at CMG for Candor. So as Carlos gets up to speed, we'll have Jina Choi and Carlos's Candor experts in a nutshell from a conditions.Oral perspective, Candor will read the AUS results and it will create conditions that Candor will be responsible for signing off on through OCR and other things. So it's almost like a they call it like a almost like a.A private or a mock underwriter is doing all of the work as documents get uploaded. Let's say Candor creat
+
+[47:02] Leslie Chang: We appreciate that.OK, so this is thought right. I was using, yeah, with a different model with, yeah, because you can select the models. So I just started building conditions for all of this, see what I'm doing. It's made a huge difference. I mean, well, it's.It should be remarkable. Yeah, I'll show you mine really quick. It's all gonna keep doing that like every every time they release a new model, it should, you know, there's gonna be differences in levels, but like they're now there getting 
+
+[49:38] Leslie Chang: OK, perfect. So file received and then we also have the role here, processor and underwriter and this is posted on both sites, so you can access it via the URL if you want to play with it on your own time.So we're on the landing page and as Mark mentioned, we have the rules engine. So it's looking at the individual attributes of the loan and deciding what loan conditions need to be assigned to it. So these are grouped by you can see.Prior to docs, prior to funding, there's also prior to closing,
+
+[1:15:44] Leslie Chang: Final stamp and and so even if you sent the loan, let's say you've partially underwrote the loan and you you had like 8 docs that were good. You'd final stamp those. They're locked, but the other three go back to the processor. That way the processor can go fix that, but they can't actually change what was there that way the underwriter has.Peace of Mind, and they don't feel like they have to re underwrite the entire file because if it's screen checked only underwriters can uncheck it. So anyway
+
+[1:17:26] Leslie Chang: Yeah, the unintentional changes, Carlos, are real and they happen. We just need to. We need Keith to build a bite time machine like go back in 10 minutes. Anyway, keep going, Leslie. All right. Is this a quick pause? Is this helpful? Is this a good?Are you guys, are we going at the right depth or I'm trying to keep it like high, high level so you can understand it but also deep dive in where we need. But I I I don't want to necessarily go into a tunnel on anything until we get through the high l
+
+[1:29:35] Leslie Chang: All of the notes requirements, but there's a concept of, again, notes at a condition level and one at the loan level. So then if I add a note here, going to save it.How do you exit? Oh, OK.OK. And then how do you access the notes portal from? Oh, it's the bell icon. Oh, the bell icon. OK, notice for this we didn't have a save button. So we'll talk about that. Is the red symbol painting like a bolts thing or is that just the that was a bolt thing? OK, yeah, yeah, it should. When you close that co
+

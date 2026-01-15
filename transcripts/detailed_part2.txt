@@ -1,0 +1,1424 @@
+====================================================================================================
+DETAILED ANALYSIS: DAY 1 PART 2
+====================================================================================================
+
+
+====================================================================================================
+FEATURES (11 items)
+====================================================================================================
+
+[1:51:33] Josephine Yen:
+That role, would you argue that the verbs of what you can do, they're no different. If you took some of the actions of an underwriter and the processor and called it this post underwriter role, like there's no new or different functionality, right? In other words, I'm just.
+
+----------------------------------------------------------------------------------------------------
+
+[1:51:52] Josephine Yen:
+I'm just swapping out existing functionality and and grouping it into a new role. Is is that right or is there some new?
+
+----------------------------------------------------------------------------------------------------
+
+[1:52:08] Josephine Yen:
+That's that's. I think that's OK. Can I can I using the same all the same behavior and functionality just applying just just to do that? OK, that's what I'm trying.
+
+----------------------------------------------------------------------------------------------------
+
+[2:02:33] Josephine Yen:
+Bytes fields or roles, for example, like I I want to have as few as possible. I only want to. I only want to add 1 when there's a difference in functionality.
+
+----------------------------------------------------------------------------------------------------
+
+[2:05:54] Kelly Mattox:
+Yeah, I mean, I feel like if if you're putting something somewhere, the idea is, is that I guess at some point in time there'll be an audit, there'll be something that comes back, somebody will ask a question and we just need to be able to see that data that was entered in on the condition screen if it's not the same as.
+
+----------------------------------------------------------------------------------------------------
+
+[2:11:39] Kelly Mattox:
+Well, it's going to need to be if that's what you want. If you want them to get the same or have the same capability, if if an underwriter is adding a condition for a closer to sign off and they're using the additional fields that you're giving them, they're going to need to use that.
+
+----------------------------------------------------------------------------------------------------
+
+[2:12:14] Josephine Yen:
+Request from borrower or whatever. It is all of the stuff that exists today. Is there anything else that that I didn't describe like a new piece of functionality that one of those roles would need to do that that we haven't accounted for? That's the question.
+
+----------------------------------------------------------------------------------------------------
+
+[2:12:52] Josephine Yen:
+Those are. That's existing functionality. Yes, right. Is there anything else? Like do they extract the data? Do they do they do they do anything funky with the?
+
+----------------------------------------------------------------------------------------------------
+
+[2:14:38] Josephine Yen:
+And and again this will be a this will be kind of a Lauren ask like like we need to ask that like hey we want to yeah we wanna 'cause my argument is if we're already building the core functionality and to me it this just sounds like.
+
+----------------------------------------------------------------------------------------------------
+
+[2:14:54] Josephine Yen:
+Permissions and roles creating a couple more profiles. Yeah, or I don't know if I'm using the right nomenclature, but like if we're not adding any new features then I I I think it's fine to have extra roles if if it means having a.Full uh downstream all on our same all on our tool. So then that means three and four is checks. It's checked off, right? So.
+
+----------------------------------------------------------------------------------------------------
+
+[2:27:59] Josephine Yen:
+Says, oh, you have an outstanding thing. You need to go change the status or something. That way they're they when they go, even if they didn't know about it, they go to the loan. They can see it as a as a to do. It's a toaster pop like a like a little pop in the bottom right that tells you something. You know what I mean? Like we could we could say oh for this loan.Trigger a toaster pop in the queue. So when someone goes there and they see it, maybe they'll click it and then goes to change the status.Um.OK, what else? I'm like, I feel way better. I thought Kelly was gonna sabotage us. That was the problem. The whole thing. Yeah, it sounded like if we can do these roles. OK, so they ask for product guys. We need a Excel spreadsheet. We need all the roles. Yeah, and I need to know.I I wanna...
+
+----------------------------------------------------------------------------------------------------
+
+
+====================================================================================================
+API TECHNICAL (18 items)
+====================================================================================================
+
+[1:30:12] Josephine Yen:
+Yes, I don't know. I mean, at the end of the day, what do you other than you can create, you can create a condition, you can edit, you can link it, you can change status. That's it. Like that's not like a lot of stuff like and it's not, it's not very dangerous, especially if we audit, if we if we log it, we know what's happening and.And you know, we can if worst case, we can take these underwriter and processor roles and obfuscate them up into groups. Yes, that this uses and then so OK, you have an underwriter 1-2 and three with various controls and a processor. Yes, I I don't need to worry about all 90. I can just have these.Smaller groups, 'cause we're not. Yes. Everything else you do in the loan, you're doing invite. You're you're not. You're only coming to the screen for very limited s...
+
+----------------------------------------------------------------------------------------------------
+
+[1:48:52] Josephine Yen:
+There we go. So can you hear me? OK, OK, cool. So you have the you have the loan officer, you have a processor, you have an underwriter and then you have like everybody else call that like post underwriting.
+
+----------------------------------------------------------------------------------------------------
+
+[1:50:44] Josephine Yen:
+And then everybody post underwriting we like Mitch and and folks. So we're we have this conundrum like assuming that we build the conditions portal if the condition portal breaks bite or.
+
+----------------------------------------------------------------------------------------------------
+
+[1:50:59] Josephine Yen:
+Conditions for a loan like like let's assume that that's the case or it makes it irreversible. Is there anything like like with post underwriting? What's the close? Is it just a read only at that point or or like what? Like who? Who would a post?
+
+----------------------------------------------------------------------------------------------------
+
+[1:51:03] Kelly Mattox:
+Yep.So you have closers and funders who sign off and add conditions and pass them to the next one. They also move them post closing. Post closing will go in and they're now actually adding conditions to loans based on loans not being purchased from investor purchasing.Getting steps back.Mhm.
+
+----------------------------------------------------------------------------------------------------
+
+[1:51:33] Josephine Yen:
+That role, would you argue that the verbs of what you can do, they're no different. If you took some of the actions of an underwriter and the processor and called it this post underwriter role, like there's no new or different functionality, right? In other words, I'm just.
+
+----------------------------------------------------------------------------------------------------
+
+[1:53:47] Josephine Yen:
+And that's even for closing funding and post closing.
+
+----------------------------------------------------------------------------------------------------
+
+[2:04:04] Kelly Mattox:
+No, yes and no. I mean some of our areas work like that. That's the other part that we're looking forward to hopefully making some changes is, is having like a wet and a dry state and everybody on the same page. Right now we have multiple, we had multiple ownerships of those divisions and they didn't always.Agree and they mixed in each other. So the idea is is that yes, it should be wet versus dry.Cause a wet and in a wet the closer does almost all of it and the funder really just validates the documents that come back. They're more like a post closing piece, but that's on wet and on dry they actually have two separate.
+
+----------------------------------------------------------------------------------------------------
+
+[2:07:17] Kelly Mattox:
+Yeah.Yeah, and really, I think cause you're still using the Byte API right to push the data back. So Byte should have that API of whatever's happening. Well, although now it's gonna show API 22 or whatever API bot we're using, huh?
+
+----------------------------------------------------------------------------------------------------
+
+[2:08:02] Josephine Yen:
+Many to many concepts, but OK, that sounds the question that's in my head is is the full data set of condition in one system outside of byte and you sync whatever data you want to byte or is the full data set of condition.Is whatever. There's a set that exists outside of byte and then the rest of it is in byte and together A + B is a full set. So that's the latter is how you're doing it elsewhere, right? The condition itself will live in.Byte, but metadata will exist in clear, so probably want to follow a similar pattern. That's an engineering question, but yeah, I wouldn't. I don't know. I wouldn't. The problem is if you one, you're it's gonna be in. It's gonna. If you're gonna use the API, it's gonna be in byte anyway.
+
+----------------------------------------------------------------------------------------------------
+
+[2:09:06] Kelly Mattox:
+Just remember that again, if it's an API call, the API call, unless we're able to use the new one that shows who does it, byte doesn't tell us who does it.
+
+----------------------------------------------------------------------------------------------------
+
+[2:09:18] Kelly Mattox:
+When it's done through the API. So like anybody who does anything through EPS or through clear.
+
+----------------------------------------------------------------------------------------------------
+
+[2:09:30] Josephine Yen:
+Uh, we run into that same issue with the modified daytime done with the API LB server will.That invite, it's user level. I think these are dates or they have this timeline too. They have modified. They have modified. They don't have. I don't. They don't have modified, but they have the status. But there's no history. So like there's five statuses. The latest one is what you get.Yeah, so if I if you modify them, like you, I get invited.But if you do it with the UI, it's server time, then you'll know types of this, yeah.OK. So that we'll take that as a as a research. So I I think we know what we want to do. But I think what you're saying is we use the data, we source the data that we need that is that byte supports and then all the extra stuff we do it outside and then the the A + B is the f...
+
+----------------------------------------------------------------------------------------------------
+
+[2:10:35] Josephine Yen:
+Do the joint I I don't. In other words I don't think no, but the full data set is what we need for the to render the UI. That's what I say. We have to merge the two of the data. I don't know that we need to render you. I think Domo is I I don't know that we need an audit tool in clear docs. I think we can do that through Domo.No, what what I'm saying is that when we get the payload to render the data in our conditions portal UI, our API is going to take data from some database. Yes. And then from both databases. Yes. Yeah, that's sort of thing. OK, OK, we're not, I don't believe that we should store duplicate data.Again, I'll defer to engineering, but I would we we want a it's OK to have two sources of truth that are hybrid. OK, OK. So then #3 is which I I think, yes, I'll. So Kelly, can y...
+
+----------------------------------------------------------------------------------------------------
+
+[2:16:31] Josephine Yen:
+Different from what you said, which is, could I have this group like a lab of downstream? Yes, that's a different thing. Yes. I think we need that flexibility cuz I certainly don't want to bring down CMG production. Yes, total processors. So I think what we would say is we'd go to operations and we'd say give me.So a group of ellos, processors, underwriters, post closers, all the way down that are in the whole value chain in this group. Yeah. They will all be on conditions port only. Yeah. And we'll have them test it for a month. We'll fix things. Yes. And then if we like it, we'll roll it to the rest of the company. Yeah.
+
+----------------------------------------------------------------------------------------------------
+
+[2:18:11] Kelly Mattox:
+Yeah, but the the challenges is when you guys get to the end result, let's just talk about like your post closing all of those folks and everywhere investor purchasing, am I insuring, FHA insuring all of those people, you're now talking about people who support.Every channel throughout CMG, so their reports, you can't just like we have two MI insuring analysts. You can't stop them from doing their job across the board. Does that make sense?
+
+----------------------------------------------------------------------------------------------------
+
+[2:25:36] Josephine Yen:
+Earlier, you guys are gonna solve for those last two 'cause you're not gonna have a bite screen. So does that mean that you can't change status? Oh, that means you can't. So yeah, it would be impossible to do it from those, but we could provide.Instruction for them to go, yeah, into. So we'll have to be on the day one. So we can't change it through the API 'cause we there's all these validation rules. We we check the API and yeah, it bypasses and so.
+
+----------------------------------------------------------------------------------------------------
+
+[2:27:59] Josephine Yen:
+Says, oh, you have an outstanding thing. You need to go change the status or something. That way they're they when they go, even if they didn't know about it, they go to the loan. They can see it as a as a to do. It's a toaster pop like a like a little pop in the bottom right that tells you something. You know what I mean? Like we could we could say oh for this loan.Trigger a toaster pop in the queue. So when someone goes there and they see it, maybe they'll click it and then goes to change the status.Um.OK, what else? I'm like, I feel way better. I thought Kelly was gonna sabotage us. That was the problem. The whole thing. Yeah, it sounded like if we can do these roles. OK, so they ask for product guys. We need a Excel spreadsheet. We need all the roles. Yeah, and I need to know.I I wanna...
+
+----------------------------------------------------------------------------------------------------
+
+
+====================================================================================================
+ROLES PERMISSIONS (54 items)
+====================================================================================================
+
+[1:30:12] Josephine Yen:
+Yes, I don't know. I mean, at the end of the day, what do you other than you can create, you can create a condition, you can edit, you can link it, you can change status. That's it. Like that's not like a lot of stuff like and it's not, it's not very dangerous, especially if we audit, if we if we log it, we know what's happening and.And you know, we can if worst case, we can take these underwriter and processor roles and obfuscate them up into groups. Yes, that this uses and then so OK, you have an underwriter 1-2 and three with various controls and a processor. Yes, I I don't need to worry about all 90. I can just have these.Smaller groups, 'cause we're not. Yes. Everything else you do in the loan, you're doing invite. You're you're not. You're only coming to the screen for very limited s...
+
+----------------------------------------------------------------------------------------------------
+
+[1:43:29] Josephine Yen:
+Josephine went through kind of a data models and and we're starting to get into some of the like the cautionary tales, things to be considered about and folks keep bringing up kind of Kelly's 5 cardinal roles of conditions and wanted to find out if you could just.
+
+----------------------------------------------------------------------------------------------------
+
+[1:46:39] Kelly Mattox:
+Yeah, we did lose the screen share. I think the biggest, one of the biggest things that we have to remember is access levels for it. And I think you guys were talking briefly about that. When we talk about giving people access to these, we say, hey, underwriters and and processors are the most important, the first thing.Just keep in mind that we have multiple names or multiple roles in byte that a processor uses, right? So we have a loan processor, we have a processor two, we have a processor 3. So when you handicap them, you handicap them.Unless you allow all three roles to get in. Same thing with underwriter. We have an underwriter role. We have underwrite level 123 and four. So we now have candor role.Roles that we've added for all of those levels as well. So anytime that we roll out so...
+
+----------------------------------------------------------------------------------------------------
+
+[1:48:36] Josephine Yen:
+Um, and I'm I'm looking. I'm trying to look at it very simplicity. Simplicitly. You have a loan officer.A.Hold on, Leslie's going.
+
+----------------------------------------------------------------------------------------------------
+
+[1:48:52] Josephine Yen:
+There we go. So can you hear me? OK, OK, cool. So you have the you have the loan officer, you have a processor, you have an underwriter and then you have like everybody else call that like post underwriting.
+
+----------------------------------------------------------------------------------------------------
+
+[1:49:09] Josephine Yen:
+Conditions portal. Right now we have two roles. We have the processor who will who who doesn't really create conditions. They they sort of, they sort of assign, they upload docs, they assign docs, they reach out to the borrower.
+
+----------------------------------------------------------------------------------------------------
+
+[1:49:25] Josephine Yen:
+They set statuses, blah blah blah. The underwriter kind of does the inverse. They create the conditions, they sign off on the conditions, but they're not like linking docs to conditions. Would you would you argue that regardless of how many types of processor or underwriter that they could all be?
+
+----------------------------------------------------------------------------------------------------
+
+[1:49:45] Josephine Yen:
+Obfuscated into kind of generally those two permission sets.Like, is there a is an underwriter 3 doing something special that an underwriter 2 can't do with conditions, linking, et cetera? You know what I mean?
+
+----------------------------------------------------------------------------------------------------
+
+[1:49:52] Kelly Mattox:
+Um, yes, for the.No, except for we talked about that yesterday in the exception. If we're not requiring them to use the exception checkboxes, then that's the only thing on an underwriter role that would need to be different based off of.The underwriter role pushing out, right? A processor. There would be a difference because a processor is allowed to sign off on some conditions because they do have processor 3 conditions, but the other two processor roles will not be allowed to sign sign off on any conditions.
+
+----------------------------------------------------------------------------------------------------
+
+[1:50:32] Josephine Yen:
+So, so you have processors that when you say sign off, they can, they can effectively close a condition or satisfy a condition. OK.
+
+----------------------------------------------------------------------------------------------------
+
+[1:51:03] Kelly Mattox:
+Yep.So you have closers and funders who sign off and add conditions and pass them to the next one. They also move them post closing. Post closing will go in and they're now actually adding conditions to loans based on loans not being purchased from investor purchasing.Getting steps back.Mhm.
+
+----------------------------------------------------------------------------------------------------
+
+[1:51:33] Josephine Yen:
+That role, would you argue that the verbs of what you can do, they're no different. If you took some of the actions of an underwriter and the processor and called it this post underwriter role, like there's no new or different functionality, right? In other words, I'm just.
+
+----------------------------------------------------------------------------------------------------
+
+[1:51:52] Josephine Yen:
+I'm just swapping out existing functionality and and grouping it into a new role. Is is that right or is there some new?
+
+----------------------------------------------------------------------------------------------------
+
+[1:52:19] Josephine Yen:
+Yeah, so OK, can I make this general statement? If the class is processor 3 and I am a processor, then I can do whatever I want to that condition. I can change the data, I can do whatever I want. It's my condition to play with.
+
+----------------------------------------------------------------------------------------------------
+
+[1:52:38] Josephine Yen:
+So if the condition is defined as not editable, the only field that that controls is the description field. But all data fields like I should be able to change any field if if class is underwriter and that sorry class is processor and a person logging in as processor I can change.
+
+----------------------------------------------------------------------------------------------------
+
+[1:53:02] Kelly Mattox:
+Well, the based on what we're getting. So we're going to remove access to the responsibility because we don't want them changing or editing a responsibility. And then depending upon what I think today they can edit and they can move it to PTF, yes, so.Yes, they should be able to move it to PTF so they can move this stage of the loan, correct?
+
+----------------------------------------------------------------------------------------------------
+
+[1:53:52] Kelly Mattox:
+Correct. Just remember that you have multiple the one. So underwriters you have 5 different roles that sign off conditions to the one underwriter class in the drop down.
+
+----------------------------------------------------------------------------------------------------
+
+[1:53:55] Josephine Yen:
+OK.So could we make our lives easier? So could we make our lives easier and say, I'm an underwriter one, the class is underwriter one. I can do whatever I want with that. I'm an underwriter 2 and sorry, I'm an underwriter one and the class is underwriter 2. Sorry.Door shut. Can't get in the club.Can I do that? Can we do that 'cause that will make it a lot easier for us for rollout.
+
+----------------------------------------------------------------------------------------------------
+
+[1:54:32] Kelly Mattox:
+Hmm.I I know, but that's not how all the conditions are inside of Bite currently. So that would be a whole change to everything we have today. All of our auto conditions, all of the conditions inside of Bite if you're looking to put multiple drop downs in the class for different underwriter.
+
+----------------------------------------------------------------------------------------------------
+
+[1:54:50] Josephine Yen:
+Here's another here's another way to think about it. I think what I think we need is imagine in Excel I need a list of. I need a list of call it five, maybe six or seven roles that the conditions portal supports.
+
+----------------------------------------------------------------------------------------------------
+
+[1:55:07] Josephine Yen:
+Which will roll up a bunch of the bytes. So I'm gonna make it a loan officer, processor one and two, underwriter one and two, and then closer and funder. I'm just making that up. Maybe there's more, but for each of those.
+
+----------------------------------------------------------------------------------------------------
+
+[1:55:23] Josephine Yen:
+What? I don't know if you do what they can do or what they can't do, but like, give me the give me the role of what they're allowed to do. And then I I think that.That we we we just built that into clear. I think that would be the easiest route and then we what we want the mapping when you log in depending on your the one of of 400 roles will wire those up to to roll up into one of these seven roles.
+
+----------------------------------------------------------------------------------------------------
+
+[1:55:51] Josephine Yen:
+That way if you're a processor one or two, you roll up to processor. If you're a processor 3, you roll up to processor 2 and that way we just have our own sort of mini version and and I I I I don't want conditions portal to have to have 400 rolls. That's that's what I'm trying to solve for. So what is the lowest common denominator?And then and then what are the permissions within that and that way we can provide that to engineering is that?
+
+----------------------------------------------------------------------------------------------------
+
+[1:56:17] Kelly Mattox:
+Are are you mapping your own? Because like every a lot of the other things that we've built for clear, like our pipelines and such, don't map all of the roles, right? So like we have three different processor roles and only one was provided access.Or two, I think they ended up adding. So the idea is, is that depending upon the product that you're delivering in the new clear screen, it needs to be tied to either the specific name of the role, so like a processor three if you're signing off conditions, but in every other thing that you build in clear or pipe.
+
+----------------------------------------------------------------------------------------------------
+
+[1:56:53] Kelly Mattox:
+Line or VOEVOE screen it it it it's the it's the joint thing of it being a one processor. It doesn't matter what we call them. Certain things give them an extra responsibility being a a 1-2 or a three.
+
+----------------------------------------------------------------------------------------------------
+
+[1:57:11] Kelly Mattox:
+But generically, if you're going to look at something, you can either decipher whether it's going to be every loan processor is going to like what it's tied to inside of byte, or what you know specifically if it is something that we have to give them access. Does that make sense?
+
+----------------------------------------------------------------------------------------------------
+
+[1:57:27] Kelly Mattox:
+Sorry, because there's an indicator that we actually tie it to. So like loan officers are tied to like a disclosure LO, but they're still tied to an LO role inside of Bite, right? So there is somewhere a mechanism in Bite and I'm trying to open up the.
+
+----------------------------------------------------------------------------------------------------
+
+[1:58:03] Kelly Mattox:
+And then you can change what is done with it afterwards, right? So there's other indicators that show that it can they can do something else like self disclosures in clear allow them to do, you know, change edit fees. We give them other.Other rules on top of what the base rule is. Does that make sense? But it's almost like if I create a new role that's tied to that base role, that base role is what should drive them into something. So everyone should be able to go in your condition portal who has a base role of an LO or a profile or a processor, just as an example.Simple and then AP3 would be added in an extra layer of OK they can sign off their class equals this.
+
+----------------------------------------------------------------------------------------------------
+
+[1:58:47] Kelly Mattox:
+OK, good.So loan officers do look at conditions, but if you're going to give them access to see them inside of clear and bite, I think you should be OK, right? Your production assistance in some areas might help the processor, almost like a junior processor role. A lot of them help.
+
+----------------------------------------------------------------------------------------------------
+
+[1:59:16] Kelly Mattox:
+So I would suggest that you use your production assistant. You would use your processor as your base role P3, being able to sign off your underwriter, right? And then you're going to look at your closer and funder roles, right? Closer slash funder roles.And then you would be looking at your OST closing.
+
+----------------------------------------------------------------------------------------------------
+
+[1:59:36] Josephine Yen:
+OK, Kelly, would the closer and funder be kind of like the same role or are they? Is there enough distinction between the two that they need two separate ones?Is it wet and state dependent?
+
+----------------------------------------------------------------------------------------------------
+
+[2:00:41] Josephine Yen:
+Yeah, that's what I want and yeah and and I I want to know like OK can that roll into, can that go into one role or can it does it need to be two or three and and what's the difference and when we can build that I just want to I I need it like in an Excel spreadsheet. I need it like the 8 roles you described.
+
+----------------------------------------------------------------------------------------------------
+
+[2:01:01] Josephine Yen:
+I wanna know like what can the LO do or not do? What does the assistant do or not do? Or is an assistant identical to an LO and we can roll them up together even better? But I just need to know. I need us to ultimately know the difference like you mentioned APA processor.
+
+----------------------------------------------------------------------------------------------------
+
+[2:01:45] Josephine Yen:
+Well, unless you I I don't agree with any new role unless you you meaning whoever described to me that the role has different permissions. Like if if if a PA behaves identically to an LO, then I would say no ever. You know we'll have one role because why? Why do I need a separate role?
+
+----------------------------------------------------------------------------------------------------
+
+[2:02:05] Josephine Yen:
+Per role if there's no that there's not different permissions. Am I thinking about that right?
+
+----------------------------------------------------------------------------------------------------
+
+[2:02:33] Josephine Yen:
+Bytes fields or roles, for example, like I I want to have as few as possible. I only want to. I only want to add 1 when there's a difference in functionality.
+
+----------------------------------------------------------------------------------------------------
+
+[2:02:48] Kelly Mattox:
+So this is like the name of it which drives the permissions for this, but here it says the role is loan officer and this ties back to the role like on the home screen of where that name displays. But if we start to identify things as a role here and not necessarily as the naming convention.I think we will have a lot more success when we allow people to get into clear or anything that we're building in general.
+
+----------------------------------------------------------------------------------------------------
+
+[2:03:15] Josephine Yen:
+OK.I see. So essentially the name is the clone of a role. You can give it whatever and then we we can layer in an overlay of permissions. The role is the deeper. That's the that's the foundation. It's the foundation, yeah.
+
+----------------------------------------------------------------------------------------------------
+
+[2:03:51] Kelly Mattox:
+Yeah, and then your closer and funder are separate roles. It looks like it's funder and then there's a closer in here somewhere. I find it like that.
+
+----------------------------------------------------------------------------------------------------
+
+[2:04:04] Kelly Mattox:
+No, yes and no. I mean some of our areas work like that. That's the other part that we're looking forward to hopefully making some changes is, is having like a wet and a dry state and everybody on the same page. Right now we have multiple, we had multiple ownerships of those divisions and they didn't always.Agree and they mixed in each other. So the idea is is that yes, it should be wet versus dry.Cause a wet and in a wet the closer does almost all of it and the funder really just validates the documents that come back. They're more like a post closing piece, but that's on wet and on dry they actually have two separate.
+
+----------------------------------------------------------------------------------------------------
+
+[2:05:00] Josephine Yen:
+Awesome. OK, that helps. Any questions guys on the roles. So I I think we need to. I think we're gonna. So let's let's let's go back to the list. OK, we we can have Kelly explain. Was that on the list? Well, kind of.
+
+----------------------------------------------------------------------------------------------------
+
+[2:11:28] Josephine Yen:
+That the condition portal that we have now could be used to not just for processing and underwriting, but for closure, funder, all those other departments.
+
+----------------------------------------------------------------------------------------------------
+
+[2:11:39] Kelly Mattox:
+Well, it's going to need to be if that's what you want. If you want them to get the same or have the same capability, if if an underwriter is adding a condition for a closer to sign off and they're using the additional fields that you're giving them, they're going to need to use that.
+
+----------------------------------------------------------------------------------------------------
+
+[2:11:57] Josephine Yen:
+I am. I am AI am somebody downstream of an underwriter other than and I don't for now forget about who the roles are. Create condition, update status, add note, add flag, link documents.
+
+----------------------------------------------------------------------------------------------------
+
+[2:12:14] Josephine Yen:
+Request from borrower or whatever. It is all of the stuff that exists today. Is there anything else that that I didn't describe like a new piece of functionality that one of those roles would need to do that that we haven't accounted for? That's the question.
+
+----------------------------------------------------------------------------------------------------
+
+[2:14:54] Josephine Yen:
+Permissions and roles creating a couple more profiles. Yeah, or I don't know if I'm using the right nomenclature, but like if we're not adding any new features then I I I think it's fine to have extra roles if if it means having a.Full uh downstream all on our same all on our tool. So then that means three and four is checks. It's checked off, right? So.
+
+----------------------------------------------------------------------------------------------------
+
+[2:16:31] Josephine Yen:
+Different from what you said, which is, could I have this group like a lab of downstream? Yes, that's a different thing. Yes. I think we need that flexibility cuz I certainly don't want to bring down CMG production. Yes, total processors. So I think what we would say is we'd go to operations and we'd say give me.So a group of ellos, processors, underwriters, post closers, all the way down that are in the whole value chain in this group. Yeah. They will all be on conditions port only. Yeah. And we'll have them test it for a month. We'll fix things. Yes. And then if we like it, we'll roll it to the rest of the company. Yeah.
+
+----------------------------------------------------------------------------------------------------
+
+[2:17:07] Josephine Yen:
+I think, yeah, it needs to be in production, but I think in in a lab, yeah, right. But I think what we're agreeing to is that if we're gonna turn it on, it, it's on all the way downstream for all of those seven roles or whatever. The whole chain, yeah, arrow.You can't be in and out. Can I ask a dumb question and maybe you're answering it, but the existing pipeline that did not use conditions portal that has conditions out there in the current by. It's a good question. What happens? Is it all technically if you don't open it?
+
+----------------------------------------------------------------------------------------------------
+
+[2:19:17] Josephine Yen:
+Underwrite, I'm sorry, loan officer starting, you know, February 1st is considered a conditions portal loan. So let's assume we have a flag for that. When you're in bite, when you click on the conditions button, could that button look at that flag and either open?Legacy if if it's false, or our new tool if it's positive. That way the user simply does what they always do and we present them with a screen accordingly.So it's one menu item, two different screens, bite screen or clear screen, and we decide that by the flag.
+
+----------------------------------------------------------------------------------------------------
+
+[2:20:26] Josephine Yen:
+Could we assume that we flag like 5 loan officers as conditional condition portal loan officers? So any loan they open from a date, you know January 15th forward, we flag as a condition portal loan. It's a it's a new flag invite.
+
+----------------------------------------------------------------------------------------------------
+
+[2:22:31] Josephine Yen:
+It's a customization of some kind that right seems like it follows existing pattern and it's it's solves for some of these I think. I think we're trying to say we'd like all roles to be included in the scope. Let's minimize those as much as we can and.And try to accommodate for those, but let's also accommodate for roles that may not be specific in our lab. They might still be getting non condition portal loans.
+
+----------------------------------------------------------------------------------------------------
+
+[2:22:51] Kelly Mattox:
+Yeah.Yeah, I think, I think your, yeah, your class is the most important thing. Everybody else should be able to see it and log into it, right? Cause do you really care if a PA or if somebody attaches a condition to it? Probably not. Loan officer's not gonna do what they're not supposed to do and they're not gonna launch from bite anyways, so.
+
+----------------------------------------------------------------------------------------------------
+
+[2:26:05] Kelly Mattox:
+So there's more than that, Rusty. There's a whole underwriting screen. There's other screens that people complete things on that have to be completed. So if you're going to fire a hard stop based on calling a macro, you're also going to have to give them access to those fields. So it's almost like.
+
+----------------------------------------------------------------------------------------------------
+
+[2:27:59] Josephine Yen:
+Says, oh, you have an outstanding thing. You need to go change the status or something. That way they're they when they go, even if they didn't know about it, they go to the loan. They can see it as a as a to do. It's a toaster pop like a like a little pop in the bottom right that tells you something. You know what I mean? Like we could we could say oh for this loan.Trigger a toaster pop in the queue. So when someone goes there and they see it, maybe they'll click it and then goes to change the status.Um.OK, what else? I'm like, I feel way better. I thought Kelly was gonna sabotage us. That was the problem. The whole thing. Yeah, it sounded like if we can do these roles. OK, so they ask for product guys. We need a Excel spreadsheet. We need all the roles. Yeah, and I need to know.I I wanna...
+
+----------------------------------------------------------------------------------------------------
+
+
+====================================================================================================
+DATA MODEL (10 items)
+====================================================================================================
+
+[1:43:29] Josephine Yen:
+Josephine went through kind of a data models and and we're starting to get into some of the like the cautionary tales, things to be considered about and folks keep bringing up kind of Kelly's 5 cardinal roles of conditions and wanted to find out if you could just.
+
+----------------------------------------------------------------------------------------------------
+
+[1:52:38] Josephine Yen:
+So if the condition is defined as not editable, the only field that that controls is the description field. But all data fields like I should be able to change any field if if class is underwriter and that sorry class is processor and a person logging in as processor I can change.
+
+----------------------------------------------------------------------------------------------------
+
+[2:02:33] Josephine Yen:
+Bytes fields or roles, for example, like I I want to have as few as possible. I only want to. I only want to add 1 when there's a difference in functionality.
+
+----------------------------------------------------------------------------------------------------
+
+[2:08:02] Josephine Yen:
+Many to many concepts, but OK, that sounds the question that's in my head is is the full data set of condition in one system outside of byte and you sync whatever data you want to byte or is the full data set of condition.Is whatever. There's a set that exists outside of byte and then the rest of it is in byte and together A + B is a full set. So that's the latter is how you're doing it elsewhere, right? The condition itself will live in.Byte, but metadata will exist in clear, so probably want to follow a similar pattern. That's an engineering question, but yeah, I wouldn't. I don't know. I wouldn't. The problem is if you one, you're it's gonna be in. It's gonna. If you're gonna use the API, it's gonna be in byte anyway.
+
+----------------------------------------------------------------------------------------------------
+
+[2:11:39] Kelly Mattox:
+Well, it's going to need to be if that's what you want. If you want them to get the same or have the same capability, if if an underwriter is adding a condition for a closer to sign off and they're using the additional fields that you're giving them, they're going to need to use that.
+
+----------------------------------------------------------------------------------------------------
+
+[2:12:32] Josephine Yen:
+What do you mean by move a condition from prior to doc to park? Oh, stage, stage, stage. That's just a status. It's a stage. It's a field. It's got to be either met prior to getting your loan documents, PPD. It's got to be met prior to funding. It's just it's just the data.
+
+----------------------------------------------------------------------------------------------------
+
+[2:17:38] Josephine Yen:
+And once you open it in conditions portal, you've sort of tainted it, right? Like it's now this new data model. So you could technically argue that well, what what Gina did for her, one of her projects, Kelly, you created a custom field for her, right?Like a candor field, you created a custom field and then so all only her alone. I forget she was explaining it to me, but if that field is checked then those are those are hers, hers for the lab for her measurements. Anything else is not.So we could do the same thing. Can we?
+
+----------------------------------------------------------------------------------------------------
+
+[2:22:20] Kelly Mattox:
+No, it's actually it's the fields inside of Byte, and that's how it was built to toggle between the two.
+
+----------------------------------------------------------------------------------------------------
+
+[2:23:21] Josephine Yen:
+Yeah, Kelly, does that does what is what just just got check me here is what Mark described. It sounds like things we've done already. You click a button it it checks if a custom field exists for that loan and if it doesn't it navigates you somewhere or or somewhere else.
+
+----------------------------------------------------------------------------------------------------
+
+[2:26:05] Kelly Mattox:
+So there's more than that, Rusty. There's a whole underwriting screen. There's other screens that people complete things on that have to be completed. So if you're going to fire a hard stop based on calling a macro, you're also going to have to give them access to those fields. So it's almost like.
+
+----------------------------------------------------------------------------------------------------
+
+
+====================================================================================================
+EMAIL FUNCTIONALITY (2 items)
+====================================================================================================
+
+[1:30:12] Josephine Yen:
+Yes, I don't know. I mean, at the end of the day, what do you other than you can create, you can create a condition, you can edit, you can link it, you can change status. That's it. Like that's not like a lot of stuff like and it's not, it's not very dangerous, especially if we audit, if we if we log it, we know what's happening and.And you know, we can if worst case, we can take these underwriter and processor roles and obfuscate them up into groups. Yes, that this uses and then so OK, you have an underwriter 1-2 and three with various controls and a processor. Yes, I I don't need to worry about all 90. I can just have these.Smaller groups, 'cause we're not. Yes. Everything else you do in the loan, you're doing invite. You're you're not. You're only coming to the screen for very limited s...
+
+----------------------------------------------------------------------------------------------------
+
+[2:13:05] Josephine Yen:
+What? What? What actions do they do that our current conditions portal doesn't support is my question. I'm gonna make up something. Do they generate a letter that has all these different conditions and they send it back to the investor? I'm making up stuff. I mean, are we missing anything?
+
+----------------------------------------------------------------------------------------------------
+
+
+====================================================================================================
+DOCUMENT WORKFLOW (15 items)
+====================================================================================================
+
+[1:30:12] Josephine Yen:
+Yes, I don't know. I mean, at the end of the day, what do you other than you can create, you can create a condition, you can edit, you can link it, you can change status. That's it. Like that's not like a lot of stuff like and it's not, it's not very dangerous, especially if we audit, if we if we log it, we know what's happening and.And you know, we can if worst case, we can take these underwriter and processor roles and obfuscate them up into groups. Yes, that this uses and then so OK, you have an underwriter 1-2 and three with various controls and a processor. Yes, I I don't need to worry about all 90. I can just have these.Smaller groups, 'cause we're not. Yes. Everything else you do in the loan, you're doing invite. You're you're not. You're only coming to the screen for very limited s...
+
+----------------------------------------------------------------------------------------------------
+
+[1:44:07] Josephine Yen:
+I don't know if we have that document somewhere, but we could start there. But but is that in USBC or in box service? There's one in the office there, but it might be plugged into it. I have a screen, I have something. What do you do? So just a minute Kelly, we'll we'll share the screen and then we'll we'll have you talk.
+
+----------------------------------------------------------------------------------------------------
+
+[1:49:09] Josephine Yen:
+Conditions portal. Right now we have two roles. We have the processor who will who who doesn't really create conditions. They they sort of, they sort of assign, they upload docs, they assign docs, they reach out to the borrower.
+
+----------------------------------------------------------------------------------------------------
+
+[1:49:25] Josephine Yen:
+They set statuses, blah blah blah. The underwriter kind of does the inverse. They create the conditions, they sign off on the conditions, but they're not like linking docs to conditions. Would you would you argue that regardless of how many types of processor or underwriter that they could all be?
+
+----------------------------------------------------------------------------------------------------
+
+[1:49:45] Josephine Yen:
+Obfuscated into kind of generally those two permission sets.Like, is there a is an underwriter 3 doing something special that an underwriter 2 can't do with conditions, linking, et cetera? You know what I mean?
+
+----------------------------------------------------------------------------------------------------
+
+[2:01:21] Josephine Yen:
+Three can do certain things with certain types. I need that part of it documented somewhere so we can tell engineering so that they're aware of it because we won't natively inherit that with what we're building.
+
+----------------------------------------------------------------------------------------------------
+
+[2:04:04] Kelly Mattox:
+No, yes and no. I mean some of our areas work like that. That's the other part that we're looking forward to hopefully making some changes is, is having like a wet and a dry state and everybody on the same page. Right now we have multiple, we had multiple ownerships of those divisions and they didn't always.Agree and they mixed in each other. So the idea is is that yes, it should be wet versus dry.Cause a wet and in a wet the closer does almost all of it and the funder really just validates the documents that come back. They're more like a post closing piece, but that's on wet and on dry they actually have two separate.
+
+----------------------------------------------------------------------------------------------------
+
+[2:06:30] Josephine Yen:
+Documents linked and unlinked, et cetera. Do you do you think all of that into an audit table? Like who did it, when they did it, what did they do? Do you think that is enough or valuable and and and and maybe not in the conditions portal, but at least linked so it can be brought up on a Domo report? Do you think that's?
+
+----------------------------------------------------------------------------------------------------
+
+[2:07:25] Josephine Yen:
+Yes.But but the the thing, yeah, but but but the the The thing is on the documents. So we can do many document. The same document can be linked to multiple conditions in bite. You can't do that.
+
+----------------------------------------------------------------------------------------------------
+
+[2:10:35] Josephine Yen:
+Do the joint I I don't. In other words I don't think no, but the full data set is what we need for the to render the UI. That's what I say. We have to merge the two of the data. I don't know that we need to render you. I think Domo is I I don't know that we need an audit tool in clear docs. I think we can do that through Domo.No, what what I'm saying is that when we get the payload to render the data in our conditions portal UI, our API is going to take data from some database. Yes. And then from both databases. Yes. Yeah, that's sort of thing. OK, OK, we're not, I don't believe that we should store duplicate data.Again, I'll defer to engineering, but I would we we want a it's OK to have two sources of truth that are hybrid. OK, OK. So then #3 is which I I think, yes, I'll. So Kelly, can y...
+
+----------------------------------------------------------------------------------------------------
+
+[2:11:57] Josephine Yen:
+I am. I am AI am somebody downstream of an underwriter other than and I don't for now forget about who the roles are. Create condition, update status, add note, add flag, link documents.
+
+----------------------------------------------------------------------------------------------------
+
+[2:12:32] Josephine Yen:
+What do you mean by move a condition from prior to doc to park? Oh, stage, stage, stage. That's just a status. It's a stage. It's a field. It's got to be either met prior to getting your loan documents, PPD. It's got to be met prior to funding. It's just it's just the data.
+
+----------------------------------------------------------------------------------------------------
+
+[2:13:34] Kelly Mattox:
+Well, they're gonna have to possibly save things back, right? Like documents. They're gonna get a doc package to sign that's signed back. They're gonna get, they're gonna have to generate out a 4506 to include in there or something to generate out, right?OK.Yeah.
+
+----------------------------------------------------------------------------------------------------
+
+[2:15:20] Josephine Yen:
+Yeah.Oh, we're gonna, we're gonna, we're gonna merge the two data. So we're gonna whatever data it does not exist in byte, we will store it somewhere else. Whatever data does exist in byte will still be in byte. We're gonna pull those two together. We're gonna stitch it and give you one UI for it.
+
+----------------------------------------------------------------------------------------------------
+
+[2:27:59] Josephine Yen:
+Says, oh, you have an outstanding thing. You need to go change the status or something. That way they're they when they go, even if they didn't know about it, they go to the loan. They can see it as a as a to do. It's a toaster pop like a like a little pop in the bottom right that tells you something. You know what I mean? Like we could we could say oh for this loan.Trigger a toaster pop in the queue. So when someone goes there and they see it, maybe they'll click it and then goes to change the status.Um.OK, what else? I'm like, I feel way better. I thought Kelly was gonna sabotage us. That was the problem. The whole thing. Yeah, it sounded like if we can do these roles. OK, so they ask for product guys. We need a Excel spreadsheet. We need all the roles. Yeah, and I need to know.I I wanna...
+
+----------------------------------------------------------------------------------------------------
+
+
+====================================================================================================
+BYTE INTEGRATION (33 items)
+====================================================================================================
+
+[1:30:12] Josephine Yen:
+Yes, I don't know. I mean, at the end of the day, what do you other than you can create, you can create a condition, you can edit, you can link it, you can change status. That's it. Like that's not like a lot of stuff like and it's not, it's not very dangerous, especially if we audit, if we if we log it, we know what's happening and.And you know, we can if worst case, we can take these underwriter and processor roles and obfuscate them up into groups. Yes, that this uses and then so OK, you have an underwriter 1-2 and three with various controls and a processor. Yes, I I don't need to worry about all 90. I can just have these.Smaller groups, 'cause we're not. Yes. Everything else you do in the loan, you're doing invite. You're you're not. You're only coming to the screen for very limited s...
+
+----------------------------------------------------------------------------------------------------
+
+[1:46:39] Kelly Mattox:
+Yeah, we did lose the screen share. I think the biggest, one of the biggest things that we have to remember is access levels for it. And I think you guys were talking briefly about that. When we talk about giving people access to these, we say, hey, underwriters and and processors are the most important, the first thing.Just keep in mind that we have multiple names or multiple roles in byte that a processor uses, right? So we have a loan processor, we have a processor two, we have a processor 3. So when you handicap them, you handicap them.Unless you allow all three roles to get in. Same thing with underwriter. We have an underwriter role. We have underwrite level 123 and four. So we now have candor role.Roles that we've added for all of those levels as well. So anytime that we roll out so...
+
+----------------------------------------------------------------------------------------------------
+
+[1:50:32] Josephine Yen:
+So, so you have processors that when you say sign off, they can, they can effectively close a condition or satisfy a condition. OK.
+
+----------------------------------------------------------------------------------------------------
+
+[1:50:59] Josephine Yen:
+Conditions for a loan like like let's assume that that's the case or it makes it irreversible. Is there anything like like with post underwriting? What's the close? Is it just a read only at that point or or like what? Like who? Who would a post?
+
+----------------------------------------------------------------------------------------------------
+
+[1:51:03] Kelly Mattox:
+Yep.So you have closers and funders who sign off and add conditions and pass them to the next one. They also move them post closing. Post closing will go in and they're now actually adding conditions to loans based on loans not being purchased from investor purchasing.Getting steps back.Mhm.
+
+----------------------------------------------------------------------------------------------------
+
+[1:53:47] Josephine Yen:
+And that's even for closing funding and post closing.
+
+----------------------------------------------------------------------------------------------------
+
+[1:55:07] Josephine Yen:
+Which will roll up a bunch of the bytes. So I'm gonna make it a loan officer, processor one and two, underwriter one and two, and then closer and funder. I'm just making that up. Maybe there's more, but for each of those.
+
+----------------------------------------------------------------------------------------------------
+
+[1:57:11] Kelly Mattox:
+But generically, if you're going to look at something, you can either decipher whether it's going to be every loan processor is going to like what it's tied to inside of byte, or what you know specifically if it is something that we have to give them access. Does that make sense?
+
+----------------------------------------------------------------------------------------------------
+
+[1:57:27] Kelly Mattox:
+Sorry, because there's an indicator that we actually tie it to. So like loan officers are tied to like a disclosure LO, but they're still tied to an LO role inside of Bite, right? So there is somewhere a mechanism in Bite and I'm trying to open up the.
+
+----------------------------------------------------------------------------------------------------
+
+[1:58:03] Kelly Mattox:
+And then you can change what is done with it afterwards, right? So there's other indicators that show that it can they can do something else like self disclosures in clear allow them to do, you know, change edit fees. We give them other.Other rules on top of what the base rule is. Does that make sense? But it's almost like if I create a new role that's tied to that base role, that base role is what should drive them into something. So everyone should be able to go in your condition portal who has a base role of an LO or a profile or a processor, just as an example.Simple and then AP3 would be added in an extra layer of OK they can sign off their class equals this.
+
+----------------------------------------------------------------------------------------------------
+
+[1:59:16] Kelly Mattox:
+So I would suggest that you use your production assistant. You would use your processor as your base role P3, being able to sign off your underwriter, right? And then you're going to look at your closer and funder roles, right? Closer slash funder roles.And then you would be looking at your OST closing.
+
+----------------------------------------------------------------------------------------------------
+
+[1:59:36] Josephine Yen:
+OK, Kelly, would the closer and funder be kind of like the same role or are they? Is there enough distinction between the two that they need two separate ones?Is it wet and state dependent?
+
+----------------------------------------------------------------------------------------------------
+
+[2:02:33] Josephine Yen:
+Bytes fields or roles, for example, like I I want to have as few as possible. I only want to. I only want to add 1 when there's a difference in functionality.
+
+----------------------------------------------------------------------------------------------------
+
+[2:03:51] Kelly Mattox:
+Yeah, and then your closer and funder are separate roles. It looks like it's funder and then there's a closer in here somewhere. I find it like that.
+
+----------------------------------------------------------------------------------------------------
+
+[2:04:04] Kelly Mattox:
+No, yes and no. I mean some of our areas work like that. That's the other part that we're looking forward to hopefully making some changes is, is having like a wet and a dry state and everybody on the same page. Right now we have multiple, we had multiple ownerships of those divisions and they didn't always.Agree and they mixed in each other. So the idea is is that yes, it should be wet versus dry.Cause a wet and in a wet the closer does almost all of it and the funder really just validates the documents that come back. They're more like a post closing piece, but that's on wet and on dry they actually have two separate.
+
+----------------------------------------------------------------------------------------------------
+
+[2:05:33] Josephine Yen:
+Yeah, so, yeah, so don't break Domo reports. So what that means is even though we have the richer data set, we still need to save the data to Byte so that these Domo reports can still be generated so that it looks like nothing's really changed, OK.
+
+----------------------------------------------------------------------------------------------------
+
+[2:05:48] Josephine Yen:
+The next one is it's kind of the same thing, meaning that we still have to save the data to byte.
+
+----------------------------------------------------------------------------------------------------
+
+[2:07:14] Josephine Yen:
+OK, so I think a minimum we need to do what Byte does, but if we can do more than we we can do more. OK, that's an easy one.
+
+----------------------------------------------------------------------------------------------------
+
+[2:07:17] Kelly Mattox:
+Yeah.Yeah, and really, I think cause you're still using the Byte API right to push the data back. So Byte should have that API of whatever's happening. Well, although now it's gonna show API 22 or whatever API bot we're using, huh?
+
+----------------------------------------------------------------------------------------------------
+
+[2:08:02] Josephine Yen:
+Many to many concepts, but OK, that sounds the question that's in my head is is the full data set of condition in one system outside of byte and you sync whatever data you want to byte or is the full data set of condition.Is whatever. There's a set that exists outside of byte and then the rest of it is in byte and together A + B is a full set. So that's the latter is how you're doing it elsewhere, right? The condition itself will live in.Byte, but metadata will exist in clear, so probably want to follow a similar pattern. That's an engineering question, but yeah, I wouldn't. I don't know. I wouldn't. The problem is if you one, you're it's gonna be in. It's gonna. If you're gonna use the API, it's gonna be in byte anyway.
+
+----------------------------------------------------------------------------------------------------
+
+[2:09:06] Kelly Mattox:
+Just remember that again, if it's an API call, the API call, unless we're able to use the new one that shows who does it, byte doesn't tell us who does it.
+
+----------------------------------------------------------------------------------------------------
+
+[2:09:30] Josephine Yen:
+Uh, we run into that same issue with the modified daytime done with the API LB server will.That invite, it's user level. I think these are dates or they have this timeline too. They have modified. They have modified. They don't have. I don't. They don't have modified, but they have the status. But there's no history. So like there's five statuses. The latest one is what you get.Yeah, so if I if you modify them, like you, I get invited.But if you do it with the UI, it's server time, then you'll know types of this, yeah.OK. So that we'll take that as a as a research. So I I think we know what we want to do. But I think what you're saying is we use the data, we source the data that we need that is that byte supports and then all the extra stuff we do it outside and then the the A + B is the f...
+
+----------------------------------------------------------------------------------------------------
+
+[2:11:28] Josephine Yen:
+That the condition portal that we have now could be used to not just for processing and underwriting, but for closure, funder, all those other departments.
+
+----------------------------------------------------------------------------------------------------
+
+[2:11:39] Kelly Mattox:
+Well, it's going to need to be if that's what you want. If you want them to get the same or have the same capability, if if an underwriter is adding a condition for a closer to sign off and they're using the additional fields that you're giving them, they're going to need to use that.
+
+----------------------------------------------------------------------------------------------------
+
+[2:13:21] Josephine Yen:
+That would make it so that they can't complete their job by using the condition portal and they have to straddle between the condition portal and the byte whatever screens.
+
+----------------------------------------------------------------------------------------------------
+
+[2:14:03] Josephine Yen:
+It'll so you'll still have all of your your byte screens to do other things like you're not bound to just this window because you're already in byte if that helps. But but can I take away your the current byte out-of-the-box condition screen and no one would be upset?
+
+----------------------------------------------------------------------------------------------------
+
+[2:15:20] Josephine Yen:
+Yeah.Oh, we're gonna, we're gonna, we're gonna merge the two data. So we're gonna whatever data it does not exist in byte, we will store it somewhere else. Whatever data does exist in byte will still be in byte. We're gonna pull those two together. We're gonna stitch it and give you one UI for it.
+
+----------------------------------------------------------------------------------------------------
+
+[2:16:31] Josephine Yen:
+Different from what you said, which is, could I have this group like a lab of downstream? Yes, that's a different thing. Yes. I think we need that flexibility cuz I certainly don't want to bring down CMG production. Yes, total processors. So I think what we would say is we'd go to operations and we'd say give me.So a group of ellos, processors, underwriters, post closers, all the way down that are in the whole value chain in this group. Yeah. They will all be on conditions port only. Yeah. And we'll have them test it for a month. We'll fix things. Yes. And then if we like it, we'll roll it to the rest of the company. Yeah.
+
+----------------------------------------------------------------------------------------------------
+
+[2:18:11] Kelly Mattox:
+Yeah, but the the challenges is when you guys get to the end result, let's just talk about like your post closing all of those folks and everywhere investor purchasing, am I insuring, FHA insuring all of those people, you're now talking about people who support.Every channel throughout CMG, so their reports, you can't just like we have two MI insuring analysts. You can't stop them from doing their job across the board. Does that make sense?
+
+----------------------------------------------------------------------------------------------------
+
+[2:20:44] Josephine Yen:
+With me, yeah. So in Bite, I don't care who you are. When you open up the when you click on the conditions menu that exists today, Bite will look at that flag and either open our new conditions portal or it will open the current old conditions portal. That way you already do stuff based on dates.Flags. It doesn't seem that different. Yeah, that way we we IT controls the window. You're you're gonna get the conditions window or you're gonna get the old byte window and it'll be based on loan. So if if a user is only doing stuff for this new LO.It'll always be the new conditions window, but it solves for downstream where people who are doing warehouse line stuff where they they are, they're not necessarily bound to like a small group depending on what window, depending on the loan, it will, it...
+
+----------------------------------------------------------------------------------------------------
+
+[2:22:20] Kelly Mattox:
+No, it's actually it's the fields inside of Byte, and that's how it was built to toggle between the two.
+
+----------------------------------------------------------------------------------------------------
+
+[2:25:17] Josephine Yen:
+Any change of status references on the portal will tell you open up byte status screen. Then it'll run. I think that's the fact that we're now that said, interestingly you guys are going to have to. So remember there are three use cases. There is invite, there is standalone and there is include.
+
+----------------------------------------------------------------------------------------------------
+
+[2:27:59] Josephine Yen:
+Says, oh, you have an outstanding thing. You need to go change the status or something. That way they're they when they go, even if they didn't know about it, they go to the loan. They can see it as a as a to do. It's a toaster pop like a like a little pop in the bottom right that tells you something. You know what I mean? Like we could we could say oh for this loan.Trigger a toaster pop in the queue. So when someone goes there and they see it, maybe they'll click it and then goes to change the status.Um.OK, what else? I'm like, I feel way better. I thought Kelly was gonna sabotage us. That was the problem. The whole thing. Yeah, it sounded like if we can do these roles. OK, so they ask for product guys. We need a Excel spreadsheet. We need all the roles. Yeah, and I need to know.I I wanna...
+
+----------------------------------------------------------------------------------------------------
+
+
+====================================================================================================
+CANDOR INTEGRATION (29 items)
+====================================================================================================
+
+[1:30:12] Josephine Yen:
+Yes, I don't know. I mean, at the end of the day, what do you other than you can create, you can create a condition, you can edit, you can link it, you can change status. That's it. Like that's not like a lot of stuff like and it's not, it's not very dangerous, especially if we audit, if we if we log it, we know what's happening and.And you know, we can if worst case, we can take these underwriter and processor roles and obfuscate them up into groups. Yes, that this uses and then so OK, you have an underwriter 1-2 and three with various controls and a processor. Yes, I I don't need to worry about all 90. I can just have these.Smaller groups, 'cause we're not. Yes. Everything else you do in the loan, you're doing invite. You're you're not. You're only coming to the screen for very limited s...
+
+----------------------------------------------------------------------------------------------------
+
+[1:44:33] Kelly Mattox:
+That's all good.Oh good. No, I appreciate it. I know I always have the Kelly Cardinal rules, unfortunately, and I think it's I'll try and try and mirror the best that I can of what we discussed the other day because we were on the phone for about an hour.
+
+----------------------------------------------------------------------------------------------------
+
+[1:46:39] Kelly Mattox:
+Yeah, we did lose the screen share. I think the biggest, one of the biggest things that we have to remember is access levels for it. And I think you guys were talking briefly about that. When we talk about giving people access to these, we say, hey, underwriters and and processors are the most important, the first thing.Just keep in mind that we have multiple names or multiple roles in byte that a processor uses, right? So we have a loan processor, we have a processor two, we have a processor 3. So when you handicap them, you handicap them.Unless you allow all three roles to get in. Same thing with underwriter. We have an underwriter role. We have underwrite level 123 and four. So we now have candor role.Roles that we've added for all of those levels as well. So anytime that we roll out so...
+
+----------------------------------------------------------------------------------------------------
+
+[1:49:52] Kelly Mattox:
+Um, yes, for the.No, except for we talked about that yesterday in the exception. If we're not requiring them to use the exception checkboxes, then that's the only thing on an underwriter role that would need to be different based off of.The underwriter role pushing out, right? A processor. There would be a difference because a processor is allowed to sign off on some conditions because they do have processor 3 conditions, but the other two processor roles will not be allowed to sign sign off on any conditions.
+
+----------------------------------------------------------------------------------------------------
+
+[1:53:02] Kelly Mattox:
+Well, the based on what we're getting. So we're going to remove access to the responsibility because we don't want them changing or editing a responsibility. And then depending upon what I think today they can edit and they can move it to PTF, yes, so.Yes, they should be able to move it to PTF so they can move this stage of the loan, correct?
+
+----------------------------------------------------------------------------------------------------
+
+[1:53:55] Josephine Yen:
+OK.So could we make our lives easier? So could we make our lives easier and say, I'm an underwriter one, the class is underwriter one. I can do whatever I want with that. I'm an underwriter 2 and sorry, I'm an underwriter one and the class is underwriter 2. Sorry.Door shut. Can't get in the club.Can I do that? Can we do that 'cause that will make it a lot easier for us for rollout.
+
+----------------------------------------------------------------------------------------------------
+
+[1:56:17] Kelly Mattox:
+Are are you mapping your own? Because like every a lot of the other things that we've built for clear, like our pipelines and such, don't map all of the roles, right? So like we have three different processor roles and only one was provided access.Or two, I think they ended up adding. So the idea is, is that depending upon the product that you're delivering in the new clear screen, it needs to be tied to either the specific name of the role, so like a processor three if you're signing off conditions, but in every other thing that you build in clear or pipe.
+
+----------------------------------------------------------------------------------------------------
+
+[1:57:27] Kelly Mattox:
+Sorry, because there's an indicator that we actually tie it to. So like loan officers are tied to like a disclosure LO, but they're still tied to an LO role inside of Bite, right? So there is somewhere a mechanism in Bite and I'm trying to open up the.
+
+----------------------------------------------------------------------------------------------------
+
+[2:00:21] Kelly Mattox:
+Yeah, yeah, it's hard cause if if really you're going to change enough in conditions portal to where bite will no longer be available for anyone to see, really anyone after a nut alone goes through underwriting. If it's QC, if it's anyone, they're going to have to see that.If that's what you're looking for, 'cause don't forget you still have QC as well, so I would add QC to that list.
+
+----------------------------------------------------------------------------------------------------
+
+[2:01:21] Josephine Yen:
+Three can do certain things with certain types. I need that part of it documented somewhere so we can tell engineering so that they're aware of it because we won't natively inherit that with what we're building.
+
+----------------------------------------------------------------------------------------------------
+
+[2:01:21] Kelly Mattox:
+Right.OK. Do you agree with the PA thing? Because we have so many ways that we allow our teams to work that the PA is one that needs to be identified as well?
+
+----------------------------------------------------------------------------------------------------
+
+[2:01:45] Josephine Yen:
+Well, unless you I I don't agree with any new role unless you you meaning whoever described to me that the role has different permissions. Like if if if a PA behaves identically to an LO, then I would say no ever. You know we'll have one role because why? Why do I need a separate role?
+
+----------------------------------------------------------------------------------------------------
+
+[2:04:04] Kelly Mattox:
+No, yes and no. I mean some of our areas work like that. That's the other part that we're looking forward to hopefully making some changes is, is having like a wet and a dry state and everybody on the same page. Right now we have multiple, we had multiple ownerships of those divisions and they didn't always.Agree and they mixed in each other. So the idea is is that yes, it should be wet versus dry.Cause a wet and in a wet the closer does almost all of it and the funder really just validates the documents that come back. They're more like a post closing piece, but that's on wet and on dry they actually have two separate.
+
+----------------------------------------------------------------------------------------------------
+
+[2:04:49] Kelly Mattox:
+Division like 2 separate things cause they get the docs back, they review them, they order the wire, they balance with title, they do it very differently.
+
+----------------------------------------------------------------------------------------------------
+
+[2:06:42] Kelly Mattox:
+Yeah.Yes, yes, cause at at some point in time someone's going to ask how did this get here? Why was the wrong thing attached to a? Why was the wrong condition attached to this and someone signed it off? Who did that? That'll be the first thing that comes through it just as an example.
+
+----------------------------------------------------------------------------------------------------
+
+[2:07:17] Kelly Mattox:
+Yeah.Yeah, and really, I think cause you're still using the Byte API right to push the data back. So Byte should have that API of whatever's happening. Well, although now it's gonna show API 22 or whatever API bot we're using, huh?
+
+----------------------------------------------------------------------------------------------------
+
+[2:09:21] Josephine Yen:
+Oh, because it's uh, it's using a system account, right? Yes.
+
+----------------------------------------------------------------------------------------------------
+
+[2:14:03] Josephine Yen:
+It'll so you'll still have all of your your byte screens to do other things like you're not bound to just this window because you're already in byte if that helps. But but can I take away your the current byte out-of-the-box condition screen and no one would be upset?
+
+----------------------------------------------------------------------------------------------------
+
+[2:14:38] Josephine Yen:
+And and again this will be a this will be kind of a Lauren ask like like we need to ask that like hey we want to yeah we wanna 'cause my argument is if we're already building the core functionality and to me it this just sounds like.
+
+----------------------------------------------------------------------------------------------------
+
+[2:15:14] Kelly Mattox:
+So I have a.So I have a question. Yeah, the existing pipeline would be the one of the other questions that we have because someone's going to have to sometimes go into the new one, sometimes use the old one, right? But.
+
+----------------------------------------------------------------------------------------------------
+
+[2:15:46] Josephine Yen:
+So it's not going to change talking about.Yes. And the data will be there. No, I think are we saying, yes, that's what I'm saying. Oh, you're saying like I'm saying the data's there. It's the same data. Everybody. Yeah, the same data's there. Limited. Hey, here's a beta group. No, because expand that group and then so on because the beta group, the problem with the beta group is.I'm a new condition portal loan, but then I'm working on a condition and then the guy downstream is not in my beta group and then all the other people working that loan is not in my beta group. It's a problem. Question could you? Yes, agreed. So the loan is now a condition portal loan, but that's different.
+
+----------------------------------------------------------------------------------------------------
+
+[2:17:38] Josephine Yen:
+And once you open it in conditions portal, you've sort of tainted it, right? Like it's now this new data model. So you could technically argue that well, what what Gina did for her, one of her projects, Kelly, you created a custom field for her, right?Like a candor field, you created a custom field and then so all only her alone. I forget she was explaining it to me, but if that field is checked then those are those are hers, hers for the lab for her measurements. Anything else is not.So we could do the same thing. Can we?
+
+----------------------------------------------------------------------------------------------------
+
+[2:19:51] Kelly Mattox:
+Maybe.I would feel way more comfortable if we talked to some people like in on the back end piece cause I don't know all of the things that they're doing. Yeah, the Colleen and I know, I know you're you're you're like just trying to generically.
+
+----------------------------------------------------------------------------------------------------
+
+[2:19:57] Josephine Yen:
+So yeah.No, yeah, we'll need. We're just, we're just no reaction.Yeah.Because I I want to, I don't want to stop people from doing their jobs and I don't want to go to Candy and say give me force somebody to only do a like a portion of their job. So how do we, how do we get our tool out there in a in a isolated environment and how do we make it as easy as possible? So Rusty, the question was.
+
+----------------------------------------------------------------------------------------------------
+
+[2:22:51] Kelly Mattox:
+Yeah.Yeah, I think, I think your, yeah, your class is the most important thing. Everybody else should be able to see it and log into it, right? Cause do you really care if a PA or if somebody attaches a condition to it? Probably not. Loan officer's not gonna do what they're not supposed to do and they're not gonna launch from bite anyways, so.
+
+----------------------------------------------------------------------------------------------------
+
+[2:24:30] Kelly Mattox:
+Uh.No, I I mean that. I'm just worried about what you guys are putting in there that are different, I guess to think about what it is as long as you guys are putting in.Items within the condition itself and not moving into like changing a status because we have so much built around those status changes. We have hard stops, we have macros, we have all sorts of things based on statuses. So that would be the only other thing that would worry me from the condition portal.As long as you guys stick to just truly adding, signing off conditions and that's what it's used for and everything else is left for a later date, that's what I would say.
+
+----------------------------------------------------------------------------------------------------
+
+[2:25:36] Josephine Yen:
+Earlier, you guys are gonna solve for those last two 'cause you're not gonna have a bite screen. So does that mean that you can't change status? Oh, that means you can't. So yeah, it would be impossible to do it from those, but we could provide.Instruction for them to go, yeah, into. So we'll have to be on the day one. So we can't change it through the API 'cause we there's all these validation rules. We we check the API and yeah, it bypasses and so.
+
+----------------------------------------------------------------------------------------------------
+
+[2:27:28] Josephine Yen:
+Yeah, I think we'll still want to keep this button there because we still want them to add a note just to the communication challenges that exist. We want them to do that. Maybe. And again, I'm no, thank you. Thank you, Jody. Thank you.
+
+----------------------------------------------------------------------------------------------------
+
+[2:27:59] Josephine Yen:
+Says, oh, you have an outstanding thing. You need to go change the status or something. That way they're they when they go, even if they didn't know about it, they go to the loan. They can see it as a as a to do. It's a toaster pop like a like a little pop in the bottom right that tells you something. You know what I mean? Like we could we could say oh for this loan.Trigger a toaster pop in the queue. So when someone goes there and they see it, maybe they'll click it and then goes to change the status.Um.OK, what else? I'm like, I feel way better. I thought Kelly was gonna sabotage us. That was the problem. The whole thing. Yeah, it sounded like if we can do these roles. OK, so they ask for product guys. We need a Excel spreadsheet. We need all the roles. Yeah, and I need to know.I I wanna...
+
+----------------------------------------------------------------------------------------------------
+
+
+====================================================================================================
+OPEN QUESTIONS (21 items)
+====================================================================================================
+
+[1:30:12] Josephine Yen:
+Yes, I don't know. I mean, at the end of the day, what do you other than you can create, you can create a condition, you can edit, you can link it, you can change status. That's it. Like that's not like a lot of stuff like and it's not, it's not very dangerous, especially if we audit, if we if we log it, we know what's happening and.And you know, we can if worst case, we can take these underwriter and processor roles and obfuscate them up into groups. Yes, that this uses and then so OK, you have an underwriter 1-2 and three with various controls and a processor. Yes, I I don't need to worry about all 90. I can just have these.Smaller groups, 'cause we're not. Yes. Everything else you do in the loan, you're doing invite. You're you're not. You're only coming to the screen for very limited s...
+
+----------------------------------------------------------------------------------------------------
+
+[1:41:08] Josephine Yen:
+Who's who's? Who's screen is on? Is that you, Josephine? Yeah. Oh, yes. But we need the Leslie's screen. The card. Oh, yeah. Yeah. Yes. It's hard to hear on yours, Leslie. Yeah, it is. You can hear OK on mine. I don't know.Turn on her. Turn on. Turn on your video. We'll have. We'll have my my video. You'll free to mess around. Not your video. Your be seated. My audio is turned on. Can you hear me? Hold on. Let me turn off the audio here. Hold on, hold on. It was hard to hear Shailendra on your. Yeah, your.
+
+----------------------------------------------------------------------------------------------------
+
+[1:41:55] Josephine Yen:
+Why can't I hear her? We can't hear shy either. Here, let me join to see if I can. Uh.Oh, hold on a second.Special as I don't know what that is. Oh, hold on.
+
+----------------------------------------------------------------------------------------------------
+
+[1:44:07] Josephine Yen:
+I don't know if we have that document somewhere, but we could start there. But but is that in USBC or in box service? There's one in the office there, but it might be plugged into it. I have a screen, I have something. What do you do? So just a minute Kelly, we'll we'll share the screen and then we'll we'll have you talk.
+
+----------------------------------------------------------------------------------------------------
+
+[1:48:21] Josephine Yen:
+So it does. So let me ask like a fundamental question. My my correct me where I'm wrong here. I I want I would like or in clear so that we're building this in clear.
+
+----------------------------------------------------------------------------------------------------
+
+[1:55:23] Josephine Yen:
+What? I don't know if you do what they can do or what they can't do, but like, give me the give me the role of what they're allowed to do. And then I I think that.That we we we just built that into clear. I think that would be the easiest route and then we what we want the mapping when you log in depending on your the one of of 400 roles will wire those up to to roll up into one of these seven roles.
+
+----------------------------------------------------------------------------------------------------
+
+[1:59:46] Kelly Mattox:
+Um.Let me see if it's all tied to one. Let me see if I can find that indicator to answer that question for you.I'm looking. Oh, we got the little list up here. Oh, that's good.I'm waiting for that to come up, so.
+
+----------------------------------------------------------------------------------------------------
+
+[2:05:00] Josephine Yen:
+Awesome. OK, that helps. Any questions guys on the roles. So I I think we need to. I think we're gonna. So let's let's let's go back to the list. OK, we we can have Kelly explain. Was that on the list? Well, kind of.
+
+----------------------------------------------------------------------------------------------------
+
+[2:05:54] Kelly Mattox:
+Yeah, I mean, I feel like if if you're putting something somewhere, the idea is, is that I guess at some point in time there'll be an audit, there'll be something that comes back, somebody will ask a question and we just need to be able to see that data that was entered in on the condition screen if it's not the same as.
+
+----------------------------------------------------------------------------------------------------
+
+[2:06:14] Josephine Yen:
+Question. We had a we were wondering, we were talking about an audit concept. So imagine that you have you have a condition and and things can happen to a condition. It can be created, it can have notes added, it can have status changed, it can have.
+
+----------------------------------------------------------------------------------------------------
+
+[2:08:02] Josephine Yen:
+Many to many concepts, but OK, that sounds the question that's in my head is is the full data set of condition in one system outside of byte and you sync whatever data you want to byte or is the full data set of condition.Is whatever. There's a set that exists outside of byte and then the rest of it is in byte and together A + B is a full set. So that's the latter is how you're doing it elsewhere, right? The condition itself will live in.Byte, but metadata will exist in clear, so probably want to follow a similar pattern. That's an engineering question, but yeah, I wouldn't. I don't know. I wouldn't. The problem is if you one, you're it's gonna be in. It's gonna. If you're gonna use the API, it's gonna be in byte anyway.
+
+----------------------------------------------------------------------------------------------------
+
+[2:10:35] Josephine Yen:
+Do the joint I I don't. In other words I don't think no, but the full data set is what we need for the to render the UI. That's what I say. We have to merge the two of the data. I don't know that we need to render you. I think Domo is I I don't know that we need an audit tool in clear docs. I think we can do that through Domo.No, what what I'm saying is that when we get the payload to render the data in our conditions portal UI, our API is going to take data from some database. Yes. And then from both databases. Yes. Yeah, that's sort of thing. OK, OK, we're not, I don't believe that we should store duplicate data.Again, I'll defer to engineering, but I would we we want a it's OK to have two sources of truth that are hybrid. OK, OK. So then #3 is which I I think, yes, I'll. So Kelly, can y...
+
+----------------------------------------------------------------------------------------------------
+
+[2:12:14] Josephine Yen:
+Request from borrower or whatever. It is all of the stuff that exists today. Is there anything else that that I didn't describe like a new piece of functionality that one of those roles would need to do that that we haven't accounted for? That's the question.
+
+----------------------------------------------------------------------------------------------------
+
+[2:12:28] Kelly Mattox:
+They would need to move a condition and clear it. I don't know if you hear said that.
+
+----------------------------------------------------------------------------------------------------
+
+[2:13:05] Josephine Yen:
+What? What? What actions do they do that our current conditions portal doesn't support is my question. I'm gonna make up something. Do they generate a letter that has all these different conditions and they send it back to the investor? I'm making up stuff. I mean, are we missing anything?
+
+----------------------------------------------------------------------------------------------------
+
+[2:14:54] Josephine Yen:
+Permissions and roles creating a couple more profiles. Yeah, or I don't know if I'm using the right nomenclature, but like if we're not adding any new features then I I I think it's fine to have extra roles if if it means having a.Full uh downstream all on our same all on our tool. So then that means three and four is checks. It's checked off, right? So.
+
+----------------------------------------------------------------------------------------------------
+
+[2:15:14] Kelly Mattox:
+So I have a.So I have a question. Yeah, the existing pipeline would be the one of the other questions that we have because someone's going to have to sometimes go into the new one, sometimes use the old one, right? But.
+
+----------------------------------------------------------------------------------------------------
+
+[2:15:46] Josephine Yen:
+So it's not going to change talking about.Yes. And the data will be there. No, I think are we saying, yes, that's what I'm saying. Oh, you're saying like I'm saying the data's there. It's the same data. Everybody. Yeah, the same data's there. Limited. Hey, here's a beta group. No, because expand that group and then so on because the beta group, the problem with the beta group is.I'm a new condition portal loan, but then I'm working on a condition and then the guy downstream is not in my beta group and then all the other people working that loan is not in my beta group. It's a problem. Question could you? Yes, agreed. So the loan is now a condition portal loan, but that's different.
+
+----------------------------------------------------------------------------------------------------
+
+[2:17:07] Josephine Yen:
+I think, yeah, it needs to be in production, but I think in in a lab, yeah, right. But I think what we're agreeing to is that if we're gonna turn it on, it, it's on all the way downstream for all of those seven roles or whatever. The whole chain, yeah, arrow.You can't be in and out. Can I ask a dumb question and maybe you're answering it, but the existing pipeline that did not use conditions portal that has conditions out there in the current by. It's a good question. What happens? Is it all technically if you don't open it?
+
+----------------------------------------------------------------------------------------------------
+
+[2:19:51] Kelly Mattox:
+Maybe.I would feel way more comfortable if we talked to some people like in on the back end piece cause I don't know all of the things that they're doing. Yeah, the Colleen and I know, I know you're you're you're like just trying to generically.
+
+----------------------------------------------------------------------------------------------------
+
+[2:19:57] Josephine Yen:
+So yeah.No, yeah, we'll need. We're just, we're just no reaction.Yeah.Because I I want to, I don't want to stop people from doing their jobs and I don't want to go to Candy and say give me force somebody to only do a like a portion of their job. So how do we, how do we get our tool out there in a in a isolated environment and how do we make it as easy as possible? So Rusty, the question was.
+
+----------------------------------------------------------------------------------------------------
+
+
+====================================================================================================
+DECISIONS (1 items)
+====================================================================================================
+
+[2:15:46] Josephine Yen:
+So it's not going to change talking about.Yes. And the data will be there. No, I think are we saying, yes, that's what I'm saying. Oh, you're saying like I'm saying the data's there. It's the same data. Everybody. Yeah, the same data's there. Limited. Hey, here's a beta group. No, because expand that group and then so on because the beta group, the problem with the beta group is.I'm a new condition portal loan, but then I'm working on a condition and then the guy downstream is not in my beta group and then all the other people working that loan is not in my beta group. It's a problem. Question could you? Yes, agreed. So the loan is now a condition portal loan, but that's different.
+
+----------------------------------------------------------------------------------------------------
+
+
+====================================================================================================
+UI DESIGN (50 items)
+====================================================================================================
+
+[1:30:12] Josephine Yen:
+Yes, I don't know. I mean, at the end of the day, what do you other than you can create, you can create a condition, you can edit, you can link it, you can change status. That's it. Like that's not like a lot of stuff like and it's not, it's not very dangerous, especially if we audit, if we if we log it, we know what's happening and.And you know, we can if worst case, we can take these underwriter and processor roles and obfuscate them up into groups. Yes, that this uses and then so OK, you have an underwriter 1-2 and three with various controls and a processor. Yes, I I don't need to worry about all 90. I can just have these.Smaller groups, 'cause we're not. Yes. Everything else you do in the loan, you're doing invite. You're you're not. You're only coming to the screen for very limited s...
+
+----------------------------------------------------------------------------------------------------
+
+[1:41:08] Josephine Yen:
+Who's who's? Who's screen is on? Is that you, Josephine? Yeah. Oh, yes. But we need the Leslie's screen. The card. Oh, yeah. Yeah. Yes. It's hard to hear on yours, Leslie. Yeah, it is. You can hear OK on mine. I don't know.Turn on her. Turn on. Turn on your video. We'll have. We'll have my my video. You'll free to mess around. Not your video. Your be seated. My audio is turned on. Can you hear me? Hold on. Let me turn off the audio here. Hold on, hold on. It was hard to hear Shailendra on your. Yeah, your.
+
+----------------------------------------------------------------------------------------------------
+
+[1:42:22] Tim Borquez:
+Why? Why don't you mute yourself, Josephine, real quick?
+
+----------------------------------------------------------------------------------------------------
+
+[1:42:46] Josephine Yen:
+You're on the big screen. We're all staring. We're all staring. It's great. OK, so, so Kelly, we are all here in Irvine and we we've got Tony, Leslie, myself, Josephine.
+
+----------------------------------------------------------------------------------------------------
+
+[1:43:13] Josephine Yen:
+Hi. Hey. So we're doing a two day deep dive on our favorite topic, Conditions Portal and so far we've gone through the design. Leslie and Tim did sort of a walk through etcetera and.
+
+----------------------------------------------------------------------------------------------------
+
+[1:44:07] Josephine Yen:
+I don't know if we have that document somewhere, but we could start there. But but is that in USBC or in box service? There's one in the office there, but it might be plugged into it. I have a screen, I have something. What do you do? So just a minute Kelly, we'll we'll share the screen and then we'll we'll have you talk.
+
+----------------------------------------------------------------------------------------------------
+
+[1:46:17] Kelly Mattox:
+All right. Don't break down my reports. I like that. OK. I think the biggest thing that I was talking through were a couple of things. Number one is we start to build a conditions portal and I heard you guys talking, I think a little bit about it when.
+
+----------------------------------------------------------------------------------------------------
+
+[1:46:39] Kelly Mattox:
+Yeah, we did lose the screen share. I think the biggest, one of the biggest things that we have to remember is access levels for it. And I think you guys were talking briefly about that. When we talk about giving people access to these, we say, hey, underwriters and and processors are the most important, the first thing.Just keep in mind that we have multiple names or multiple roles in byte that a processor uses, right? So we have a loan processor, we have a processor two, we have a processor 3. So when you handicap them, you handicap them.Unless you allow all three roles to get in. Same thing with underwriter. We have an underwriter role. We have underwrite level 123 and four. So we now have candor role.Roles that we've added for all of those levels as well. So anytime that we roll out so...
+
+----------------------------------------------------------------------------------------------------
+
+[1:48:21] Josephine Yen:
+So it does. So let me ask like a fundamental question. My my correct me where I'm wrong here. I I want I would like or in clear so that we're building this in clear.
+
+----------------------------------------------------------------------------------------------------
+
+[1:49:52] Kelly Mattox:
+Um, yes, for the.No, except for we talked about that yesterday in the exception. If we're not requiring them to use the exception checkboxes, then that's the only thing on an underwriter role that would need to be different based off of.The underwriter role pushing out, right? A processor. There would be a difference because a processor is allowed to sign off on some conditions because they do have processor 3 conditions, but the other two processor roles will not be allowed to sign sign off on any conditions.
+
+----------------------------------------------------------------------------------------------------
+
+[1:50:44] Josephine Yen:
+And then everybody post underwriting we like Mitch and and folks. So we're we have this conundrum like assuming that we build the conditions portal if the condition portal breaks bite or.
+
+----------------------------------------------------------------------------------------------------
+
+[1:52:24] Kelly Mattox:
+Yeah.Mhm.No.Depending upon the condition and if it's editable or not.
+
+----------------------------------------------------------------------------------------------------
+
+[1:52:38] Josephine Yen:
+So if the condition is defined as not editable, the only field that that controls is the description field. But all data fields like I should be able to change any field if if class is underwriter and that sorry class is processor and a person logging in as processor I can change.
+
+----------------------------------------------------------------------------------------------------
+
+[1:52:56] Josephine Yen:
+Anything on that loan a a condition except for description if description is set as not editable, is that correct?
+
+----------------------------------------------------------------------------------------------------
+
+[1:53:22] Josephine Yen:
+OK, so if I'm in, so taking that exact same example, if the condition description is saying that it's not editable, then that that that is a definition across the board. I don't care who you are. OK, so I'm going to take that off the table. So if the logged in person is.
+
+----------------------------------------------------------------------------------------------------
+
+[1:55:23] Josephine Yen:
+What? I don't know if you do what they can do or what they can't do, but like, give me the give me the role of what they're allowed to do. And then I I think that.That we we we just built that into clear. I think that would be the easiest route and then we what we want the mapping when you log in depending on your the one of of 400 roles will wire those up to to roll up into one of these seven roles.
+
+----------------------------------------------------------------------------------------------------
+
+[1:56:17] Kelly Mattox:
+Are are you mapping your own? Because like every a lot of the other things that we've built for clear, like our pipelines and such, don't map all of the roles, right? So like we have three different processor roles and only one was provided access.Or two, I think they ended up adding. So the idea is, is that depending upon the product that you're delivering in the new clear screen, it needs to be tied to either the specific name of the role, so like a processor three if you're signing off conditions, but in every other thing that you build in clear or pipe.
+
+----------------------------------------------------------------------------------------------------
+
+[1:56:53] Kelly Mattox:
+Line or VOEVOE screen it it it it's the it's the joint thing of it being a one processor. It doesn't matter what we call them. Certain things give them an extra responsibility being a a 1-2 or a three.
+
+----------------------------------------------------------------------------------------------------
+
+[2:00:41] Josephine Yen:
+Yeah, that's what I want and yeah and and I I want to know like OK can that roll into, can that go into one role or can it does it need to be two or three and and what's the difference and when we can build that I just want to I I need it like in an Excel spreadsheet. I need it like the 8 roles you described.
+
+----------------------------------------------------------------------------------------------------
+
+[2:01:21] Josephine Yen:
+Three can do certain things with certain types. I need that part of it documented somewhere so we can tell engineering so that they're aware of it because we won't natively inherit that with what we're building.
+
+----------------------------------------------------------------------------------------------------
+
+[2:02:48] Kelly Mattox:
+So this is like the name of it which drives the permissions for this, but here it says the role is loan officer and this ties back to the role like on the home screen of where that name displays. But if we start to identify things as a role here and not necessarily as the naming convention.I think we will have a lot more success when we allow people to get into clear or anything that we're building in general.
+
+----------------------------------------------------------------------------------------------------
+
+[2:05:17] Josephine Yen:
+Let me go back. I can't. I gotta go back.I took a screenshot, Leslie. Yeah, it's charging super slow, so OK, so.
+
+----------------------------------------------------------------------------------------------------
+
+[2:05:54] Kelly Mattox:
+Yeah, I mean, I feel like if if you're putting something somewhere, the idea is, is that I guess at some point in time there'll be an audit, there'll be something that comes back, somebody will ask a question and we just need to be able to see that data that was entered in on the condition screen if it's not the same as.
+
+----------------------------------------------------------------------------------------------------
+
+[2:06:30] Josephine Yen:
+Documents linked and unlinked, et cetera. Do you do you think all of that into an audit table? Like who did it, when they did it, what did they do? Do you think that is enough or valuable and and and and maybe not in the conditions portal, but at least linked so it can be brought up on a Domo report? Do you think that's?
+
+----------------------------------------------------------------------------------------------------
+
+[2:07:44] Josephine Yen:
+So, so and and we're gonna have more metadata like flags and notes that may not exist though. So well I think the the the take away is we need to we need to log minimum what's there today but we we need to support our new model for.
+
+----------------------------------------------------------------------------------------------------
+
+[2:09:30] Josephine Yen:
+Uh, we run into that same issue with the modified daytime done with the API LB server will.That invite, it's user level. I think these are dates or they have this timeline too. They have modified. They have modified. They don't have. I don't. They don't have modified, but they have the status. But there's no history. So like there's five statuses. The latest one is what you get.Yeah, so if I if you modify them, like you, I get invited.But if you do it with the UI, it's server time, then you'll know types of this, yeah.OK. So that we'll take that as a as a research. So I I think we know what we want to do. But I think what you're saying is we use the data, we source the data that we need that is that byte supports and then all the extra stuff we do it outside and then the the A + B is the f...
+
+----------------------------------------------------------------------------------------------------
+
+[2:10:35] Josephine Yen:
+Do the joint I I don't. In other words I don't think no, but the full data set is what we need for the to render the UI. That's what I say. We have to merge the two of the data. I don't know that we need to render you. I think Domo is I I don't know that we need an audit tool in clear docs. I think we can do that through Domo.No, what what I'm saying is that when we get the payload to render the data in our conditions portal UI, our API is going to take data from some database. Yes. And then from both databases. Yes. Yeah, that's sort of thing. OK, OK, we're not, I don't believe that we should store duplicate data.Again, I'll defer to engineering, but I would we we want a it's OK to have two sources of truth that are hybrid. OK, OK. So then #3 is which I I think, yes, I'll. So Kelly, can y...
+
+----------------------------------------------------------------------------------------------------
+
+[2:11:57] Josephine Yen:
+I am. I am AI am somebody downstream of an underwriter other than and I don't for now forget about who the roles are. Create condition, update status, add note, add flag, link documents.
+
+----------------------------------------------------------------------------------------------------
+
+[2:13:21] Josephine Yen:
+That would make it so that they can't complete their job by using the condition portal and they have to straddle between the condition portal and the byte whatever screens.
+
+----------------------------------------------------------------------------------------------------
+
+[2:14:03] Josephine Yen:
+It'll so you'll still have all of your your byte screens to do other things like you're not bound to just this window because you're already in byte if that helps. But but can I take away your the current byte out-of-the-box condition screen and no one would be upset?
+
+----------------------------------------------------------------------------------------------------
+
+[2:14:22] Josephine Yen:
+And give you the new condition portal screen. Can we do that and nobody would be upset. They won't be disrupted. They can still do their jobs.You're nodding, yes.
+
+----------------------------------------------------------------------------------------------------
+
+[2:14:38] Josephine Yen:
+And and again this will be a this will be kind of a Lauren ask like like we need to ask that like hey we want to yeah we wanna 'cause my argument is if we're already building the core functionality and to me it this just sounds like.
+
+----------------------------------------------------------------------------------------------------
+
+[2:15:20] Josephine Yen:
+Yeah.Oh, we're gonna, we're gonna, we're gonna merge the two data. So we're gonna whatever data it does not exist in byte, we will store it somewhere else. Whatever data does exist in byte will still be in byte. We're gonna pull those two together. We're gonna stitch it and give you one UI for it.
+
+----------------------------------------------------------------------------------------------------
+
+[2:18:56] Josephine Yen:
+I'm wrong.Could we, I'm making this up. We flag a loan like pretend that we have that group of people. But I I understand that in that group there might be people that do everything. So there's this, there's certain people that might need to be in the old and the new way. Could we, let's say we could flag the loan, every loan opened by this.
+
+----------------------------------------------------------------------------------------------------
+
+[2:19:17] Josephine Yen:
+Underwrite, I'm sorry, loan officer starting, you know, February 1st is considered a conditions portal loan. So let's assume we have a flag for that. When you're in bite, when you click on the conditions button, could that button look at that flag and either open?Legacy if if it's false, or our new tool if it's positive. That way the user simply does what they always do and we present them with a screen accordingly.So it's one menu item, two different screens, bite screen or clear screen, and we decide that by the flag.
+
+----------------------------------------------------------------------------------------------------
+
+[2:19:51] Kelly Mattox:
+Maybe.I would feel way more comfortable if we talked to some people like in on the back end piece cause I don't know all of the things that they're doing. Yeah, the Colleen and I know, I know you're you're you're like just trying to generically.
+
+----------------------------------------------------------------------------------------------------
+
+[2:20:26] Josephine Yen:
+Could we assume that we flag like 5 loan officers as conditional condition portal loan officers? So any loan they open from a date, you know January 15th forward, we flag as a condition portal loan. It's a it's a new flag invite.
+
+----------------------------------------------------------------------------------------------------
+
+[2:20:44] Josephine Yen:
+With me, yeah. So in Bite, I don't care who you are. When you open up the when you click on the conditions menu that exists today, Bite will look at that flag and either open our new conditions portal or it will open the current old conditions portal. That way you already do stuff based on dates.Flags. It doesn't seem that different. Yeah, that way we we IT controls the window. You're you're gonna get the conditions window or you're gonna get the old byte window and it'll be based on loan. So if if a user is only doing stuff for this new LO.It'll always be the new conditions window, but it solves for downstream where people who are doing warehouse line stuff where they they are, they're not necessarily bound to like a small group depending on what window, depending on the loan, it will, it...
+
+----------------------------------------------------------------------------------------------------
+
+[2:22:20] Kelly Mattox:
+No, it's actually it's the fields inside of Byte, and that's how it was built to toggle between the two.
+
+----------------------------------------------------------------------------------------------------
+
+[2:22:22] Josephine Yen:
+OK.OK, I'm not arguing that's the answer, but that is a that is a recommendation.
+
+----------------------------------------------------------------------------------------------------
+
+[2:23:21] Josephine Yen:
+Yeah, Kelly, does that does what is what just just got check me here is what Mark described. It sounds like things we've done already. You click a button it it checks if a custom field exists for that loan and if it doesn't it navigates you somewhere or or somewhere else.
+
+----------------------------------------------------------------------------------------------------
+
+[2:23:22] Kelly Mattox:
+I do not.Yeah, it's or it stops you. Yeah, it tells you you can't and that you have to go to this other screen like conditions too. You can call it or.
+
+----------------------------------------------------------------------------------------------------
+
+[2:24:14] Kelly Mattox:
+Just those types of things. And so it would be on screen change, which is much better than file open, right?
+
+----------------------------------------------------------------------------------------------------
+
+[2:24:30] Kelly Mattox:
+Uh.No, I I mean that. I'm just worried about what you guys are putting in there that are different, I guess to think about what it is as long as you guys are putting in.Items within the condition itself and not moving into like changing a status because we have so much built around those status changes. We have hard stops, we have macros, we have all sorts of things based on statuses. So that would be the only other thing that would worry me from the condition portal.As long as you guys stick to just truly adding, signing off conditions and that's what it's used for and everything else is left for a later date, that's what I would say.
+
+----------------------------------------------------------------------------------------------------
+
+[2:25:17] Josephine Yen:
+Any change of status references on the portal will tell you open up byte status screen. Then it'll run. I think that's the fact that we're now that said, interestingly you guys are going to have to. So remember there are three use cases. There is invite, there is standalone and there is include.
+
+----------------------------------------------------------------------------------------------------
+
+[2:25:36] Josephine Yen:
+Earlier, you guys are gonna solve for those last two 'cause you're not gonna have a bite screen. So does that mean that you can't change status? Oh, that means you can't. So yeah, it would be impossible to do it from those, but we could provide.Instruction for them to go, yeah, into. So we'll have to be on the day one. So we can't change it through the API 'cause we there's all these validation rules. We we check the API and yeah, it bypasses and so.
+
+----------------------------------------------------------------------------------------------------
+
+[2:26:05] Kelly Mattox:
+So there's more than that, Rusty. There's a whole underwriting screen. There's other screens that people complete things on that have to be completed. So if you're going to fire a hard stop based on calling a macro, you're also going to have to give them access to those fields. So it's almost like.
+
+----------------------------------------------------------------------------------------------------
+
+[2:26:20] Kelly Mattox:
+We're almost giving them. They don't clear any of these things on a condition screen, right? They can't change a status. If the screen technically opens where it is, they do the same thing that they do today, which is on the right side. If they want to keep conditions open on the right side, they change their screen on the right side, which is their status screen and change their status.Status. It's all about training and educating people on how to use the system.
+
+----------------------------------------------------------------------------------------------------
+
+[2:27:28] Josephine Yen:
+Yeah, I think we'll still want to keep this button there because we still want them to add a note just to the communication challenges that exist. We want them to do that. Maybe. And again, I'm no, thank you. Thank you, Jody. Thank you.
+
+----------------------------------------------------------------------------------------------------
+
+[2:27:59] Josephine Yen:
+Says, oh, you have an outstanding thing. You need to go change the status or something. That way they're they when they go, even if they didn't know about it, they go to the loan. They can see it as a as a to do. It's a toaster pop like a like a little pop in the bottom right that tells you something. You know what I mean? Like we could we could say oh for this loan.Trigger a toaster pop in the queue. So when someone goes there and they see it, maybe they'll click it and then goes to change the status.Um.OK, what else? I'm like, I feel way better. I thought Kelly was gonna sabotage us. That was the problem. The whole thing. Yeah, it sounded like if we can do these roles. OK, so they ask for product guys. We need a Excel spreadsheet. We need all the roles. Yeah, and I need to know.I I wanna...
+
+----------------------------------------------------------------------------------------------------
+
+
+====================================================================================================
+ROLLOUT STRATEGY (6 items)
+====================================================================================================
+
+[1:53:55] Josephine Yen:
+OK.So could we make our lives easier? So could we make our lives easier and say, I'm an underwriter one, the class is underwriter one. I can do whatever I want with that. I'm an underwriter 2 and sorry, I'm an underwriter one and the class is underwriter 2. Sorry.Door shut. Can't get in the club.Can I do that? Can we do that 'cause that will make it a lot easier for us for rollout.
+
+----------------------------------------------------------------------------------------------------
+
+[1:58:47] Kelly Mattox:
+OK, good.So loan officers do look at conditions, but if you're going to give them access to see them inside of clear and bite, I think you should be OK, right? Your production assistance in some areas might help the processor, almost like a junior processor role. A lot of them help.
+
+----------------------------------------------------------------------------------------------------
+
+[1:59:16] Kelly Mattox:
+So I would suggest that you use your production assistant. You would use your processor as your base role P3, being able to sign off your underwriter, right? And then you're going to look at your closer and funder roles, right? Closer slash funder roles.And then you would be looking at your OST closing.
+
+----------------------------------------------------------------------------------------------------
+
+[2:15:46] Josephine Yen:
+So it's not going to change talking about.Yes. And the data will be there. No, I think are we saying, yes, that's what I'm saying. Oh, you're saying like I'm saying the data's there. It's the same data. Everybody. Yeah, the same data's there. Limited. Hey, here's a beta group. No, because expand that group and then so on because the beta group, the problem with the beta group is.I'm a new condition portal loan, but then I'm working on a condition and then the guy downstream is not in my beta group and then all the other people working that loan is not in my beta group. It's a problem. Question could you? Yes, agreed. So the loan is now a condition portal loan, but that's different.
+
+----------------------------------------------------------------------------------------------------
+
+[2:16:31] Josephine Yen:
+Different from what you said, which is, could I have this group like a lab of downstream? Yes, that's a different thing. Yes. I think we need that flexibility cuz I certainly don't want to bring down CMG production. Yes, total processors. So I think what we would say is we'd go to operations and we'd say give me.So a group of ellos, processors, underwriters, post closers, all the way down that are in the whole value chain in this group. Yeah. They will all be on conditions port only. Yeah. And we'll have them test it for a month. We'll fix things. Yes. And then if we like it, we'll roll it to the rest of the company. Yeah.
+
+----------------------------------------------------------------------------------------------------
+
+[2:17:07] Josephine Yen:
+I think, yeah, it needs to be in production, but I think in in a lab, yeah, right. But I think what we're agreeing to is that if we're gonna turn it on, it, it's on all the way downstream for all of those seven roles or whatever. The whole chain, yeah, arrow.You can't be in and out. Can I ask a dumb question and maybe you're answering it, but the existing pipeline that did not use conditions portal that has conditions out there in the current by. It's a good question. What happens? Is it all technically if you don't open it?
+
+----------------------------------------------------------------------------------------------------
+
+
+====================================================================================================
+AUDIT LOGGING (21 items)
+====================================================================================================
+
+[1:30:12] Josephine Yen:
+Yes, I don't know. I mean, at the end of the day, what do you other than you can create, you can create a condition, you can edit, you can link it, you can change status. That's it. Like that's not like a lot of stuff like and it's not, it's not very dangerous, especially if we audit, if we if we log it, we know what's happening and.And you know, we can if worst case, we can take these underwriter and processor roles and obfuscate them up into groups. Yes, that this uses and then so OK, you have an underwriter 1-2 and three with various controls and a processor. Yes, I I don't need to worry about all 90. I can just have these.Smaller groups, 'cause we're not. Yes. Everything else you do in the loan, you're doing invite. You're you're not. You're only coming to the screen for very limited s...
+
+----------------------------------------------------------------------------------------------------
+
+[1:45:11] Josephine Yen:
+I gave her two options. We either do the 150 backlog or we we look at the conditions portal demo.
+
+----------------------------------------------------------------------------------------------------
+
+[1:46:17] Kelly Mattox:
+All right. Don't break down my reports. I like that. OK. I think the biggest thing that I was talking through were a couple of things. Number one is we start to build a conditions portal and I heard you guys talking, I think a little bit about it when.
+
+----------------------------------------------------------------------------------------------------
+
+[1:46:39] Kelly Mattox:
+Yeah, we did lose the screen share. I think the biggest, one of the biggest things that we have to remember is access levels for it. And I think you guys were talking briefly about that. When we talk about giving people access to these, we say, hey, underwriters and and processors are the most important, the first thing.Just keep in mind that we have multiple names or multiple roles in byte that a processor uses, right? So we have a loan processor, we have a processor two, we have a processor 3. So when you handicap them, you handicap them.Unless you allow all three roles to get in. Same thing with underwriter. We have an underwriter role. We have underwrite level 123 and four. So we now have candor role.Roles that we've added for all of those levels as well. So anytime that we roll out so...
+
+----------------------------------------------------------------------------------------------------
+
+[1:52:38] Josephine Yen:
+So if the condition is defined as not editable, the only field that that controls is the description field. But all data fields like I should be able to change any field if if class is underwriter and that sorry class is processor and a person logging in as processor I can change.
+
+----------------------------------------------------------------------------------------------------
+
+[1:53:22] Josephine Yen:
+OK, so if I'm in, so taking that exact same example, if the condition description is saying that it's not editable, then that that that is a definition across the board. I don't care who you are. OK, so I'm going to take that off the table. So if the logged in person is.
+
+----------------------------------------------------------------------------------------------------
+
+[1:55:23] Josephine Yen:
+What? I don't know if you do what they can do or what they can't do, but like, give me the give me the role of what they're allowed to do. And then I I think that.That we we we just built that into clear. I think that would be the easiest route and then we what we want the mapping when you log in depending on your the one of of 400 roles will wire those up to to roll up into one of these seven roles.
+
+----------------------------------------------------------------------------------------------------
+
+[2:00:14] Josephine Yen:
+Just just conditions portal itself, I think, I think got a little sidetracked with some of these discussions, you know what I mean?
+
+----------------------------------------------------------------------------------------------------
+
+[2:02:09] Kelly Mattox:
+Um, yes, but the problem is, is how you're connecting it from bite and the what they're logging into in as that's up to you.
+
+----------------------------------------------------------------------------------------------------
+
+[2:05:33] Josephine Yen:
+Yeah, so, yeah, so don't break Domo reports. So what that means is even though we have the richer data set, we still need to save the data to Byte so that these Domo reports can still be generated so that it looks like nothing's really changed, OK.
+
+----------------------------------------------------------------------------------------------------
+
+[2:05:54] Kelly Mattox:
+Yeah, I mean, I feel like if if you're putting something somewhere, the idea is, is that I guess at some point in time there'll be an audit, there'll be something that comes back, somebody will ask a question and we just need to be able to see that data that was entered in on the condition screen if it's not the same as.
+
+----------------------------------------------------------------------------------------------------
+
+[2:06:14] Josephine Yen:
+Question. We had a we were wondering, we were talking about an audit concept. So imagine that you have you have a condition and and things can happen to a condition. It can be created, it can have notes added, it can have status changed, it can have.
+
+----------------------------------------------------------------------------------------------------
+
+[2:06:30] Josephine Yen:
+Documents linked and unlinked, et cetera. Do you do you think all of that into an audit table? Like who did it, when they did it, what did they do? Do you think that is enough or valuable and and and and maybe not in the conditions portal, but at least linked so it can be brought up on a Domo report? Do you think that's?
+
+----------------------------------------------------------------------------------------------------
+
+[2:06:50] Josephine Yen:
+Stops this.OK. What do we have this today? Does this by do that today? Do we know all of that auditing?
+
+----------------------------------------------------------------------------------------------------
+
+[2:07:44] Josephine Yen:
+So, so and and we're gonna have more metadata like flags and notes that may not exist though. So well I think the the the take away is we need to we need to log minimum what's there today but we we need to support our new model for.
+
+----------------------------------------------------------------------------------------------------
+
+[2:09:30] Josephine Yen:
+Uh, we run into that same issue with the modified daytime done with the API LB server will.That invite, it's user level. I think these are dates or they have this timeline too. They have modified. They have modified. They don't have. I don't. They don't have modified, but they have the status. But there's no history. So like there's five statuses. The latest one is what you get.Yeah, so if I if you modify them, like you, I get invited.But if you do it with the UI, it's server time, then you'll know types of this, yeah.OK. So that we'll take that as a as a research. So I I think we know what we want to do. But I think what you're saying is we use the data, we source the data that we need that is that byte supports and then all the extra stuff we do it outside and then the the A + B is the f...
+
+----------------------------------------------------------------------------------------------------
+
+[2:10:35] Josephine Yen:
+Do the joint I I don't. In other words I don't think no, but the full data set is what we need for the to render the UI. That's what I say. We have to merge the two of the data. I don't know that we need to render you. I think Domo is I I don't know that we need an audit tool in clear docs. I think we can do that through Domo.No, what what I'm saying is that when we get the payload to render the data in our conditions portal UI, our API is going to take data from some database. Yes. And then from both databases. Yes. Yeah, that's sort of thing. OK, OK, we're not, I don't believe that we should store duplicate data.Again, I'll defer to engineering, but I would we we want a it's OK to have two sources of truth that are hybrid. OK, OK. So then #3 is which I I think, yes, I'll. So Kelly, can y...
+
+----------------------------------------------------------------------------------------------------
+
+[2:18:11] Kelly Mattox:
+Yeah, but the the challenges is when you guys get to the end result, let's just talk about like your post closing all of those folks and everywhere investor purchasing, am I insuring, FHA insuring all of those people, you're now talking about people who support.Every channel throughout CMG, so their reports, you can't just like we have two MI insuring analysts. You can't stop them from doing their job across the board. Does that make sense?
+
+----------------------------------------------------------------------------------------------------
+
+[2:22:51] Kelly Mattox:
+Yeah.Yeah, I think, I think your, yeah, your class is the most important thing. Everybody else should be able to see it and log into it, right? Cause do you really care if a PA or if somebody attaches a condition to it? Probably not. Loan officer's not gonna do what they're not supposed to do and they're not gonna launch from bite anyways, so.
+
+----------------------------------------------------------------------------------------------------
+
+[2:22:57] Josephine Yen:
+Kelly Kelly.Yeah.Right. And that's my point. It's.And we're gonna have, we're gonna have full logging anyway. If it's not alone, it's been working before, yeah.
+
+----------------------------------------------------------------------------------------------------
+
+[2:27:59] Josephine Yen:
+Says, oh, you have an outstanding thing. You need to go change the status or something. That way they're they when they go, even if they didn't know about it, they go to the loan. They can see it as a as a to do. It's a toaster pop like a like a little pop in the bottom right that tells you something. You know what I mean? Like we could we could say oh for this loan.Trigger a toaster pop in the queue. So when someone goes there and they see it, maybe they'll click it and then goes to change the status.Um.OK, what else? I'm like, I feel way better. I thought Kelly was gonna sabotage us. That was the problem. The whole thing. Yeah, it sounded like if we can do these roles. OK, so they ask for product guys. We need a Excel spreadsheet. We need all the roles. Yeah, and I need to know.I I wanna...
+
+----------------------------------------------------------------------------------------------------
+

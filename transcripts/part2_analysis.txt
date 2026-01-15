@@ -1,0 +1,261 @@
+================================================================================
+ANALYSIS OF C:\Users\Mark Hansen\Desktop\saro\transcripts\part2_extracted.txt
+================================================================================
+
+
+FEATURES MENTIONED (56 items):
+--------------------------------------------------------------------------------
+[0:03] s
+Leslie Chang started transcription
+Leslie Chang: So um identify bar docs to request update descriptions, AI bar request e-mail request non bar related docs. OK we're striking this, yeah.OK, so now I'm the processor. The loan has been approved by the underwriter and now I need to request my documents that have a bar dependency. So these are the BRW.Conditions. So let's see. I have a couple that say need bar request and you can see the status here need bar request and then so this button here send bar request. If you click on this, it's also I g
+
+[8:45] Leslie Chang: Sorry, say that again for the create new version. Is there a way to save it? I think was the question. Well, if they want to save it as a template, they they could save it as a template for sure. We have the manage templates button that allows you to do that.
+
+[9:11] Leslie Chang: Yeah.If you.Well, you have. You would copy and paste whatever verbiage from the e-mail body you want to put into the template.
+
+[9:25] Leslie Chang: So it helps me to do it. Can I recommend from product? Can we assuming tokens are not a concern? Can we potentially allow changing the tone and the other features and doing just a regeneration? Yeah, that way there's.It's easier. I think that's more intuitive, like change the tone to like from casual to formal and then and then when you hit save, it'll regen the message. Would that be an appropriate thing? Yeah, we we did it this way because we're really trying to put a cap like, hey, you can do
+
+[13:37] Leslie Chang: Oh, we need. That's not. Yeah, we need to add that to this send e-mail and then that's good to call out. Shy to remind the borrower to get auto notification. Oh, we need this stuff from you. OK, so if you wait three days, you get another days depending on what you want to set it to and how many.
+
+[13:57] Leslie Chang: Sometimes you want to do that. Got it. Can we do that? Are we thinking, Tim, is that going to be a a global for the for everything? So we have multiple things going right now that the emails integrated into we have.
+
+[14:14] Leslie Chang: So we have conditions portal, we have the needs list where they're doing the work and then we have tasks. So right now that Cathy's Yep, Yep. So are we gonna, are we gonna inherit from one of those or are we gonna? I'd like to not have its own set of brains. Yeah, that's the idea is that.There's one e-mail screen for all three of those experiences with auto reminders controlling any either task or doc requests. It's all like one e-mail and is is the docs already though it is. It's in clear docs 
+
+[16:38] Shailendra Sharma: Like.Yeah, yeah, fixed. Yeah.Yeah, yeah, yeah.Yeah, that way, even if the Outlook does not work, you know all they have to do is one time they have to copy paste from Outlook into here and then it is here forever.And they can modify it here also. Nothing is stopping them from saying, hey, you know, I copied it two days ago from Outlook and I want to change something. Go ahead and change it.
+
+[17:05] Leslie Chang: Sure.But these it's gonna get overwritten if you've you've had it set up in marketing if it's added. So don't have to know. Well, I think that'd be an import often. Like let them do it. Let them choose to do it. Yeah, my my recommendation would be have an import, have a have an app, have a a.A user click import option from Marketing Hub or Outlook, whatever we have to check for and then that'll bring it in and then internally you can you can have multiple versions of a of a signature and and you
+
+[17:47] Leslie Chang: Signature for this particular instance you can you can change it from the you choose it from the drop down. So there's just an import button that can run at any time or you can just do it. Yeah, whatever like yeah yeah or just an edit tool. I think I think the import's overkill for this one.So page one, we just allow them to copy and paste, give an HTML editor, let them three. OK, so let me make this 5 signatures and let them choose a default or one of the options in the e-mail is let them choos
+
+[18:29] Leslie Chang: Yeah, that was basically like what Outlook has to say. Yeah, more or less, yeah.OK, so we went over doc doc request history, loan history, and then there's also going to be a tab for clear docs.OK, let's go back to Tim's. So this tab's gonna be a problem if they're doing it by which which tab? What's up? They have to go to like. Oh, we just got to open it at the No, we're gonna keep it all in the same browser. It's a tab within the window tab. What's that? Didn't want it side by side.They can st
+
+[26:04] Leslie Chang: Yeah, so there's a filter for all of the conditions. You can do it by category. Like if I would just want to do my app or my credit and then bar internal, external, you can sort by flags. This is my prototype. I didn't.I don't think I realized we had color, so I just put flagged, unflagged and then you can do by status doc requests with or without. You can also sort ascending, descending by various categories.
+
+[26:40] Leslie Chang: The only reason I sent tags is because people always want to get home. They don't want to. Well, I agree you. You're compelling arguments is if it's persist, then why does it need to be constrained? Because who cares what they write? Yes, but if it's public, then then then we need some sort of organization.
+
+[26:58] Leslie Chang: I I think, I I think we did talk about doing tags. We're just concerned about stoke. But I imagine with there isn't a slot with the scope. The engineer's talking.Flags today and clear. People want to add flags that are gonna be universal for everybody. We have to put a kibosh on just saying I want this flag up or this tag, this tag, this tag because it can get out of control. So I think we have this. Let's go with what we have and have Lauren type it if she wants to change it. Is that?A fair, fa
+
+[28:16] Leslie Chang: And search really quick. I don't think I went over this, but you can basically um search by your ID number or like a a keyword.Or you could use the the filter that I just showed.It's searched by ID and I think I have seven fields listed for searching somewhere. I think we went over everything in the header. Need to request requested active.This are we using the this?Yeah. Are we using export? What? What does it do? It exports the conditions. I don't see an issue with that. This is you can browse
+
+[41:42] Leslie Chang: So I I think that one of the takeaways will be we'll we'll we'll take all of our notes and then whatever other feedback and we'll sort of let's Polish the design and and and then that'll be what we provide along with all of our.Good requirements. We talk about more. Yep. Um.Yeah.Yes, we had a couple of parking lots. The architecture. Oh, Leslie, can you go through to Kelly? Oh, yes, yes, yes, yes.The cardinal roles, yeah, I wanted to do that with Kelly. But should we have these groups understand
+
+[44:00] Josephine Yen: Carlos. Oh, you're back. Carlos. Sorry. All right.Shoot. OK, I was making a change, so hopefully I didn't break anything. OK, OK, OK, so I have um.I have three samples, I have a get condition list and I also have the schema for that. I don't need to get conditions and I'll tell you why, but I told Claude to rename it but.He didn't, he just added the next one. But I have something else called get loan conditions. So the get loan conditions is that landing screen that you've been seeing when Tim a
+
+[46:22] Josephine Yen: But essentially Byte has something that's out-of-the-box that says when the condition is defined, it's defined when you set it up as a template, editable or not editable. The third option is custom question. CMG doesn't use custom question, but they will be using custom question, but editable just means.Across the board, no one can edit a description. Across the board, everyone can edit a description and then permissions is another layer on top with every field that says who can do what when, OK
+
+[1:30:12] Josephine Yen: Yes, I don't know. I mean, at the end of the day, what do you other than you can create, you can create a condition, you can edit, you can link it, you can change status. That's it. Like that's not like a lot of stuff like and it's not, it's not very dangerous, especially if we audit, if we if we log it, we know what's happening and.And you know, we can if worst case, we can take these underwriter and processor roles and obfuscate them up into groups. Yes, that this uses and then so OK, you have
+
+[1:49:52] Kelly Mattox: Um, yes, for the.No, except for we talked about that yesterday in the exception. If we're not requiring them to use the exception checkboxes, then that's the only thing on an underwriter role that would need to be different based off of.The underwriter role pushing out, right? A processor. There would be a difference because a processor is allowed to sign off on some conditions because they do have processor 3 conditions, but the other two processor roles will not be allowed to sign sign off on 
+
+[1:51:33] Josephine Yen: That role, would you argue that the verbs of what you can do, they're no different. If you took some of the actions of an underwriter and the processor and called it this post underwriter role, like there's no new or different functionality, right? In other words, I'm just.
+
+[1:51:52] Josephine Yen: I'm just swapping out existing functionality and and grouping it into a new role. Is is that right or is there some new?
+
+[1:52:08] Josephine Yen: That's that's. I think that's OK. Can I can I using the same all the same behavior and functionality just applying just just to do that? OK, that's what I'm trying.
+
+[1:52:19] Josephine Yen: Yeah, so OK, can I make this general statement? If the class is processor 3 and I am a processor, then I can do whatever I want to that condition. I can change the data, I can do whatever I want. It's my condition to play with.
+
+[1:52:38] Josephine Yen: So if the condition is defined as not editable, the only field that that controls is the description field. But all data fields like I should be able to change any field if if class is underwriter and that sorry class is processor and a person logging in as processor I can change.
+
+[1:53:02] Kelly Mattox: Well, the based on what we're getting. So we're going to remove access to the responsibility because we don't want them changing or editing a responsibility. And then depending upon what I think today they can edit and they can move it to PTF, yes, so.Yes, they should be able to move it to PTF so they can move this stage of the loan, correct?
+
+[1:53:40] Josephine Yen: Their security profile matches the profile that is in that class. They can do whatever they want to it.
+
+[1:58:03] Kelly Mattox: And then you can change what is done with it afterwards, right? So there's other indicators that show that it can they can do something else like self disclosures in clear allow them to do, you know, change edit fees. We give them other.Other rules on top of what the base rule is. Does that make sense? But it's almost like if I create a new role that's tied to that base role, that base role is what should drive them into something. So everyone should be able to go in your condition portal who ha
+
+[2:00:02] Josephine Yen: This is, this is we're getting to the to the friction point where we got stuck last time. So we're we're I want to get this time. I want to power through it.
+
+[2:00:41] Josephine Yen: Yeah, that's what I want and yeah and and I I want to know like OK can that roll into, can that go into one role or can it does it need to be two or three and and what's the difference and when we can build that I just want to I I need it like in an Excel spreadsheet. I need it like the 8 roles you described.
+
+[2:01:01] Josephine Yen: I wanna know like what can the LO do or not do? What does the assistant do or not do? Or is an assistant identical to an LO and we can roll them up together even better? But I just need to know. I need us to ultimately know the difference like you mentioned APA processor.
+
+[2:02:33] Josephine Yen: Bytes fields or roles, for example, like I I want to have as few as possible. I only want to. I only want to add 1 when there's a difference in functionality.
+
+[2:05:00] Josephine Yen: Awesome. OK, that helps. Any questions guys on the roles. So I I think we need to. I think we're gonna. So let's let's let's go back to the list. OK, we we can have Kelly explain. Was that on the list? Well, kind of.
+
+[2:05:33] Josephine Yen: Yeah, so, yeah, so don't break Domo reports. So what that means is even though we have the richer data set, we still need to save the data to Byte so that these Domo reports can still be generated so that it looks like nothing's really changed, OK.
+
+[2:05:54] Kelly Mattox: Yeah, I mean, I feel like if if you're putting something somewhere, the idea is, is that I guess at some point in time there'll be an audit, there'll be something that comes back, somebody will ask a question and we just need to be able to see that data that was entered in on the condition screen if it's not the same as.
+
+[2:07:14] Josephine Yen: OK, so I think a minimum we need to do what Byte does, but if we can do more than we we can do more. OK, that's an easy one.
+
+[2:07:44] Kelly Mattox: OK, yeah, then, yeah, you need to definitely capture that.
+
+[2:07:44] Josephine Yen: So, so and and we're gonna have more metadata like flags and notes that may not exist though. So well I think the the the take away is we need to we need to log minimum what's there today but we we need to support our new model for.
+
+[2:08:02] Josephine Yen: Many to many concepts, but OK, that sounds the question that's in my head is is the full data set of condition in one system outside of byte and you sync whatever data you want to byte or is the full data set of condition.Is whatever. There's a set that exists outside of byte and then the rest of it is in byte and together A + B is a full set. So that's the latter is how you're doing it elsewhere, right? The condition itself will live in.Byte, but metadata will exist in clear, so probably want t
+
+[2:09:30] Josephine Yen: Uh, we run into that same issue with the modified daytime done with the API LB server will.That invite, it's user level. I think these are dates or they have this timeline too. They have modified. They have modified. They don't have. I don't. They don't have modified, but they have the status. But there's no history. So like there's five statuses. The latest one is what you get.Yeah, so if I if you modify them, like you, I get invited.But if you do it with the UI, it's server time, then you'll k
+
+[2:10:35] Josephine Yen: Do the joint I I don't. In other words I don't think no, but the full data set is what we need for the to render the UI. That's what I say. We have to merge the two of the data. I don't know that we need to render you. I think Domo is I I don't know that we need an audit tool in clear docs. I think we can do that through Domo.No, what what I'm saying is that when we get the payload to render the data in our conditions portal UI, our API is going to take data from some database. Yes. And then fro
+
+[2:11:39] Kelly Mattox: Well, it's going to need to be if that's what you want. If you want them to get the same or have the same capability, if if an underwriter is adding a condition for a closer to sign off and they're using the additional fields that you're giving them, they're going to need to use that.
+
+[2:12:14] Josephine Yen: Request from borrower or whatever. It is all of the stuff that exists today. Is there anything else that that I didn't describe like a new piece of functionality that one of those roles would need to do that that we haven't accounted for? That's the question.
+
+[2:12:28] Kelly Mattox: They would need to move a condition and clear it. I don't know if you hear said that.
+
+[2:12:52] Josephine Yen: Those are. That's existing functionality. Yes, right. Is there anything else? Like do they extract the data? Do they do they do they do anything funky with the?
+
+[2:14:38] Josephine Yen: And and again this will be a this will be kind of a Lauren ask like like we need to ask that like hey we want to yeah we wanna 'cause my argument is if we're already building the core functionality and to me it this just sounds like.
+
+[2:14:54] Josephine Yen: Permissions and roles creating a couple more profiles. Yeah, or I don't know if I'm using the right nomenclature, but like if we're not adding any new features then I I I think it's fine to have extra roles if if it means having a.Full uh downstream all on our same all on our tool. So then that means three and four is checks. It's checked off, right? So.
+
+[2:16:31] Josephine Yen: Different from what you said, which is, could I have this group like a lab of downstream? Yes, that's a different thing. Yes. I think we need that flexibility cuz I certainly don't want to bring down CMG production. Yes, total processors. So I think what we would say is we'd go to operations and we'd say give me.So a group of ellos, processors, underwriters, post closers, all the way down that are in the whole value chain in this group. Yeah. They will all be on conditions port only. Yeah. And w
+
+[2:18:56] Josephine Yen: I'm wrong.Could we, I'm making this up. We flag a loan like pretend that we have that group of people. But I I understand that in that group there might be people that do everything. So there's this, there's certain people that might need to be in the old and the new way. Could we, let's say we could flag the loan, every loan opened by this.
+
+[2:19:57] Josephine Yen: So yeah.No, yeah, we'll need. We're just, we're just no reaction.Yeah.Because I I want to, I don't want to stop people from doing their jobs and I don't want to go to Candy and say give me force somebody to only do a like a portion of their job. So how do we, how do we get our tool out there in a in a isolated environment and how do we make it as easy as possible? So Rusty, the question was.
+
+
+DECISIONS MADE (2 items):
+--------------------------------------------------------------------------------
+[46:22] Josephine Yen: But essentially Byte has something that's out-of-the-box that says when the condition is defined, it's defined when you set it up as a template, editable or not editable. The third option is custom question. CMG doesn't use custom question, but they will be using custom question, but editable just means.Across the board, no one can edit a description. Across the board, everyone can edit a description and then permissions is another layer on top with every field that says who can do what when, OK
+
+[2:15:46] Josephine Yen: So it's not going to change talking about.Yes. And the data will be there. No, I think are we saying, yes, that's what I'm saying. Oh, you're saying like I'm saying the data's there. It's the same data. Everybody. Yeah, the same data's there. Limited. Hey, here's a beta group. No, because expand that group and then so on because the beta group, the problem with the beta group is.I'm a new condition portal loan, but then I'm working on a condition and then the guy downstream is not in my beta gro
+
+
+OPEN QUESTIONS/ISSUES (34 items):
+--------------------------------------------------------------------------------
+[0:03] s
+Leslie Chang started transcription
+Leslie Chang: So um identify bar docs to request update descriptions, AI bar request e-mail request non bar related docs. OK we're striking this, yeah.OK, so now I'm the processor. The loan has been approved by the underwriter and now I need to request my documents that have a bar dependency. So these are the BRW.Conditions. So let's see. I have a couple that say need bar request and you can see the status here need bar request and then so this button here send bar request. If you click on this, it's also I g
+
+[8:45] Leslie Chang: Sorry, say that again for the create new version. Is there a way to save it? I think was the question. Well, if they want to save it as a template, they they could save it as a template for sure. We have the manage templates button that allows you to do that.
+
+[9:25] Leslie Chang: So it helps me to do it. Can I recommend from product? Can we assuming tokens are not a concern? Can we potentially allow changing the tone and the other features and doing just a regeneration? Yeah, that way there's.It's easier. I think that's more intuitive, like change the tone to like from casual to formal and then and then when you hit save, it'll regen the message. Would that be an appropriate thing? Yeah, we we did it this way because we're really trying to put a cap like, hey, you can do
+
+[16:08] Shailendra Sharma: No, I I don't think it will be possible with. Yeah, I I don't think it will be possible with Outlook unless we have a central depository to pull it from. I have not explored that, so I don't know. But I was thinking, you know, let's say they have how many can they have like 3 or 4?If they were to, you know, copy paste from Outlook into template, you know our intro template kind of user interface, then they can pick it right here.
+
+[18:29] Leslie Chang: Yeah, that was basically like what Outlook has to say. Yeah, more or less, yeah.OK, so we went over doc doc request history, loan history, and then there's also going to be a tab for clear docs.OK, let's go back to Tim's. So this tab's gonna be a problem if they're doing it by which which tab? What's up? They have to go to like. Oh, we just got to open it at the No, we're gonna keep it all in the same browser. It's a tab within the window tab. What's that? Didn't want it side by side.They can st
+
+[26:58] Leslie Chang: I I think, I I think we did talk about doing tags. We're just concerned about stoke. But I imagine with there isn't a slot with the scope. The engineer's talking.Flags today and clear. People want to add flags that are gonna be universal for everybody. We have to put a kibosh on just saying I want this flag up or this tag, this tag, this tag because it can get out of control. So I think we have this. Let's go with what we have and have Lauren type it if she wants to change it. Is that?A fair, fa
+
+[27:35] Shailendra Sharma: Hey, one more question on the.Hey, another question on the doc request.Yeah, hey, on the doc request, is it the open doc request or the ones that we already received?
+
+[28:16] Leslie Chang: And search really quick. I don't think I went over this, but you can basically um search by your ID number or like a a keyword.Or you could use the the filter that I just showed.It's searched by ID and I think I have seven fields listed for searching somewhere. I think we went over everything in the header. Need to request requested active.This are we using the this?Yeah. Are we using export? What? What does it do? It exports the conditions. I don't see an issue with that. This is you can browse
+
+[41:01] Leslie Chang: Hey, you're you're a little bit quiet for us. Sorry because you're on this laptop. Was there anything else, any questions before we moved on? We're going to move away from the demo and we're we're Josephine's going to talk about the data model and like just implications around roles, permissions and that kind of thing. Did you have any?
+
+[41:42] Leslie Chang: So I I think that one of the takeaways will be we'll we'll we'll take all of our notes and then whatever other feedback and we'll sort of let's Polish the design and and and then that'll be what we provide along with all of our.Good requirements. We talk about more. Yep. Um.Yeah.Yes, we had a couple of parking lots. The architecture. Oh, Leslie, can you go through to Kelly? Oh, yes, yes, yes, yes.The cardinal roles, yeah, I wanted to do that with Kelly. But should we have these groups understand
+
+[44:00] Josephine Yen: Carlos. Oh, you're back. Carlos. Sorry. All right.Shoot. OK, I was making a change, so hopefully I didn't break anything. OK, OK, OK, so I have um.I have three samples, I have a get condition list and I also have the schema for that. I don't need to get conditions and I'll tell you why, but I told Claude to rename it but.He didn't, he just added the next one. But I have something else called get loan conditions. So the get loan conditions is that landing screen that you've been seeing when Tim a
+
+[46:22] Josephine Yen: But essentially Byte has something that's out-of-the-box that says when the condition is defined, it's defined when you set it up as a template, editable or not editable. The third option is custom question. CMG doesn't use custom question, but they will be using custom question, but editable just means.Across the board, no one can edit a description. Across the board, everyone can edit a description and then permissions is another layer on top with every field that says who can do what when, OK
+
+[1:30:12] Josephine Yen: Yes, I don't know. I mean, at the end of the day, what do you other than you can create, you can create a condition, you can edit, you can link it, you can change status. That's it. Like that's not like a lot of stuff like and it's not, it's not very dangerous, especially if we audit, if we if we log it, we know what's happening and.And you know, we can if worst case, we can take these underwriter and processor roles and obfuscate them up into groups. Yes, that this uses and then so OK, you have
+
+[1:41:08] Josephine Yen: Who's who's? Who's screen is on? Is that you, Josephine? Yeah. Oh, yes. But we need the Leslie's screen. The card. Oh, yeah. Yeah. Yes. It's hard to hear on yours, Leslie. Yeah, it is. You can hear OK on mine. I don't know.Turn on her. Turn on. Turn on your video. We'll have. We'll have my my video. You'll free to mess around. Not your video. Your be seated. My audio is turned on. Can you hear me? Hold on. Let me turn off the audio here. Hold on, hold on. It was hard to hear Shailendra on your. 
+
+[1:41:55] Josephine Yen: Why can't I hear her? We can't hear shy either. Here, let me join to see if I can. Uh.Oh, hold on a second.Special as I don't know what that is. Oh, hold on.
+
+[1:44:07] Josephine Yen: I don't know if we have that document somewhere, but we could start there. But but is that in USBC or in box service? There's one in the office there, but it might be plugged into it. I have a screen, I have something. What do you do? So just a minute Kelly, we'll we'll share the screen and then we'll we'll have you talk.
+
+[1:48:21] Josephine Yen: So it does. So let me ask like a fundamental question. My my correct me where I'm wrong here. I I want I would like or in clear so that we're building this in clear.
+
+[1:55:23] Josephine Yen: What? I don't know if you do what they can do or what they can't do, but like, give me the give me the role of what they're allowed to do. And then I I think that.That we we we just built that into clear. I think that would be the easiest route and then we what we want the mapping when you log in depending on your the one of of 400 roles will wire those up to to roll up into one of these seven roles.
+
+[1:59:46] Kelly Mattox: Um.Let me see if it's all tied to one. Let me see if I can find that indicator to answer that question for you.I'm looking. Oh, we got the little list up here. Oh, that's good.I'm waiting for that to come up, so.
+
+[2:05:00] Josephine Yen: Awesome. OK, that helps. Any questions guys on the roles. So I I think we need to. I think we're gonna. So let's let's let's go back to the list. OK, we we can have Kelly explain. Was that on the list? Well, kind of.
+
+[2:05:54] Kelly Mattox: Yeah, I mean, I feel like if if you're putting something somewhere, the idea is, is that I guess at some point in time there'll be an audit, there'll be something that comes back, somebody will ask a question and we just need to be able to see that data that was entered in on the condition screen if it's not the same as.
+
+[2:06:14] Josephine Yen: Question. We had a we were wondering, we were talking about an audit concept. So imagine that you have you have a condition and and things can happen to a condition. It can be created, it can have notes added, it can have status changed, it can have.
+
+[2:08:02] Josephine Yen: Many to many concepts, but OK, that sounds the question that's in my head is is the full data set of condition in one system outside of byte and you sync whatever data you want to byte or is the full data set of condition.Is whatever. There's a set that exists outside of byte and then the rest of it is in byte and together A + B is a full set. So that's the latter is how you're doing it elsewhere, right? The condition itself will live in.Byte, but metadata will exist in clear, so probably want t
+
+[2:10:35] Josephine Yen: Do the joint I I don't. In other words I don't think no, but the full data set is what we need for the to render the UI. That's what I say. We have to merge the two of the data. I don't know that we need to render you. I think Domo is I I don't know that we need an audit tool in clear docs. I think we can do that through Domo.No, what what I'm saying is that when we get the payload to render the data in our conditions portal UI, our API is going to take data from some database. Yes. And then fro
+
+[2:11:41] Josephine Yen: Provided.So question.
+
+[2:12:14] Josephine Yen: Request from borrower or whatever. It is all of the stuff that exists today. Is there anything else that that I didn't describe like a new piece of functionality that one of those roles would need to do that that we haven't accounted for? That's the question.
+
+[2:12:28] Kelly Mattox: They would need to move a condition and clear it. I don't know if you hear said that.
+
+[2:13:05] Josephine Yen: What? What? What actions do they do that our current conditions portal doesn't support is my question. I'm gonna make up something. Do they generate a letter that has all these different conditions and they send it back to the investor? I'm making up stuff. I mean, are we missing anything?
+
+[2:14:54] Josephine Yen: Permissions and roles creating a couple more profiles. Yeah, or I don't know if I'm using the right nomenclature, but like if we're not adding any new features then I I I think it's fine to have extra roles if if it means having a.Full uh downstream all on our same all on our tool. So then that means three and four is checks. It's checked off, right? So.
+
+[2:15:14] Kelly Mattox: So I have a.So I have a question. Yeah, the existing pipeline would be the one of the other questions that we have because someone's going to have to sometimes go into the new one, sometimes use the old one, right? But.
+
+[2:15:46] Josephine Yen: So it's not going to change talking about.Yes. And the data will be there. No, I think are we saying, yes, that's what I'm saying. Oh, you're saying like I'm saying the data's there. It's the same data. Everybody. Yeah, the same data's there. Limited. Hey, here's a beta group. No, because expand that group and then so on because the beta group, the problem with the beta group is.I'm a new condition portal loan, but then I'm working on a condition and then the guy downstream is not in my beta gro
+
+[2:17:07] Josephine Yen: I think, yeah, it needs to be in production, but I think in in a lab, yeah, right. But I think what we're agreeing to is that if we're gonna turn it on, it, it's on all the way downstream for all of those seven roles or whatever. The whole chain, yeah, arrow.You can't be in and out. Can I ask a dumb question and maybe you're answering it, but the existing pipeline that did not use conditions portal that has conditions out there in the current by. It's a good question. What happens? Is it all tec
+
+[2:19:51] Kelly Mattox: Maybe.I would feel way more comfortable if we talked to some people like in on the back end piece cause I don't know all of the things that they're doing. Yeah, the Colleen and I know, I know you're you're you're like just trying to generically.
+
+[2:19:57] Josephine Yen: So yeah.No, yeah, we'll need. We're just, we're just no reaction.Yeah.Because I I want to, I don't want to stop people from doing their jobs and I don't want to go to Candy and say give me force somebody to only do a like a portion of their job. So how do we, how do we get our tool out there in a in a isolated environment and how do we make it as easy as possible? So Rusty, the question was.
+
+
+API/INTEGRATION MENTIONS (2 items):
+--------------------------------------------------------------------------------
+[46:22] Josephine Yen: But essentially Byte has something that's out-of-the-box that says when the condition is defined, it's defined when you set it up as a template, editable or not editable. The third option is custom question. CMG doesn't use custom question, but they will be using custom question, but editable just means.Across the board, no one can edit a description. Across the board, everyone can edit a description and then permissions is another layer on top with every field that says who can do what when, OK
+
+[1:44:07] Josephine Yen: I don't know if we have that document somewhere, but we could start there. But but is that in USBC or in box service? There's one in the office there, but it might be plugged into it. I have a screen, I have something. What do you do? So just a minute Kelly, we'll we'll share the screen and then we'll we'll have you talk.
+
+
+WORKFLOW DESCRIPTIONS (74 items):
+--------------------------------------------------------------------------------
+[0:03] s
+Leslie Chang started transcription
+Leslie Chang: So um identify bar docs to request update descriptions, AI bar request e-mail request non bar related docs. OK we're striking this, yeah.OK, so now I'm the processor. The loan has been approved by the underwriter and now I need to request my documents that have a bar dependency. So these are the BRW.Conditions. So let's see. I have a couple that say need bar request and you can see the status here need bar request and then so this button here send bar request. If you click on this, it's also I g
+
+[9:25] Leslie Chang: So it helps me to do it. Can I recommend from product? Can we assuming tokens are not a concern? Can we potentially allow changing the tone and the other features and doing just a regeneration? Yeah, that way there's.It's easier. I think that's more intuitive, like change the tone to like from casual to formal and then and then when you hit save, it'll regen the message. Would that be an appropriate thing? Yeah, we we did it this way because we're really trying to put a cap like, hey, you can do
+
+[13:37] Leslie Chang: Oh, we need. That's not. Yeah, we need to add that to this send e-mail and then that's good to call out. Shy to remind the borrower to get auto notification. Oh, we need this stuff from you. OK, so if you wait three days, you get another days depending on what you want to set it to and how many.
+
+[14:14] Leslie Chang: So we have conditions portal, we have the needs list where they're doing the work and then we have tasks. So right now that Cathy's Yep, Yep. So are we gonna, are we gonna inherit from one of those or are we gonna? I'd like to not have its own set of brains. Yeah, that's the idea is that.There's one e-mail screen for all three of those experiences with auto reminders controlling any either task or doc requests. It's all like one e-mail and is is the docs already though it is. It's in clear docs 
+
+[15:49] Leslie Chang: Some loan officers in multiple templates in Outlook. It's easy, but they don't like to have to do that extra step.
+
+[16:08] Shailendra Sharma: No, I I don't think it will be possible with. Yeah, I I don't think it will be possible with Outlook unless we have a central depository to pull it from. I have not explored that, so I don't know. But I was thinking, you know, let's say they have how many can they have like 3 or 4?If they were to, you know, copy paste from Outlook into template, you know our intro template kind of user interface, then they can pick it right here.
+
+[16:38] Shailendra Sharma: Like.Yeah, yeah, fixed. Yeah.Yeah, yeah, yeah.Yeah, that way, even if the Outlook does not work, you know all they have to do is one time they have to copy paste from Outlook into here and then it is here forever.And they can modify it here also. Nothing is stopping them from saying, hey, you know, I copied it two days ago from Outlook and I want to change something. Go ahead and change it.
+
+[17:05] Leslie Chang: Sure.But these it's gonna get overwritten if you've you've had it set up in marketing if it's added. So don't have to know. Well, I think that'd be an import often. Like let them do it. Let them choose to do it. Yeah, my my recommendation would be have an import, have a have an app, have a a.A user click import option from Marketing Hub or Outlook, whatever we have to check for and then that'll bring it in and then internally you can you can have multiple versions of a of a signature and and you
+
+[17:47] Leslie Chang: Signature for this particular instance you can you can change it from the you choose it from the drop down. So there's just an import button that can run at any time or you can just do it. Yeah, whatever like yeah yeah or just an edit tool. I think I think the import's overkill for this one.So page one, we just allow them to copy and paste, give an HTML editor, let them three. OK, so let me make this 5 signatures and let them choose a default or one of the options in the e-mail is let them choos
+
+[18:29] Leslie Chang: Yeah, that was basically like what Outlook has to say. Yeah, more or less, yeah.OK, so we went over doc doc request history, loan history, and then there's also going to be a tab for clear docs.OK, let's go back to Tim's. So this tab's gonna be a problem if they're doing it by which which tab? What's up? They have to go to like. Oh, we just got to open it at the No, we're gonna keep it all in the same browser. It's a tab within the window tab. What's that? Didn't want it side by side.They can st
+
+[26:04] Leslie Chang: Yeah, so there's a filter for all of the conditions. You can do it by category. Like if I would just want to do my app or my credit and then bar internal, external, you can sort by flags. This is my prototype. I didn't.I don't think I realized we had color, so I just put flagged, unflagged and then you can do by status doc requests with or without. You can also sort ascending, descending by various categories.
+
+[26:19] Shailendra Sharma: Yeah.OK, so Josephine, if we go with tags, then that would have to be multiple tags there.
+
+[26:40] Leslie Chang: The only reason I sent tags is because people always want to get home. They don't want to. Well, I agree you. You're compelling arguments is if it's persist, then why does it need to be constrained? Because who cares what they write? Yes, but if it's public, then then then we need some sort of organization.
+
+[27:57] Shailendra Sharma: OK. And once you receive it, then it basically goes away from here, correct?
+
+[28:01] Leslie Chang: Then the document press gets status to complete and it disappears. Yeah, well, then you have to go through the then you have to go through the document workflow, the acceptance process, which is new documents workflow, right?
+
+[28:16] Leslie Chang: And search really quick. I don't think I went over this, but you can basically um search by your ID number or like a a keyword.Or you could use the the filter that I just showed.It's searched by ID and I think I have seven fields listed for searching somewhere. I think we went over everything in the header. Need to request requested active.This are we using the this?Yeah. Are we using export? What? What does it do? It exports the conditions. I don't see an issue with that. This is you can browse
+
+[41:42] Leslie Chang: So I I think that one of the takeaways will be we'll we'll we'll take all of our notes and then whatever other feedback and we'll sort of let's Polish the design and and and then that'll be what we provide along with all of our.Good requirements. We talk about more. Yep. Um.Yeah.Yes, we had a couple of parking lots. The architecture. Oh, Leslie, can you go through to Kelly? Oh, yes, yes, yes, yes.The cardinal roles, yeah, I wanted to do that with Kelly. But should we have these groups understand
+
+[44:00] Josephine Yen: Carlos. Oh, you're back. Carlos. Sorry. All right.Shoot. OK, I was making a change, so hopefully I didn't break anything. OK, OK, OK, so I have um.I have three samples, I have a get condition list and I also have the schema for that. I don't need to get conditions and I'll tell you why, but I told Claude to rename it but.He didn't, he just added the next one. But I have something else called get loan conditions. So the get loan conditions is that landing screen that you've been seeing when Tim a
+
+[46:22] Josephine Yen: But essentially Byte has something that's out-of-the-box that says when the condition is defined, it's defined when you set it up as a template, editable or not editable. The third option is custom question. CMG doesn't use custom question, but they will be using custom question, but editable just means.Across the board, no one can edit a description. Across the board, everyone can edit a description and then permissions is another layer on top with every field that says who can do what when, OK
+
+[1:30:12] Josephine Yen: Yes, I don't know. I mean, at the end of the day, what do you other than you can create, you can create a condition, you can edit, you can link it, you can change status. That's it. Like that's not like a lot of stuff like and it's not, it's not very dangerous, especially if we audit, if we if we log it, we know what's happening and.And you know, we can if worst case, we can take these underwriter and processor roles and obfuscate them up into groups. Yes, that this uses and then so OK, you have
+
+[1:44:07] Josephine Yen: I don't know if we have that document somewhere, but we could start there. But but is that in USBC or in box service? There's one in the office there, but it might be plugged into it. I have a screen, I have something. What do you do? So just a minute Kelly, we'll we'll share the screen and then we'll we'll have you talk.
+
+[1:45:35] Josephine Yen: So I think uh Leslie. OK, so Leslie's gonna power up and then she's gonna share the the the slide and then and then like Kelly, we can start now like like like as we wait for the slide so so.
+
+[1:46:17] Kelly Mattox: All right. Don't break down my reports. I like that. OK. I think the biggest thing that I was talking through were a couple of things. Number one is we start to build a conditions portal and I heard you guys talking, I think a little bit about it when.
+
+[1:46:39] Kelly Mattox: Yeah, we did lose the screen share. I think the biggest, one of the biggest things that we have to remember is access levels for it. And I think you guys were talking briefly about that. When we talk about giving people access to these, we say, hey, underwriters and and processors are the most important, the first thing.Just keep in mind that we have multiple names or multiple roles in byte that a processor uses, right? So we have a loan processor, we have a processor two, we have a processor 3.
+
+[1:48:52] Josephine Yen: There we go. So can you hear me? OK, OK, cool. So you have the you have the loan officer, you have a processor, you have an underwriter and then you have like everybody else call that like post underwriting.
+
+[1:49:09] Josephine Yen: Conditions portal. Right now we have two roles. We have the processor who will who who doesn't really create conditions. They they sort of, they sort of assign, they upload docs, they assign docs, they reach out to the borrower.
+
+[1:49:25] Josephine Yen: They set statuses, blah blah blah. The underwriter kind of does the inverse. They create the conditions, they sign off on the conditions, but they're not like linking docs to conditions. Would you would you argue that regardless of how many types of processor or underwriter that they could all be?
+
+[1:49:52] Kelly Mattox: Um, yes, for the.No, except for we talked about that yesterday in the exception. If we're not requiring them to use the exception checkboxes, then that's the only thing on an underwriter role that would need to be different based off of.The underwriter role pushing out, right? A processor. There would be a difference because a processor is allowed to sign off on some conditions because they do have processor 3 conditions, but the other two processor roles will not be allowed to sign sign off on 
+
+[1:50:32] Josephine Yen: So, so you have processors that when you say sign off, they can, they can effectively close a condition or satisfy a condition. OK.
+
+[1:50:44] Josephine Yen: And then everybody post underwriting we like Mitch and and folks. So we're we have this conundrum like assuming that we build the conditions portal if the condition portal breaks bite or.
+

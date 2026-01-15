@@ -1,0 +1,174 @@
+====================================================================================================
+DETAILED ANALYSIS: DAY 1 PART 1
+====================================================================================================
+
+
+====================================================================================================
+FEATURES (1 items)
+====================================================================================================
+
+[1:29:35] Leslie Chang:
+All of the notes requirements, but there's a concept of, again, notes at a condition level and one at the loan level. So then if I add a note here, going to save it.How do you exit? Oh, OK.OK. And then how do you access the notes portal from? Oh, it's the bell icon. Oh, the bell icon. OK, notice for this we didn't have a save button. So we'll talk about that. Is the red symbol painting like a bolts thing or is that just the that was a bolt thing? OK, yeah, yeah, it should. When you close that condition, it should update.real time on the team because our engineers are stillNot for long. OK, so if you click on this bell icon, this is essentially the conditions portal notes. So you would have all of the conditions associated with this loan here. So these would be.Specific to the condition and...
+
+----------------------------------------------------------------------------------------------------
+
+
+====================================================================================================
+API TECHNICAL (1 items)
+====================================================================================================
+
+[1:29:35] Leslie Chang:
+All of the notes requirements, but there's a concept of, again, notes at a condition level and one at the loan level. So then if I add a note here, going to save it.How do you exit? Oh, OK.OK. And then how do you access the notes portal from? Oh, it's the bell icon. Oh, the bell icon. OK, notice for this we didn't have a save button. So we'll talk about that. Is the red symbol painting like a bolts thing or is that just the that was a bolt thing? OK, yeah, yeah, it should. When you close that condition, it should update.real time on the team because our engineers are stillNot for long. OK, so if you click on this bell icon, this is essentially the conditions portal notes. So you would have all of the conditions associated with this loan here. So these would be.Specific to the condition and...
+
+----------------------------------------------------------------------------------------------------
+
+
+====================================================================================================
+ROLES PERMISSIONS (2 items)
+====================================================================================================
+
+[1:15:44] Leslie Chang:
+Final stamp and and so even if you sent the loan, let's say you've partially underwrote the loan and you you had like 8 docs that were good. You'd final stamp those. They're locked, but the other three go back to the processor. That way the processor can go fix that, but they can't actually change what was there that way the underwriter has.Peace of Mind, and they don't feel like they have to re underwrite the entire file because if it's screen checked only underwriters can uncheck it. So anyway, I don't know. We we don't do that here, but but that's that would be like a phase two thought is like how now that we have all this cool tech, how can we?Reduce. So when I when an underwriter is on on on view two and three and four, how do we only allow them only tell them they only have to look a...
+
+----------------------------------------------------------------------------------------------------
+
+[1:29:35] Leslie Chang:
+All of the notes requirements, but there's a concept of, again, notes at a condition level and one at the loan level. So then if I add a note here, going to save it.How do you exit? Oh, OK.OK. And then how do you access the notes portal from? Oh, it's the bell icon. Oh, the bell icon. OK, notice for this we didn't have a save button. So we'll talk about that. Is the red symbol painting like a bolts thing or is that just the that was a bolt thing? OK, yeah, yeah, it should. When you close that condition, it should update.real time on the team because our engineers are stillNot for long. OK, so if you click on this bell icon, this is essentially the conditions portal notes. So you would have all of the conditions associated with this loan here. So these would be.Specific to the condition and...
+
+----------------------------------------------------------------------------------------------------
+
+
+====================================================================================================
+DATA MODEL (1 items)
+====================================================================================================
+
+[1:29:35] Leslie Chang:
+All of the notes requirements, but there's a concept of, again, notes at a condition level and one at the loan level. So then if I add a note here, going to save it.How do you exit? Oh, OK.OK. And then how do you access the notes portal from? Oh, it's the bell icon. Oh, the bell icon. OK, notice for this we didn't have a save button. So we'll talk about that. Is the red symbol painting like a bolts thing or is that just the that was a bolt thing? OK, yeah, yeah, it should. When you close that condition, it should update.real time on the team because our engineers are stillNot for long. OK, so if you click on this bell icon, this is essentially the conditions portal notes. So you would have all of the conditions associated with this loan here. So these would be.Specific to the condition and...
+
+----------------------------------------------------------------------------------------------------
+
+
+====================================================================================================
+EMAIL FUNCTIONALITY (1 items)
+====================================================================================================
+
+[1:29:35] Leslie Chang:
+All of the notes requirements, but there's a concept of, again, notes at a condition level and one at the loan level. So then if I add a note here, going to save it.How do you exit? Oh, OK.OK. And then how do you access the notes portal from? Oh, it's the bell icon. Oh, the bell icon. OK, notice for this we didn't have a save button. So we'll talk about that. Is the red symbol painting like a bolts thing or is that just the that was a bolt thing? OK, yeah, yeah, it should. When you close that condition, it should update.real time on the team because our engineers are stillNot for long. OK, so if you click on this bell icon, this is essentially the conditions portal notes. So you would have all of the conditions associated with this loan here. So these would be.Specific to the condition and...
+
+----------------------------------------------------------------------------------------------------
+
+
+====================================================================================================
+DOCUMENT WORKFLOW (2 items)
+====================================================================================================
+
+[1:15:44] Leslie Chang:
+Final stamp and and so even if you sent the loan, let's say you've partially underwrote the loan and you you had like 8 docs that were good. You'd final stamp those. They're locked, but the other three go back to the processor. That way the processor can go fix that, but they can't actually change what was there that way the underwriter has.Peace of Mind, and they don't feel like they have to re underwrite the entire file because if it's screen checked only underwriters can uncheck it. So anyway, I don't know. We we don't do that here, but but that's that would be like a phase two thought is like how now that we have all this cool tech, how can we?Reduce. So when I when an underwriter is on on on view two and three and four, how do we only allow them only tell them they only have to look a...
+
+----------------------------------------------------------------------------------------------------
+
+[1:29:35] Leslie Chang:
+All of the notes requirements, but there's a concept of, again, notes at a condition level and one at the loan level. So then if I add a note here, going to save it.How do you exit? Oh, OK.OK. And then how do you access the notes portal from? Oh, it's the bell icon. Oh, the bell icon. OK, notice for this we didn't have a save button. So we'll talk about that. Is the red symbol painting like a bolts thing or is that just the that was a bolt thing? OK, yeah, yeah, it should. When you close that condition, it should update.real time on the team because our engineers are stillNot for long. OK, so if you click on this bell icon, this is essentially the conditions portal notes. So you would have all of the conditions associated with this loan here. So these would be.Specific to the condition and...
+
+----------------------------------------------------------------------------------------------------
+
+
+====================================================================================================
+BYTE INTEGRATION (3 items)
+====================================================================================================
+
+[1:15:44] Leslie Chang:
+Final stamp and and so even if you sent the loan, let's say you've partially underwrote the loan and you you had like 8 docs that were good. You'd final stamp those. They're locked, but the other three go back to the processor. That way the processor can go fix that, but they can't actually change what was there that way the underwriter has.Peace of Mind, and they don't feel like they have to re underwrite the entire file because if it's screen checked only underwriters can uncheck it. So anyway, I don't know. We we don't do that here, but but that's that would be like a phase two thought is like how now that we have all this cool tech, how can we?Reduce. So when I when an underwriter is on on on view two and three and four, how do we only allow them only tell them they only have to look a...
+
+----------------------------------------------------------------------------------------------------
+
+[1:17:26] Leslie Chang:
+Yeah, the unintentional changes, Carlos, are real and they happen. We just need to. We need Keith to build a bite time machine like go back in 10 minutes. Anyway, keep going, Leslie. All right. Is this a quick pause? Is this helpful? Is this a good?Are you guys, are we going at the right depth or I'm trying to keep it like high, high level so you can understand it but also deep dive in where we need. But I I I don't want to necessarily go into a tunnel on anything until we get through the high level.You guys, you guys want to take like a quick break or key point?Let me grab some more. Five minute break. OK. Sorry, Leslie. No, no, no, you're fine. We're going to take a quick break.Mhm.Restroom. Is it? Is it this side or the other side? Go all the way down the hall on this side and then make...
+
+----------------------------------------------------------------------------------------------------
+
+[1:29:35] Leslie Chang:
+All of the notes requirements, but there's a concept of, again, notes at a condition level and one at the loan level. So then if I add a note here, going to save it.How do you exit? Oh, OK.OK. And then how do you access the notes portal from? Oh, it's the bell icon. Oh, the bell icon. OK, notice for this we didn't have a save button. So we'll talk about that. Is the red symbol painting like a bolts thing or is that just the that was a bolt thing? OK, yeah, yeah, it should. When you close that condition, it should update.real time on the team because our engineers are stillNot for long. OK, so if you click on this bell icon, this is essentially the conditions portal notes. So you would have all of the conditions associated with this loan here. So these would be.Specific to the condition and...
+
+----------------------------------------------------------------------------------------------------
+
+
+====================================================================================================
+CANDOR INTEGRATION (3 items)
+====================================================================================================
+
+[1:15:44] Leslie Chang:
+Final stamp and and so even if you sent the loan, let's say you've partially underwrote the loan and you you had like 8 docs that were good. You'd final stamp those. They're locked, but the other three go back to the processor. That way the processor can go fix that, but they can't actually change what was there that way the underwriter has.Peace of Mind, and they don't feel like they have to re underwrite the entire file because if it's screen checked only underwriters can uncheck it. So anyway, I don't know. We we don't do that here, but but that's that would be like a phase two thought is like how now that we have all this cool tech, how can we?Reduce. So when I when an underwriter is on on on view two and three and four, how do we only allow them only tell them they only have to look a...
+
+----------------------------------------------------------------------------------------------------
+
+[1:17:26] Leslie Chang:
+Yeah, the unintentional changes, Carlos, are real and they happen. We just need to. We need Keith to build a bite time machine like go back in 10 minutes. Anyway, keep going, Leslie. All right. Is this a quick pause? Is this helpful? Is this a good?Are you guys, are we going at the right depth or I'm trying to keep it like high, high level so you can understand it but also deep dive in where we need. But I I I don't want to necessarily go into a tunnel on anything until we get through the high level.You guys, you guys want to take like a quick break or key point?Let me grab some more. Five minute break. OK. Sorry, Leslie. No, no, no, you're fine. We're going to take a quick break.Mhm.Restroom. Is it? Is it this side or the other side? Go all the way down the hall on this side and then make...
+
+----------------------------------------------------------------------------------------------------
+
+[1:29:35] Leslie Chang:
+All of the notes requirements, but there's a concept of, again, notes at a condition level and one at the loan level. So then if I add a note here, going to save it.How do you exit? Oh, OK.OK. And then how do you access the notes portal from? Oh, it's the bell icon. Oh, the bell icon. OK, notice for this we didn't have a save button. So we'll talk about that. Is the red symbol painting like a bolts thing or is that just the that was a bolt thing? OK, yeah, yeah, it should. When you close that condition, it should update.real time on the team because our engineers are stillNot for long. OK, so if you click on this bell icon, this is essentially the conditions portal notes. So you would have all of the conditions associated with this loan here. So these would be.Specific to the condition and...
+
+----------------------------------------------------------------------------------------------------
+
+
+====================================================================================================
+OPEN QUESTIONS (3 items)
+====================================================================================================
+
+[1:15:44] Leslie Chang:
+Final stamp and and so even if you sent the loan, let's say you've partially underwrote the loan and you you had like 8 docs that were good. You'd final stamp those. They're locked, but the other three go back to the processor. That way the processor can go fix that, but they can't actually change what was there that way the underwriter has.Peace of Mind, and they don't feel like they have to re underwrite the entire file because if it's screen checked only underwriters can uncheck it. So anyway, I don't know. We we don't do that here, but but that's that would be like a phase two thought is like how now that we have all this cool tech, how can we?Reduce. So when I when an underwriter is on on on view two and three and four, how do we only allow them only tell them they only have to look a...
+
+----------------------------------------------------------------------------------------------------
+
+[1:29:35] Leslie Chang:
+All of the notes requirements, but there's a concept of, again, notes at a condition level and one at the loan level. So then if I add a note here, going to save it.How do you exit? Oh, OK.OK. And then how do you access the notes portal from? Oh, it's the bell icon. Oh, the bell icon. OK, notice for this we didn't have a save button. So we'll talk about that. Is the red symbol painting like a bolts thing or is that just the that was a bolt thing? OK, yeah, yeah, it should. When you close that condition, it should update.real time on the team because our engineers are stillNot for long. OK, so if you click on this bell icon, this is essentially the conditions portal notes. So you would have all of the conditions associated with this loan here. So these would be.Specific to the condition and...
+
+----------------------------------------------------------------------------------------------------
+
+[2:36:43] Carlos Sanchez:
+I don't. I am fading. I don't have any. No, I don't have any questions. It's a pretty good prototype and kind of getting the idea of what we're trying to do so.
+
+----------------------------------------------------------------------------------------------------
+
+
+====================================================================================================
+DECISIONS (1 items)
+====================================================================================================
+
+[1:29:35] Leslie Chang:
+All of the notes requirements, but there's a concept of, again, notes at a condition level and one at the loan level. So then if I add a note here, going to save it.How do you exit? Oh, OK.OK. And then how do you access the notes portal from? Oh, it's the bell icon. Oh, the bell icon. OK, notice for this we didn't have a save button. So we'll talk about that. Is the red symbol painting like a bolts thing or is that just the that was a bolt thing? OK, yeah, yeah, it should. When you close that condition, it should update.real time on the team because our engineers are stillNot for long. OK, so if you click on this bell icon, this is essentially the conditions portal notes. So you would have all of the conditions associated with this loan here. So these would be.Specific to the condition and...
+
+----------------------------------------------------------------------------------------------------
+
+
+====================================================================================================
+UI DESIGN (3 items)
+====================================================================================================
+
+[1:15:44] Leslie Chang:
+Final stamp and and so even if you sent the loan, let's say you've partially underwrote the loan and you you had like 8 docs that were good. You'd final stamp those. They're locked, but the other three go back to the processor. That way the processor can go fix that, but they can't actually change what was there that way the underwriter has.Peace of Mind, and they don't feel like they have to re underwrite the entire file because if it's screen checked only underwriters can uncheck it. So anyway, I don't know. We we don't do that here, but but that's that would be like a phase two thought is like how now that we have all this cool tech, how can we?Reduce. So when I when an underwriter is on on on view two and three and four, how do we only allow them only tell them they only have to look a...
+
+----------------------------------------------------------------------------------------------------
+
+[1:17:26] Leslie Chang:
+Yeah, the unintentional changes, Carlos, are real and they happen. We just need to. We need Keith to build a bite time machine like go back in 10 minutes. Anyway, keep going, Leslie. All right. Is this a quick pause? Is this helpful? Is this a good?Are you guys, are we going at the right depth or I'm trying to keep it like high, high level so you can understand it but also deep dive in where we need. But I I I don't want to necessarily go into a tunnel on anything until we get through the high level.You guys, you guys want to take like a quick break or key point?Let me grab some more. Five minute break. OK. Sorry, Leslie. No, no, no, you're fine. We're going to take a quick break.Mhm.Restroom. Is it? Is it this side or the other side? Go all the way down the hall on this side and then make...
+
+----------------------------------------------------------------------------------------------------
+
+[1:29:35] Leslie Chang:
+All of the notes requirements, but there's a concept of, again, notes at a condition level and one at the loan level. So then if I add a note here, going to save it.How do you exit? Oh, OK.OK. And then how do you access the notes portal from? Oh, it's the bell icon. Oh, the bell icon. OK, notice for this we didn't have a save button. So we'll talk about that. Is the red symbol painting like a bolts thing or is that just the that was a bolt thing? OK, yeah, yeah, it should. When you close that condition, it should update.real time on the team because our engineers are stillNot for long. OK, so if you click on this bell icon, this is essentially the conditions portal notes. So you would have all of the conditions associated with this loan here. So these would be.Specific to the condition and...
+
+----------------------------------------------------------------------------------------------------
+
+
+====================================================================================================
+AUDIT LOGGING (1 items)
+====================================================================================================
+
+[1:29:35] Leslie Chang:
+All of the notes requirements, but there's a concept of, again, notes at a condition level and one at the loan level. So then if I add a note here, going to save it.How do you exit? Oh, OK.OK. And then how do you access the notes portal from? Oh, it's the bell icon. Oh, the bell icon. OK, notice for this we didn't have a save button. So we'll talk about that. Is the red symbol painting like a bolts thing or is that just the that was a bolt thing? OK, yeah, yeah, it should. When you close that condition, it should update.real time on the team because our engineers are stillNot for long. OK, so if you click on this bell icon, this is essentially the conditions portal notes. So you would have all of the conditions associated with this loan here. So these would be.Specific to the condition and...
+
+----------------------------------------------------------------------------------------------------
+

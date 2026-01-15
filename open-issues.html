@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open Issues & Questions - Conditions Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0a0f1a;
+      --bg-secondary: #111827;
+      --bg-card: #1a2234;
+      --accent-blue: #3b82f6;
+      --accent-teal: #14b8a6;
+      --accent-red: #ef4444;
+      --accent-yellow: #f59e0b;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --border-subtle: rgba(255,255,255,0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: 60px 80px;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(ellipse at 20% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(20, 184, 166, 0.06) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .breadcrumb {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .breadcrumb a {
+      color: var(--accent-blue);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--accent-teal);
+    }
+
+    .label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent-red);
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+      margin-bottom: 3rem;
+    }
+
+    .priority-section {
+      margin-bottom: 3rem;
+    }
+
+    .priority-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .priority-badge {
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .priority-high {
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid rgba(239, 68, 68, 0.5);
+      color: var(--accent-red);
+    }
+
+    .priority-medium {
+      background: rgba(245, 158, 11, 0.2);
+      border: 1px solid rgba(245, 158, 11, 0.5);
+      color: var(--accent-yellow);
+    }
+
+    .priority-section h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .issue-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .issue-card:hover {
+      border-color: var(--accent-blue);
+      box-shadow: 0 4px 16px rgba(59, 130, 246, 0.15);
+    }
+
+    .issue-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .issue-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--accent-teal);
+      font-weight: 600;
+    }
+
+    .issue-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-top: 0.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .issue-description {
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .issue-meta {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .meta-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .meta-value {
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .impact-tag {
+      display: inline-block;
+      padding: 0.35rem 0.85rem;
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent-blue);
+      margin-top: 0.5rem;
+    }
+
+    .blocker-warning {
+      background: rgba(239, 68, 68, 0.1);
+      border: 2px solid rgba(239, 68, 68, 0.4);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .blocker-warning h3 {
+      color: var(--accent-red);
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .blocker-warning p {
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 40px 30px;
+      }
+
+      h1 {
+        font-size: 2.25rem;
+      }
+
+      .issue-meta {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="dashboard.html">← Back to Dashboard</a>
+    </div>
+
+    <div class="label">⚠️ REQUIRES CLARIFICATION</div>
+    <h1>Open Issues & Questions</h1>
+    <p class="subtitle">12 high/medium priority items identified during Day 1 requirements review (January 13, 2026)</p>
+
+    <div class="blocker-warning">
+      <h3>🚨 Critical Blockers</h3>
+      <p>Items #1 and #2 (Role/Permissions Matrix and Byte Role Mapping) are blocking development progress and must be resolved before implementation can begin.</p>
+    </div>
+
+    <!-- HIGH PRIORITY ISSUES -->
+    <div class="priority-section">
+      <div class="priority-header">
+        <span class="priority-badge priority-high">High Priority</span>
+        <h2>Critical for Development (6 items)</h2>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-header">
+          <div>
+            <div class="issue-number">ISSUE #1</div>
+            <h3 class="issue-title">Create Role/Permissions Matrix</h3>
+          </div>
+        </div>
+        <div class="issue-description">
+          Define exact permissions for 5-7 base roles (Loan Officer, LO Assistant, Processor, Underwriter, Post-Underwriting). Must specify which actions each role can perform (create, edit, clear, view-only) and under what conditions (class-based permissions, field-level controls).
+        </div>
+        <span class="impact-tag">BLOCKER - Development Cannot Start</span>
+        <div class="issue-meta">
+          <div class="meta-item">
+            <span class="meta-label">Owner</span>
+            <span class="meta-value">Josephine / Lauren</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Status</span>
+            <span class="meta-value">Not Started</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Impact</span>
+            <span class="meta-value">Blocks all permission logic</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-header">
+          <div>
+            <div class="issue-number">ISSUE #2</div>
+            <h3 class="issue-title">Map Byte Roles to Conditions Portal Base Roles</h3>
+          </div>
+        </div>
+        <div class="issue-description">
+          Create mapping table from 400+ Byte roles to the 5-7 base roles defined in Issue #1. This determines which UI and permissions users see when they log in. Must account for edge cases where one Byte role could map to multiple portal roles.
+        </div>
+        <span class="impact-tag">BLOCKER - Development Cannot Start</span>
+        <div class="issue-meta">
+          <div class="meta-item">
+            <span class="meta-label">Owner</span>
+            <span class="meta-value">Andrew (new employee)</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Status</span>
+            <span class="meta-value">Not Started</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Impact</span>
+            <span class="meta-value">Blocks authentication logic</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-header">
+          <div>
+            <div class="issue-number">ISSUE #3</div>
+            <h3 class="issue-title">Clarify "Responsibility" Field Removal Impact on Candor</h3>
+          </div>
+        </div>
+        <div class="issue-description">
+          Kelly Mattox directed removal of "Responsibility" field per Byte team, but Candor integration pilot may depend on it. Coordinate with Byte team to confirm Candor can use "Transaction" field instead. Critical for Candor go-live timeline.
+        </div>
+        <span class="impact-tag">Integration Risk</span>
+        <div class="issue-meta">
+          <div class="meta-item">
+            <span class="meta-label">Owner</span>
+            <span class="meta-value">Jina Choi / Kelly Mattox</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Due</span>
+            <span class="meta-value">ASAP</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Impact</span>
+            <span class="meta-value">Could break Candor pilot</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-header">
+          <div>
+            <div class="issue-number">ISSUE #4</div>
+            <h3 class="issue-title">Deep Dive on Exception Requests Functionality</h3>
+          </div>
+        </div>
+        <div class="issue-description">
+          Exception request workflow impacts underwriter role permissions significantly. Need detailed walkthrough of: who can request exceptions, approval flow, what happens to condition when exception is granted/denied, how this affects stage progression and clearance rules.
+        </div>
+        <span class="impact-tag">Feature Scope</span>
+        <div class="issue-meta">
+          <div class="meta-item">
+            <span class="meta-label">Owner</span>
+            <span class="meta-value">Product / Kelly Mattox</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Status</span>
+            <span class="meta-value">Pending</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Impact</span>
+            <span class="meta-value">Affects role model and workflow logic</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-header">
+          <div>
+            <div class="issue-number">ISSUE #5</div>
+            <h3 class="issue-title">Determine Auto-Run Conditions Engine Trigger</h3>
+          </div>
+        </div>
+        <div class="issue-description">
+          Should the rules engine run automatically when a loan is opened, or only when user clicks a button? Auto-run has UX benefits but performance concerns. Button approach gives control but risks users forgetting to run it. Decision impacts UI design and backend architecture.
+        </div>
+        <span class="impact-tag">UX & Performance</span>
+        <div class="issue-meta">
+          <div class="meta-item">
+            <span class="meta-label">Owner</span>
+            <span class="meta-value">Product / Kelly Mattox</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Status</span>
+            <span class="meta-value">Pending</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Impact</span>
+            <span class="meta-value">UI design and load time</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-header">
+          <div>
+            <div class="issue-number">ISSUE #6</div>
+            <h3 class="issue-title">Investigate Loan-Level Flag for Beta Rollout</h3>
+          </div>
+        </div>
+        <div class="issue-description">
+          Need loan-level flag in Byte to identify "Conditions Portal loans" vs "legacy loans" to enable hybrid rollout. Similar to GFE/Loan Estimate toggle. Byte conditions button will check flag and open appropriate UI. Required for pilot program without full company cutover.
+        </div>
+        <span class="impact-tag">Rollout Strategy</span>
+        <div class="issue-meta">
+          <div class="meta-item">
+            <span class="meta-label">Owner</span>
+            <span class="meta-value">Rusty / Engineering</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Status</span>
+            <span class="meta-value">Not Started</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Impact</span>
+            <span class="meta-value">Enables phased rollout</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MEDIUM PRIORITY ISSUES -->
+    <div class="priority-section">
+      <div class="priority-header">
+        <span class="priority-badge priority-medium">Medium Priority</span>
+        <h2>Important for Completeness (6 items)</h2>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-header">
+          <div>
+            <div class="issue-number">ISSUE #7</div>
+            <h3 class="issue-title">Document Kelly's "Cardinal Rules" and Constraints</h3>
+          </div>
+        </div>
+        <div class="issue-description">
+          Kelly Mattox (Byte Platform Owner) mentioned several "cardinal rules" for Byte compatibility during the offsite. These constraints must be documented to avoid integration issues. Examples: API user attribution, bidirectional sync timing (~30s acceptable), history tracking limitations.
+        </div>
+        <span class="impact-tag">Documentation</span>
+        <div class="issue-meta">
+          <div class="meta-item">
+            <span class="meta-label">Owner</span>
+            <span class="meta-value">Leslie / Tim</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Status</span>
+            <span class="meta-value">Not Started</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-header">
+          <div>
+            <div class="issue-number">ISSUE #8</div>
+            <h3 class="issue-title">Confirm Closer vs Funder Role Distinction</h3>
+          </div>
+        </div>
+        <div class="issue-description">
+          Clarify if closer and funder are separate roles with different permissions, or if they're the same base role. May differ by wet state vs dry state closing procedures. Impacts the base role count (5-7 roles) and permission matrix.
+        </div>
+        <span class="impact-tag">Roles & Permissions</span>
+        <div class="issue-meta">
+          <div class="meta-item">
+            <span class="meta-label">Owner</span>
+            <span class="meta-value">Kelly Mattox / Lauren</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Status</span>
+            <span class="meta-value">Pending</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-header">
+          <div>
+            <div class="issue-number">ISSUE #9</div>
+            <h3 class="issue-title">Review Document Description Field in Split/Merge</h3>
+          </div>
+        </div>
+        <div class="issue-description">
+          Verify that document description field is available and editable during split and merge operations. Current POC may not surface this field correctly. Minor UX issue but affects document organization workflow.
+        </div>
+        <span class="impact-tag">UX Polish</span>
+        <div class="issue-meta">
+          <div class="meta-item">
+            <span class="meta-label">Owner</span>
+            <span class="meta-value">Tim / Engineering</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Status</span>
+            <span class="meta-value">Pending</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-header">
+          <div>
+            <div class="issue-number">ISSUE #10</div>
+            <h3 class="issue-title">Add AI Document Auto-Indexing to Requirements</h3>
+          </div>
+        </div>
+        <div class="issue-description">
+          Incorporate Sato's AI document auto-indexing tool into requirements doc. This feature automatically categorizes and tags uploaded documents using AI, reducing manual data entry. Demo scheduled for Day 2.
+        </div>
+        <span class="impact-tag">Feature Addition</span>
+        <div class="issue-meta">
+          <div class="meta-item">
+            <span class="meta-label">Owner</span>
+            <span class="meta-value">Leslie</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Due</span>
+            <span class="meta-value">End of January</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-header">
+          <div>
+            <div class="issue-number">ISSUE #11</div>
+            <h3 class="issue-title">Define Email System Unification Strategy</h3>
+          </div>
+        </div>
+        <div class="issue-description">
+          Determine if email generation, templates, and signature management should be unified across all CMG tools (Pipeline, Clear Docs, Conditions Portal) or remain portal-specific. Impacts whether we build from scratch or integrate existing email infrastructure.
+        </div>
+        <span class="impact-tag">Architecture</span>
+        <div class="issue-meta">
+          <div class="meta-item">
+            <span class="meta-label">Owner</span>
+            <span class="meta-value">Product / Engineering</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Status</span>
+            <span class="meta-value">Pending</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card">
+        <div class="issue-header">
+          <div>
+            <div class="issue-number">ISSUE #12</div>
+            <h3 class="issue-title">Custom Conditions Governance Strategy</h3>
+          </div>
+        </div>
+        <div class="issue-description">
+          Decide how to govern user-created custom conditions. Mark's directive: allow but monitor. Need process to mine custom conditions for patterns and promote common ones to standardized templates. Balance flexibility with standardization.
+        </div>
+        <span class="impact-tag">Process & Governance</span>
+        <div class="issue-meta">
+          <div class="meta-item">
+            <span class="meta-label">Owner</span>
+            <span class="meta-value">Product / Operations</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Status</span>
+            <span class="meta-value">Pending</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

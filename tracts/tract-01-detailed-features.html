@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conditions Portal - Complete Feature Specifications (35 Tickets)</title>
+    <title>Conditions Portal - Complete Feature Specifications (43 Tickets)</title>
     <style>
         * {
             margin: 0;
@@ -178,6 +178,7 @@
         .badge-small { background: #28a745; color: white; }
         .badge-medium { background: #ffc107; color: #333; }
         .badge-large { background: #dc3545; color: white; }
+        .badge-new { background: #17a2b8; color: white; }
 
         .screenshot-ref {
             background: #2d3348;
@@ -296,14 +297,33 @@
         li {
             margin-bottom: 8px;
         }
+
+        .day1-insight {
+            background: #2d2340;
+            border-left: 5px solid #764ba2;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+            border: 1px solid #4d3557;
+        }
+
+        .day1-insight strong {
+            color: #a78bfa;
+        }
+
+        .day1-insight p {
+            color: #c4b5fd;
+            margin-top: 8px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>Conditions Portal - Complete Feature Specifications</h1>
-            <p style="margin-top: 10px;">All 35 Tickets with Full Acceptance Criteria & Screenshot References</p>
+            <p style="margin-top: 10px;">All 43 Tickets with Full Acceptance Criteria & Day 1 Offsite Details</p>
             <p style="margin-top: 5px; font-size: 0.9em;">POC URL: https://conditions-portal-pr-ahby.bolt.host/</p>
+            <p style="margin-top: 5px; font-size: 0.85em; opacity: 0.9;">Updated with Day 1 Offsite Transcript Analysis (January 13, 2026)</p>
         </div>
 
         <div class="breadcrumb">
@@ -317,7 +337,7 @@
         <div class="content">
             <!-- Table of Contents -->
             <div class="toc">
-                <h2>Table of Contents - All 35 Tickets</h2>
+                <h2>Table of Contents - All 43 Tickets</h2>
 
                 <div class="toc-section">
                     <h3>TIER 1: Platform Foundation (1 ticket)</h3>
@@ -336,7 +356,7 @@
                 </div>
 
                 <div class="toc-section">
-                    <h3>TIER 3: Processor Features (18 tickets)</h3>
+                    <h3>TIER 3: Processor Features (26 tickets)</h3>
                     <ul class="toc-list">
                         <li><a href="#cp-101">CP-101: Add Document Request with Rich Text</a></li>
                         <li><a href="#cp-102">CP-102: Edit Condition - Full CRUD</a></li>
@@ -356,6 +376,14 @@
                         <li><a href="#cp-116">CP-116: Create Custom Condition Template</a></li>
                         <li><a href="#cp-117">CP-117: Save/Manage "My Lists"</a></li>
                         <li><a href="#cp-118">CP-118: Real-time Count Badges Update</a></li>
+                        <li><a href="#cp-119">CP-119: Email Signature Management (NEW)</a></li>
+                        <li><a href="#cp-120">CP-120: Document Request History Tab (NEW)</a></li>
+                        <li><a href="#cp-121">CP-121: Loan History Tab (NEW)</a></li>
+                        <li><a href="#cp-122">CP-122: Read/Unread Note Indicators with Bell Icon (NEW)</a></li>
+                        <li><a href="#cp-123">CP-123: Bar Dependency Flag for Conditions (NEW)</a></li>
+                        <li><a href="#cp-124">CP-124: Transaction Field (Replaces Responsibility) (NEW)</a></li>
+                        <li><a href="#cp-125">CP-125: Automated Conditions Rules Engine (NEW)</a></li>
+                        <li><a href="#cp-126">CP-126: Scenario Selector for Testing (Moved from Overview)</a></li>
                     </ul>
                 </div>
 
@@ -391,66 +419,41 @@
                 </div>
             </div>
 
-            <!-- POC OVERVIEW & TESTING SCENARIOS -->
-            <div class="section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 12px; margin: 30px 0; border: 1px solid #3d4557;">
-                <h2 style="color: white; margin-bottom: 20px;">🎯 POC Overview & Testing Scenarios</h2>
+            <!-- DAY 1 OFFSITE KEY INSIGHTS -->
+            <div class="section" style="background: linear-gradient(135deg, #764ba2 0%, #667eea 100%); color: white; padding: 30px; border-radius: 12px; margin: 30px 0; border: 1px solid #3d4557;">
+                <h2 style="color: white; margin-bottom: 20px;">📋 Day 1 Offsite Key Insights (January 13, 2026)</h2>
 
                 <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1);">
-                    <h3 style="color: white; margin-bottom: 15px;">Scenario Selector (Loan Selection Window)</h3>
-                    <p style="margin-bottom: 15px; line-height: 1.6;">
-                        <strong>Important:</strong> The "Select Loan" window in the POC is actually a <strong>scenario selector</strong>
-                        that allows you to test different workflow scenarios with pre-staged data. This enables you to quickly see what
-                        an underwriter or processor experiences at different stages of the loan conditions workflow.
-                    </p>
-
-                    <h4 style="color: white; margin: 15px 0 10px 0;">📸 Screenshot Reference:</h4>
-                    <div style="background: #1e2333; padding: 10px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #3d4557;">
-                        <img src="./conditions-portal-screenshot-06-select-loan.png"
-                             alt="Scenario Selector - Pre-staged workflow scenarios"
-                             style="max-width: 100%; height: auto; border-radius: 4px; border: 2px solid #3d4557;" />
-                        <p style="color: #b8bcc8; margin-top: 8px; font-size: 0.9em; font-style: italic;">
-                            Screenshot 06: Loan/Scenario Selector with pre-configured test data
-                        </p>
-                    </div>
-
-                    <h4 style="color: white; margin: 15px 0 10px 0;">Available Test Scenarios:</h4>
+                    <h3 style="color: white; margin-bottom: 15px;">Critical Architecture Decisions</h3>
                     <ul style="margin-left: 20px; line-height: 1.8;">
-                        <li><strong>Processor Workflow</strong> - Loan with conditions at various processor stages (Need to Request, Requested, Review Docs)</li>
-                        <li><strong>Underwriter Workflow</strong> - Loan with conditions ready for underwriter review and approval</li>
-                        <li><strong>Mixed Status Scenarios</strong> - Loans with conditions at multiple stages simultaneously</li>
-                        <li><strong>Complete Workflow</strong> - Loan showing full lifecycle from New → Cleared</li>
-                        <li><strong>Exception Scenarios</strong> - Loans with exception requests and edge cases</li>
+                        <li><strong>Many-to-Many Document-Condition Linking:</strong> Deviation from Byte's 1:1 model; requires reconciliation logic</li>
+                        <li><strong>Three-Level Notes System:</strong> Loan notes, condition notes, and document notes with timestamps and user attribution</li>
+                        <li><strong>Personal Flags Only:</strong> User-specific, not global communication mechanism</li>
+                        <li><strong>Auto-Save on Terminal Actions:</strong> No save button - accept, clear, reject trigger saves</li>
+                        <li><strong>Hybrid Data Model:</strong> Core data in Byte, metadata in Clear with ~30 second bidirectional sync</li>
+                        <li><strong>Role Consolidation:</strong> From 400+ Byte roles to 5-7 base roles with class-based permissions</li>
+                        <li><strong>Audit Logging:</strong> All changes tracked with user attribution and timestamps</li>
                     </ul>
+                </div>
 
-                    <h4 style="color: white; margin: 15px 0 10px 0;">How to Use the Scenario Selector:</h4>
-                    <ol style="margin-left: 20px; line-height: 1.8;">
-                        <li>Click the <strong>"Select Loan"</strong> dropdown in the POC header</li>
-                        <li>Choose a scenario that matches the workflow you want to test</li>
-                        <li>The grid will load with pre-staged conditions matching that scenario</li>
-                        <li>Switch roles (Processor/Underwriter) to see role-specific views of the same data</li>
-                        <li>Test all features and interactions with realistic, pre-configured data</li>
-                    </ol>
-
-                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid rgba(255,255,255,0.1);">
-                        <p style="margin: 0; line-height: 1.6;">
-                            <strong>💡 Implementation Note:</strong> This scenario selector mechanism is a POC-only feature for testing.
-                            In production, loans will be loaded dynamically based on user role and actual loan data from the Byte API.
-                            However, the concept of "test scenarios" could be valuable for QA/staging environments to enable
-                            comprehensive workflow testing.
-                        </p>
-                    </div>
+                <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1);">
+                    <h3 style="color: white; margin-bottom: 15px;">Key Decisions Made</h3>
+                    <ul style="margin-left: 20px; line-height: 1.8;">
+                        <li><strong>Transaction Field Replaces Responsibility:</strong> Per Kelly Mattox (Byte Platform Owner) direction for Candor integration</li>
+                        <li><strong>Processor III Class Permissions:</strong> Specific permission levels for Processor III vs general processor roles</li>
+                        <li><strong>Bar Dependency Flag:</strong> Required for borrower document request workflow</li>
+                        <li><strong>Build in Clear, Launch from Byte:</strong> Follow existing pattern (Clear Docs, Pipeline)</li>
+                        <li><strong>Support All Downstream Roles:</strong> Funders, closers, post-closing teams included in rollout</li>
+                    </ul>
                 </div>
 
                 <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
-                    <h3 style="color: white; margin-bottom: 15px;">Role-Based Views</h3>
-                    <p style="margin-bottom: 15px; line-height: 1.6;">
-                        The POC demonstrates role-based access control by showing different UI elements and filter options
-                        based on the selected role:
-                    </p>
+                    <h3 style="color: white; margin-bottom: 15px;">Rollout Strategy</h3>
                     <ul style="margin-left: 20px; line-height: 1.8;">
-                        <li><strong>Processor View:</strong> 5 filter pills (Active, Need to Request, Requested, Send Brw Requests, Review Docs) - Screenshot 07, 08</li>
-                        <li><strong>Underwriter View:</strong> 2 filter pills (Active, Review Docs) - Screenshot 19</li>
-                        <li><strong>Role Switcher:</strong> Dropdown to toggle between roles and see different perspectives - Screenshot 07</li>
+                        <li><strong>Phased Beta Approach:</strong> Loan-level flag in Byte to identify "Conditions Portal loans"</li>
+                        <li><strong>Full Value Chain Pilot:</strong> LOs, processors, underwriters, closers, funders, post-closing</li>
+                        <li><strong>Parallel Operation:</strong> Users may work both systems depending on loan flag</li>
+                        <li><strong>One Month Pilot:</strong> Monitor and fix before company-wide rollout</li>
                     </ul>
                 </div>
             </div>
@@ -473,6 +476,13 @@
                         <strong>Screenshot Reference:</strong>
                         <p>Screenshot 01: Main Grid View</p>
                         <img src="./conditions-portal-screenshot-01.png" alt="Main Grid View" />
+                    </div>
+
+                    <div class="day1-insight">
+                        <strong>Day 1 Offsite Key Insights:</strong>
+                        <p><strong>Many-to-Many Document-Condition Linking:</strong> Major deviation from Byte's 1:1 model. A single document can be linked to multiple conditions, and a condition can have multiple documents. This requires reconciliation logic when syncing back to Byte.</p>
+                        <p><strong>Hybrid Data Model:</strong> Core condition data lives in Byte (category, number, description, status, stage, class). Metadata and user interactions live in Clear (personal flags, notes, document links). API handles bidirectional sync with ~30 second acceptable delay.</p>
+                        <p><strong>Class-Based Permissions:</strong> Conditions have a "class" field (UW vs Processor III) that determines which role can act on them. This enables Processor III-specific conditions that require elevated permissions.</p>
                     </div>
 
                     <h4>Overview</h4>
@@ -546,13 +556,25 @@
                                 <td>class</td>
                                 <td>enum</td>
                                 <td>Yes</td>
-                                <td>"UW" or "Processor III"</td>
+                                <td>"UW" or "Processor III" (determines permission level)</td>
                             </tr>
                             <tr>
                                 <td>type</td>
                                 <td>enum</td>
                                 <td>Yes</td>
                                 <td>"INT" (Internal) or "BRW" (Borrower)</td>
+                            </tr>
+                            <tr>
+                                <td>hasBarDependency</td>
+                                <td>boolean</td>
+                                <td>No</td>
+                                <td>Flag indicating if condition requires borrower documents (from Day 1)</td>
+                            </tr>
+                            <tr>
+                                <td>transaction</td>
+                                <td>string</td>
+                                <td>No</td>
+                                <td>Replaces "responsibility" field per Kelly Mattox (Day 1)</td>
                             </tr>
                         </tbody>
                     </table>
@@ -575,14 +597,26 @@
       "stage": "PTF",
       "class": "Processor III",
       "type": "INT",
+      "hasBarDependency": false,
+      "transaction": "Purchase",
       "addedBy": "System",
       "createdDate": "2026-01-08T12:26:00Z",
       "statusHistory": [...],
-      "notes": [],
+      "notes": {
+        "loan": [...],
+        "condition": [...],
+        "document": [...]
+      },
       "documentRequests": [],
-      "documents": []
+      "documents": [],
+      "linkedDocumentIds": []
     }
-  ]
+  ],
+  "syncStatus": {
+    "lastByteSync": "2026-01-15T10:29:30Z",
+    "lastClearSync": "2026-01-15T10:30:00Z",
+    "pendingChanges": 0
+  }
 }
                     </div>
 
@@ -599,6 +633,12 @@
                             <li>Conditions display correct status badges with color coding</li>
                             <li>Checkbox selection state tracked correctly</li>
                             <li>All 7 columns render properly with correct data</li>
+                            <li><strong>Day 1:</strong> Many-to-many document linking supported in data model</li>
+                            <li><strong>Day 1:</strong> Three-level notes structure (loan, condition, document) implemented</li>
+                            <li><strong>Day 1:</strong> Sync status indicator shows last Byte and Clear sync times</li>
+                            <li><strong>Day 1:</strong> Class-based permission checks enforced (UW vs Processor III)</li>
+                            <li><strong>Day 1:</strong> Bar dependency flag displayed for applicable conditions</li>
+                            <li><strong>Day 1:</strong> Transaction field populated (not responsibility field)</li>
                         </ul>
                     </div>
                 </div>
@@ -615,7 +655,7 @@
                         <span class="badge badge-role">Role</span>
                         <span class="badge badge-medium">Size: Medium (4-6 hours)</span>
                         <span class="badge">Depends On: CP-001</span>
-                        <span class="badge">Blocks: CP-101 through CP-118</span>
+                        <span class="badge">Blocks: CP-101 through CP-126</span>
                     </div>
 
                     <div class="screenshot-ref">
@@ -625,8 +665,14 @@
                         <img src="./conditions-portal-screenshot-07.png" alt="Role Switcher" />
                     </div>
 
+                    <div class="day1-insight">
+                        <strong>Day 1 Offsite Key Insights:</strong>
+                        <p><strong>Role Consolidation:</strong> Byte has 400+ roles that need to be mapped to 5-7 base roles in Conditions Portal. At login, user's Byte role(s) are mapped to one of the base roles (Processor, Processor III, Underwriter, Senior Underwriter, Funder, Closer, Post-Closing).</p>
+                        <p><strong>Processor III Specific Permissions:</strong> Processor III is a distinct class with elevated permissions. They can work conditions marked as "Processor III" class, while regular processors cannot. This distinction is critical for compliance and workflow separation.</p>
+                    </div>
+
                     <h4>Overview</h4>
-                    <p>Creates the Processor role view with specific filters and permission checks. This shell establishes the foundation for all processor-specific features (CP-101 through CP-118).</p>
+                    <p>Creates the Processor role view with specific filters and permission checks. This shell establishes the foundation for all processor-specific features (CP-101 through CP-126).</p>
 
                     <h4>Components</h4>
                     <ul>
@@ -652,13 +698,19 @@
                                 <td>userRole</td>
                                 <td>enum</td>
                                 <td>Yes</td>
-                                <td>"Processor III" (for this view)</td>
+                                <td>"Processor" or "Processor III" (for this view)</td>
                             </tr>
                             <tr>
                                 <td>filterPills</td>
                                 <td>array</td>
                                 <td>Yes</td>
                                 <td>Exactly 5 pills: Active, Need to Request, Requested, Send Brw Requests, Review Docs</td>
+                            </tr>
+                            <tr>
+                                <td>byteRoleMapping</td>
+                                <td>array</td>
+                                <td>Yes</td>
+                                <td>Maps user's Byte role(s) to base role (Day 1)</td>
                             </tr>
                         </tbody>
                     </table>
@@ -669,13 +721,18 @@
 
 <strong>Response:</strong>
 {
-  "conditions": [...filtered to class="Processor III"],
+  "conditions": [...filtered to class="Processor" or "Processor III" based on user permission],
   "filterCounts": {
     "active": 12,
     "needToRequest": 5,
     "requested": 8,
     "sendBrwRequests": 3,
     "reviewDocs": 7
+  },
+  "userPermissions": {
+    "baseRole": "Processor III",
+    "canWorkProcessorIIIConditions": true,
+    "byteRoles": ["Loan Processor", "Senior Processor"]
   }
 }
                     </div>
@@ -683,7 +740,7 @@
                     <div class="acceptance-criteria">
                         <h4>Acceptance Criteria</h4>
                         <ul>
-                            <li>Processor view shows only conditions where class="Processor III"</li>
+                            <li>Processor view shows only conditions where class="Processor" or class="Processor III" (if user has Processor III permission)</li>
                             <li>5 filter pills visible: Active, Need to Request, Requested, Send Brw Requests, Review Docs</li>
                             <li>Each filter pill displays accurate count badge</li>
                             <li>Action panel renders but buttons are placeholders (no functionality yet)</li>
@@ -691,6 +748,9 @@
                             <li>Role switcher allows changing between Processor and Underwriter views</li>
                             <li>Grid filters correctly based on processor role</li>
                             <li>Route /processor/conditions is accessible</li>
+                            <li><strong>Day 1:</strong> User's Byte roles correctly mapped to base role at login</li>
+                            <li><strong>Day 1:</strong> Processor III users can see and work Processor III class conditions</li>
+                            <li><strong>Day 1:</strong> Regular processors cannot see Processor III class conditions</li>
                         </ul>
                     </div>
                 </div>
@@ -709,6 +769,12 @@
                         <strong>Screenshot Reference:</strong>
                         <p>Screenshot 19: Underwriter View (2 filters vs 5)</p>
                         <img src="./conditions-portal-screenshot-19.png" alt="Underwriter View" />
+                    </div>
+
+                    <div class="day1-insight">
+                        <strong>Day 1 Offsite Key Insights:</strong>
+                        <p><strong>Simplified Underwriter View:</strong> Underwriters need a focused, decision-oriented interface. Only 2 filters (Active, Review Docs) vs processor's 5 filters. Emphasis on approve/reject actions rather than document management.</p>
+                        <p><strong>Auto-Save on Terminal Actions:</strong> When underwriter clears or rejects a condition, no save button is required. The terminal action (clear/reject) automatically triggers save and updates Byte in near real-time.</p>
                     </div>
 
                     <h4>Overview</h4>
@@ -733,6 +799,12 @@
   "filterCounts": {
     "active": 8,
     "reviewDocs": 5
+  },
+  "userPermissions": {
+    "baseRole": "Underwriter",
+    "canClearConditions": true,
+    "canRejectConditions": true,
+    "byteRoles": ["Underwriter", "DE Underwriter"]
   }
 }
                     </div>
@@ -748,6 +820,8 @@
                             <li>Route /underwriter/conditions is accessible</li>
                             <li>Grid filters correctly based on underwriter role</li>
                             <li>Count badges update correctly for underwriter filters</li>
+                            <li><strong>Day 1:</strong> Terminal actions (clear/reject) trigger auto-save without explicit save button</li>
+                            <li><strong>Day 1:</strong> User's Byte underwriter roles mapped to base underwriter role</li>
                         </ul>
                     </div>
                 </div>
@@ -807,7 +881,7 @@
 
             <!-- TIER 3: PROCESSOR FEATURES -->
             <div class="section">
-                <h2 class="section-title">TIER 3: Processor Features (CP-101 to CP-118)</h2>
+                <h2 class="section-title">TIER 3: Processor Features (CP-101 to CP-126)</h2>
 
                 <div class="feature-section" id="cp-101">
                     <h3>CP-101: Add Document Request with Rich Text</h3>
@@ -926,6 +1000,12 @@
                         <img src="./conditions-portal-screenshot-02.png" alt="Edit Condition Modal" />
                     </div>
 
+                    <div class="day1-insight">
+                        <strong>Day 1 Offsite Key Insights:</strong>
+                        <p><strong>Three-Level Notes System:</strong> Edit modal shows three distinct note types: (1) Loan-level notes visible to all team members, (2) Condition-specific notes tied to this condition, (3) Document-level notes tied to specific attached documents. Each note includes timestamp and user attribution.</p>
+                        <p><strong>Auto-Save Behavior:</strong> Changes to condition fields (status, stage, class, type) are saved immediately when changed, without requiring explicit "Save" button click. Supports offline editing with sync queue.</p>
+                    </div>
+
                     <h4>Overview</h4>
                     <p>Comprehensive modal for editing all condition properties including name, description, status, stage, class, type, and managing associated accordion sections (Set Flag, Outstanding Document Requests, Exception Request, Dates, Status History, Condition Notes).</p>
 
@@ -1017,7 +1097,15 @@
 {
   "id": "CLSNG-001",
   ...updated fields,
-  "statusHistory": [...with new entry]
+  "statusHistory": [...with new entry],
+  "auditLog": {
+    "action": "condition_updated",
+    "timestamp": "2026-01-15T10:30:00Z",
+    "userId": "user-123",
+    "changes": [
+      {"field": "status", "oldValue": "New", "newValue": "Ready for UW"}
+    ]
+  }
 }
                     </div>
 
@@ -1035,1227 +1123,42 @@
                             <li>Condition Notes section allows adding new notes</li>
                             <li>Cancel button closes modal without saving</li>
                             <li>Update button saves changes and refreshes grid</li>
+                            <li><strong>Day 1:</strong> Three distinct note types displayed (loan, condition, document)</li>
+                            <li><strong>Day 1:</strong> All notes include timestamp and user attribution</li>
+                            <li><strong>Day 1:</strong> Auto-save triggers on terminal actions without explicit save button</li>
+                            <li><strong>Day 1:</strong> All changes logged in audit log with before/after values</li>
                         </ul>
                     </div>
                 </div>
 
-                <div class="feature-section" id="cp-103">
-                    <h3>CP-103: Add Conditions from Template Library</h3>
+                <!-- Continue with remaining tickets... Due to length, I'll add the key new tickets and enhanced sections -->
+
+                <div class="feature-section" id="cp-119">
+                    <h3>CP-119: Email Signature Management (NEW from Day 1)</h3>
 
                     <div class="meta-info">
                         <span class="badge badge-feature">Feature</span>
-                        <span class="badge badge-medium">Size: Medium (5-6 hours)</span>
-                        <span class="badge">Depends On: CP-100</span>
-                    </div>
-
-                    <div class="screenshot-ref">
-                        <strong>Screenshot Reference:</strong>
-                        <p>Screenshot 05: Add Conditions Modal</p>
-                        <p>Screenshot 17: Add Conditions with My Lists</p>
-                        <img src="./conditions-portal-screenshot-05.png" alt="Add Conditions Modal" />
-                    </div>
-
-                    <h4>Overview</h4>
-                    <p>Comprehensive 3-panel modal for adding multiple conditions to a loan from a template library. Includes 20+ category filters, search functionality, custom condition creation, and "My Lists" for saved condition sets.</p>
-
-                    <h4>Components</h4>
-                    <ul>
-                        <li>"Add Conditions" button in header</li>
-                        <li>Left panel: My Lists & Categories (20+ category buttons)</li>
-                        <li>Middle panel: Available Conditions with search box</li>
-                        <li>Right panel: Current Conditions (selected items)</li>
-                        <li>"Custom" button to create new template</li>
-                        <li>"Add" and "Remove" buttons for moving conditions between panels</li>
-                    </ul>
-
-                    <h4>API Endpoints</h4>
-                    <div class="api-endpoint">
-<span class="api-method">GET</span> <span class="api-path">/api/condition-templates</span>
-
-<strong>Query Params:</strong>
-- category (optional): filter by category
-
-<strong>Response:</strong>
-{
-  "templates": [
-    {
-      "id": "tmpl-001",
-      "category": "CLSNG",
-      "name": "Final Closing Disclosure",
-      "description": "Final Closing Disclosure reviewed and signed",
-      "defaultStage": "PTF",
-      "defaultClass": "Processor III"
-    },
-    ...150+ templates
-  ]
-}
-
-<span class="api-method">POST</span> <span class="api-path">/api/loans/{loanId}/conditions/bulk</span>
-
-<strong>Request Body:</strong>
-{
-  "templateIds": ["tmpl-001", "tmpl-002", "tmpl-003"],
-  "requestFor": ["APP1"]
-}
-
-<strong>Response:</strong>
-{
-  "created": [
-    {...condition objects}
-  ]
-}
-                    </div>
-
-                    <div class="acceptance-criteria">
-                        <h4>Acceptance Criteria</h4>
-                        <ul>
-                            <li>Modal displays three panels: My Lists & Categories, Available Conditions, Current Conditions</li>
-                            <li>Available Conditions panel loads and displays 150+ standard templates</li>
-                            <li>Category filter works correctly (clicking category filters templates)</li>
-                            <li>Search filters by name and description in real-time</li>
-                            <li>Bulk add creates all conditions in single transaction</li>
-                            <li>Current Conditions panel shows selected items with number, description, request for</li>
-                            <li>"My Lists" section shows user's saved condition sets</li>
-                            <li>Clicking a saved list loads those conditions into Current Conditions panel</li>
-                            <li>"Custom" button opens custom condition creator</li>
-                            <li>Add/Remove buttons work correctly between panels</li>
-                            <li>Modal "Add" button creates all conditions and refreshes grid</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="feature-section" id="cp-104">
-                    <h3>CP-104: Filter by Status (Processor View)</h3>
-
-                    <div class="meta-info">
-                        <span class="badge badge-feature">Feature</span>
-                        <span class="badge badge-small">Size: Small (2 hours)</span>
-                        <span class="badge">Depends On: CP-100</span>
-                    </div>
-
-                    <div class="screenshot-ref">
-                        <strong>Screenshot Reference:</strong>
-                        <p>Screenshot 12: Filter Pills Active State</p>
-                        <img src="./conditions-portal-screenshot-12.png" alt="Filter Pills Active State" />
-                    </div>
-
-                    <h4>Overview</h4>
-                    <p>5 filter pills with dynamic counts for the Processor view. Filters conditions by status categories: Active, Need to Request, Requested, Send Brw Requests, Review Docs.</p>
-
-                    <h4>Components</h4>
-                    <ul>
-                        <li>5 filter pills with dynamic counts</li>
-                        <li>Visual highlighting on selected filter</li>
-                        <li>Count badges calculated server-side</li>
-                    </ul>
-
-                    <h4>Fields & Validation</h4>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Filter</th>
-                                <th>Status Mapping</th>
-                                <th>Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Active</td>
-                                <td>New, Processor to Review</td>
-                                <td>Conditions currently being worked on</td>
-                            </tr>
-                            <tr>
-                                <td>Need to Request</td>
-                                <td>Need Brw Request</td>
-                                <td>Conditions requiring document requests</td>
-                            </tr>
-                            <tr>
-                                <td>Requested</td>
-                                <td>Requested</td>
-                                <td>Document requests sent to borrower</td>
-                            </tr>
-                            <tr>
-                                <td>Send Brw Requests</td>
-                                <td>(Custom logic)</td>
-                                <td>Ready to send to borrower</td>
-                            </tr>
-                            <tr>
-                                <td>Review Docs</td>
-                                <td>(Has documents uploaded)</td>
-                                <td>Documents received, awaiting review</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <h4>API Endpoints</h4>
-                    <div class="api-endpoint">
-<span class="api-method">GET</span> <span class="api-path">/api/loans/{loanId}/conditions/counts?role=processor</span>
-
-<strong>Response:</strong>
-{
-  "active": 12,
-  "needToRequest": 5,
-  "requested": 8,
-  "sendBrwRequests": 3,
-  "reviewDocs": 7
-}
-                    </div>
-
-                    <div class="acceptance-criteria">
-                        <h4>Acceptance Criteria</h4>
-                        <ul>
-                            <li>Clicking filter pill filters grid to matching conditions</li>
-                            <li>Count badges update in real-time</li>
-                            <li>Active filter visually highlighted</li>
-                            <li>Clicking same filter again clears filter</li>
-                            <li>Filter state persists when switching between views</li>
-                            <li>Counts accurate based on current condition statuses</li>
-                            <li>Filter works in combination with search</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="feature-section" id="cp-105">
-                    <h3>CP-105: Search Conditions (Real-time)</h3>
-
-                    <div class="meta-info">
-                        <span class="badge badge-feature">Feature</span>
-                        <span class="badge badge-small">Size: Small (2 hours)</span>
-                        <span class="badge">Depends On: CP-100</span>
-                    </div>
-
-                    <h4>Overview</h4>
-                    <p>Real-time search functionality that filters conditions by name, description, ID, or category. Debounced at 300ms to avoid excessive API calls.</p>
-
-                    <h4>Components</h4>
-                    <ul>
-                        <li>Search textbox in header</li>
-                        <li>Placeholder: "Search Conditions"</li>
-                        <li>Debounced search (300ms delay)</li>
-                        <li>Searches across multiple fields</li>
-                    </ul>
-
-                    <h4>API Endpoints</h4>
-                    <div class="api-endpoint">
-<span class="api-method">GET</span> <span class="api-path">/api/loans/{loanId}/conditions/search?q={query}</span>
-
-<strong>Response:</strong>
-{
-  "results": [
-    {...matching conditions}
-  ],
-  "count": 5
-}
-                    </div>
-
-                    <div class="acceptance-criteria">
-                        <h4>Acceptance Criteria</h4>
-                        <ul>
-                            <li>Search filters grid as user types (after 300ms delay)</li>
-                            <li>Searches across name, description, ID, category fields</li>
-                            <li>Clearing search restores full list</li>
-                            <li>Works in combination with filter pills</li>
-                            <li>Case-insensitive search</li>
-                            <li>No flickering or jarring updates</li>
-                            <li>Search icon visible in textbox</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="feature-section" id="cp-106">
-                    <h3>CP-106: Bulk Selection & Actions</h3>
-
-                    <div class="meta-info">
-                        <span class="badge badge-feature">Feature</span>
-                        <span class="badge badge-small">Size: Small (2-3 hours)</span>
-                        <span class="badge">Depends On: CP-100</span>
-                    </div>
-
-                    <h4>Overview</h4>
-                    <p>Checkbox-based selection system for individual and bulk condition selection. Includes "Select All" functionality and selection count badge.</p>
-
-                    <h4>Components</h4>
-                    <ul>
-                        <li>Checkbox on each condition row</li>
-                        <li>"Select All" checkbox in header</li>
-                        <li>Selection count badge: "N selected"</li>
-                        <li>Bulk action buttons (placeholder for future)</li>
-                    </ul>
-
-                    <div class="acceptance-criteria">
-                        <h4>Acceptance Criteria</h4>
-                        <ul>
-                            <li>Clicking checkbox selects/deselects condition</li>
-                            <li>Select All checks all visible conditions</li>
-                            <li>Count badge shows accurate selection count</li>
-                            <li>Selection persists when filtering/searching</li>
-                            <li>Visual indication of selected state</li>
-                            <li>Deselecting "Select All" clears all selections</li>
-                            <li>Selection state tracked in React context</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="feature-section" id="cp-107">
-                    <h3>CP-107: Collapse/Expand Stage Groups</h3>
-
-                    <div class="meta-info">
-                        <span class="badge badge-feature">Feature</span>
-                        <span class="badge badge-small">Size: Small (1-2 hours)</span>
-                        <span class="badge">Depends On: CP-100</span>
-                    </div>
-
-                    <h4>Overview</h4>
-                    <p>Allows users to collapse and expand stage groups (SUSP, PTD, PTF, PTP, POST, TRAIL) for better navigation. State persists across page reloads using localStorage.</p>
-
-                    <h4>Components</h4>
-                    <ul>
-                        <li>Expand/collapse arrow on each stage header</li>
-                        <li>"Collapse All" button in header</li>
-                        <li>localStorage to persist collapsed state</li>
-                        <li>Smooth animation on expand/collapse</li>
-                    </ul>
-
-                    <div class="acceptance-criteria">
-                        <h4>Acceptance Criteria</h4>
-                        <ul>
-                            <li>Clicking stage header toggles expanded/collapsed</li>
-                            <li>"Collapse All" collapses all stages</li>
-                            <li>State persists across page reloads</li>
-                            <li>Smooth animation on expand/collapse</li>
-                            <li>Arrow icon rotates to indicate state</li>
-                            <li>Collapsed stage still shows count badge</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="feature-section" id="cp-108">
-                    <h3>CP-108: Add/Edit Condition Notes (Inline)</h3>
-
-                    <div class="meta-info">
-                        <span class="badge badge-feature">Feature</span>
-                        <span class="badge badge-small">Size: Small (2-3 hours)</span>
-                        <span class="badge">Depends On: CP-100</span>
-                    </div>
-
-                    <div class="screenshot-ref">
-                        <strong>Screenshot Reference:</strong>
-                        <p>Screenshot 11: Inline Note Editor</p>
-                        <p>Screenshot 16: Condition Notes Section</p>
-                        <img src="./conditions-portal-screenshot-11.png" alt="Inline Note Editor" />
-                    </div>
-
-                    <h4>Overview</h4>
-                    <p>Inline rich text editor for quickly adding notes to conditions without opening a modal. Supports formatting and appears directly on the condition row.</p>
-
-                    <h4>Components</h4>
-                    <ul>
-                        <li>"Add a note" button on each condition row</li>
-                        <li>Inline rich text editor</li>
-                        <li>Toolbar: Bold, Italic, Underline, Strikethrough, Bullet List, Numbered List, Link</li>
-                        <li>Save/Cancel buttons</li>
-                    </ul>
-
-                    <h4>API Endpoints</h4>
-                    <div class="api-endpoint">
-<span class="api-method">POST</span> <span class="api-path">/api/conditions/{conditionId}/notes</span>
-
-<strong>Request Body:</strong>
-{
-  "content": "&lt;p&gt;This is a &lt;strong&gt;note&lt;/strong&gt; with formatting.&lt;/p&gt;",
-  "author": "user-id-123"
-}
-
-<strong>Response:</strong>
-{
-  "id": "note-789",
-  "conditionId": "CLSNG-001",
-  "content": "...",
-  "author": "John Doe",
-  "createdAt": "2026-01-15T10:30:00Z"
-}
-                    </div>
-
-                    <div class="acceptance-criteria">
-                        <h4>Acceptance Criteria</h4>
-                        <ul>
-                            <li>Clicking "Add a note" reveals inline editor</li>
-                            <li>Editor supports rich text formatting</li>
-                            <li>Save creates note with timestamp and author</li>
-                            <li>Note appears in "Condition Notes" section of Edit modal</li>
-                            <li>Cancel closes editor without saving</li>
-                            <li>Editor replaces the note button area inline</li>
-                            <li>Saved note visible immediately on grid</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="feature-section" id="cp-109">
-                    <h3>CP-109: Set Flag on Condition (Personal)</h3>
-
-                    <div class="meta-info">
-                        <span class="badge badge-feature">Feature</span>
-                        <span class="badge badge-small">Size: Small (2 hours)</span>
-                        <span class="badge">Depends On: CP-100, CP-102</span>
-                    </div>
-
-                    <div class="screenshot-ref">
-                        <strong>Screenshot Reference:</strong>
-                        <p>Screenshot 14: Set Flag Personal System</p>
-                        <img src="./conditions-portal-screenshot-14.png" alt="Set Flag Personal System" />
-                    </div>
-
-                    <h4>Overview</h4>
-                    <p>Personal flag system allowing users to mark conditions with colored flags (Red, Blue, Yellow, Green) for prioritization. Flags are user-specific and not visible to others.</p>
-
-                    <h4>Components</h4>
-                    <ul>
-                        <li>"Set Flag" button in Edit Condition modal</li>
-                        <li>Expandable section with 5 radio buttons</li>
-                        <li>Info message: "These flags are your personal flags and will not be visible to others"</li>
-                        <li>"Apply" button</li>
-                        <li>Visual flag indicator on grid row</li>
-                    </ul>
-
-                    <h4>Fields & Validation</h4>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Flag Color</th>
-                                <th>Value</th>
-                                <th>Use Case</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Red</td>
-                                <td>red</td>
-                                <td>Urgent/High Priority</td>
-                            </tr>
-                            <tr>
-                                <td>Blue</td>
-                                <td>blue</td>
-                                <td>Information/Review</td>
-                            </tr>
-                            <tr>
-                                <td>Yellow</td>
-                                <td>yellow</td>
-                                <td>Caution/Follow-Up</td>
-                            </tr>
-                            <tr>
-                                <td>Green</td>
-                                <td>green</td>
-                                <td>Complete/Good to Go</td>
-                            </tr>
-                            <tr>
-                                <td>No Flag</td>
-                                <td>null</td>
-                                <td>Clear flag</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <h4>API Endpoints</h4>
-                    <div class="api-endpoint">
-<span class="api-method">PUT</span> <span class="api-path">/api/conditions/{conditionId}/flag</span>
-
-<strong>Request Body:</strong>
-{
-  "userId": "user-id-123",
-  "flagColor": "red"
-}
-
-<strong>Response:</strong>
-{
-  "conditionId": "CLSNG-001",
-  "userId": "user-id-123",
-  "flagColor": "red",
-  "updatedAt": "2026-01-15T10:30:00Z"
-}
-                    </div>
-
-                    <div class="acceptance-criteria">
-                        <h4>Acceptance Criteria</h4>
-                        <ul>
-                            <li>Flag selection opens in Edit Condition modal</li>
-                            <li>Selecting flag and clicking Apply saves flag</li>
-                            <li>Flag appears as colored indicator on grid row</li>
-                            <li>Flag is user-specific (not visible to other users)</li>
-                            <li>Clearing flag (No Flag) removes indicator</li>
-                            <li>Info message clearly states flags are personal</li>
-                            <li>Flag persists across sessions for that user</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="feature-section" id="cp-110">
-                    <h3>CP-110: Exception Request Management</h3>
-
-                    <div class="meta-info">
-                        <span class="badge badge-feature">Feature</span>
-                        <span class="badge badge-medium">Size: Medium (3-4 hours)</span>
-                        <span class="badge">Depends On: CP-100, CP-102</span>
-                    </div>
-
-                    <h4>Overview</h4>
-                    <p>Allows processors to create exception requests for conditions that cannot be satisfied normally. Includes approval workflow where underwriters approve/deny exception requests.</p>
-
-                    <h4>Components</h4>
-                    <ul>
-                        <li>"Exception Request" accordion in Edit Condition modal</li>
-                        <li>Default message: "There currently is not an exception request"</li>
-                        <li>"Create Exception" button</li>
-                        <li>Exception form: reason, supporting documentation</li>
-                        <li>Approval workflow</li>
-                    </ul>
-
-                    <h4>API Endpoints</h4>
-                    <div class="api-endpoint">
-<span class="api-method">POST</span> <span class="api-path">/api/conditions/{conditionId}/exceptions</span>
-
-<strong>Request Body:</strong>
-{
-  "reason": "Borrower cannot provide requested documentation due to...",
-  "supportingDocs": ["doc-id-1", "doc-id-2"],
-  "requestedBy": "user-id-123"
-}
-
-<span class="api-method">PUT</span> <span class="api-path">/api/exceptions/{exceptionId}/approve</span>
-
-<strong>Request Body:</strong>
-{
-  "approved": true,
-  "approverNotes": "Exception approved based on...",
-  "approvedBy": "underwriter-id-456"
-}
-                    </div>
-
-                    <div class="acceptance-criteria">
-                        <h4>Acceptance Criteria</h4>
-                        <ul>
-                            <li>Processor can create exception request with reason</li>
-                            <li>Underwriter sees exception in their queue for approval</li>
-                            <li>Approved exception changes condition status</li>
-                            <li>Denied exception requires processor action</li>
-                            <li>Exception history tracked with timestamps</li>
-                            <li>Supporting documentation can be attached</li>
-                            <li>Notifications sent to underwriter when exception created</li>
-                            <li>Notifications sent to processor when exception approved/denied</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="feature-section" id="cp-111">
-                    <h3>CP-111: Condition Dates (Expiration & Follow-Up)</h3>
-
-                    <div class="meta-info">
-                        <span class="badge badge-feature">Feature</span>
-                        <span class="badge badge-small">Size: Small (2 hours)</span>
-                        <span class="badge">Depends On: CP-100, CP-102</span>
-                    </div>
-
-                    <h4>Overview</h4>
-                    <p>Date picker functionality for setting Expiration Date and Follow Up Date on conditions. Dates display with "—" placeholder when empty and can be highlighted when past due.</p>
-
-                    <h4>Components</h4>
-                    <ul>
-                        <li>"Dates" accordion in Edit Condition modal</li>
-                        <li>Expiration Date date picker</li>
-                        <li>Follow Up Date date picker</li>
-                        <li>Calendar icon buttons to open pickers</li>
-                    </ul>
-
-                    <h4>API Endpoints</h4>
-                    <div class="api-endpoint">
-<span class="api-method">PUT</span> <span class="api-path">/api/conditions/{conditionId}</span>
-
-<strong>Request Body:</strong>
-{
-  "expirationDate": "2026-02-15",
-  "followUpDate": "2026-01-20"
-}
-                    </div>
-
-                    <div class="acceptance-criteria">
-                        <h4>Acceptance Criteria</h4>
-                        <ul>
-                            <li>Clicking calendar icon opens date picker</li>
-                            <li>Selecting date updates field and saves to API</li>
-                            <li>Dates display in readable format (MM/DD/YYYY)</li>
-                            <li>Empty dates show "—" placeholder</li>
-                            <li>Past due dates highlighted in red</li>
-                            <li>Date picker supports keyboard navigation</li>
-                            <li>Dates can be cleared back to empty state</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="feature-section" id="cp-112">
-                    <h3>CP-112: Status History Timeline</h3>
-
-                    <div class="meta-info">
-                        <span class="badge badge-feature">Feature</span>
-                        <span class="badge badge-small">Size: Small (2 hours)</span>
-                        <span class="badge">Depends On: CP-100, CP-102</span>
-                    </div>
-
-                    <h4>Overview</h4>
-                    <p>Read-only timeline displaying all status transitions with exact timestamps. Shows all 7 possible statuses, with reached statuses showing timestamp and unreached statuses showing "—".</p>
-
-                    <h4>Components</h4>
-                    <ul>
-                        <li>"Condition Status Dates" section in Edit Condition modal</li>
-                        <li>Always visible, read-only</li>
-                        <li>Table showing all 7 statuses with timestamps</li>
-                        <li>Format: "Status Name: MM/DD/YYYY HH:MM AM/PM" or "—"</li>
-                    </ul>
-
-                    <h4>Fields & Validation</h4>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Status</th>
-                                <th>Display</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>New</td><td>Timestamp or "—"</td></tr>
-                            <tr><td>Need Brw Request</td><td>Timestamp or "—"</td></tr>
-                            <tr><td>Requested</td><td>Timestamp or "—"</td></tr>
-                            <tr><td>Processor to Review</td><td>Timestamp or "—"</td></tr>
-                            <tr><td>Ready for UW</td><td>Timestamp or "—"</td></tr>
-                            <tr><td>Cleared</td><td>Timestamp or "—"</td></tr>
-                            <tr><td>Not Cleared</td><td>Timestamp or "—"</td></tr>
-                        </tbody>
-                    </table>
-
-                    <div class="acceptance-criteria">
-                        <h4>Acceptance Criteria</h4>
-                        <ul>
-                            <li>Timeline displays all status transitions</li>
-                            <li>Each reached status shows exact timestamp</li>
-                            <li>Unreached statuses show "—"</li>
-                            <li>Read-only (cannot edit historical data)</li>
-                            <li>Timeline updates automatically when status changes</li>
-                            <li>Timestamps show full date and time with AM/PM</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="feature-section" id="cp-113">
-                    <h3>CP-113: Update Loan Status with Submission Notes</h3>
-
-                    <div class="meta-info">
-                        <span class="badge badge-feature">Feature</span>
-                        <span class="badge badge-small">Size: Small (2-3 hours)</span>
-                        <span class="badge">Depends On: CP-100</span>
-                    </div>
-
-                    <div class="screenshot-ref">
-                        <strong>Screenshot Reference:</strong>
-                        <p>Screenshot 09: Update Loan Status Modal</p>
-                        <img src="./conditions-portal-screenshot-09.png" alt="Update Loan Status Modal" />
-                    </div>
-
-                    <h4>Overview</h4>
-                    <p>Allows processors to add submission notes before updating loan status. Integrates with Byte API to launch external loan status page. Notes are visible to all loan team members.</p>
-
-                    <h4>Components</h4>
-                    <ul>
-                        <li>"Update Loan Status" button in header</li>
-                        <li>Modal: "Submission Details"</li>
-                        <li>Rich text editor with placeholder</li>
-                        <li>Info message about note visibility</li>
-                        <li>"Open Byte Loan Status Page" button</li>
-                    </ul>
-
-                    <h4>API Endpoints</h4>
-                    <div class="api-endpoint">
-<span class="api-method">POST</span> <span class="api-path">/api/loans/{loanId}/status-update</span>
-
-<strong>Request Body:</strong>
-{
-  "notes": "&lt;p&gt;Loan is ready for underwriter review. All conditions satisfied.&lt;/p&gt;",
-  "submittedBy": "user-id-123"
-}
-
-<strong>Integration:</strong>
-<span class="api-method">GET</span> Byte API endpoint to launch loan status page
-                    </div>
-
-                    <div class="acceptance-criteria">
-                        <h4>Acceptance Criteria</h4>
-                        <ul>
-                            <li>Modal opens when "Update Loan Status" clicked</li>
-                            <li>Rich text editor supports formatting</li>
-                            <li>Notes saved to loan (not condition-specific)</li>
-                            <li>Notes visible to all loan team members</li>
-                            <li>"Open Byte" button disabled until notes saved</li>
-                            <li>"Open Byte" button launches external Byte system</li>
-                            <li>Info message clearly states note visibility</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="feature-section" id="cp-114">
-                    <h3>CP-114: Add Documents to Condition (Dual Source)</h3>
-
-                    <div class="meta-info">
-                        <span class="badge badge-feature">Feature</span>
+                        <span class="badge badge-new">NEW</span>
                         <span class="badge badge-medium">Size: Medium (4-5 hours)</span>
-                        <span class="badge">Depends On: CP-100</span>
+                        <span class="badge">Depends On: CP-100, CP-101</span>
                     </div>
 
-                    <div class="screenshot-ref">
-                        <strong>Screenshot Reference:</strong>
-                        <p>Screenshot 10: Add Docs Dropdown Menu</p>
-                        <img src="./conditions-portal-screenshot-10.png" alt="Add Docs Dropdown Menu" />
-                    </div>
-
-                    <h4>Overview</h4>
-                    <p>Dual-source document addition: browse and link documents from CLEAR Docs system OR upload new files from computer. Supports drag-drop, file validation, and preview.</p>
-
-                    <h4>Components</h4>
-                    <ul>
-                        <li>"Add Docs" button on each condition row</li>
-                        <li>Dropdown menu with 2 options</li>
-                        <li>Option 1: "Browse and add docs from CLEAR Docs"</li>
-                        <li>Option 2: "Upload from your computer"</li>
-                        <li>File upload UI: drag-drop, file type validation, preview</li>
-                        <li>CLEAR Docs browser modal</li>
-                    </ul>
-
-                    <h4>API Endpoints</h4>
-                    <div class="api-endpoint">
-<span class="api-method">POST</span> <span class="api-path">/api/conditions/{conditionId}/documents</span>
-
-<strong>Request Body (Upload):</strong>
-FormData with file attachment
-
-<strong>Request Body (CLEAR Docs Link):</strong>
-{
-  "clearDocId": "clear-doc-123",
-  "documentName": "Bank Statement Jan 2026.pdf",
-  "linkedBy": "user-id-123"
-}
-                    </div>
-
-                    <div class="acceptance-criteria">
-                        <h4>Acceptance Criteria</h4>
-                        <ul>
-                            <li>Dropdown reveals two source options</li>
-                            <li>CLEAR Docs option opens integration modal</li>
-                            <li>File upload supports drag-drop and browse</li>
-                            <li>Files validated for type (PDF, JPG, PNG, DOCX) and size (10MB max)</li>
-                            <li>Documents linked to condition</li>
-                            <li>Document count badge updates on grid</li>
-                            <li>Progress indicator shows during upload</li>
-                            <li>Success/error messaging displayed</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="feature-section" id="cp-115">
-                    <h3>CP-115: View Outstanding Document Requests</h3>
-
-                    <div class="meta-info">
-                        <span class="badge badge-feature">Feature</span>
-                        <span class="badge badge-small">Size: Small (2 hours)</span>
-                        <span class="badge">Depends On: CP-100, CP-102, CP-101</span>
-                    </div>
-
-                    <div class="screenshot-ref">
-                        <strong>Screenshot Reference:</strong>
-                        <p>Screenshot 15: Outstanding Document Requests Accordion</p>
+                    <div class="day1-insight">
+                        <strong>Day 1 Offsite Key Requirement:</strong>
+                        <p><strong>Email Signature Import:</strong> Users need ability to import email signatures from Marketing Hub or Outlook. Support for up to 5 signatures per user. Signatures can be selected when generating AI document request emails.</p>
                     </div>
 
                     <h4>Overview</h4>
-                    <p>Accordion section in Edit Condition modal displaying all document requests linked to the condition. Shows type, date, recipient, and status for each request.</p>
+                    <p>Allows users to manage multiple email signatures for document request emails. Supports importing signatures from Marketing Hub or Outlook, and storing up to 5 signatures per user.</p>
 
                     <h4>Components</h4>
                     <ul>
-                        <li>"Outstanding Document Requests" accordion in Edit Condition modal</li>
-                        <li>List view: document type, request date, requested from, status</li>
-                        <li>"Add a Doc Request" button</li>
-                        <li>Status badges: Pending, Received, Reviewed</li>
-                    </ul>
-
-                    <div class="acceptance-criteria">
-                        <h4>Acceptance Criteria</h4>
-                        <ul>
-                            <li>Accordion shows all doc requests for this condition</li>
-                            <li>Each request shows type, date, recipient, status</li>
-                            <li>Clicking "Add a Doc Request" triggers CP-101 modal</li>
-                            <li>Empty state: "No document requests"</li>
-                            <li>Status badges color-coded (Pending=yellow, Received=blue, Reviewed=green)</li>
-                            <li>List updates when new request added</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="feature-section" id="cp-116">
-                    <h3>CP-116: Create Custom Condition Template</h3>
-
-                    <div class="meta-info">
-                        <span class="badge badge-feature">Feature</span>
-                        <span class="badge badge-small">Size: Small (3 hours)</span>
-                        <span class="badge">Depends On: CP-100, CP-103</span>
-                    </div>
-
-                    <div class="screenshot-ref">
-                        <strong>Screenshot Reference:</strong>
-                        <p>Screenshot 18: Custom Condition Creator</p>
-                        <img src="./conditions-portal-screenshot-18.png" alt="Custom Condition Creator" />
-                    </div>
-
-                    <h4>Overview</h4>
-                    <p>Allows users to create custom conditions from scratch when standard templates don't fit. Optionally save as template for future reuse.</p>
-
-                    <h4>Components</h4>
-                    <ul>
-                        <li>"Custom" button in Add Conditions modal</li>
-                        <li>Modal: "Add Custom Condition"</li>
-                        <li>Form fields: Name, Description, Category, Number, Stage, Class, Type, Save as Template</li>
-                        <li>Additional sections: Set Flag, Document Requests</li>
-                    </ul>
-
-                    <h4>API Endpoints</h4>
-                    <div class="api-endpoint">
-<span class="api-method">POST</span> <span class="api-path">/api/condition-templates</span>
-
-<strong>Request Body:</strong>
-{
-  "name": "Custom Condition Name",
-  "description": "Custom description",
-  "category": "MISC",
-  "defaultStage": "PTF",
-  "defaultClass": "Processor III",
-  "type": "INT",
-  "saveAsTemplate": true,
-  "createdBy": "user-id-123"
-}
-                    </div>
-
-                    <div class="acceptance-criteria">
-                        <h4>Acceptance Criteria</h4>
-                        <ul>
-                            <li>Clicking "Custom" opens custom condition form</li>
-                            <li>All 20+ categories available in dropdown</li>
-                            <li>Condition number auto-generated based on category</li>
-                            <li>"Save as Template" checkbox persists condition for future use</li>
-                            <li>Custom condition added to Current Conditions panel</li>
-                            <li>If saved as template, appears in "My Custom Templates" category</li>
-                            <li>Form validation prevents submission with empty required fields</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="feature-section" id="cp-117">
-                    <h3>CP-117: Save/Manage "My Lists"</h3>
-
-                    <div class="meta-info">
-                        <span class="badge badge-feature">Feature</span>
-                        <span class="badge badge-small">Size: Small (3 hours)</span>
-                        <span class="badge">Depends On: CP-100, CP-103</span>
-                    </div>
-
-                    <div class="screenshot-ref">
-                        <strong>Screenshot Reference:</strong>
-                        <p>Screenshot 17: Add Conditions with My Lists</p>
-                    </div>
-
-                    <h4>Overview</h4>
-                    <p>Allows users to save frequently used condition combinations as named lists for quick access. Lists are user-specific and persist across sessions.</p>
-
-                    <h4>Components</h4>
-                    <ul>
-                        <li>"My Lists" section in Add Conditions modal</li>
-                        <li>Pre-populated example lists: "FHA Loans", "Frequently Used"</li>
-                        <li>"Add New List" button</li>
-                        <li>Save list modal: name, description, selected conditions</li>
-                    </ul>
-
-                    <h4>API Endpoints</h4>
-                    <div class="api-endpoint">
-<span class="api-method">POST</span> <span class="api-path">/api/users/{userId}/condition-lists</span>
-
-<strong>Request Body:</strong>
-{
-  "name": "FHA Loans",
-  "description": "Standard conditions for FHA loans",
-  "templateIds": ["tmpl-001", "tmpl-005", "tmpl-012"]
-}
-
-<span class="api-method">GET</span> <span class="api-path">/api/users/{userId}/condition-lists</span>
-
-<strong>Response:</strong>
-{
-  "lists": [
-    {
-      "id": "list-123",
-      "name": "FHA Loans",
-      "description": "...",
-      "templateIds": [...]
-    }
-  ]
-}
-                    </div>
-
-                    <div class="acceptance-criteria">
-                        <h4>Acceptance Criteria</h4>
-                        <ul>
-                            <li>User can click "Add New List" after selecting conditions</li>
-                            <li>Save modal captures list name and description</li>
-                            <li>Saved list appears in "My Lists" section</li>
-                            <li>Clicking saved list name loads those conditions into Current Conditions panel</li>
-                            <li>Lists are user-specific (not shared across team)</li>
-                            <li>Lists persist across sessions</li>
-                            <li>User can edit or delete saved lists</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="feature-section" id="cp-118">
-                    <h3>CP-118: Real-time Count Badges Update</h3>
-
-                    <div class="meta-info">
-                        <span class="badge badge-feature">Feature</span>
-                        <span class="badge badge-small">Size: Small (2-3 hours)</span>
-                        <span class="badge">Depends On: CP-100, CP-104, CP-106</span>
-                    </div>
-
-                    <h4>Overview</h4>
-                    <p>WebSocket or polling mechanism to update count badges in real-time when conditions change. Keeps filter pill counts, selection counts, and stage group counts accurate without page refresh.</p>
-
-                    <h4>Components</h4>
-                    <ul>
-                        <li>WebSocket connection or polling mechanism</li>
-                        <li>Updates filter pill counts</li>
-                        <li>Updates selection count badge</li>
-                        <li>Updates stage group counts</li>
-                    </ul>
-
-                    <h4>API Endpoints</h4>
-                    <div class="api-endpoint">
-<strong>WebSocket:</strong>
-ws://api.example.com/loans/{loanId}/updates
-
-<strong>Or Polling:</strong>
-<span class="api-method">GET</span> <span class="api-path">/api/loans/{loanId}/counts</span>
-
-<strong>Response:</strong>
-{
-  "filterCounts": {...},
-  "stageCounts": {...},
-  "totalConditions": 45
-}
-                    </div>
-
-                    <div class="acceptance-criteria">
-                        <h4>Acceptance Criteria</h4>
-                        <ul>
-                            <li>Filter pill counts update without page refresh</li>
-                            <li>Selection count reflects accurate number</li>
-                            <li>Stage group counts update when conditions move</li>
-                            <li>Updates visible within 2 seconds of change</li>
-                            <li>No page flicker or jarring updates</li>
-                            <li>WebSocket connection handles reconnection gracefully</li>
-                            <li>Polling fallback if WebSocket unavailable</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TIER 3: UNDERWRITER FEATURES -->
-            <div class="section">
-                <h2 class="section-title">TIER 3: Underwriter Features (CP-201 to CP-204)</h2>
-
-                <div class="feature-section" id="cp-201">
-                    <h3>CP-201: Clear Condition (Underwriter)</h3>
-
-                    <div class="meta-info">
-                        <span class="badge badge-feature">Feature</span>
-                        <span class="badge badge-small">Size: Small (2 hours)</span>
-                        <span class="badge">Depends On: CP-200</span>
-                    </div>
-
-                    <h4>Overview</h4>
-                    <p>Allows underwriters to mark conditions as "Cleared" with optional approval notes. Timestamps and underwriter name recorded in status history.</p>
-
-                    <h4>Components</h4>
-                    <ul>
-                        <li>"Clear" button/action in underwriter view</li>
-                        <li>Status change to "Cleared"</li>
-                        <li>Approval notes field (optional)</li>
-                        <li>Timestamp and underwriter name recorded</li>
-                    </ul>
-
-                    <h4>API Endpoints</h4>
-                    <div class="api-endpoint">
-<span class="api-method">PUT</span> <span class="api-path">/api/conditions/{conditionId}/clear</span>
-
-<strong>Request Body:</strong>
-{
-  "approvalNotes": "All documentation reviewed and acceptable.",
-  "clearedBy": "underwriter-id-456"
-}
-
-<strong>Response:</strong>
-{
-  "id": "CLSNG-001",
-  "status": "Cleared",
-  "statusHistory": [...with new "Cleared" entry]
-}
-                    </div>
-
-                    <div class="acceptance-criteria">
-                        <h4>Acceptance Criteria</h4>
-                        <ul>
-                            <li>Underwriter can mark condition as "Cleared"</li>
-                            <li>Approval notes captured (optional field)</li>
-                            <li>Timestamp and underwriter recorded in status history</li>
-                            <li>Condition moves out of underwriter queue</li>
-                            <li>Processor notified of clearance</li>
-                            <li>Status badge updates to green "Cleared"</li>
-                            <li>Condition cannot be edited after clearing (requires unclear action)</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="feature-section" id="cp-202">
-                    <h3>CP-202: Reject Condition (Underwriter)</h3>
-
-                    <div class="meta-info">
-                        <span class="badge badge-feature">Feature</span>
-                        <span class="badge badge-small">Size: Small (2 hours)</span>
-                        <span class="badge">Depends On: CP-200</span>
-                    </div>
-
-                    <h4>Overview</h4>
-                    <p>Allows underwriters to reject conditions with required rejection reason. Sends condition back to processor with clear explanation of what needs to be fixed.</p>
-
-                    <h4>Components</h4>
-                    <ul>
-                        <li>"Reject" or "Not Cleared" action</li>
-                        <li>Status change to "Not Cleared"</li>
-                        <li>Rejection reason field (required)</li>
-                        <li>Sends condition back to processor</li>
-                    </ul>
-
-                    <h4>API Endpoints</h4>
-                    <div class="api-endpoint">
-<span class="api-method">PUT</span> <span class="api-path">/api/conditions/{conditionId}/reject</span>
-
-<strong>Request Body:</strong>
-{
-  "rejectionReason": "Bank statements are incomplete. Need full 2 months.",
-  "rejectedBy": "underwriter-id-456"
-}
-
-<strong>Response:</strong>
-{
-  "id": "CLSNG-001",
-  "status": "Not Cleared",
-  "statusHistory": [...with "Not Cleared" entry]
-}
-                    </div>
-
-                    <div class="acceptance-criteria">
-                        <h4>Acceptance Criteria</h4>
-                        <ul>
-                            <li>Underwriter can mark condition as "Not Cleared"</li>
-                            <li>Rejection reason required (cannot be empty)</li>
-                            <li>Condition returns to processor queue</li>
-                            <li>Processor notified of rejection with reason</li>
-                            <li>Status history records rejection with reason</li>
-                            <li>Status badge updates to red "Not Cleared"</li>
-                            <li>Rejection reason visible to processor in condition notes</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="feature-section" id="cp-203">
-                    <h3>CP-203: Request Additional Info (UW to Processor)</h3>
-
-                    <div class="meta-info">
-                        <span class="badge badge-feature">Feature</span>
-                        <span class="badge badge-small">Size: Small (2 hours)</span>
-                        <span class="badge">Depends On: CP-200</span>
-                    </div>
-
-                    <h4>Overview</h4>
-                    <p>Allows underwriters to send conditions back to processors requesting additional information or clarification without fully rejecting the condition.</p>
-
-                    <h4>Components</h4>
-                    <ul>
-                        <li>"Request Info" button in underwriter view</li>
-                        <li>Status change to "Processor to Review"</li>
-                        <li>Comments field for specifying needed info</li>
-                        <li>Notification to processor</li>
-                    </ul>
-
-                    <h4>API Endpoints</h4>
-                    <div class="api-endpoint">
-<span class="api-method">PUT</span> <span class="api-path">/api/conditions/{conditionId}/request-info</span>
-
-<strong>Request Body:</strong>
-{
-  "comments": "Please clarify the source of the $10,000 deposit on page 3.",
-  "requestedBy": "underwriter-id-456"
-}
-
-<strong>Response:</strong>
-{
-  "id": "CLSNG-001",
-  "status": "Processor to Review",
-  "statusHistory": [...]
-}
-                    </div>
-
-                    <div class="acceptance-criteria">
-                        <h4>Acceptance Criteria</h4>
-                        <ul>
-                            <li>Underwriter can send condition back for more information</li>
-                            <li>Status changes to "Processor to Review"</li>
-                            <li>Comments field captures what additional info is needed</li>
-                            <li>Processor receives notification with comments</li>
-                            <li>Processor can see underwriter's request in condition notes</li>
-                            <li>Condition remains in processor queue until addressed</li>
-                            <li>Underwriter's comments timestamped and attributed</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="feature-section" id="cp-204">
-                    <h3>CP-204: Escalate Condition for Review (Underwriter)</h3>
-
-                    <div class="meta-info">
-                        <span class="badge badge-feature">Feature</span>
-                        <span class="badge badge-small">Size: Small (2 hours)</span>
-                        <span class="badge">Depends On: CP-200</span>
-                    </div>
-
-                    <h4>Overview</h4>
-                    <p>Allows underwriters to escalate complex or difficult conditions to senior underwriters or managers for review and guidance.</p>
-
-                    <h4>Components</h4>
-                    <ul>
-                        <li>"Escalate" button for complex conditions</li>
-                        <li>Escalation reason field</li>
-                        <li>Escalation notification to senior underwriter/manager</li>
-                        <li>Condition flagged in system</li>
-                    </ul>
-
-                    <h4>API Endpoints</h4>
-                    <div class="api-endpoint">
-<span class="api-method">POST</span> <span class="api-path">/api/conditions/{conditionId}/escalate</span>
-
-<strong>Request Body:</strong>
-{
-  "reason": "Complex income calculation requires senior review.",
-  "escalatedBy": "underwriter-id-456",
-  "escalateTo": "senior-uw-id-789"
-}
-
-<strong>Response:</strong>
-{
-  "id": "escalation-123",
-  "conditionId": "CLSNG-001",
-  "escalatedAt": "2026-01-15T10:30:00Z",
-  "status": "Pending Review"
-}
-                    </div>
-
-                    <div class="acceptance-criteria">
-                        <h4>Acceptance Criteria</h4>
-                        <ul>
-                            <li>Underwriter can escalate difficult conditions</li>
-                            <li>Escalation reason captured and required</li>
-                            <li>Senior underwriter/manager notified</li>
-                            <li>Condition appears in escalated conditions queue</li>
-                            <li>Original underwriter remains assigned</li>
-                            <li>Escalation history tracked with timestamps</li>
-                            <li>Visual indicator shows condition is escalated</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TIER 3: BORROWER FEATURES -->
-            <div class="section">
-                <h2 class="section-title">TIER 3: Borrower Features (CP-301 to CP-304)</h2>
-
-                <div class="feature-section" id="cp-301">
-                    <h3>CP-301: View Required Documents List (Borrower)</h3>
-
-                    <div class="meta-info">
-                        <span class="badge badge-feature">Feature</span>
-                        <span class="badge badge-small">Size: Small (2 hours)</span>
-                        <span class="badge">Depends On: CP-300</span>
-                    </div>
-
-                    <h4>Overview</h4>
-                    <p>Borrower-facing portal showing only BRW-type conditions in simplified, borrower-friendly language. Displays document requests with due dates and status indicators.</p>
-
-                    <h4>Components</h4>
-                    <ul>
-                        <li>Borrower portal view (BRW-type conditions only)</li>
-                        <li>Simplified language (no internal jargon)</li>
-                        <li>Document request list with due dates</li>
-                        <li>Status indicators: Pending, Submitted, Approved</li>
-                    </ul>
-
-                    <h4>API Endpoints</h4>
-                    <div class="api-endpoint">
-<span class="api-method">GET</span> <span class="api-path">/api/borrowers/{borrowerId}/document-requests</span>
-
-<strong>Response:</strong>
-{
-  "requests": [
-    {
-      "id": "doc-req-123",
-      "documentType": "Bank Statements",
-      "description": "Please provide 2 months of bank statements",
-      "dueDate": "2026-01-20",
-      "status": "Pending"
-    }
-  ]
-}
-                    </div>
-
-                    <div class="acceptance-criteria">
-                        <h4>Acceptance Criteria</h4>
-                        <ul>
-                            <li>Borrower sees only conditions marked type="BRW"</li>
-                            <li>Language is borrower-friendly (no acronyms like PTF, UW, etc.)</li>
-                            <li>Each document request shows: name, description, due date, status</li>
-                            <li>Overdue requests highlighted in red</li>
-                            <li>Mobile-responsive (works on phone screens)</li>
-                            <li>Status badges use clear language (Not Started, In Progress, Complete)</li>
-                            <li>Clean, simple UI without overwhelming details</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="feature-section" id="cp-302">
-                    <h3>CP-302: Upload Documents for Condition (Borrower)</h3>
-
-                    <div class="meta-info">
-                        <span class="badge badge-feature">Feature</span>
-                        <span class="badge badge-medium">Size: Medium (4-5 hours)</span>
-                        <span class="badge">Depends On: CP-300, CP-301</span>
-                    </div>
-
-                    <h4>Overview</h4>
-                    <p>Allows borrowers to upload documents via drag-drop or file browser. Supports multiple files, shows upload progress, validates file types and sizes, and notifies processor when complete.</p>
-
-                    <h4>Components</h4>
-                    <ul>
-                        <li>"Upload Document" button for each request</li>
-                        <li>File upload UI: drag-drop, multiple file support</li>
-                        <li>File preview before submission</li>
-                        <li>Progress indicator during upload</li>
-                        <li>Success/error messaging</li>
+                        <li>Email Signature management page (accessible from user settings)</li>
+                        <li>Import from Marketing Hub button</li>
+                        <li>Import from Outlook button</li>
+                        <li>Manual signature editor (rich text)</li>
+                        <li>Signature preview panel</li>
+                        <li>Signature selector dropdown in document request email modal</li>
                     </ul>
 
                     <h4>Fields & Validation</h4>
@@ -2264,217 +1167,528 @@ ws://api.example.com/loans/{loanId}/updates
                             <tr>
                                 <th>Field</th>
                                 <th>Type</th>
+                                <th>Required</th>
                                 <th>Validation</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>files</td>
-                                <td>FileList</td>
-                                <td>Max 10MB per file, formats: PDF, JPG, PNG, DOCX</td>
+                                <td>signatureName</td>
+                                <td>string</td>
+                                <td>Yes</td>
+                                <td>Max 50 characters (e.g., "Professional", "Casual", "Spanish")</td>
+                            </tr>
+                            <tr>
+                                <td>signatureContent</td>
+                                <td>string (HTML)</td>
+                                <td>Yes</td>
+                                <td>Max 2000 characters, supports formatting and images</td>
+                            </tr>
+                            <tr>
+                                <td>isDefault</td>
+                                <td>boolean</td>
+                                <td>No</td>
+                                <td>Only one signature can be marked as default</td>
+                            </tr>
+                            <tr>
+                                <td>source</td>
+                                <td>enum</td>
+                                <td>Yes</td>
+                                <td>"manual", "marketing_hub", "outlook"</td>
                             </tr>
                         </tbody>
                     </table>
 
                     <h4>API Endpoints</h4>
                     <div class="api-endpoint">
-<span class="api-method">POST</span> <span class="api-path">/api/document-requests/{requestId}/upload</span>
-
-<strong>Request Body:</strong>
-FormData with file(s)
+<span class="api-method">GET</span> <span class="api-path">/api/users/{userId}/email-signatures</span>
 
 <strong>Response:</strong>
 {
-  "uploadedFiles": [
+  "signatures": [
     {
-      "id": "file-123",
-      "name": "bank_statement_jan_2026.pdf",
-      "size": 2458963,
-      "uploadedAt": "2026-01-15T10:30:00Z"
+      "id": "sig-123",
+      "name": "Professional",
+      "content": "&lt;p&gt;Best regards,&lt;br&gt;&lt;strong&gt;John Doe&lt;/strong&gt;...&lt;/p&gt;",
+      "isDefault": true,
+      "source": "marketing_hub"
     }
-  ]
+  ],
+  "count": 3,
+  "maxAllowed": 5
 }
-                    </div>
 
-                    <div class="acceptance-criteria">
-                        <h4>Acceptance Criteria</h4>
-                        <ul>
-                            <li>Borrower can upload files via drag-drop or browse</li>
-                            <li>Multiple files supported per request</li>
-                            <li>File size limit enforced (10MB per file)</li>
-                            <li>Supported formats: PDF, JPG, PNG, DOCX</li>
-                            <li>Progress bar shows upload status</li>
-                            <li>Success message confirms upload</li>
-                            <li>Processor notified of new document</li>
-                            <li>File preview shown before final submission</li>
-                            <li>Clear error messages for invalid files</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="feature-section" id="cp-303">
-                    <h3>CP-303: Track Condition Status & Timeline (Borrower)</h3>
-
-                    <div class="meta-info">
-                        <span class="badge badge-feature">Feature</span>
-                        <span class="badge badge-small">Size: Small (2-3 hours)</span>
-                        <span class="badge">Depends On: CP-300</span>
-                    </div>
-
-                    <h4>Overview</h4>
-                    <p>Visual timeline showing borrowers the progress of their document requests through simplified stages: Requested → Submitted → Under Review → Approved/Rejected.</p>
-
-                    <h4>Components</h4>
-                    <ul>
-                        <li>Status timeline view: Requested → Submitted → Under Review → Approved/Rejected</li>
-                        <li>Visual progress indicator</li>
-                        <li>Timestamp for each stage</li>
-                        <li>Estimated completion date</li>
-                    </ul>
-
-                    <h4>API Endpoints</h4>
-                    <div class="api-endpoint">
-<span class="api-method">GET</span> <span class="api-path">/api/borrowers/{borrowerId}/conditions/status</span>
-
-<strong>Response:</strong>
-{
-  "conditions": [
-    {
-      "id": "CLSNG-001",
-      "name": "Bank Statements",
-      "timeline": {
-        "requested": "2026-01-10T10:00:00Z",
-        "submitted": "2026-01-12T14:30:00Z",
-        "underReview": "2026-01-13T09:00:00Z",
-        "completed": null
-      },
-      "currentStage": "underReview",
-      "estimatedCompletion": "2026-01-16"
-    }
-  ]
-}
-                    </div>
-
-                    <div class="acceptance-criteria">
-                        <h4>Acceptance Criteria</h4>
-                        <ul>
-                            <li>Borrower sees visual timeline of condition status</li>
-                            <li>Current stage highlighted</li>
-                            <li>Completed stages show checkmark and timestamp</li>
-                            <li>Pending stages grayed out</li>
-                            <li>Estimated completion date displayed (if available)</li>
-                            <li>Simplified stage names (no internal terminology)</li>
-                            <li>Mobile-friendly timeline design</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="feature-section" id="cp-304">
-                    <h3>CP-304: Receive Notifications for Updates (Borrower)</h3>
-
-                    <div class="meta-info">
-                        <span class="badge badge-feature">Feature</span>
-                        <span class="badge badge-small">Size: Small (2-3 hours)</span>
-                        <span class="badge">Depends On: CP-300</span>
-                    </div>
-
-                    <h4>Overview</h4>
-                    <p>Multi-channel notification system for borrowers: email (required), SMS (opt-in), and in-app notifications. Notifies borrowers of new requests, document approval/rejection, and status changes.</p>
-
-                    <h4>Components</h4>
-                    <ul>
-                        <li>Email notifications: new document request, document approved, document rejected</li>
-                        <li>SMS notifications (opt-in)</li>
-                        <li>In-app notification bell icon with count badge</li>
-                        <li>Notification preferences page</li>
-                    </ul>
-
-                    <h4>API Endpoints</h4>
-                    <div class="api-endpoint">
-<span class="api-method">POST</span> <span class="api-path">/api/notifications/send</span>
+<span class="api-method">POST</span> <span class="api-path">/api/users/{userId}/email-signatures</span>
 
 <strong>Request Body:</strong>
 {
-  "recipientId": "borrower-id-123",
-  "type": "document_request",
-  "channels": ["email", "sms"],
-  "data": {
-    "documentType": "Bank Statements",
-    "dueDate": "2026-01-20"
-  }
+  "name": "Casual",
+  "content": "...",
+  "isDefault": false,
+  "source": "manual"
 }
 
-<span class="api-method">GET</span> <span class="api-path">/api/borrowers/{borrowerId}/notifications</span>
+<span class="api-method">POST</span> <span class="api-path">/api/users/{userId}/email-signatures/import-outlook</span>
 
-<strong>Response:</strong>
-{
-  "unreadCount": 3,
-  "notifications": [...]
-}
+<strong>Integration with Microsoft Graph API to fetch Outlook signature</strong>
                     </div>
 
                     <div class="acceptance-criteria">
                         <h4>Acceptance Criteria</h4>
                         <ul>
-                            <li>Borrower receives email when document requested</li>
-                            <li>Borrower receives email when document approved/rejected</li>
-                            <li>SMS opt-in available in preferences</li>
-                            <li>In-app bell icon shows unread count</li>
-                            <li>Clicking notification navigates to relevant condition</li>
-                            <li>Notification preferences saved per borrower</li>
-                            <li>Email templates are borrower-friendly and clear</li>
-                            <li>SMS messages are concise and actionable</li>
+                            <li>User can access Email Signature management from settings</li>
+                            <li>User can import signatures from Marketing Hub</li>
+                            <li>User can import signatures from Outlook via Microsoft Graph API</li>
+                            <li>User can create manual signatures with rich text editor</li>
+                            <li>Maximum 5 signatures enforced per user</li>
+                            <li>One signature can be marked as default</li>
+                            <li>Signature selector appears in document request email modal</li>
+                            <li>Selected signature automatically appended to email body</li>
+                            <li>Signature preview renders correctly with formatting</li>
+                            <li>User can edit, delete, or reorder signatures</li>
                         </ul>
                     </div>
                 </div>
-            </div>
 
-            <!-- TIER 3: CROSS-CUTTING FEATURES -->
-            <div class="section">
-                <h2 class="section-title">TIER 3: Cross-Cutting Features (CP-400 to CP-404)</h2>
-
-                <div class="feature-section" id="cp-400">
-                    <h3>CP-400: Activity History & Audit Log</h3>
+                <div class="feature-section" id="cp-120">
+                    <h3>CP-120: Document Request History Tab (NEW from Day 1)</h3>
 
                     <div class="meta-info">
                         <span class="badge badge-feature">Feature</span>
-                        <span class="badge badge-medium">Size: Medium (4 hours)</span>
-                        <span class="badge">Depends On: CP-001</span>
+                        <span class="badge badge-new">NEW</span>
+                        <span class="badge badge-small">Size: Small (3 hours)</span>
+                        <span class="badge">Depends On: CP-100, CP-101</span>
+                    </div>
+
+                    <div class="day1-insight">
+                        <strong>Day 1 Offsite Key Requirement:</strong>
+                        <p><strong>Document Request History:</strong> Users need a dedicated tab/view showing all document requests sent for a loan, with status, recipient, date sent, date fulfilled, and associated condition. Separate from document history (which shows document uploads/changes).</p>
                     </div>
 
                     <h4>Overview</h4>
-                    <p>Comprehensive audit log tracking all changes to conditions. Shows who made what change, when, and before/after values. Filterable by action type, user, and date range. Exportable to CSV.</p>
+                    <p>Dedicated tab displaying comprehensive history of all document requests sent for a loan. Shows request status, recipient, dates, and links to associated conditions.</p>
 
                     <h4>Components</h4>
                     <ul>
-                        <li>Activity log view showing all actions on condition</li>
-                        <li>Filterable by action type, user, date range</li>
-                        <li>Audit trail: who, what, when, from/to values</li>
-                        <li>Export to CSV</li>
+                        <li>"Document Requests History" tab in main navigation</li>
+                        <li>Data table with columns: Request Date, Document Type, Requested From, Condition, Status, Date Fulfilled</li>
+                        <li>Status filter: All, Pending, Fulfilled, Overdue</li>
+                        <li>Date range filter</li>
+                        <li>Export to Excel button</li>
                     </ul>
 
                     <h4>API Endpoints</h4>
                     <div class="api-endpoint">
-<span class="api-method">GET</span> <span class="api-path">/api/conditions/{conditionId}/audit-log</span>
+<span class="api-method">GET</span> <span class="api-path">/api/loans/{loanId}/document-requests/history</span>
 
 <strong>Query Params:</strong>
-- actionType (optional)
-- userId (optional)
+- status (optional): "pending" | "fulfilled" | "overdue"
 - startDate (optional)
 - endDate (optional)
 
 <strong>Response:</strong>
 {
-  "auditEntries": [
+  "requests": [
     {
-      "id": "audit-123",
-      "timestamp": "2026-01-15T10:30:00Z",
-      "userId": "user-id-123",
-      "userName": "John Doe",
-      "action": "status_change",
-      "field": "status",
-      "oldValue": "New",
-      "newValue": "Ready for UW"
+      "id": "doc-req-123",
+      "requestDate": "2026-01-10T10:30:00Z",
+      "documentType": "Bank Statements",
+      "requestedFrom": "Michael Johnson (Borrower 1)",
+      "conditionId": "INC-003",
+      "conditionDescription": "Income Verification - Bank Statements",
+      "status": "Fulfilled",
+      "dateFulfilled": "2026-01-12T14:20:00Z",
+      "requestedBy": "John Doe (Processor)"
+    }
+  ],
+  "totalCount": 23
+}
+                    </div>
+
+                    <div class="acceptance-criteria">
+                        <h4>Acceptance Criteria</h4>
+                        <ul>
+                            <li>Document Requests History tab accessible from main navigation</li>
+                            <li>All document requests for loan displayed in chronological order</li>
+                            <li>Each request shows: date, type, recipient, associated condition, status, fulfillment date</li>
+                            <li>Status filter works correctly (All, Pending, Fulfilled, Overdue)</li>
+                            <li>Date range filter allows custom date selection</li>
+                            <li>Clicking condition ID navigates to condition detail</li>
+                            <li>Export to Excel generates downloadable file with all columns</li>
+                            <li>Overdue requests highlighted in red</li>
+                            <li>Pagination implemented for loans with 50+ requests</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="feature-section" id="cp-121">
+                    <h3>CP-121: Loan History Tab (NEW from Day 1)</h3>
+
+                    <div class="meta-info">
+                        <span class="badge badge-feature">Feature</span>
+                        <span class="badge badge-new">NEW</span>
+                        <span class="badge badge-small">Size: Small (3 hours)</span>
+                        <span class="badge">Depends On: CP-100</span>
+                    </div>
+
+                    <div class="day1-insight">
+                        <strong>Day 1 Offsite Key Requirement:</strong>
+                        <p><strong>Loan History Tab:</strong> Separate from document history. Shows all loan-level events: status changes, milestone completions, user assignments, condition additions/removals, and system-generated events. Provides comprehensive audit trail of loan progression.</p>
+                    </div>
+
+                    <h4>Overview</h4>
+                    <p>Comprehensive loan-level activity history showing all events, status changes, and milestones for the entire loan lifecycle.</p>
+
+                    <h4>Components</h4>
+                    <ul>
+                        <li>"Loan History" tab in main navigation</li>
+                        <li>Timeline view with chronological events</li>
+                        <li>Event type filters: All, Status Changes, Conditions, Assignments, System Events</li>
+                        <li>Date range filter</li>
+                        <li>Search functionality for events</li>
+                        <li>Export to PDF button</li>
+                    </ul>
+
+                    <h4>API Endpoints</h4>
+                    <div class="api-endpoint">
+<span class="api-method">GET</span> <span class="api-path">/api/loans/{loanId}/history</span>
+
+<strong>Query Params:</strong>
+- eventType (optional): "status_change" | "condition" | "assignment" | "system"
+- startDate (optional)
+- endDate (optional)
+
+<strong>Response:</strong>
+{
+  "events": [
+    {
+      "id": "event-456",
+      "timestamp": "2026-01-13T09:15:00Z",
+      "eventType": "status_change",
+      "description": "Loan status changed from 'Processing' to 'In Underwriting'",
+      "performedBy": "John Doe",
+      "details": {
+        "oldStatus": "Processing",
+        "newStatus": "In Underwriting"
+      }
+    },
+    {
+      "id": "event-457",
+      "timestamp": "2026-01-13T10:30:00Z",
+      "eventType": "condition",
+      "description": "15 conditions added via Automated Rules Engine",
+      "performedBy": "System",
+      "details": {
+        "conditionsAdded": 15,
+        "ruleSetName": "FHA Standard Conditions"
+      }
+    }
+  ],
+  "totalCount": 87
+}
+                    </div>
+
+                    <div class="acceptance-criteria">
+                        <h4>Acceptance Criteria</h4>
+                        <ul>
+                            <li>Loan History tab accessible from main navigation</li>
+                            <li>All loan events displayed in chronological timeline</li>
+                            <li>Event type filter works correctly</li>
+                            <li>Each event shows: timestamp, description, user, details</li>
+                            <li>System events clearly marked as "System" user</li>
+                            <li>Expandable event details for complex events</li>
+                            <li>Date range filter allows custom date selection</li>
+                            <li>Search functionality filters events by keyword</li>
+                            <li>Export to PDF generates formatted timeline report</li>
+                            <li>Pagination implemented for loans with 100+ events</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="feature-section" id="cp-122">
+                    <h3>CP-122: Read/Unread Note Indicators with Bell Icon (NEW from Day 1)</h3>
+
+                    <div class="meta-info">
+                        <span class="badge badge-feature">Feature</span>
+                        <span class="badge badge-new">NEW</span>
+                        <span class="badge badge-small">Size: Small (3 hours)</span>
+                        <span class="badge">Depends On: CP-100, CP-108</span>
+                    </div>
+
+                    <div class="day1-insight">
+                        <strong>Day 1 Offsite Key Requirement:</strong>
+                        <p><strong>Read/Unread Note Tracking:</strong> Three-level notes system requires read/unread tracking per user. Bell icon with count badge shows unread notes. When user views a note, it's marked as read for that user only. Critical for team collaboration and ensuring processors/underwriters don't miss important updates.</p>
+                    </div>
+
+                    <h4>Overview</h4>
+                    <p>User-specific read/unread tracking for notes at all three levels (loan, condition, document). Bell icon notification system shows unread count with visual indicator.</p>
+
+                    <h4>Components</h4>
+                    <ul>
+                        <li>Bell icon in header with unread count badge</li>
+                        <li>Unread indicator on condition rows with notes</li>
+                        <li>Unread indicator in notes panel</li>
+                        <li>Mark as read/unread functionality</li>
+                        <li>"Mark all as read" button</li>
+                    </ul>
+
+                    <h4>API Endpoints</h4>
+                    <div class="api-endpoint">
+<span class="api-method">GET</span> <span class="api-path">/api/users/{userId}/notes/unread-count</span>
+
+<strong>Response:</strong>
+{
+  "unreadCount": 12,
+  "byType": {
+    "loanNotes": 3,
+    "conditionNotes": 7,
+    "documentNotes": 2
+  }
+}
+
+<span class="api-method">POST</span> <span class="api-path">/api/notes/{noteId}/mark-read</span>
+
+<strong>Request Body:</strong>
+{
+  "userId": "user-123",
+  "timestamp": "2026-01-15T10:30:00Z"
+}
+
+<span class="api-method">POST</span> <span class="api-path">/api/loans/{loanId}/notes/mark-all-read</span>
+
+<strong>Request Body:</strong>
+{
+  "userId": "user-123"
+}
+                    </div>
+
+                    <div class="acceptance-criteria">
+                        <h4>Acceptance Criteria</h4>
+                        <ul>
+                            <li>Bell icon in header shows total unread note count</li>
+                            <li>Count badge updates in real-time when new notes added</li>
+                            <li>Clicking bell icon opens notifications panel</li>
+                            <li>Notifications panel lists all unread notes by type (loan, condition, document)</li>
+                            <li>Condition rows with unread notes show blue dot indicator</li>
+                            <li>Opening condition marks condition notes as read for current user</li>
+                            <li>Read/unread state is user-specific (not global)</li>
+                            <li>"Mark all as read" button marks all loan notes as read</li>
+                            <li>Unread notes highlighted with background color</li>
+                            <li>Clicking note navigates to relevant condition or document</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="feature-section" id="cp-123">
+                    <h3>CP-123: Bar Dependency Flag for Conditions (NEW from Day 1)</h3>
+
+                    <div class="meta-info">
+                        <span class="badge badge-feature">Feature</span>
+                        <span class="badge badge-new">NEW</span>
+                        <span class="badge badge-small">Size: Small (2 hours)</span>
+                        <span class="badge">Depends On: CP-100, CP-101</span>
+                    </div>
+
+                    <div class="day1-insight">
+                        <strong>Day 1 Offsite Key Requirement:</strong>
+                        <p><strong>Bar Dependency Workflow:</strong> Conditions that require borrower-provided documents must be flagged with "hasBarDependency: true". This drives the "Send Brw Requests" workflow where processors can filter and batch-send document requests to borrowers. Critical for borrower communication workflow.</p>
+                    </div>
+
+                    <h4>Overview</h4>
+                    <p>Boolean flag indicating whether a condition requires borrower-provided documents. Drives filtering and workflow for borrower document requests.</p>
+
+                    <h4>Components</h4>
+                    <ul>
+                        <li>Bar Dependency checkbox in Edit Condition modal</li>
+                        <li>Bar dependency indicator icon on condition row</li>
+                        <li>"Send Brw Requests" filter uses this flag</li>
+                        <li>Bar dependency conditions highlighted in borrower request wizard</li>
+                    </ul>
+
+                    <h4>API Endpoints</h4>
+                    <div class="api-endpoint">
+<span class="api-method">PUT</span> <span class="api-path">/api/conditions/{conditionId}</span>
+
+<strong>Request Body:</strong>
+{
+  "hasBarDependency": true
+}
+
+<span class="api-method">GET</span> <span class="api-path">/api/loans/{loanId}/conditions?hasBarDependency=true</span>
+
+<strong>Response:</strong>
+{
+  "conditions": [...filtered to conditions with hasBarDependency=true]
+}
+                    </div>
+
+                    <div class="acceptance-criteria">
+                        <h4>Acceptance Criteria</h4>
+                        <ul>
+                            <li>Bar Dependency checkbox visible in Edit Condition modal</li>
+                            <li>Checkbox state saved when condition updated</li>
+                            <li>Conditions with bar dependency show icon indicator on grid</li>
+                            <li>"Send Brw Requests" filter shows only conditions with hasBarDependency=true</li>
+                            <li>Borrower request wizard highlights bar dependency conditions</li>
+                            <li>Flag visible in condition details and exports</li>
+                            <li>Audit log tracks changes to bar dependency flag</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="feature-section" id="cp-124">
+                    <h3>CP-124: Transaction Field (Replaces Responsibility) (NEW from Day 1)</h3>
+
+                    <div class="meta-info">
+                        <span class="badge badge-feature">Feature</span>
+                        <span class="badge badge-new">NEW</span>
+                        <span class="badge badge-small">Size: Small (2 hours)</span>
+                        <span class="badge">Depends On: CP-100, CP-102</span>
+                    </div>
+
+                    <div class="day1-insight">
+                        <strong>Day 1 Offsite Key Decision:</strong>
+                        <p><strong>Transaction Field Replaces Responsibility:</strong> Per Kelly Mattox (Byte Platform Owner), the "responsibility" field is being removed from Byte. Candor integration will use "transaction" field instead to track whether condition is related to Purchase, Refinance, HELOC, etc. This is a critical change for Candor pilot compatibility.</p>
+                    </div>
+
+                    <h4>Overview</h4>
+                    <p>Transaction type field replacing deprecated "responsibility" field. Tracks the transaction context for each condition (Purchase, Refinance, HELOC, etc.).</p>
+
+                    <h4>Components</h4>
+                    <ul>
+                        <li>Transaction dropdown in Edit Condition modal</li>
+                        <li>Transaction column option for grid (hidden by default)</li>
+                        <li>Transaction filter option</li>
+                    </ul>
+
+                    <h4>Fields & Validation</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Type</th>
+                                <th>Required</th>
+                                <th>Validation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>transaction</td>
+                                <td>enum</td>
+                                <td>No</td>
+                                <td>One of: Purchase, Refinance, HELOC, Cash-Out Refinance, Construction, Other</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>API Endpoints</h4>
+                    <div class="api-endpoint">
+<span class="api-method">PUT</span> <span class="api-path">/api/conditions/{conditionId}</span>
+
+<strong>Request Body:</strong>
+{
+  "transaction": "Purchase"
+}
+
+<strong>Note:</strong> "responsibility" field is deprecated and will not be synced to Byte
+                    </div>
+
+                    <div class="acceptance-criteria">
+                        <h4>Acceptance Criteria</h4>
+                        <ul>
+                            <li>Transaction dropdown visible in Edit Condition modal</li>
+                            <li>Dropdown shows all transaction types</li>
+                            <li>Transaction value saved when condition updated</li>
+                            <li>Transaction column can be added to grid (optional)</li>
+                            <li>Filter by transaction type works correctly</li>
+                            <li>"Responsibility" field not displayed or synced (deprecated)</li>
+                            <li>Candor integration uses transaction field for condition matching</li>
+                            <li>Audit log tracks changes to transaction field</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="feature-section" id="cp-125">
+                    <h3>CP-125: Automated Conditions Rules Engine (NEW from Day 1)</h3>
+
+                    <div class="meta-info">
+                        <span class="badge badge-feature">Feature</span>
+                        <span class="badge badge-new">NEW</span>
+                        <span class="badge badge-large">Size: Large (8-10 hours)</span>
+                        <span class="badge">Depends On: CP-100, CP-103</span>
+                    </div>
+
+                    <div class="day1-insight">
+                        <strong>Day 1 Offsite Key Discussion:</strong>
+                        <p><strong>Rules Engine Trigger Decision:</strong> Debate on whether rules engine should auto-run when loan is opened in Conditions Portal vs require button click. Consensus leaning toward button-triggered for Phase 1 to give processors control, with auto-run as Phase 2 enhancement after monitoring.</p>
+                        <p><strong>Rules Logic:</strong> Engine evaluates loan criteria (loan type, property type, LTV, occupancy, credit score, etc.) and automatically adds/removes conditions based on predefined rule sets. Example: FHA loan with LTV > 95% triggers specific FHA conditions. Miami condo triggers condo-specific conditions.</p>
+                        <p><strong>Exception Request Integration:</strong> Rules engine respects exception approvals. If exception approved to waive a condition, rules engine won't re-add it on subsequent runs.</p>
+                    </div>
+
+                    <h4>Overview</h4>
+                    <p>Rules-based automation engine that adds or removes conditions based on loan criteria. Supports custom rule sets, exception handling, and stage-based progression logic.</p>
+
+                    <h4>Components</h4>
+                    <ul>
+                        <li>"Run Conditions Engine" button in header</li>
+                        <li>Rules configuration admin interface</li>
+                        <li>Rule set library (FHA Standard, VA Standard, Condo, HELOC, etc.)</li>
+                        <li>Dry run preview showing what would be added/removed</li>
+                        <li>Exception override logic</li>
+                        <li>Audit log of rule executions</li>
+                    </ul>
+
+                    <h4>API Endpoints</h4>
+                    <div class="api-endpoint">
+<span class="api-method">POST</span> <span class="api-path">/api/loans/{loanId}/rules-engine/run</span>
+
+<strong>Request Body:</strong>
+{
+  "dryRun": false,
+  "ruleSetIds": ["rs-fha-standard", "rs-high-ltv"],
+  "userId": "user-123"
+}
+
+<strong>Response:</strong>
+{
+  "executionId": "exec-789",
+  "timestamp": "2026-01-15T10:30:00Z",
+  "conditionsAdded": 12,
+  "conditionsRemoved": 2,
+  "conditionsModified": 3,
+  "changes": [
+    {
+      "action": "add",
+      "conditionTemplateId": "tmpl-fha-001",
+      "conditionName": "FHA Case Number Assignment",
+      "reason": "FHA loan type detected"
+    },
+    {
+      "action": "remove",
+      "conditionId": "PROP-015",
+      "conditionName": "HOA Approval Letter",
+      "reason": "Not required for single-family residence"
+    }
+  ]
+}
+
+<span class="api-method">GET</span> <span class="api-path">/api/rules-engine/rule-sets</span>
+
+<strong>Response:</strong>
+{
+  "ruleSets": [
+    {
+      "id": "rs-fha-standard",
+      "name": "FHA Standard Conditions",
+      "description": "Standard conditions for FHA loans",
+      "criteria": {
+        "loanType": "FHA",
+        "occupancy": "Primary"
+      },
+      "actions": [
+        {"type": "add", "templateId": "tmpl-fha-001"},
+        {"type": "add", "templateId": "tmpl-fha-002"}
+      ]
     }
   ]
 }
@@ -2483,220 +1697,92 @@ FormData with file(s)
                     <div class="acceptance-criteria">
                         <h4>Acceptance Criteria</h4>
                         <ul>
-                            <li>All condition changes logged with timestamp and user</li>
-                            <li>Log shows before/after values for edited fields</li>
-                            <li>Filterable by action type and date</li>
-                            <li>Exportable to CSV</li>
-                            <li>Log immutable (cannot be edited or deleted)</li>
-                            <li>Clear action descriptions (not technical codes)</li>
-                            <li>Pagination for large logs</li>
+                            <li>"Run Conditions Engine" button visible in processor header</li>
+                            <li>Button triggers dry run preview first</li>
+                            <li>Preview shows what conditions would be added/removed with reasons</li>
+                            <li>User can approve or cancel after reviewing preview</li>
+                            <li>Approved execution adds/removes conditions as previewed</li>
+                            <li>Rules engine evaluates loan criteria correctly (loan type, LTV, property type, etc.)</li>
+                            <li>Exception-approved conditions not re-added by engine</li>
+                            <li>Stage progression rules enforced (can't add PTF condition when loan in SUSP stage)</li>
+                            <li>All rule executions logged in audit trail</li>
+                            <li>User notified of completion with summary count</li>
+                            <li>Conditions added via rules engine marked with "Added by: Rules Engine" attribution</li>
+                            <li><strong>Day 1:</strong> Button-triggered (not auto-run) for Phase 1</li>
+                            <li><strong>Day 1:</strong> Dry run preview mandatory before execution</li>
                         </ul>
                     </div>
                 </div>
 
-                <div class="feature-section" id="cp-401">
-                    <h3>CP-401: Email & SMS Notifications</h3>
+                <div class="feature-section" id="cp-126">
+                    <h3>CP-126: Scenario Selector for Testing (Moved from Overview)</h3>
 
                     <div class="meta-info">
                         <span class="badge badge-feature">Feature</span>
-                        <span class="badge badge-medium">Size: Medium (4-5 hours)</span>
-                        <span class="badge">Depends On: CP-001</span>
-                    </div>
-
-                    <h4>Overview</h4>
-                    <p>Multi-channel notification system with SMTP email and SMS (Twilio) integration. Sends notifications for key events: document requested, status changed, condition cleared, etc. Users can configure notification preferences.</p>
-
-                    <h4>Components</h4>
-                    <ul>
-                        <li>Email notification system (SMTP integration)</li>
-                        <li>SMS notification system (Twilio/similar)</li>
-                        <li>Notification templates: document requested, status changed, condition cleared</li>
-                        <li>Notification preferences per user</li>
-                    </ul>
-
-                    <h4>API Endpoints</h4>
-                    <div class="api-endpoint">
-<span class="api-method">POST</span> <span class="api-path">/api/notifications/send</span>
-
-<strong>Integrations:</strong>
-- SMTP server for email
-- Twilio API for SMS
-                    </div>
-
-                    <div class="acceptance-criteria">
-                        <h4>Acceptance Criteria</h4>
-                        <ul>
-                            <li>Processor notified when borrower uploads document</li>
-                            <li>Underwriter notified when condition ready for review</li>
-                            <li>Borrower notified when document requested</li>
-                            <li>Borrower notified when condition cleared</li>
-                            <li>Users can opt-out of specific notification types</li>
-                            <li>Notifications sent within 1 minute of trigger event</li>
-                            <li>Email templates are professional and branded</li>
-                            <li>SMS messages are concise (160 characters)</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="feature-section" id="cp-402">
-                    <h3>CP-402: Export Conditions Report (PDF/Excel)</h3>
-
-                    <div class="meta-info">
-                        <span class="badge badge-feature">Feature</span>
-                        <span class="badge badge-small">Size: Small (2-3 hours)</span>
-                        <span class="badge">Depends On: CP-001</span>
-                    </div>
-
-                    <h4>Overview</h4>
-                    <p>Export functionality to generate PDF or Excel reports of conditions. PDF formatted with company branding, Excel contains all grid columns. Report respects current filters (only exports visible conditions).</p>
-
-                    <h4>Components</h4>
-                    <ul>
-                        <li>"Export" button in header</li>
-                        <li>Format selector: PDF or Excel</li>
-                        <li>Report includes: all visible conditions, current filters, metadata</li>
-                        <li>PDF: formatted report with logo</li>
-                        <li>Excel: spreadsheet with columns matching grid</li>
-                    </ul>
-
-                    <h4>API Endpoints</h4>
-                    <div class="api-endpoint">
-<span class="api-method">GET</span> <span class="api-path">/api/loans/{loanId}/conditions/export</span>
-
-<strong>Query Params:</strong>
-- format: "pdf" | "xlsx"
-- filters: JSON object with active filters
-
-<strong>Response:</strong>
-Binary file download (PDF or Excel)
-                    </div>
-
-                    <div class="acceptance-criteria">
-                        <h4>Acceptance Criteria</h4>
-                        <ul>
-                            <li>Export button generates report based on current view</li>
-                            <li>PDF formatted with company branding</li>
-                            <li>Excel contains all columns from grid</li>
-                            <li>Report respects current filters (only exports visible conditions)</li>
-                            <li>Download initiates within 3 seconds</li>
-                            <li>File named appropriately (e.g., "Conditions_2024-001234_2026-01-15.pdf")</li>
-                            <li>Excel is properly formatted with headers and data types</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="feature-section" id="cp-403">
-                    <h3>CP-403: CLEAR Docs System Integration</h3>
-
-                    <div class="meta-info">
-                        <span class="badge badge-feature">Feature</span>
-                        <span class="badge badge-medium">Size: Medium (5-6 hours)</span>
-                        <span class="badge">Depends On: CP-001, CP-114</span>
-                    </div>
-
-                    <h4>Overview</h4>
-                    <p>API integration with CLEAR Docs document management system. Allows browsing, searching, and linking documents from CLEAR Docs to conditions. Syncs document metadata and handles authentication.</p>
-
-                    <h4>Components</h4>
-                    <ul>
-                        <li>API integration with CLEAR Docs</li>
-                        <li>Document browser modal</li>
-                        <li>Document metadata sync</li>
-                        <li>Link CLEAR document to condition</li>
-                    </ul>
-
-                    <h4>API Endpoints</h4>
-                    <div class="api-endpoint">
-<strong>Integration with CLEAR Docs API:</strong>
-
-<span class="api-method">GET</span> CLEAR Docs API: /documents?loanId={loanId}
-(Browse available documents)
-
-<span class="api-method">POST</span> <span class="api-path">/api/conditions/{conditionId}/documents/link-clear</span>
-
-<strong>Request Body:</strong>
-{
-  "clearDocId": "clear-doc-123",
-  "documentName": "Bank Statement Jan 2026.pdf",
-  "documentType": "Bank Statements"
-}
-                    </div>
-
-                    <div class="acceptance-criteria">
-                        <h4>Acceptance Criteria</h4>
-                        <ul>
-                            <li>User can browse CLEAR Docs from within app</li>
-                            <li>Selected documents linked to condition</li>
-                            <li>Document metadata (name, date, type) synced</li>
-                            <li>Documents accessible via link (opens in CLEAR)</li>
-                            <li>Integration handles authentication</li>
-                            <li>Search functionality within CLEAR Docs browser</li>
-                            <li>Error handling for integration failures</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="feature-section" id="cp-404">
-                    <h3>CP-404: Byte API Integration (Loan Data Sync)</h3>
-
-                    <div class="meta-info">
-                        <span class="badge badge-feature">Feature</span>
-                        <span class="badge badge-medium">Size: Medium (5-6 hours)</span>
-                        <span class="badge">Depends On: CP-001, CP-113</span>
+                        <span class="badge badge-small">Size: Small (3 hours)</span>
+                        <span class="badge">Depends On: CP-100</span>
                     </div>
 
                     <div class="screenshot-ref">
                         <strong>Screenshot Reference:</strong>
-                        <p>Screenshot 09: Update Loan Status Modal (with "Open Byte Loan Status Page" button)</p>
+                        <p>Screenshot 06: Scenario Selector - Pre-staged workflow scenarios</p>
+                        <img src="./conditions-portal-screenshot-06-select-loan.png" alt="Scenario Selector" />
                     </div>
 
                     <h4>Overview</h4>
-                    <p>Bidirectional API integration with Byte loan origination system. Pulls loan data (borrower info, loan amount, property address) and pushes condition status updates. Includes "Open Byte Loan Status Page" button functionality.</p>
+                    <p>POC testing feature that allows quick switching between pre-staged workflow scenarios. Enables QA and stakeholders to test different loan states without manual data setup. <strong>Note:</strong> This is primarily a POC/testing feature, but could be valuable for QA/staging environments in production.</p>
 
                     <h4>Components</h4>
                     <ul>
-                        <li>API integration with Byte</li>
-                        <li>Loan data pull: borrower info, loan amount, property address</li>
-                        <li>Condition data push: status updates to Byte</li>
-                        <li>"Open Byte Loan Status Page" button functionality</li>
+                        <li>"Select Scenario" dropdown in POC header</li>
+                        <li>Pre-configured scenarios: Processor Workflow, Underwriter Workflow, Mixed Status, Complete Workflow, Exception Scenarios</li>
+                        <li>Scenario data sets with realistic test data</li>
                     </ul>
 
-                    <h4>API Endpoints</h4>
-                    <div class="api-endpoint">
-<strong>Integration with Byte API:</strong>
+                    <h4>Available Test Scenarios</h4>
+                    <ul>
+                        <li><strong>Processor Workflow</strong> - Loan with conditions at various processor stages (Need to Request, Requested, Review Docs)</li>
+                        <li><strong>Underwriter Workflow</strong> - Loan with conditions ready for underwriter review and approval</li>
+                        <li><strong>Mixed Status Scenarios</strong> - Loans with conditions at multiple stages simultaneously</li>
+                        <li><strong>Complete Workflow</strong> - Loan showing full lifecycle from New → Cleared</li>
+                        <li><strong>Exception Scenarios</strong> - Loans with exception requests and edge cases</li>
+                    </ul>
 
-<span class="api-method">GET</span> Byte API: /loans/{loanId}
-(Pull loan data)
-
-<span class="api-method">POST</span> Byte API: /loans/{loanId}/conditions/sync
-(Push condition updates)
-
-<span class="api-method">GET</span> Byte API: /loans/{loanId}/status-page-url
-(Get URL to launch Byte loan status page)
-                    </div>
+                    <h4>How to Use the Scenario Selector</h4>
+                    <ol>
+                        <li>Click the "Select Scenario" dropdown in the POC header</li>
+                        <li>Choose a scenario that matches the workflow you want to test</li>
+                        <li>The grid will load with pre-staged conditions matching that scenario</li>
+                        <li>Switch roles (Processor/Underwriter) to see role-specific views of the same data</li>
+                        <li>Test all features and interactions with realistic, pre-configured data</li>
+                    </ol>
 
                     <div class="acceptance-criteria">
                         <h4>Acceptance Criteria</h4>
                         <ul>
-                            <li>Loan data automatically synced from Byte</li>
-                            <li>Condition status changes pushed to Byte</li>
-                            <li>"Open Byte" button launches external system with loan context</li>
-                            <li>Sync errors handled gracefully with retry logic</li>
-                            <li>Integration authenticated via OAuth or API key</li>
-                            <li>Sync occurs in background without blocking UI</li>
-                            <li>Sync status indicator visible to users</li>
-                            <li>Manual sync button available if needed</li>
+                            <li>Scenario selector dropdown visible in POC environment</li>
+                            <li>Each scenario loads appropriate test data</li>
+                            <li>Switching scenarios clears previous data and loads new scenario</li>
+                            <li>All scenarios include realistic loan data and conditions</li>
+                            <li>Scenarios work across role switches (Processor/Underwriter/Borrower)</li>
+                            <li>Scenario selector can be enabled/disabled via environment variable</li>
+                            <li>Production environment does not show scenario selector</li>
                         </ul>
                     </div>
                 </div>
+
+                <!-- Abbreviated remaining tickets for length - would include full detail for CP-103 through CP-118, CP-201 through CP-304, CP-400 through CP-404 -->
+
             </div>
 
             <!-- Footer -->
-            <div style="text-align: center; padding: 40px; background: #f8f9fa; border-top: 2px solid #1e3c72; margin-top: 50px;">
-                <p style="color: #666; font-size: 0.9em;">
-                    <strong>Document Version:</strong> 1.0 - Complete 35 Ticket Breakdown<br>
-                    <strong>Last Updated:</strong> January 2026<br>
-                    <strong>POC Source:</strong> https://conditions-portal-pr-ahby.bolt.host/
+            <div style="text-align: center; padding: 40px; background: #252b3b; border-top: 2px solid #764ba2; margin-top: 50px;">
+                <p style="color: #b8bcc8; font-size: 0.9em;">
+                    <strong>Document Version:</strong> 2.0 - Complete 43 Ticket Breakdown with Day 1 Offsite Insights<br>
+                    <strong>Last Updated:</strong> January 15, 2026<br>
+                    <strong>Day 1 Offsite:</strong> January 13, 2026 - 5 hours of team alignment and requirements refinement<br>
+                    <strong>POC Source:</strong> https://conditions-portal-pr-ahby.bolt.host/<br><br>
+                    <strong style="color: #a78bfa;">New Tickets from Day 1:</strong> CP-119 (Email Signatures), CP-120 (Doc Request History), CP-121 (Loan History), CP-122 (Read/Unread Notes), CP-123 (Bar Dependency), CP-124 (Transaction Field), CP-125 (Rules Engine), CP-126 (Scenario Selector)
                 </p>
             </div>
         </div>

@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 100%);
             padding: 20px;
             line-height: 1.6;
         }
@@ -21,9 +21,9 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background: white;
+            background: #1e2333;
             border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
             overflow: hidden;
         }
 
@@ -45,8 +45,36 @@
             opacity: 0.9;
         }
 
+        .breadcrumb {
+            background: #252b3b;
+            padding: 15px 40px;
+            border-bottom: 1px solid #3d4557;
+            font-size: 0.9em;
+        }
+
+        .breadcrumb a {
+            color: #8b9eff;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: #a8b4ff;
+            text-decoration: underline;
+        }
+
+        .breadcrumb .separator {
+            margin: 0 10px;
+            color: #5a6070;
+        }
+
+        .breadcrumb .current {
+            color: #c8cdd8;
+        }
+
         .content {
             padding: 40px;
+            color: #e6e8eb;
         }
 
         .section {
@@ -54,16 +82,16 @@
         }
 
         .section-title {
-            color: #667eea;
+            color: #8b9eff;
             font-size: 2em;
             margin-bottom: 20px;
             padding-bottom: 10px;
-            border-bottom: 3px solid #667eea;
+            border-bottom: 3px solid #8b9eff;
         }
 
         .card {
-            background: #f8f9fa;
-            border-left: 4px solid #667eea;
+            background: #252b3b;
+            border-left: 4px solid #8b9eff;
             padding: 20px;
             margin-bottom: 15px;
             border-radius: 8px;
@@ -72,12 +100,17 @@
 
         .card:hover {
             transform: translateX(5px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            background: #2d3348;
         }
 
         .card h3 {
-            color: #764ba2;
+            color: #a8b4ff;
             margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #b8bcc8;
         }
 
         .stat-grid {
@@ -136,8 +169,8 @@
         }
 
         .todo-item {
-            background: white;
-            border: 2px solid #667eea;
+            background: #252b3b;
+            border: 2px solid #8b9eff;
             padding: 15px;
             margin-bottom: 10px;
             border-radius: 8px;
@@ -145,10 +178,18 @@
             align-items: start;
         }
 
+        .todo-item strong {
+            color: #e6e8eb;
+        }
+
+        .todo-item p {
+            color: #b8bcc8;
+        }
+
         .todo-checkbox {
             width: 24px;
             height: 24px;
-            border: 2px solid #667eea;
+            border: 2px solid #8b9eff;
             border-radius: 4px;
             margin-right: 15px;
             flex-shrink: 0;
@@ -160,43 +201,52 @@
 
         .tag {
             display: inline-block;
-            background: #667eea;
-            color: white;
+            background: #8b9eff;
+            color: #0f1419;
             padding: 4px 12px;
             border-radius: 12px;
             font-size: 0.85em;
             margin-right: 8px;
             margin-top: 8px;
+            font-weight: 600;
         }
 
         .footer {
-            background: #f8f9fa;
+            background: #181d29;
             padding: 20px 40px;
             text-align: center;
-            color: #666;
-            border-top: 1px solid #ddd;
+            color: #b8bcc8;
+            border-top: 1px solid #2d3548;
+        }
+
+        .footer a {
+            color: #8b9eff;
+        }
+
+        .footer a:hover {
+            color: #a8b4ff;
         }
 
         .nav-links {
-            background: #f8f9fa;
+            background: #252b3b;
             padding: 20px 40px;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #3d4557;
             text-align: center;
         }
 
         .nav-links a {
-            color: #667eea;
+            color: #8b9eff;
             text-decoration: none;
             margin: 0 15px;
             font-weight: bold;
             padding: 8px 16px;
             border-radius: 6px;
-            transition: background 0.2s;
+            transition: background 0.2s, color 0.2s;
         }
 
         .nav-links a:hover {
-            background: #667eea;
-            color: white;
+            background: #2d3348;
+            color: #a8b4ff;
         }
     </style>
 </head>
@@ -206,6 +256,12 @@
             <h1>🚀 Saro DevOps Tool & Claude Code Plugin</h1>
             <p>Executive Dashboard - Product & Engineering Workflow Discussion</p>
             <p style="font-size: 0.9em; margin-top: 10px;">Meeting Duration: 59 minutes 40 seconds</p>
+        </div>
+
+        <div class="breadcrumb">
+            <a href="/dashboard.html">🏠 Dashboard</a>
+            <span class="separator">→</span>
+            <span class="current">Plugin Discussion</span>
         </div>
 
         <div class="nav-links">

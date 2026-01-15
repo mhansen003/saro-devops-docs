@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 100%);
             padding: 20px;
             line-height: 1.6;
         }
@@ -21,9 +21,9 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background: white;
+            background: #1e2333;
             border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
             overflow: hidden;
         }
 
@@ -40,8 +40,36 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
 
+        .breadcrumb {
+            background: #252b3b;
+            padding: 15px 40px;
+            border-bottom: 1px solid #3d4557;
+            font-size: 0.9em;
+        }
+
+        .breadcrumb a {
+            color: #8b9eff;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: #a8b4ff;
+            text-decoration: underline;
+        }
+
+        .breadcrumb .separator {
+            margin: 0 10px;
+            color: #5a6070;
+        }
+
+        .breadcrumb .current {
+            color: #c8cdd8;
+        }
+
         .content {
             padding: 40px;
+            color: #e6e8eb;
         }
 
         .section {
@@ -49,54 +77,72 @@
         }
 
         .section-title {
-            color: #667eea;
+            color: #8b9eff;
             font-size: 2em;
             margin-bottom: 20px;
             padding-bottom: 10px;
-            border-bottom: 3px solid #667eea;
+            border-bottom: 3px solid #8b9eff;
         }
 
         .subsection-title {
-            color: #764ba2;
+            color: #a8b4ff;
             font-size: 1.5em;
             margin: 25px 0 15px 0;
         }
 
         .card {
-            background: #f8f9fa;
-            border-left: 4px solid #667eea;
+            background: #252b3b;
+            border-left: 4px solid #8b9eff;
             padding: 20px;
             margin-bottom: 15px;
             border-radius: 8px;
         }
 
+        .card:hover {
+            background: #2d3348;
+        }
+
         .card h3 {
-            color: #764ba2;
+            color: #a8b4ff;
             margin-bottom: 10px;
         }
 
+        .card p, .card ul, .card li {
+            color: #b8bcc8;
+        }
+
+        .card strong {
+            color: #e6e8eb;
+        }
+
         .highlight {
-            background: #fff3cd;
+            background: #2d3348;
             border-left: 4px solid #ffc107;
             padding: 15px;
             margin: 15px 0;
             border-radius: 4px;
+            color: #e6e8eb;
+        }
+
+        .highlight strong {
+            color: #ffc107;
         }
 
         .code-block {
-            background: #282c34;
+            background: #181d29;
             color: #abb2bf;
             padding: 20px;
             border-radius: 8px;
             overflow-x: auto;
             margin: 15px 0;
             font-family: 'Courier New', monospace;
+            border: 1px solid #2d3548;
         }
 
         .timeline {
             position: relative;
             padding-left: 40px;
-            border-left: 3px solid #667eea;
+            border-left: 3px solid #8b9eff;
             margin: 20px 0;
         }
 
@@ -113,25 +159,40 @@
             width: 15px;
             height: 15px;
             border-radius: 50%;
-            background: #667eea;
-            border: 3px solid white;
-            box-shadow: 0 0 0 3px #667eea;
+            background: #8b9eff;
+            border: 3px solid #1e2333;
+            box-shadow: 0 0 0 3px #8b9eff;
         }
 
         .timeline-time {
-            color: #667eea;
+            color: #8b9eff;
             font-weight: bold;
             margin-bottom: 5px;
+        }
+
+        .timeline-item p, .timeline-item ul, .timeline-item li {
+            color: #b8bcc8;
+        }
+
+        .timeline-item code {
+            color: #a8b4ff;
+            background: #181d29;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .timeline-item strong {
+            color: #e6e8eb;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
-            background: white;
+            background: #252b3b;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
 
         th {
@@ -143,41 +204,61 @@
 
         td {
             padding: 12px 15px;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #3d4557;
+            color: #b8bcc8;
+        }
+
+        td strong {
+            color: #e6e8eb;
+        }
+
+        td code {
+            color: #a8b4ff;
+            background: #181d29;
+            padding: 2px 6px;
+            border-radius: 4px;
         }
 
         tr:hover {
-            background: #f8f9fa;
+            background: #2d3348;
         }
 
         .nav-links {
-            background: #f8f9fa;
+            background: #252b3b;
             padding: 20px 40px;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #3d4557;
             text-align: center;
         }
 
         .nav-links a {
-            color: #667eea;
+            color: #8b9eff;
             text-decoration: none;
             margin: 0 15px;
             font-weight: bold;
             padding: 8px 16px;
             border-radius: 6px;
-            transition: background 0.2s;
+            transition: background 0.2s, color 0.2s;
         }
 
         .nav-links a:hover {
-            background: #667eea;
-            color: white;
+            background: #2d3348;
+            color: #a8b4ff;
         }
 
         .footer {
-            background: #f8f9fa;
+            background: #181d29;
             padding: 20px 40px;
             text-align: center;
-            color: #666;
-            border-top: 1px solid #ddd;
+            color: #b8bcc8;
+            border-top: 1px solid #2d3548;
+        }
+
+        .footer a {
+            color: #8b9eff;
+        }
+
+        .footer a:hover {
+            color: #a8b4ff;
         }
 
         .pros-cons {
@@ -188,21 +269,43 @@
         }
 
         .pros {
-            background: #d4edda;
+            background: #1e3a2e;
             border-left: 4px solid #28a745;
             padding: 20px;
             border-radius: 8px;
         }
 
+        .pros h4 {
+            color: #4ade80;
+            margin-bottom: 15px;
+        }
+
+        .pros ul, .pros li {
+            color: #b8bcc8;
+        }
+
+        .pros strong {
+            color: #e6e8eb;
+        }
+
         .cons {
-            background: #f8d7da;
+            background: #3a1e1e;
             border-left: 4px solid #dc3545;
             padding: 20px;
             border-radius: 8px;
         }
 
-        .pros h4, .cons h4 {
+        .cons h4 {
+            color: #f87171;
             margin-bottom: 15px;
+        }
+
+        .cons ul, .cons li {
+            color: #b8bcc8;
+        }
+
+        .cons strong {
+            color: #e6e8eb;
         }
 
         ul {
@@ -219,6 +322,12 @@
         <div class="header">
             <h1>🔍 Deep Dive Analysis</h1>
             <p>Comprehensive Technical & Process Insights</p>
+        </div>
+
+        <div class="breadcrumb">
+            <a href="/dashboard.html">🏠 Dashboard</a>
+            <span class="separator">→</span>
+            <span class="current">Deep Dive</span>
         </div>
 
         <div class="nav-links">

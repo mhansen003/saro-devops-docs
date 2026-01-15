@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 100%);
             padding: 20px;
             line-height: 1.6;
         }
@@ -21,14 +21,14 @@
         .container {
             max-width: 1000px;
             margin: 0 auto;
-            background: white;
+            background: #1e2333;
             border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
             overflow: hidden;
         }
 
         .header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 40px;
             text-align: center;
@@ -40,13 +40,41 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
 
+        .breadcrumb {
+            background: #252b3b;
+            padding: 15px 40px;
+            border-bottom: 1px solid #3d4557;
+            font-size: 0.9em;
+        }
+
+        .breadcrumb a {
+            color: #8b9eff;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: #a8b4ff;
+            text-decoration: underline;
+        }
+
+        .breadcrumb .separator {
+            margin: 0 10px;
+            color: #5a6070;
+        }
+
+        .breadcrumb .current {
+            color: #c8cdd8;
+        }
+
         .content {
             padding: 40px;
+            color: #e6e8eb;
         }
 
         .tract-card {
-            background: white;
-            border: 2px solid #e0e0e0;
+            background: #252b3b;
+            border: 2px solid #3d4557;
             border-radius: 12px;
             padding: 25px;
             margin-bottom: 20px;
@@ -56,13 +84,14 @@
 
         .tract-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-            border-color: #2a5298;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            border-color: #8b9eff;
+            background: #2d3348;
         }
 
         .tract-number {
             display: inline-block;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 8px 16px;
             border-radius: 20px;
@@ -72,12 +101,12 @@
 
         .tract-title {
             font-size: 1.5em;
-            color: #1e3c72;
+            color: #8b9eff;
             margin-bottom: 10px;
         }
 
         .tract-description {
-            color: #666;
+            color: #b8bcc8;
             margin-bottom: 15px;
         }
 
@@ -88,41 +117,41 @@
         }
 
         .topic-tag {
-            background: #e3f2fd;
-            color: #1976d2;
+            background: #3d4557;
+            color: #a8b4ff;
             padding: 4px 12px;
             border-radius: 12px;
             font-size: 0.85em;
         }
 
         .nav-links {
-            background: #f8f9fa;
+            background: #252b3b;
             padding: 20px 40px;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #3d4557;
             text-align: center;
         }
 
         .nav-links a {
-            color: #1e3c72;
+            color: #8b9eff;
             text-decoration: none;
             margin: 0 15px;
             font-weight: bold;
             padding: 8px 16px;
             border-radius: 6px;
-            transition: background 0.2s;
+            transition: background 0.2s, color 0.2s;
         }
 
         .nav-links a:hover {
-            background: #1e3c72;
-            color: white;
+            background: #2d3348;
+            color: #a8b4ff;
         }
 
         .footer {
-            background: #f8f9fa;
+            background: #181d29;
             padding: 20px 40px;
             text-align: center;
-            color: #666;
-            border-top: 1px solid #ddd;
+            color: #b8bcc8;
+            border-top: 1px solid #2d3548;
         }
 
         .coming-soon {
@@ -133,7 +162,8 @@
         .coming-soon:hover {
             transform: none;
             box-shadow: none;
-            border-color: #e0e0e0;
+            border-color: #3d4557;
+            background: #252b3b;
         }
 
         .status-badge {
@@ -152,7 +182,7 @@
 
         .status-coming {
             background: #ffc107;
-            color: #333;
+            color: #0f1419;
         }
     </style>
 </head>
@@ -163,6 +193,12 @@
             <p style="margin-top: 10px;">Focused Guides for Product & Engineering Teams</p>
         </div>
 
+        <div class="breadcrumb">
+            <a href="/dashboard.html">🏠 Dashboard</a>
+            <span class="separator">→</span>
+            <span class="current">Tracts Library</span>
+        </div>
+
         <div class="nav-links">
             <a href="../dashboard.html">📊 Main Dashboard</a>
             <a href="../deep-dive.html">🔍 Deep Dive Analysis</a>
@@ -170,8 +206,8 @@
         </div>
 
         <div class="content">
-            <p style="margin-bottom: 30px; color: #666;">
-                <strong>Tracts</strong> are focused, actionable guides that address specific challenges in the SDLC workflow.
+            <p style="margin-bottom: 30px; color: #b8bcc8;">
+                <strong style="color: #e6e8eb;">Tracts</strong> are focused, actionable guides that address specific challenges in the SDLC workflow.
                 Each tract provides visual examples, templates, and practical guidance for your team.
             </p>
 
@@ -257,9 +293,9 @@
                 </div>
             </div>
 
-            <div style="background: #e3f2fd; padding: 20px; border-radius: 8px; margin-top: 30px;">
-                <strong style="color: #1976d2;">💡 Suggest a Tract</strong>
-                <p style="margin-top: 10px; color: #666;">
+            <div style="background: #2d3348; padding: 20px; border-radius: 8px; margin-top: 30px; border: 1px solid #3d4557;">
+                <strong style="color: #8b9eff;">💡 Suggest a Tract</strong>
+                <p style="margin-top: 10px; color: #b8bcc8;">
                     Have a specific challenge or topic you'd like to see covered?
                     Create a new tract to document patterns, solutions, and best practices for your team.
                 </p>

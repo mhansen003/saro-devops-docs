@@ -13,23 +13,23 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 100%);
             padding: 20px;
             line-height: 1.6;
-            color: #333;
+            color: #e6e8eb;
         }
 
         .container {
             max-width: 1600px;
             margin: 0 auto;
-            background: white;
+            background: #1e2333;
             border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
             overflow: hidden;
         }
 
         .header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 40px;
             text-align: center;
@@ -41,20 +41,47 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
 
+        .breadcrumb {
+            background: #252b3b;
+            padding: 15px 40px;
+            border-bottom: 1px solid #3d4557;
+            font-size: 0.9em;
+        }
+
+        .breadcrumb a {
+            color: #8b9eff;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: #a8b4ff;
+            text-decoration: underline;
+        }
+
+        .breadcrumb .separator {
+            margin: 0 10px;
+            color: #5a6070;
+        }
+
+        .breadcrumb .current {
+            color: #c8cdd8;
+        }
+
         .content {
             padding: 40px;
         }
 
         .toc {
-            background: #f8f9fa;
-            border: 2px solid #1e3c72;
+            background: #252b3b;
+            border: 2px solid #3d4557;
             border-radius: 12px;
             padding: 30px;
             margin-bottom: 40px;
         }
 
         .toc h2 {
-            color: #1e3c72;
+            color: #8b9eff;
             margin-bottom: 20px;
         }
 
@@ -63,7 +90,7 @@
         }
 
         .toc-section h3 {
-            color: #2a5298;
+            color: #a8b4ff;
             margin-bottom: 10px;
             font-size: 1.2em;
         }
@@ -78,13 +105,14 @@
         }
 
         .toc-list a {
-            color: #1e3c72;
+            color: #8b9eff;
             text-decoration: none;
             font-weight: 500;
         }
 
         .toc-list a:hover {
             text-decoration: underline;
+            color: #a8b4ff;
         }
 
         .section {
@@ -92,38 +120,46 @@
         }
 
         .section-title {
-            color: #1e3c72;
+            color: #8b9eff;
             font-size: 2em;
             margin-bottom: 20px;
             padding-bottom: 10px;
-            border-bottom: 3px solid #1e3c72;
+            border-bottom: 3px solid #8b9eff;
         }
 
         .feature-section {
-            background: white;
-            border: 2px solid #1e3c72;
+            background: #252b3b;
+            border: 2px solid #3d4557;
             border-radius: 12px;
             padding: 30px;
             margin: 30px 0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
 
         .feature-section h3 {
-            color: #1e3c72;
+            color: #8b9eff;
             font-size: 1.8em;
             margin-bottom: 20px;
         }
 
         .feature-section h4 {
-            color: #2a5298;
+            color: #a8b4ff;
             font-size: 1.3em;
             margin: 25px 0 15px 0;
+        }
+
+        .feature-section p, .feature-section ul, .feature-section li {
+            color: #b8bcc8;
+        }
+
+        .feature-section strong {
+            color: #e6e8eb;
         }
 
         .meta-info {
             margin-bottom: 20px;
             padding-bottom: 15px;
-            border-bottom: 2px solid #eee;
+            border-bottom: 2px solid #3d4557;
         }
 
         .badge {
@@ -144,16 +180,25 @@
         .badge-large { background: #dc3545; color: white; }
 
         .screenshot-ref {
-            background: #e3f2fd;
+            background: #2d3348;
             border-left: 5px solid #2196f3;
             padding: 15px;
             margin: 20px 0;
             border-radius: 4px;
+            border: 1px solid #3d4557;
+        }
+
+        .screenshot-ref strong {
+            color: #8b9eff;
+        }
+
+        .screenshot-ref p {
+            color: #b8bcc8;
         }
 
         .screenshot-ref img {
             max-width: 100%;
-            border: 2px solid #ddd;
+            border: 2px solid #3d4557;
             border-radius: 8px;
             margin-top: 10px;
         }
@@ -162,11 +207,12 @@
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            background: #252b3b;
         }
 
         th {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 15px;
             text-align: left;
@@ -174,18 +220,28 @@
 
         td {
             padding: 12px 15px;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #3d4557;
+            color: #b8bcc8;
+        }
+
+        td strong {
+            color: #e6e8eb;
         }
 
         tr:hover {
-            background: #f8f9fa;
+            background: #2d3348;
         }
 
         .acceptance-criteria {
-            background: #e8f5e9;
+            background: #1e3a2e;
             padding: 20px;
             border-radius: 8px;
             margin: 20px 0;
+            border: 1px solid #3d4557;
+        }
+
+        .acceptance-criteria h4 {
+            color: #4ade80;
         }
 
         .acceptance-criteria ul {
@@ -197,19 +253,24 @@
             margin-bottom: 12px;
             padding-left: 30px;
             position: relative;
+            color: #b8bcc8;
         }
 
         .acceptance-criteria li:before {
             content: "✓";
             position: absolute;
             left: 0;
-            color: #28a745;
+            color: #4ade80;
             font-weight: bold;
             font-size: 1.2em;
         }
 
+        .acceptance-criteria strong {
+            color: #e6e8eb;
+        }
+
         .api-endpoint {
-            background: #2d2d2d;
+            background: #181d29;
             color: #f8f8f2;
             padding: 20px;
             border-radius: 8px;
@@ -217,6 +278,7 @@
             font-family: 'Courier New', monospace;
             font-size: 0.9em;
             overflow-x: auto;
+            border: 1px solid #2d3548;
         }
 
         .api-method {
@@ -242,6 +304,14 @@
             <h1>Conditions Portal - Complete Feature Specifications</h1>
             <p style="margin-top: 10px;">All 35 Tickets with Full Acceptance Criteria & Screenshot References</p>
             <p style="margin-top: 5px; font-size: 0.9em;">POC URL: https://conditions-portal-pr-ahby.bolt.host/</p>
+        </div>
+
+        <div class="breadcrumb">
+            <a href="/dashboard.html">🏠 Dashboard</a>
+            <span class="separator">→</span>
+            <a href="/tracts/index.html">Tracts</a>
+            <span class="separator">→</span>
+            <span class="current">Detailed Features</span>
         </div>
 
         <div class="content">
@@ -322,10 +392,10 @@
             </div>
 
             <!-- POC OVERVIEW & TESTING SCENARIOS -->
-            <div class="section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 12px; margin: 30px 0;">
+            <div class="section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 12px; margin: 30px 0; border: 1px solid #3d4557;">
                 <h2 style="color: white; margin-bottom: 20px;">🎯 POC Overview & Testing Scenarios</h2>
 
-                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1);">
                     <h3 style="color: white; margin-bottom: 15px;">Scenario Selector (Loan Selection Window)</h3>
                     <p style="margin-bottom: 15px; line-height: 1.6;">
                         <strong>Important:</strong> The "Select Loan" window in the POC is actually a <strong>scenario selector</strong>
@@ -334,11 +404,11 @@
                     </p>
 
                     <h4 style="color: white; margin: 15px 0 10px 0;">📸 Screenshot Reference:</h4>
-                    <div style="background: white; padding: 10px; border-radius: 8px; margin-bottom: 15px;">
+                    <div style="background: #1e2333; padding: 10px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #3d4557;">
                         <img src="./conditions-portal-screenshot-06-select-loan.png"
                              alt="Scenario Selector - Pre-staged workflow scenarios"
-                             style="max-width: 100%; height: auto; border-radius: 4px;" />
-                        <p style="color: #333; margin-top: 8px; font-size: 0.9em; font-style: italic;">
+                             style="max-width: 100%; height: auto; border-radius: 4px; border: 2px solid #3d4557;" />
+                        <p style="color: #b8bcc8; margin-top: 8px; font-size: 0.9em; font-style: italic;">
                             Screenshot 06: Loan/Scenario Selector with pre-configured test data
                         </p>
                     </div>
@@ -361,7 +431,7 @@
                         <li>Test all features and interactions with realistic, pre-configured data</li>
                     </ol>
 
-                    <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 8px; margin-top: 20px;">
+                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-top: 20px; border: 1px solid rgba(255,255,255,0.1);">
                         <p style="margin: 0; line-height: 1.6;">
                             <strong>💡 Implementation Note:</strong> This scenario selector mechanism is a POC-only feature for testing.
                             In production, loans will be loaded dynamically based on user role and actual loan data from the Byte API.
@@ -371,7 +441,7 @@
                     </div>
                 </div>
 
-                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px;">
+                <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
                     <h3 style="color: white; margin-bottom: 15px;">Role-Based Views</h3>
                     <p style="margin-bottom: 15px; line-height: 1.6;">
                         The POC demonstrates role-based access control by showing different UI elements and filter options

@@ -14,12 +14,12 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            color: white;
+            color: #e6e8eb;
         }
 
         .container {
@@ -50,26 +50,29 @@
         .btn {
             display: inline-block;
             padding: 15px 30px;
-            background: white;
-            color: #1e3c72;
+            background: #252b3b;
+            color: #8b9eff;
             text-decoration: none;
             border-radius: 8px;
             font-weight: bold;
             transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            border: 1px solid #3d4557;
         }
 
         .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+            background: #2d3348;
+            color: #a8b4ff;
         }
 
         .spinner {
             margin: 20px auto;
             width: 50px;
             height: 50px;
-            border: 5px solid rgba(255,255,255,0.3);
-            border-top-color: white;
+            border: 5px solid rgba(139,158,255,0.3);
+            border-top-color: #8b9eff;
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }

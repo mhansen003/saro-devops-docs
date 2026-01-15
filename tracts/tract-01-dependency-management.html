@@ -13,23 +13,23 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 100%);
             padding: 20px;
             line-height: 1.6;
-            color: #333;
+            color: #e6e8eb;
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            background: white;
+            background: #1e2333;
             border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
             overflow: hidden;
         }
 
         .header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 40px;
             text-align: center;
@@ -47,6 +47,33 @@
             margin-top: 10px;
         }
 
+        .breadcrumb {
+            background: #252b3b;
+            padding: 15px 40px;
+            border-bottom: 1px solid #3d4557;
+            font-size: 0.9em;
+        }
+
+        .breadcrumb a {
+            color: #8b9eff;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: #a8b4ff;
+            text-decoration: underline;
+        }
+
+        .breadcrumb .separator {
+            margin: 0 10px;
+            color: #5a6070;
+        }
+
+        .breadcrumb .current {
+            color: #c8cdd8;
+        }
+
         .content {
             padding: 40px;
         }
@@ -56,49 +83,76 @@
         }
 
         .section-title {
-            color: #1e3c72;
+            color: #8b9eff;
             font-size: 2em;
             margin-bottom: 20px;
             padding-bottom: 10px;
-            border-bottom: 3px solid #1e3c72;
+            border-bottom: 3px solid #8b9eff;
         }
 
         .subsection-title {
-            color: #2a5298;
+            color: #a8b4ff;
             font-size: 1.5em;
             margin: 30px 0 15px 0;
         }
 
         .problem-box {
-            background: #fff3cd;
+            background: #3a2d1e;
             border-left: 5px solid #ffc107;
             padding: 20px;
             margin: 20px 0;
             border-radius: 8px;
+            color: #e6e8eb;
+        }
+
+        .problem-box h3 {
+            color: #ffc107;
+        }
+
+        .problem-box ul, .problem-box li, .problem-box p {
+            color: #b8bcc8;
+        }
+
+        .problem-box strong {
+            color: #e6e8eb;
         }
 
         .solution-box {
-            background: #d4edda;
+            background: #1e3a2e;
             border-left: 5px solid #28a745;
             padding: 20px;
             margin: 20px 0;
             border-radius: 8px;
+            color: #e6e8eb;
+        }
+
+        .solution-box h3 {
+            color: #4ade80;
+        }
+
+        .solution-box ul, .solution-box li, .solution-box p, .solution-box ol {
+            color: #b8bcc8;
+        }
+
+        .solution-box strong {
+            color: #e6e8eb;
         }
 
         /* Ticket Mockups */
         .ticket {
-            background: white;
-            border: 2px solid #ddd;
+            background: #252b3b;
+            border: 2px solid #3d4557;
             border-radius: 12px;
             padding: 20px;
             margin: 20px 0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
             transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .ticket:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            background: #2d3348;
         }
 
         .ticket-header {
@@ -107,20 +161,32 @@
             align-items: center;
             margin-bottom: 15px;
             padding-bottom: 15px;
-            border-bottom: 2px solid #eee;
+            border-bottom: 2px solid #3d4557;
         }
 
         .ticket-id {
             font-size: 1.2em;
             font-weight: bold;
-            color: #1e3c72;
+            color: #8b9eff;
         }
 
         .ticket-title {
             font-size: 1.3em;
             font-weight: bold;
             margin-bottom: 10px;
-            color: #2a5298;
+            color: #a8b4ff;
+        }
+
+        .ticket-description {
+            color: #b8bcc8;
+        }
+
+        .ticket-description strong {
+            color: #e6e8eb;
+        }
+
+        .ticket-description ul, .ticket-description li {
+            color: #b8bcc8;
         }
 
         .ticket-labels {
@@ -148,40 +214,41 @@
         .label-priority-medium { background: #f39c12; color: white; }
         .label-blocked { background: #6c757d; color: white; }
 
-        .ticket-description {
-            margin: 15px 0;
-            color: #555;
-        }
-
         .ticket-dependencies {
-            background: #f8f9fa;
+            background: #181d29;
             padding: 15px;
             border-radius: 8px;
             margin-top: 15px;
+            border: 1px solid #2d3548;
         }
 
         .ticket-dependencies strong {
-            color: #1e3c72;
+            color: #8b9eff;
         }
 
         .dependency-link {
             display: inline-block;
-            background: #e3f2fd;
+            background: #3d4557;
             padding: 4px 10px;
             border-radius: 6px;
             margin: 4px;
-            color: #1976d2;
+            color: #a8b4ff;
             text-decoration: none;
             font-family: monospace;
         }
 
+        .dependency-link:hover {
+            background: #4d5567;
+        }
+
         /* Dependency Flow Diagram */
         .flow-diagram {
-            background: #f8f9fa;
+            background: #252b3b;
             padding: 30px;
             border-radius: 12px;
             margin: 30px 0;
             overflow-x: auto;
+            border: 1px solid #3d4557;
         }
 
         .flow-tier {
@@ -192,7 +259,7 @@
             text-align: center;
             font-weight: bold;
             font-size: 1.2em;
-            color: #1e3c72;
+            color: #8b9eff;
             margin-bottom: 20px;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -206,14 +273,15 @@
         }
 
         .flow-box {
-            background: white;
-            border: 3px solid #2a5298;
+            background: #1e2333;
+            border: 3px solid #8b9eff;
             border-radius: 8px;
             padding: 15px 25px;
             min-width: 200px;
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
             position: relative;
+            color: #e6e8eb;
         }
 
         .flow-box.platform {
@@ -225,24 +293,26 @@
 
         .flow-box.role {
             border-color: #fd7e14;
-            background: #fff5e6;
+            background: #3a2d1e;
+            color: #e6e8eb;
         }
 
         .flow-box.feature {
             border-color: #20c997;
-            background: #e6fff9;
+            background: #1e3a2e;
+            color: #e6e8eb;
         }
 
         .flow-arrow {
             text-align: center;
             font-size: 2em;
-            color: #2a5298;
+            color: #8b9eff;
             margin: 10px 0;
         }
 
         /* Code Block */
         .code-block {
-            background: #2d2d2d;
+            background: #181d29;
             color: #f8f8f2;
             padding: 20px;
             border-radius: 8px;
@@ -250,6 +320,7 @@
             margin: 20px 0;
             font-family: 'Courier New', monospace;
             font-size: 0.9em;
+            border: 1px solid #2d3548;
         }
 
         .code-comment {
@@ -269,11 +340,12 @@
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            background: #252b3b;
         }
 
         th {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 15px;
             text-align: left;
@@ -281,44 +353,65 @@
 
         td {
             padding: 12px 15px;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #3d4557;
+            color: #b8bcc8;
+        }
+
+        td strong {
+            color: #e6e8eb;
         }
 
         tr:hover {
-            background: #f8f9fa;
+            background: #2d3348;
         }
 
         /* Callout Box */
         .callout {
-            background: #e3f2fd;
+            background: #2d3348;
             border-left: 5px solid #2196f3;
             padding: 20px;
             margin: 20px 0;
             border-radius: 8px;
+            border: 1px solid #3d4557;
         }
 
         .callout-title {
             font-weight: bold;
-            color: #1976d2;
+            color: #8b9eff;
             margin-bottom: 10px;
             font-size: 1.1em;
         }
 
+        .callout p, .callout ul, .callout li {
+            color: #b8bcc8;
+        }
+
+        .callout strong {
+            color: #e6e8eb;
+        }
+
         /* Best Practices Box */
         .best-practices {
-            background: #f3e5f5;
+            background: #2d2440;
             border-left: 5px solid #9c27b0;
             padding: 20px;
             margin: 20px 0;
             border-radius: 8px;
+            border: 1px solid #3d4557;
         }
 
         .best-practices ul {
             margin-left: 20px;
+            color: #b8bcc8;
         }
 
         .best-practices li {
             margin-bottom: 10px;
+            color: #b8bcc8;
+        }
+
+        .best-practices strong {
+            color: #e6e8eb;
         }
 
         /* Visual Hierarchy Diagram */
@@ -370,6 +463,14 @@
             <h1>📋 Tract 01: Dependency Management Strategy</h1>
             <div class="subtitle">Structuring Complex Projects to Minimize Dependencies</div>
             <p style="margin-top: 15px; font-size: 0.9em;">Case Study: Conditions Portal</p>
+        </div>
+
+        <div class="breadcrumb">
+            <a href="/dashboard.html">🏠 Dashboard</a>
+            <span class="separator">→</span>
+            <a href="/tracts/index.html">Tracts</a>
+            <span class="separator">→</span>
+            <span class="current">Dependency Management</span>
         </div>
 
         <div class="content">
@@ -1145,13 +1246,13 @@
 
         </div>
 
-        <div style="background: #f8f9fa; padding: 20px 40px; text-align: center; color: #666; border-top: 1px solid #ddd;">
-            <p><strong>Tract 01: Dependency Management Strategy</strong></p>
+        <div style="background: #181d29; padding: 20px 40px; text-align: center; color: #b8bcc8; border-top: 1px solid #2d3548;">
+            <p><strong style="color: #e6e8eb;">Tract 01: Dependency Management Strategy</strong></p>
             <p style="margin-top: 10px;">Created: January 2026</p>
             <p style="margin-top: 10px;">
-                <a href="../dashboard.html" style="color: #1e3c72;">← Dashboard</a> |
-                <a href="tract-01-detailed-features.html" style="color: #1e3c72;">View Detailed POC Features →</a> |
-                <a href="index.html" style="color: #1e3c72;">Tracts Index</a>
+                <a href="../dashboard.html" style="color: #8b9eff; text-decoration: none;">← Dashboard</a> |
+                <a href="tract-01-detailed-features.html" style="color: #8b9eff; text-decoration: none;">View Detailed POC Features →</a> |
+                <a href="index.html" style="color: #8b9eff; text-decoration: none;">Tracts Index</a>
             </p>
         </div>
     </div>

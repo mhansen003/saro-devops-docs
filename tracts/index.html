@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saro DevOps - Tracts Index</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .tract-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+
+        .tract-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border-color: #2a5298;
+        }
+
+        .tract-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .tract-title {
+            font-size: 1.5em;
+            color: #1e3c72;
+            margin-bottom: 10px;
+        }
+
+        .tract-description {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .tract-topics {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .topic-tag {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+        }
+
+        .nav-links {
+            background: #f8f9fa;
+            padding: 20px 40px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .nav-links a {
+            color: #1e3c72;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+
+        .nav-links a:hover {
+            background: #1e3c72;
+            color: white;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 20px 40px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #ddd;
+        }
+
+        .coming-soon {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .coming-soon:hover {
+            transform: none;
+            box-shadow: none;
+            border-color: #e0e0e0;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .status-available {
+            background: #28a745;
+            color: white;
+        }
+
+        .status-coming {
+            background: #ffc107;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Saro DevOps Tracts</h1>
+            <p style="margin-top: 10px;">Focused Guides for Product & Engineering Teams</p>
+        </div>
+
+        <div class="nav-links">
+            <a href="../dashboard.html">📊 Main Dashboard</a>
+            <a href="../deep-dive.html">🔍 Deep Dive Analysis</a>
+            <a href="index.html">📚 Tracts Index</a>
+        </div>
+
+        <div class="content">
+            <p style="margin-bottom: 30px; color: #666;">
+                <strong>Tracts</strong> are focused, actionable guides that address specific challenges in the SDLC workflow.
+                Each tract provides visual examples, templates, and practical guidance for your team.
+            </p>
+
+            <!-- Tract 01 -->
+            <a href="tract-01-dependency-management.html" style="text-decoration: none; color: inherit;">
+                <div class="tract-card">
+                    <div class="tract-number">Tract 01</div>
+                    <span class="status-badge status-available">Available</span>
+                    <h2 class="tract-title">Dependency Management Strategy for Complex Projects</h2>
+                    <p class="tract-description">
+                        Learn how to structure large projects like Conditions Portal into three tiers (Platform, Roles, Features)
+                        to minimize dependencies and enable parallel development. Includes visual ticket mockups, dependency flow
+                        diagrams, and complete scaffolding templates.
+                    </p>
+                    <div class="tract-topics">
+                        <span class="topic-tag">Dependencies</span>
+                        <span class="topic-tag">Ticket Structure</span>
+                        <span class="topic-tag">Work Breakdown</span>
+                        <span class="topic-tag">Templates</span>
+                        <span class="topic-tag">Best Practices</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Placeholder for Future Tracts -->
+            <div class="tract-card coming-soon">
+                <div class="tract-number">Tract 02</div>
+                <span class="status-badge status-coming">Coming Soon</span>
+                <h2 class="tract-title">Testing Strategy for Claude-Generated Code</h2>
+                <p class="tract-description">
+                    Comprehensive guide on testing acceptance criteria, validation gates, and quality assurance for
+                    AI-generated implementations. Covers unit tests, integration tests, and user acceptance testing.
+                </p>
+                <div class="tract-topics">
+                    <span class="topic-tag">Testing</span>
+                    <span class="topic-tag">Quality Gates</span>
+                    <span class="topic-tag">Validation</span>
+                </div>
+            </div>
+
+            <div class="tract-card coming-soon">
+                <div class="tract-number">Tract 03</div>
+                <span class="status-badge status-coming">Coming Soon</span>
+                <h2 class="tract-title">Multi-System Integration Patterns</h2>
+                <p class="tract-description">
+                    Strategies for handling features that span multiple systems (Clear, Docs, Byte APIs, Email).
+                    Includes architecture documentation templates and dependency mapping approaches.
+                </p>
+                <div class="tract-topics">
+                    <span class="topic-tag">Integration</span>
+                    <span class="topic-tag">Multi-System</span>
+                    <span class="topic-tag">APIs</span>
+                </div>
+            </div>
+
+            <div class="tract-card coming-soon">
+                <div class="tract-number">Tract 04</div>
+                <span class="status-badge status-coming">Coming Soon</span>
+                <h2 class="tract-title">Product Reference Folder Best Practices</h2>
+                <p class="tract-description">
+                    How to organize prototypes, design mockups, API documentation, and context materials in the
+                    "product reference" folder for optimal Claude Code utilization.
+                </p>
+                <div class="tract-topics">
+                    <span class="topic-tag">Documentation</span>
+                    <span class="topic-tag">Prototypes</span>
+                    <span class="topic-tag">Context</span>
+                </div>
+            </div>
+
+            <div class="tract-card coming-soon">
+                <div class="tract-number">Tract 05</div>
+                <span class="status-badge status-coming">Coming Soon</span>
+                <h2 class="tract-title">Non-Functional Requirements Template</h2>
+                <p class="tract-description">
+                    How to capture performance requirements, compliance needs, release communication, and other
+                    non-functional aspects in work items.
+                </p>
+                <div class="tract-topics">
+                    <span class="topic-tag">Performance</span>
+                    <span class="topic-tag">Compliance</span>
+                    <span class="topic-tag">NFRs</span>
+                </div>
+            </div>
+
+            <div style="background: #e3f2fd; padding: 20px; border-radius: 8px; margin-top: 30px;">
+                <strong style="color: #1976d2;">💡 Suggest a Tract</strong>
+                <p style="margin-top: 10px; color: #666;">
+                    Have a specific challenge or topic you'd like to see covered?
+                    Create a new tract to document patterns, solutions, and best practices for your team.
+                </p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Created: January 2026</p>
+        </div>
+    </div>
+</body>
+</html>

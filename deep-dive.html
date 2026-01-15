@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saro DevOps Tool - Deep Dive Analysis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .subsection-title {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin: 25px 0 15px 0;
+        }
+
+        .card {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+
+        .card h3 {
+            color: #764ba2;
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .code-block {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            border-left: 3px solid #667eea;
+            margin: 20px 0;
+        }
+
+        .timeline-item {
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -46px;
+            top: 0;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #667eea;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #667eea;
+        }
+
+        .timeline-time {
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .nav-links {
+            background: #f8f9fa;
+            padding: 20px 40px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .nav-links a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+
+        .nav-links a:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 20px 40px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #ddd;
+        }
+
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .pros {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .cons {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .pros h4, .cons h4 {
+            margin-bottom: 15px;
+        }
+
+        ul {
+            margin-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 Deep Dive Analysis</h1>
+            <p>Comprehensive Technical & Process Insights</p>
+        </div>
+
+        <div class="nav-links">
+            <a href="dashboard.html">📊 Dashboard</a>
+            <a href="deep-dive.html">🔍 Deep Dive Analysis</a>
+            <a href="transcript.txt">📄 Raw Transcript</a>
+        </div>
+
+        <div class="content">
+            <!-- Workflow Analysis -->
+            <div class="section">
+                <h2 class="section-title">🔄 Complete Workflow Analysis</h2>
+
+                <h3 class="subsection-title">Product Team Workflow</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-time">Step 1: Initialization</div>
+                        <p>Product team member opens Claude Code in a repository (or specifies target repo)</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">Step 2: Create Work Item</div>
+                        <p>Run <code>/create work item</code> command with either:</p>
+                        <ul>
+                            <li>An idea (Claude will interview to flesh out details)</li>
+                            <li>A file reference (Claude will analyze and create work item)</li>
+                            <li>A prototype or documentation</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">Step 3: Template Selection</div>
+                        <p>Choose work item type: Feature, Bug, or Defect (with appropriate templates)</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">Step 4: Priority Assignment</div>
+                        <p>Set priority level (maps to standard GitHub labels for reporting)</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">Step 5: Validation</div>
+                        <p>Issue Validator agent reviews acceptance criteria for:</p>
+                        <ul>
+                            <li>Template compliance</li>
+                            <li>Testability for engineering</li>
+                            <li>Completeness</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">Step 6: Preview & Workshop</div>
+                        <p>Review the generated issue, make adjustments, or request changes from Claude</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">Step 7: T-Shirt Sizing</div>
+                        <p>Claude suggests Small/Medium/Large based on complexity (can be edited)</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">Step 8: Design Check (Optional)</div>
+                        <p>If design needed, mark as "needs design" - routes to design team queue</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">Step 9: Mark Ready</div>
+                        <p>When complete, mark as "ready" - moves to engineering review queue</p>
+                    </div>
+                </div>
+
+                <h3 class="subsection-title">Engineering Team Workflow</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-time">Step 1: Review Queue</div>
+                        <p>Run <code>/dev review</code> command to see work items marked "ready"</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">Step 2: Validation</div>
+                        <p>Same Issue Validator runs again to ensure quality gates are met</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">Step 3: Grooming</div>
+                        <p>Engineer reviews work item and can:</p>
+                        <ul>
+                            <li><strong>Accept:</strong> Approve and move to accepted queue</li>
+                            <li><strong>Reject:</strong> Provide feedback, adds engineering review comment, removes "ready" label</li>
+                            <li><strong>Edit First:</strong> Make minor adjustments before accepting</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">Step 4: Size Confirmation</div>
+                        <p>Validate or adjust the suggested t-shirt size</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">Step 5: Select Work</div>
+                        <p>Engineers pull from accepted queue (no assignment - team self-organizes)</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">Step 6: Implementation</div>
+                        <p>Engineer works with Claude Code to implement the solution</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-time">Step 7: Completion</div>
+                        <p>Testing, PR review, and deployment (future plugin enhancements may automate testing validation)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Architecture -->
+            <div class="section">
+                <h2 class="section-title">🏗️ Technical Architecture</h2>
+
+                <div class="card">
+                    <h3>Plugin Components</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Component</th>
+                                <th>Purpose</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Slash Commands</strong></td>
+                                <td>User-invoked actions</td>
+                                <td>/create work item, /dev review</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Skills</strong></td>
+                                <td>Auto-triggered capabilities</td>
+                                <td>Now merged with slash commands in latest Claude Code</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sub-Agents</strong></td>
+                                <td>Specialized AI agents</td>
+                                <td>Issue Validator agent</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Templates</strong></td>
+                                <td>Standardized formats</td>
+                                <td>Feature template, Bug template, Defect template</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Scripts</strong></td>
+                                <td>Helper utilities</td>
+                                <td>Repo detection, GitHub authentication check</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Preflight Checks</strong></td>
+                                <td>Validation before execution</td>
+                                <td>Verify GitHub CLI installed and authenticated</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3>GitHub Integration Points</h3>
+                    <ul>
+                        <li><strong>Issues:</strong> Primary work item object (everything is an issue)</li>
+                        <li><strong>Labels:</strong> Workflow state management (ready, needs clarification, needs design, etc.)</li>
+                        <li><strong>Projects:</strong> Organizational views spanning multiple repos</li>
+                        <li><strong>Bot Automation:</strong> Automatic state transitions based on label changes</li>
+                        <li><strong>Teams:</strong> Can be used for design team assignments and notifications</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Label System</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Label</th>
+                                <th>Meaning</th>
+                                <th>Stage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>ready</td>
+                                <td>Product has completed work, ready for engineering review</td>
+                                <td>Requirements → Development</td>
+                            </tr>
+                            <tr>
+                                <td>needs clarification</td>
+                                <td>Engineering rejected, requires product input</td>
+                                <td>Development → Requirements</td>
+                            </tr>
+                            <tr>
+                                <td>needs design</td>
+                                <td>Design work required before engineering</td>
+                                <td>Requirements → Design</td>
+                            </tr>
+                            <tr>
+                                <td>design ready</td>
+                                <td>Design completed, ready to return to requirements</td>
+                                <td>Design → Requirements</td>
+                            </tr>
+                            <tr>
+                                <td>small / medium / large</td>
+                                <td>T-shirt sizing for estimation</td>
+                                <td>Metadata</td>
+                            </tr>
+                            <tr>
+                                <td>feature / bug / defect</td>
+                                <td>Work item type classification</td>
+                                <td>Metadata</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Key Discussion Themes -->
+            <div class="section">
+                <h2 class="section-title">💬 Key Discussion Themes</h2>
+
+                <div class="card">
+                    <h3>1. Rethinking Work Item Scope (09:31 - 12:30)</h3>
+                    <p><strong>Problem:</strong> Traditional user stories are broken down by front-end/back-end, dependencies, and testability concerns.</p>
+                    <p><strong>Insight:</strong> Claude doesn't care about front-end vs back-end separation. The team needs to discover the right scope through experimentation.</p>
+                    <p><strong>Recommendation:</strong> Start with feature-level work items (e.g., "main table view" for conditions portal) rather than micro user stories.</p>
+                    <div class="highlight">
+                        <strong>Quote:</strong> "Claude can do a lot of work. What used to be huge to humans needing to break down a problem, it's a very small task. I think Claude could swallow and work on completely."
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>2. Testing Complexity & Sizing (22:30 - 24:07)</h3>
+                    <p><strong>Problem:</strong> Initial sizing logic didn't account for testing difficulty.</p>
+                    <p><strong>Resolution:</strong> Saro committed to updating the plugin prompt to consider testing complexity in size estimation.</p>
+                    <p><strong>Key Insight:</strong> Testing often takes longer than code writing ("code is cheap"), so sizing must reflect validation time, not just development time.</p>
+                    <div class="highlight">
+                        <strong>Action Item:</strong> Plugin update deployed immediately affects all users - demonstrating the value of centralized plugin distribution.
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>3. Multi-System Dependencies (33:00 - 36:31)</h3>
+                    <p><strong>Challenge:</strong> Real-world features like conditions portal touch multiple systems (Clear, Docs, Byte APIs, email, etc.).</p>
+                    <p><strong>Current Gap:</strong> Plugin doesn't automatically crawl multiple repos or identify cross-system changes.</p>
+                    <p><strong>Proposed Solutions:</strong></p>
+                    <ul>
+                        <li>Architecture documentation file listing dependencies</li>
+                        <li>Product "cover page" or summary describing system touchpoints</li>
+                        <li>Reference folders with screenshots and documentation</li>
+                    </ul>
+                    <div class="highlight">
+                        <strong>Open Question:</strong> How to architect for "10,000-foot view" decision-making across the ecosystem?
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>4. Third-Party API Integration (39:03 - 43:03)</h3>
+                    <p><strong>Context:</strong> Teams work with vendor APIs that have inaccurate documentation and require research calls.</p>
+                    <p><strong>Workflow:</strong></p>
+                    <ul>
+                        <li>Product still does vendor discovery and API research</li>
+                        <li>Can use Claude to compare API endpoints and recommend best option</li>
+                        <li>Specific endpoint prescriptions are valid in requirements</li>
+                        <li>Can download Swagger/OpenAPI specs and include in reference folder</li>
+                    </ul>
+                    <div class="highlight">
+                        <strong>Reality Check:</strong> "Claude won't interview the vendor. We still have to do that."
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>5. Acceptance Criteria vs. Test Plans (44:34 - 46:06)</h3>
+                    <p><strong>Concern:</strong> Will acceptance criteria provide the same testability as detailed test scenarios?</p>
+                    <p><strong>Answer:</strong> Acceptance criteria using Given/When/Then format IS a form of describing tests, just in a different structure.</p>
+                    <p><strong>Flexibility:</strong> Commands exist to split large issues or merge small ones if scope adjustments needed.</p>
+                </div>
+
+                <div class="card">
+                    <h3>6. Assignment vs. Pull Model (25:04 - 27:33)</h3>
+                    <p><strong>Philosophy:</strong> Prefer pull model where engineers self-select from queue rather than assignment.</p>
+                    <p><strong>Benefits:</strong></p>
+                    <ul>
+                        <li>Spreads knowledge across team</li>
+                        <li>Reduces project stalls from vacations/absences</li>
+                        <li>Lower barrier to entry with Claude's context awareness</li>
+                    </ul>
+                    <p><strong>Exception:</strong> Can manually assign if needed (e.g., phase 2 work on same feature)</p>
+                    <div class="highlight">
+                        <strong>Hypothesis:</strong> "Claude allows us to not care as much about assignment stickiness. The barrier to entry on a ticket is super low now."
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>7. Product Reference Folder (30:03 - 36:31)</h3>
+                    <p><strong>Innovation:</strong> Standardized "product reference" folder in each repo.</p>
+                    <p><strong>Purpose:</strong> Store prototypes, design mockups, API documentation, and context materials.</p>
+                    <p><strong>Behavior:</strong> Claude can reference this folder but is instructed NOT to copy-paste directly from it.</p>
+                    <p><strong>Benefit:</strong> Provides design system context, technical constraints, and business rules without prescribing implementation.</p>
+                </div>
+            </div>
+
+            <!-- Pros & Cons -->
+            <div class="section">
+                <h2 class="section-title">⚖️ Pros & Cons Analysis</h2>
+
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>✅ Advantages</h4>
+                        <ul>
+                            <li><strong>Auto-Updates:</strong> Plugin improvements instantly distributed to all users</li>
+                            <li><strong>Consistency:</strong> Uniform templates and validation across product and engineering</li>
+                            <li><strong>Quality Gates:</strong> Dual validation prevents poor requirements from reaching implementation</li>
+                            <li><strong>GitHub Native:</strong> Leverages existing tools, no new platform to learn</li>
+                            <li><strong>Flexibility:</strong> Can use slash commands OR natural language</li>
+                            <li><strong>Context Aware:</strong> Auto-detects repo, includes technical context in work items</li>
+                            <li><strong>Feedback Loop:</strong> Clear rejection mechanism with specific feedback</li>
+                            <li><strong>Design Integration:</strong> Workflow includes design as first-class citizen</li>
+                            <li><strong>No Assignment Required:</strong> Team can self-organize around pull model</li>
+                            <li><strong>Larger Scope:</strong> Can handle feature-level work, not just micro-tasks</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>⚠️ Challenges & Gaps</h4>
+                        <ul>
+                            <li><strong>Scope Discovery:</strong> No established guidelines for "right-sized" work items yet</li>
+                            <li><strong>Multi-System Deps:</strong> No solution for tracking changes across multiple repos/systems</li>
+                            <li><strong>Limited Context:</strong> Claude works in one repo at a time, may miss ecosystem impacts</li>
+                            <li><strong>Learning Curve:</strong> Team needs to understand new workflow, commands, and philosophy</li>
+                            <li><strong>Documentation Gap:</strong> Plugin documentation incomplete (command order, label lifecycle)</li>
+                            <li><strong>Design Notifications:</strong> No clear mechanism for notifying design team of new work</li>
+                            <li><strong>Alpha Status:</strong> Plugin is bare bones, missing many planned features</li>
+                            <li><strong>No Implementation Plans:</strong> Engineers create plans ad-hoc, not persisted for others</li>
+                            <li><strong>Non-Functional Gaps:</strong> Template doesn't include performance, compliance, release communication needs</li>
+                            <li><strong>Long-Running Limits:</strong> Claude doesn't run for days unattended (requires check-ins)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Model Recommendations -->
+            <div class="section">
+                <h2 class="section-title">🤖 Claude Model Recommendations</h2>
+
+                <div class="card">
+                    <h3>Primary Recommendation: Opus 4.5</h3>
+                    <p><strong>Use Case:</strong> Default for all plugin operations unless specific reason to switch</p>
+                    <p><strong>Why:</strong> Smarter model, better understanding of complex requirements and validation logic</p>
+                    <div class="code-block">
+                        # Switch model using
+                        /model opus
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Alternative: Sonnet (for larger context windows)</h3>
+                    <p><strong>Use Case:</strong> When context window becomes an issue during implementation</p>
+                    <p><strong>Saro's Guidance:</strong> "If you can't get what you're trying to get done in the context window of opus, you should probably look at breaking down what you're trying to get done a little bit more."</p>
+                    <p><strong>Risk:</strong> Compaction can impact fidelity of work quality</p>
+                </div>
+
+                <div class="card">
+                    <h3>Sub-Agent Model Inheritance</h3>
+                    <p>Sub-agents (like Issue Validator) inherit your selected model unless explicitly configured otherwise in the plugin.</p>
+                </div>
+            </div>
+
+            <!-- Unanswered Questions -->
+            <div class="section">
+                <h2 class="section-title">❓ Open Questions & Future Exploration</h2>
+
+                <div class="card">
+                    <h3>1. Feature Flagging & Related Tickets</h3>
+                    <p><strong>Question (59:02):</strong> "Is there a way we can maybe add a flag and that flag be a feature name? And then Claude goes and looks at all the tickets in that feature to make sure the ticket it's reviewing is not contradicting a previous ticket?"</p>
+                    <p><strong>Status:</strong> Question cut off at end of recording - needs follow-up</p>
+                </div>
+
+                <div class="card">
+                    <h3>2. Release & Communication Workflow</h3>
+                    <p><strong>Question (37:34 - 38:31):</strong> How to track which work items need release notes, training, or app support communication?</p>
+                    <p><strong>Discussion:</strong> Is this ticket-level or feature-level metadata?</p>
+                    <p><strong>Status:</strong> Unresolved, needs process definition</p>
+                </div>
+
+                <div class="card">
+                    <h3>3. Hierarchical Organization</h3>
+                    <p><strong>Question (51:30 - 52:02):</strong> Can issues be grouped under feature titles for large projects?</p>
+                    <p><strong>Answer:</strong> GitHub has capability, but not leveraged yet. Assumption is larger issues reduce need for deep hierarchies.</p>
+                    <p><strong>Open Item:</strong> May need "initiative" level for multi-application efforts</p>
+                </div>
+
+                <div class="card">
+                    <h3>4. Knowledge Base Integration</h3>
+                    <p><strong>Concept (06:12 - 06:44):</strong> Skill that knows how to look up project-specific knowledge</p>
+                    <p><strong>Example:</strong> Clear project tables, Byte mappings, internal data structures</p>
+                    <p><strong>Status:</strong> Not implemented yet, future enhancement</p>
+                </div>
+
+                <div class="card">
+                    <h3>5. Risk vs. Sizing</h3>
+                    <p><strong>Idea (21:34 - 22:30):</strong> Should sizing be complexity/risk (likelihood of Claude success) rather than time-based estimation?</p>
+                    <p><strong>Counter:</strong> Sizing still useful for tracking velocity even with faster Claude development</p>
+                    <p><strong>Status:</strong> May explore adding risk as separate dimension</p>
+                </div>
+            </div>
+
+            <!-- Implementation Tips -->
+            <div class="section">
+                <h2 class="section-title">💡 Implementation Best Practices</h2>
+
+                <div class="card">
+                    <h3>For Product Teams</h3>
+                    <ul>
+                        <li>Run Claude Code from within the target repository for best context</li>
+                        <li>Use /create work item with file references for complex features (PRDs, prototypes, etc.)</li>
+                        <li>Let Claude interview you to flesh out ideas - it will ask good clarifying questions</li>
+                        <li>Don't skip the validation step - let the Issue Validator improve quality</li>
+                        <li>Workshop acceptance criteria until they're truly testable</li>
+                        <li>Use the product reference folder for design systems, API docs, and prototypes</li>
+                        <li>Mark work items "needs design" early if design input required</li>
+                        <li>Be prescriptive about business logic, data mapping, and API endpoints when you have specific requirements</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>For Engineering Teams</h3>
+                    <ul>
+                        <li>Use Opus 4.5 as default model for best results</li>
+                        <li>Run /dev review regularly to stay on top of new work items</li>
+                        <li>Reject with specific, actionable feedback rather than accepting unclear work</li>
+                        <li>Validate or adjust t-shirt sizing based on actual technical complexity</li>
+                        <li>Pull work from accepted queue based on interest/expertise (self-organization)</li>
+                        <li>Treat acceptance criteria as Given/When/Then test scenarios</li>
+                        <li>Use split command if work item scope is too large after investigation</li>
+                        <li>Reference product reference folder for design patterns and technical constraints</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>For Design Teams</h3>
+                    <ul>
+                        <li>Set up label subscription or team assignment for "needs design" items</li>
+                        <li>Check product reference folder for existing prototypes and context</li>
+                        <li>When design complete, mark as "design ready" to return to requirements phase</li>
+                        <li>Can add design artifacts directly to issue or check into reference folder</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Repository Setup</h3>
+                    <ul>
+                        <li>Create product reference folder in each repo as standard practice</li>
+                        <li>Consider adding architecture documentation listing dependencies</li>
+                        <li>Include product "cover page" describing system touchpoints</li>
+                        <li>Set up SDLC project board at org level to see all work across repos</li>
+                        <li>Ensure GitHub CLI is installed and authenticated for all team members</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Comparison: Before vs After -->
+            <div class="section">
+                <h2 class="section-title">🔄 Workflow Comparison: Traditional vs Plugin-Based</h2>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>Traditional SDLC</th>
+                            <th>Plugin-Based SDLC</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Work Item Scope</strong></td>
+                            <td>Small user stories (1-2 days), separate front-end/back-end</td>
+                            <td>Feature-level work items, front-end/back-end combined</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Template Consistency</strong></td>
+                            <td>Varies by person, manual enforcement</td>
+                            <td>Automated validation, uniform templates, auto-updated</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Quality Gates</strong></td>
+                            <td>Sporadic reviews, acceptance criteria quality varies</td>
+                            <td>Dual validation (product + engineering), AI-enforced quality</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Technical Context</strong></td>
+                            <td>Manual documentation, often incomplete</td>
+                            <td>Auto-extracted from codebase, included in work items</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Feedback Loop</strong></td>
+                            <td>Meetings, Slack messages, informal</td>
+                            <td>Structured rejection with comments, label-based workflow</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Assignment</strong></td>
+                            <td>Pre-assigned, sticky ownership</td>
+                            <td>Pull from queue, self-organization, reduced barriers</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Design Integration</strong></td>
+                            <td>Separate process, unclear handoffs</td>
+                            <td>Built into workflow with explicit design phase</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sizing Methodology</strong></td>
+                            <td>Story points, varies by team</td>
+                            <td>T-shirt sizing (S/M/L), AI-suggested, uniform across org</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Implementation Speed</strong></td>
+                            <td>Days to weeks per user story</td>
+                            <td>Hours to days per feature-level item (with Claude)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Documentation</strong></td>
+                            <td>Separate docs, often out of sync</td>
+                            <td>Reference folders in repo, accessible to Claude</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            <p>Generated: January 2026 | <a href="dashboard.html" style="color: #667eea;">← Back to Dashboard</a></p>
+        </div>
+    </div>
+</body>
+</html>

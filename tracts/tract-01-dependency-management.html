@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tract 01: Dependency Management Strategy for Complex Projects</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            color: #1e3c72;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #1e3c72;
+        }
+
+        .subsection-title {
+            color: #2a5298;
+            font-size: 1.5em;
+            margin: 30px 0 15px 0;
+        }
+
+        .problem-box {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .solution-box {
+            background: #d4edda;
+            border-left: 5px solid #28a745;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        /* Ticket Mockups */
+        .ticket {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .ticket:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .ticket-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .ticket-id {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #1e3c72;
+        }
+
+        .ticket-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2a5298;
+        }
+
+        .ticket-labels {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 10px 0;
+        }
+
+        .label {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+
+        .label-platform { background: #6f42c1; color: white; }
+        .label-role { background: #fd7e14; color: white; }
+        .label-feature { background: #20c997; color: white; }
+        .label-size-large { background: #dc3545; color: white; }
+        .label-size-medium { background: #ffc107; color: #333; }
+        .label-size-small { background: #28a745; color: white; }
+        .label-priority-high { background: #e74c3c; color: white; }
+        .label-priority-medium { background: #f39c12; color: white; }
+        .label-blocked { background: #6c757d; color: white; }
+
+        .ticket-description {
+            margin: 15px 0;
+            color: #555;
+        }
+
+        .ticket-dependencies {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .ticket-dependencies strong {
+            color: #1e3c72;
+        }
+
+        .dependency-link {
+            display: inline-block;
+            background: #e3f2fd;
+            padding: 4px 10px;
+            border-radius: 6px;
+            margin: 4px;
+            color: #1976d2;
+            text-decoration: none;
+            font-family: monospace;
+        }
+
+        /* Dependency Flow Diagram */
+        .flow-diagram {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            overflow-x: auto;
+        }
+
+        .flow-tier {
+            margin-bottom: 40px;
+        }
+
+        .tier-label {
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #1e3c72;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .flow-boxes {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .flow-box {
+            background: white;
+            border: 3px solid #2a5298;
+            border-radius: 8px;
+            padding: 15px 25px;
+            min-width: 200px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .flow-box.platform {
+            border-color: #6f42c1;
+            background: linear-gradient(135deg, #6f42c1 0%, #8e5dc5 100%);
+            color: white;
+            font-weight: bold;
+        }
+
+        .flow-box.role {
+            border-color: #fd7e14;
+            background: #fff5e6;
+        }
+
+        .flow-box.feature {
+            border-color: #20c997;
+            background: #e6fff9;
+        }
+
+        .flow-arrow {
+            text-align: center;
+            font-size: 2em;
+            color: #2a5298;
+            margin: 10px 0;
+        }
+
+        /* Code Block */
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .code-comment {
+            color: #6a9955;
+        }
+
+        .code-keyword {
+            color: #569cd6;
+        }
+
+        .code-string {
+            color: #ce9178;
+        }
+
+        /* Scaffolding Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        /* Callout Box */
+        .callout {
+            background: #e3f2fd;
+            border-left: 5px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .callout-title {
+            font-weight: bold;
+            color: #1976d2;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        /* Best Practices Box */
+        .best-practices {
+            background: #f3e5f5;
+            border-left: 5px solid #9c27b0;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .best-practices ul {
+            margin-left: 20px;
+        }
+
+        .best-practices li {
+            margin-bottom: 10px;
+        }
+
+        /* Visual Hierarchy Diagram */
+        .hierarchy {
+            margin: 30px 0;
+        }
+
+        .hierarchy-level {
+            margin-left: 40px;
+            margin-bottom: 15px;
+        }
+
+        .hierarchy-item {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+        }
+
+        .hierarchy-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            margin-right: 15px;
+        }
+
+        .icon-platform { background: #6f42c1; }
+        .icon-role { background: #fd7e14; }
+        .icon-feature { background: #20c997; }
+
+        .hierarchy-text {
+            flex: 1;
+        }
+
+        .hierarchy-connector {
+            border-left: 3px solid #ddd;
+            margin-left: 15px;
+            padding-left: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📋 Tract 01: Dependency Management Strategy</h1>
+            <div class="subtitle">Structuring Complex Projects to Minimize Dependencies</div>
+            <p style="margin-top: 15px; font-size: 0.9em;">Case Study: Conditions Portal</p>
+        </div>
+
+        <div class="content">
+            <!-- Problem Statement -->
+            <div class="section">
+                <h2 class="section-title">🎯 The Challenge</h2>
+
+                <div class="problem-box">
+                    <h3 style="margin-bottom: 15px;">The Big Project Problem</h3>
+                    <p>When building a large application like <strong>Conditions Portal</strong>, we face several challenges:</p>
+                    <ul style="margin: 15px 0 15px 30px;">
+                        <li><strong>Many Moving Parts:</strong> Multiple roles (Processor, Underwriter, Borrower), complex workflows, and interdependent features</li>
+                        <li><strong>Dependency Hell:</strong> Features that can't be built until other features exist</li>
+                        <li><strong>Blocked Progress:</strong> Engineers waiting on foundational work before starting their tasks</li>
+                        <li><strong>Integration Risk:</strong> Building everything in isolation and hoping it works together</li>
+                        <li><strong>Testing Nightmare:</strong> Can't test role-specific features without the underlying platform</li>
+                    </ul>
+                </div>
+
+                <div class="callout">
+                    <div class="callout-title">💡 The Core Question</div>
+                    <p>How do we break down a large project into manageable work items that:</p>
+                    <ul style="margin-left: 30px; margin-top: 10px;">
+                        <li>Minimize dependencies between tickets</li>
+                        <li>Allow parallel development where possible</li>
+                        <li>Provide value at each stage</li>
+                        <li>Enable incremental testing and validation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- The Solution -->
+            <div class="section">
+                <h2 class="section-title">✅ The Solution: Three-Tier Dependency Strategy</h2>
+
+                <div class="solution-box">
+                    <h3 style="margin-bottom: 15px;">The Approach</h3>
+                    <p>Structure work items in three tiers, each building upon the previous:</p>
+                    <ol style="margin: 15px 0 15px 30px;">
+                        <li><strong>Tier 1: Platform Foundation</strong> - The base grid/table with read-only data display, no features</li>
+                        <li><strong>Tier 2: Role Scaffolding</strong> - Role-specific UI shells, navigation, and permissions (no business logic yet)</li>
+                        <li><strong>Tier 3: Feature Implementation</strong> - Individual features within each role context</li>
+                    </ol>
+                </div>
+
+                <h3 class="subsection-title">Why This Works</h3>
+                <div class="best-practices">
+                    <ul>
+                        <li><strong>Single Point of Truth:</strong> Platform ticket establishes data models, API contracts, and UI framework that everyone builds on</li>
+                        <li><strong>Parallel Role Development:</strong> Once platform is done, multiple teams can work on different roles simultaneously</li>
+                        <li><strong>Feature Independence:</strong> Within a role, features have minimal dependencies on each other</li>
+                        <li><strong>Incremental Value:</strong> Each tier delivers working software that can be deployed and tested</li>
+                        <li><strong>Clear Blockers:</strong> Dependencies are explicit and easy to track</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Visual Flow Diagram -->
+            <div class="section">
+                <h2 class="section-title">🔄 Dependency Flow: Conditions Portal</h2>
+
+                <div class="flow-diagram">
+                    <div class="flow-tier">
+                        <div class="tier-label">⬛ Tier 1: Platform Foundation</div>
+                        <div class="flow-boxes">
+                            <div class="flow-box platform">
+                                #CP-001<br>
+                                Conditions Grid Platform<br>
+                                <small>(Read-Only)</small>
+                            </div>
+                        </div>
+                        <div style="text-align: center; margin-top: 15px; color: #666;">
+                            <em>Establishes: Data models, API contracts, Grid component, Authentication, Basic navigation</em>
+                        </div>
+                    </div>
+
+                    <div class="flow-arrow">⬇️</div>
+
+                    <div class="flow-tier">
+                        <div class="tier-label">🟧 Tier 2: Role Scaffolding</div>
+                        <div class="flow-boxes">
+                            <div class="flow-box role">
+                                #CP-100<br>
+                                Processor Role Shell
+                            </div>
+                            <div class="flow-box role">
+                                #CP-200<br>
+                                Underwriter Role Shell
+                            </div>
+                            <div class="flow-box role">
+                                #CP-300<br>
+                                Borrower Role Shell
+                            </div>
+                        </div>
+                        <div style="text-align: center; margin-top: 15px; color: #666;">
+                            <em>Establishes: Role-specific views, Navigation patterns, Permission boundaries, Action panels (empty)</em>
+                        </div>
+                    </div>
+
+                    <div class="flow-arrow">⬇️</div>
+
+                    <div class="flow-tier">
+                        <div class="tier-label">🟩 Tier 3: Feature Implementation</div>
+
+                        <div style="margin-bottom: 30px;">
+                            <div style="text-align: center; font-weight: bold; color: #fd7e14; margin-bottom: 10px;">Processor Features</div>
+                            <div class="flow-boxes">
+                                <div class="flow-box feature">
+                                    #CP-101<br>
+                                    Request Documents
+                                </div>
+                                <div class="flow-box feature">
+                                    #CP-102<br>
+                                    Review Submitted Docs
+                                </div>
+                                <div class="flow-box feature">
+                                    #CP-103<br>
+                                    Accept/Reject Docs
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 30px;">
+                            <div style="text-align: center; font-weight: bold; color: #fd7e14; margin-bottom: 10px;">Underwriter Features</div>
+                            <div class="flow-boxes">
+                                <div class="flow-box feature">
+                                    #CP-201<br>
+                                    Clear Conditions
+                                </div>
+                                <div class="flow-box feature">
+                                    #CP-202<br>
+                                    Add Stipulations
+                                </div>
+                                <div class="flow-box feature">
+                                    #CP-203<br>
+                                    Final Approval
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div style="text-align: center; font-weight: bold; color: #fd7e14; margin-bottom: 10px;">Borrower Features</div>
+                            <div class="flow-boxes">
+                                <div class="flow-box feature">
+                                    #CP-301<br>
+                                    View Required Docs
+                                </div>
+                                <div class="flow-box feature">
+                                    #CP-302<br>
+                                    Upload Documents
+                                </div>
+                                <div class="flow-box feature">
+                                    #CP-303<br>
+                                    Track Status
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <div class="callout-title">🔑 Key Insight</div>
+                    <p>Notice how dependencies flow <strong>downward</strong> through tiers, but features within a tier can be developed in <strong>parallel</strong>. This structure maximizes team velocity while minimizing blocked work.</p>
+                </div>
+            </div>
+
+            <!-- Ticket Examples -->
+            <div class="section">
+                <h2 class="section-title">🎫 Ticket Structure Examples</h2>
+
+                <h3 class="subsection-title">Tier 1: Platform Foundation Ticket</h3>
+                <div class="ticket">
+                    <div class="ticket-header">
+                        <div class="ticket-id">#CP-001</div>
+                        <div class="ticket-labels">
+                            <span class="label label-platform">Platform</span>
+                            <span class="label label-size-large">Large</span>
+                            <span class="label label-priority-high">Priority: High</span>
+                        </div>
+                    </div>
+                    <div class="ticket-title">Conditions Portal - Platform Foundation (Read-Only Grid)</div>
+                    <div class="ticket-description">
+                        <strong>Summary:</strong>
+                        <p>Create the foundational platform for the Conditions Portal, including a read-only grid/table that displays condition data for all user roles. This establishes the core infrastructure, data models, API contracts, and UI framework that all subsequent role and feature work will build upon.</p>
+
+                        <strong style="display: block; margin-top: 15px;">Scope:</strong>
+                        <ul style="margin-left: 30px;">
+                            <li>Data model for conditions (id, type, status, assigned_to, due_date, description, etc.)</li>
+                            <li>API endpoints: GET /conditions, GET /conditions/{id}</li>
+                            <li>Grid component displaying conditions data (sortable, filterable)</li>
+                            <li>Basic authentication and session management</li>
+                            <li>Top-level navigation structure (placeholder for roles)</li>
+                            <li>Empty state handling</li>
+                            <li>Responsive layout foundation</li>
+                        </ul>
+
+                        <strong style="display: block; margin-top: 15px;">Acceptance Criteria:</strong>
+                        <ul style="margin-left: 30px;">
+                            <li>✓ User can log in and see the conditions grid</li>
+                            <li>✓ Grid displays all conditions with columns: ID, Type, Status, Assigned To, Due Date, Description</li>
+                            <li>✓ Grid supports sorting by any column</li>
+                            <li>✓ Grid supports filtering by status and assigned user</li>
+                            <li>✓ Clicking a row shows condition details in a read-only detail panel</li>
+                            <li>✓ No action buttons or edit capabilities (read-only)</li>
+                            <li>✓ API returns JSON with consistent structure documented</li>
+                            <li>✓ Works on desktop and mobile viewports</li>
+                        </ul>
+
+                        <strong style="display: block; margin-top: 15px;">Out of Scope:</strong>
+                        <ul style="margin-left: 30px;">
+                            <li>Any create, update, or delete operations</li>
+                            <li>Role-specific views or features</li>
+                            <li>Document upload/download</li>
+                            <li>Notifications or alerts</li>
+                        </ul>
+                    </div>
+                    <div class="ticket-dependencies">
+                        <strong>Dependencies:</strong> None (Foundation ticket)<br>
+                        <strong>Blocks:</strong>
+                        <span class="dependency-link">#CP-100</span>
+                        <span class="dependency-link">#CP-200</span>
+                        <span class="dependency-link">#CP-300</span>
+                    </div>
+                </div>
+
+                <h3 class="subsection-title">Tier 2: Role Scaffolding Ticket</h3>
+                <div class="ticket">
+                    <div class="ticket-header">
+                        <div class="ticket-id">#CP-100</div>
+                        <div class="ticket-labels">
+                            <span class="label label-role">Role</span>
+                            <span class="label label-size-medium">Medium</span>
+                            <span class="label label-priority-high">Priority: High</span>
+                        </div>
+                    </div>
+                    <div class="ticket-title">Processor Role Shell - UI Scaffolding & Navigation</div>
+                    <div class="ticket-description">
+                        <strong>Summary:</strong>
+                        <p>Create the Processor role-specific view and navigation shell. This establishes the UI container and action panel framework where processor-specific features will be implemented, but does not include feature business logic yet.</p>
+
+                        <strong style="display: block; margin-top: 15px;">Scope:</strong>
+                        <ul style="margin-left: 30px;">
+                            <li>Processor-specific view of the conditions grid (filtered to show processor-assigned items)</li>
+                            <li>Action panel on the right side with placeholder sections for future features</li>
+                            <li>Navigation to toggle between "My Conditions" and "All Conditions"</li>
+                            <li>Permission checks: user must have "processor" role to access this view</li>
+                            <li>Empty states for each action section (e.g., "Document actions will appear here")</li>
+                        </ul>
+
+                        <strong style="display: block; margin-top: 15px;">Acceptance Criteria:</strong>
+                        <ul style="margin-left: 30px;">
+                            <li>✓ Processor sees grid filtered to their assigned conditions by default</li>
+                            <li>✓ Action panel displays on right side with labeled sections: "Document Requests", "Review Actions", "Decision Actions"</li>
+                            <li>✓ Each action section shows placeholder text (no functional buttons yet)</li>
+                            <li>✓ Navigation allows toggle between "My Conditions" and "All Conditions"</li>
+                            <li>✓ Non-processor users cannot access this view (permission check)</li>
+                            <li>✓ Selecting a condition highlights it and updates action panel context</li>
+                        </ul>
+
+                        <strong style="display: block; margin-top: 15px;">Out of Scope:</strong>
+                        <ul style="margin-left: 30px;">
+                            <li>Any functional action buttons (request docs, accept/reject, etc.)</li>
+                            <li>API endpoints for processor actions</li>
+                            <li>Document upload/download functionality</li>
+                        </ul>
+                    </div>
+                    <div class="ticket-dependencies">
+                        <strong>Depends On:</strong> <span class="dependency-link">#CP-001</span> (Platform Foundation)<br>
+                        <strong>Blocks:</strong>
+                        <span class="dependency-link">#CP-101</span>
+                        <span class="dependency-link">#CP-102</span>
+                        <span class="dependency-link">#CP-103</span>
+                    </div>
+                </div>
+
+                <h3 class="subsection-title">Tier 3: Feature Implementation Ticket</h3>
+                <div class="ticket">
+                    <div class="ticket-header">
+                        <div class="ticket-id">#CP-101</div>
+                        <div class="ticket-labels">
+                            <span class="label label-feature">Feature</span>
+                            <span class="label label-size-small">Small</span>
+                            <span class="label label-priority-medium">Priority: Medium</span>
+                        </div>
+                    </div>
+                    <div class="ticket-title">Processor Feature - Request Documents from Borrower</div>
+                    <div class="ticket-description">
+                        <strong>Summary:</strong>
+                        <p>Implement the "Request Documents" feature for Processor role. Processor can select a condition, specify which documents are needed, and send a request to the borrower. Borrower receives notification and sees the request in their view.</p>
+
+                        <strong style="display: block; margin-top: 15px;">Scope:</strong>
+                        <ul style="margin-left: 30px;">
+                            <li>Add "Request Documents" button in Processor action panel (Document Requests section)</li>
+                            <li>Modal dialog to select document types and add custom message</li>
+                            <li>API endpoint: POST /conditions/{id}/document-requests</li>
+                            <li>Update condition status to "Documents Requested"</li>
+                            <li>Send notification to borrower (email + in-app)</li>
+                            <li>Log action in condition activity history</li>
+                        </ul>
+
+                        <strong style="display: block; margin-top: 15px;">Acceptance Criteria:</strong>
+                        <ul style="margin-left: 30px;">
+                            <li>✓ Given a processor has selected a condition, when they click "Request Documents", then a modal opens with document type checkboxes and message field</li>
+                            <li>✓ Given the processor submits the request, when the API call succeeds, then the condition status updates to "Documents Requested"</li>
+                            <li>✓ Given a document request is submitted, when the borrower logs in, then they see the request in their conditions view</li>
+                            <li>✓ Given a document request is submitted, then the borrower receives an email notification with document list and deadline</li>
+                            <li>✓ Given a request is submitted, then it appears in the condition's activity history with timestamp and processor name</li>
+                        </ul>
+
+                        <strong style="display: block; margin-top: 15px;">Data Mapping:</strong>
+                        <ul style="margin-left: 30px;">
+                            <li>Document types: enum (PayStub, BankStatement, TaxReturn, EmploymentLetter, Other)</li>
+                            <li>API payload: { condition_id, requested_documents: [{ type, description, due_date }], message }</li>
+                            <li>Notification: Use Docs notification service with template "document-request"</li>
+                        </ul>
+                    </div>
+                    <div class="ticket-dependencies">
+                        <strong>Depends On:</strong> <span class="dependency-link">#CP-100</span> (Processor Role Shell)<br>
+                        <strong>Related:</strong> <span class="dependency-link">#CP-301</span> (Borrower must be able to view requests)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scaffolding Outline -->
+            <div class="section">
+                <h2 class="section-title">📐 Complete Scaffolding for Conditions Portal</h2>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ticket ID</th>
+                            <th>Tier</th>
+                            <th>Title</th>
+                            <th>Size</th>
+                            <th>Depends On</th>
+                            <th>Blocks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Platform -->
+                        <tr style="background: #f3e5f5;">
+                            <td><strong>#CP-001</strong></td>
+                            <td><span class="label label-platform">Platform</span></td>
+                            <td><strong>Conditions Grid Platform (Read-Only)</strong></td>
+                            <td><span class="label label-size-large">Large</span></td>
+                            <td>—</td>
+                            <td>#CP-100, #CP-200, #CP-300</td>
+                        </tr>
+
+                        <!-- Processor Role -->
+                        <tr style="background: #fff3e0;">
+                            <td><strong>#CP-100</strong></td>
+                            <td><span class="label label-role">Role</span></td>
+                            <td><strong>Processor Role Shell</strong></td>
+                            <td><span class="label label-size-medium">Medium</span></td>
+                            <td>#CP-001</td>
+                            <td>#CP-101, #CP-102, #CP-103</td>
+                        </tr>
+                        <tr>
+                            <td>#CP-101</td>
+                            <td><span class="label label-feature">Feature</span></td>
+                            <td>Request Documents from Borrower</td>
+                            <td><span class="label label-size-small">Small</span></td>
+                            <td>#CP-100</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>#CP-102</td>
+                            <td><span class="label label-feature">Feature</span></td>
+                            <td>Review Submitted Documents</td>
+                            <td><span class="label label-size-small">Small</span></td>
+                            <td>#CP-100, #CP-302</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>#CP-103</td>
+                            <td><span class="label label-feature">Feature</span></td>
+                            <td>Accept/Reject Documents</td>
+                            <td><span class="label label-size-small">Small</span></td>
+                            <td>#CP-100, #CP-102</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>#CP-104</td>
+                            <td><span class="label label-feature">Feature</span></td>
+                            <td>Add Comments/Notes to Condition</td>
+                            <td><span class="label label-size-small">Small</span></td>
+                            <td>#CP-100</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>#CP-105</td>
+                            <td><span class="label label-feature">Feature</span></td>
+                            <td>Reassign Condition to Another Processor</td>
+                            <td><span class="label label-size-small">Small</span></td>
+                            <td>#CP-100</td>
+                            <td>—</td>
+                        </tr>
+
+                        <!-- Underwriter Role -->
+                        <tr style="background: #fff3e0;">
+                            <td><strong>#CP-200</strong></td>
+                            <td><span class="label label-role">Role</span></td>
+                            <td><strong>Underwriter Role Shell</strong></td>
+                            <td><span class="label label-size-medium">Medium</span></td>
+                            <td>#CP-001</td>
+                            <td>#CP-201, #CP-202, #CP-203</td>
+                        </tr>
+                        <tr>
+                            <td>#CP-201</td>
+                            <td><span class="label label-feature">Feature</span></td>
+                            <td>Clear Condition (Mark as Satisfied)</td>
+                            <td><span class="label label-size-small">Small</span></td>
+                            <td>#CP-200</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>#CP-202</td>
+                            <td><span class="label label-feature">Feature</span></td>
+                            <td>Add New Stipulation to Loan</td>
+                            <td><span class="label label-size-medium">Medium</span></td>
+                            <td>#CP-200</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>#CP-203</td>
+                            <td><span class="label label-feature">Feature</span></td>
+                            <td>Provide Final Approval on Condition</td>
+                            <td><span class="label label-size-small">Small</span></td>
+                            <td>#CP-200, #CP-201</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>#CP-204</td>
+                            <td><span class="label label-feature">Feature</span></td>
+                            <td>Escalate Condition for Review</td>
+                            <td><span class="label label-size-small">Small</span></td>
+                            <td>#CP-200</td>
+                            <td>—</td>
+                        </tr>
+
+                        <!-- Borrower Role -->
+                        <tr style="background: #fff3e0;">
+                            <td><strong>#CP-300</strong></td>
+                            <td><span class="label label-role">Role</span></td>
+                            <td><strong>Borrower Role Shell</strong></td>
+                            <td><span class="label label-size-medium">Medium</span></td>
+                            <td>#CP-001</td>
+                            <td>#CP-301, #CP-302, #CP-303</td>
+                        </tr>
+                        <tr>
+                            <td>#CP-301</td>
+                            <td><span class="label label-feature">Feature</span></td>
+                            <td>View Required Documents List</td>
+                            <td><span class="label label-size-small">Small</span></td>
+                            <td>#CP-300</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>#CP-302</td>
+                            <td><span class="label label-feature">Feature</span></td>
+                            <td>Upload Documents for Condition</td>
+                            <td><span class="label label-size-medium">Medium</span></td>
+                            <td>#CP-300, #CP-301</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>#CP-303</td>
+                            <td><span class="label label-feature">Feature</span></td>
+                            <td>Track Condition Status & Timeline</td>
+                            <td><span class="label label-size-small">Small</span></td>
+                            <td>#CP-300</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>#CP-304</td>
+                            <td><span class="label label-feature">Feature</span></td>
+                            <td>Receive Notifications for Updates</td>
+                            <td><span class="label label-size-small">Small</span></td>
+                            <td>#CP-300</td>
+                            <td>—</td>
+                        </tr>
+
+                        <!-- Cross-Cutting Features -->
+                        <tr style="background: #e8f5e9;">
+                            <td>#CP-400</td>
+                            <td><span class="label label-feature">Feature</span></td>
+                            <td>Activity History & Audit Log</td>
+                            <td><span class="label label-size-medium">Medium</span></td>
+                            <td>#CP-001</td>
+                            <td>—</td>
+                        </tr>
+                        <tr style="background: #e8f5e9;">
+                            <td>#CP-401</td>
+                            <td><span class="label label-feature">Feature</span></td>
+                            <td>Email & SMS Notifications</td>
+                            <td><span class="label label-size-medium">Medium</span></td>
+                            <td>#CP-001</td>
+                            <td>—</td>
+                        </tr>
+                        <tr style="background: #e8f5e9;">
+                            <td>#CP-402</td>
+                            <td><span class="label label-feature">Feature</span></td>
+                            <td>Export Conditions Report (PDF/Excel)</td>
+                            <td><span class="label label-size-small">Small</span></td>
+                            <td>#CP-001</td>
+                            <td>—</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Implementation Guidelines -->
+            <div class="section">
+                <h2 class="section-title">🚀 Implementation Guidelines for Product Team</h2>
+
+                <h3 class="subsection-title">1. Ticket Naming Convention</h3>
+                <div class="code-block">
+<span class="code-comment"># Format: [Project]-[Tier][Role][Sequence]</span>
+
+<span class="code-comment"># Platform (Tier 1): CP-001 to CP-099</span>
+<span class="code-keyword">Example:</span> <span class="code-string">#CP-001</span> Conditions Grid Platform
+
+<span class="code-comment"># Role Scaffolding (Tier 2): CP-[Role]00</span>
+<span class="code-keyword">Example:</span> <span class="code-string">#CP-100</span> Processor Role Shell
+<span class="code-keyword">Example:</span> <span class="code-string">#CP-200</span> Underwriter Role Shell
+
+<span class="code-comment"># Features (Tier 3): CP-[Role][Feature]</span>
+<span class="code-keyword">Example:</span> <span class="code-string">#CP-101</span> Request Documents (Processor)
+<span class="code-keyword">Example:</span> <span class="code-string">#CP-201</span> Clear Condition (Underwriter)
+                </div>
+
+                <h3 class="subsection-title">2. Dependency Management Best Practices</h3>
+                <div class="best-practices">
+                    <ul>
+                        <li><strong>Explicit Dependencies:</strong> Always list "Depends On" and "Blocks" in ticket description</li>
+                        <li><strong>Use GitHub Labels:</strong> Tag tickets with "blocked" label when dependencies aren't met</li>
+                        <li><strong>Link Related Tickets:</strong> Use GitHub's linking syntax (#CP-XXX) to create clickable references</li>
+                        <li><strong>Order Matters:</strong> Create tickets in dependency order so engineers see the logical flow</li>
+                        <li><strong>Ready Gates:</strong> Only mark Tier 2 tickets "ready" after Tier 1 is complete and deployed</li>
+                    </ul>
+                </div>
+
+                <h3 class="subsection-title">3. What to Include in Each Tier</h3>
+
+                <div class="callout">
+                    <div class="callout-title">Tier 1: Platform Foundation</div>
+                    <ul style="margin-left: 30px; margin-top: 10px;">
+                        <li><strong>Data Models:</strong> Define all entities, fields, types, validations</li>
+                        <li><strong>API Contracts:</strong> Specify endpoints, request/response shapes, error codes</li>
+                        <li><strong>UI Framework:</strong> Core components (grid, navigation, detail panel)</li>
+                        <li><strong>Authentication:</strong> Login, session, role detection</li>
+                        <li><strong>Read-Only:</strong> Display data only, no mutations</li>
+                    </ul>
+                </div>
+
+                <div class="callout">
+                    <div class="callout-title">Tier 2: Role Scaffolding</div>
+                    <ul style="margin-left: 30px; margin-top: 10px;">
+                        <li><strong>Role-Specific Views:</strong> Filtered grids, specialized layouts</li>
+                        <li><strong>Action Panels:</strong> Empty containers where features will live</li>
+                        <li><strong>Navigation:</strong> Role-specific menu items and routes</li>
+                        <li><strong>Permissions:</strong> Role checks and access control</li>
+                        <li><strong>No Business Logic:</strong> Just the UI shell, placeholders for actions</li>
+                    </ul>
+                </div>
+
+                <div class="callout">
+                    <div class="callout-title">Tier 3: Feature Implementation</div>
+                    <ul style="margin-left: 30px; margin-top: 10px;">
+                        <li><strong>Single Responsibility:</strong> One feature per ticket (e.g., "Request Documents" only)</li>
+                        <li><strong>Complete Vertical Slice:</strong> UI + API + DB for that specific feature</li>
+                        <li><strong>Given/When/Then:</strong> Use BDD acceptance criteria format</li>
+                        <li><strong>Data Mapping:</strong> Specify exact field mappings, API payload structure</li>
+                        <li><strong>Error Handling:</strong> Define what happens when things fail</li>
+                    </ul>
+                </div>
+
+                <h3 class="subsection-title">4. When Features Have Cross-Role Dependencies</h3>
+                <div class="solution-box">
+                    <p><strong>Problem:</strong> Processor "Request Documents" (#CP-101) requires Borrower "View Requests" (#CP-301)</p>
+
+                    <p style="margin-top: 15px;"><strong>Solution Options:</strong></p>
+                    <ol style="margin-left: 30px;">
+                        <li><strong>Option A - Sequential:</strong> Build borrower viewing capability first, then processor request feature depends on it</li>
+                        <li><strong>Option B - Stub First:</strong> Build processor request feature with a mock/stub notification, then implement borrower view later and connect them</li>
+                        <li><strong>Option C - Single Ticket:</strong> Combine both into one larger ticket (#CP-101-301) if they're tightly coupled</li>
+                    </ol>
+
+                    <p style="margin-top: 15px;"><strong>Recommendation:</strong> Use Option B (Stub First) to maintain parallel development. Processor can build and test request feature with email-only notification, then borrower view enhances it later.</p>
+                </div>
+
+                <h3 class="subsection-title">5. Testing Strategy Per Tier</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tier</th>
+                            <th>Testing Focus</th>
+                            <th>Acceptance Gate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Platform</strong></td>
+                            <td>Can users view data? Is API contract stable? Does grid render correctly?</td>
+                            <td>Deploy to staging, have all roles log in and verify data loads</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Role Scaffolding</strong></td>
+                            <td>Can each role access their view? Are permissions correct? Does navigation work?</td>
+                            <td>Have actual users (processor, underwriter, borrower) test their views</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Features</strong></td>
+                            <td>Does the feature work end-to-end? Happy path + error cases</td>
+                            <td>User acceptance testing with real workflow scenarios</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 class="subsection-title">6. GitHub Labels to Use</h3>
+                <div class="code-block">
+<span class="code-comment"># Tier Labels</span>
+<span class="code-keyword">platform</span>    <span class="code-comment"># Purple - Foundation work</span>
+<span class="code-keyword">role</span>        <span class="code-comment"># Orange - Role scaffolding</span>
+<span class="code-keyword">feature</span>     <span class="code-comment"># Teal - Individual features</span>
+
+<span class="code-comment"># Size Labels</span>
+<span class="code-keyword">small</span>       <span class="code-comment"># Green - 2-4 hours</span>
+<span class="code-keyword">medium</span>      <span class="code-comment"># Yellow - 4-8 hours</span>
+<span class="code-keyword">large</span>       <span class="code-comment"># Red - 8+ hours</span>
+
+<span class="code-comment"># Status Labels</span>
+<span class="code-keyword">blocked</span>     <span class="code-comment"># Gray - Waiting on dependencies</span>
+<span class="code-keyword">ready</span>       <span class="code-comment"># Green - Ready for engineering</span>
+<span class="code-keyword">in-progress</span> <span class="code-comment"># Blue - Currently being worked</span>
+
+<span class="code-comment"># Priority Labels</span>
+<span class="code-keyword">priority-high</span>   <span class="code-comment"># Red - Critical path</span>
+<span class="code-keyword">priority-medium</span> <span class="code-comment"># Yellow - Important but not blocking</span>
+<span class="code-keyword">priority-low</span>    <span class="code-comment"># Green - Nice to have</span>
+                </div>
+
+                <h3 class="subsection-title">7. Template for Creating Tickets</h3>
+                <div class="code-block">
+<span class="code-keyword">## Summary</span>
+[One paragraph describing what this ticket accomplishes]
+
+<span class="code-keyword">## Scope</span>
+- [Bulleted list of what's included]
+- [Be specific: UI components, API endpoints, data models]
+
+<span class="code-keyword">## Acceptance Criteria</span>
+- ✓ <span class="code-string">Given</span> [context], <span class="code-string">when</span> [action], <span class="code-string">then</span> [expected result]
+- ✓ <span class="code-string">Given</span> [context], <span class="code-string">when</span> [action], <span class="code-string">then</span> [expected result]
+
+<span class="code-keyword">## Out of Scope</span>
+- [List what's explicitly NOT included to avoid scope creep]
+
+<span class="code-keyword">## Data Mapping</span> <span class="code-comment">(if applicable)</span>
+- Field: type, validation rules
+- API payload structure
+- External system references
+
+<span class="code-keyword">## Dependencies</span>
+- <span class="code-string">Depends On:</span> #CP-XXX (must be complete first)
+- <span class="code-string">Blocks:</span> #CP-YYY, #CP-ZZZ (these wait on this ticket)
+- <span class="code-string">Related:</span> #CP-AAA (loosely connected)
+
+<span class="code-keyword">## Technical Context</span> <span class="code-comment">(optional)</span>
+- Reference to design mockups
+- Links to API documentation
+- Related decisions or architectural notes
+                </div>
+            </div>
+
+            <!-- Decision Tree -->
+            <div class="section">
+                <h2 class="section-title">🌳 Decision Tree: Determining Ticket Tier</h2>
+
+                <div class="flow-diagram">
+                    <div style="background: white; padding: 30px; border-radius: 12px;">
+                        <div style="text-align: center; margin-bottom: 30px;">
+                            <div style="background: #1e3c72; color: white; padding: 15px; border-radius: 8px; display: inline-block; font-weight: bold;">
+                                START: New Feature Idea
+                            </div>
+                        </div>
+
+                        <div style="text-align: center; margin: 20px 0;">
+                            <div style="color: #1e3c72; font-weight: bold;">Does this work affect the core data model, API contracts, or base UI framework?</div>
+                        </div>
+
+                        <div style="display: flex; justify-content: center; gap: 100px; margin: 30px 0;">
+                            <div>
+                                <div style="text-align: center; font-weight: bold; margin-bottom: 10px;">YES ↓</div>
+                                <div style="background: #6f42c1; color: white; padding: 20px; border-radius: 8px; text-align: center;">
+                                    <strong>TIER 1</strong><br>
+                                    Platform Foundation<br>
+                                    <small>Large ticket, blocks everything</small>
+                                </div>
+                            </div>
+                            <div>
+                                <div style="text-align: center; font-weight: bold; margin-bottom: 10px;">NO ↓</div>
+                                <div style="text-align: center; padding: 20px;">
+                                    <div style="color: #1e3c72; font-weight: bold;">Does this establish role-specific views, navigation, or permission boundaries?</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; justify-content: flex-end; gap: 100px; margin: 30px 100px 30px 0;">
+                            <div>
+                                <div style="text-align: center; font-weight: bold; margin-bottom: 10px;">YES ↓</div>
+                                <div style="background: #fd7e14; color: white; padding: 20px; border-radius: 8px; text-align: center;">
+                                    <strong>TIER 2</strong><br>
+                                    Role Scaffolding<br>
+                                    <small>Medium ticket, blocks role features</small>
+                                </div>
+                            </div>
+                            <div>
+                                <div style="text-align: center; font-weight: bold; margin-bottom: 10px;">NO ↓</div>
+                                <div style="background: #20c997; color: white; padding: 20px; border-radius: 8px; text-align: center;">
+                                    <strong>TIER 3</strong><br>
+                                    Feature Implementation<br>
+                                    <small>Small ticket, can be parallel</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div class="section">
+                <h2 class="section-title">📌 Quick Reference Summary</h2>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    <div style="background: linear-gradient(135deg, #6f42c1 0%, #8e5dc5 100%); color: white; padding: 25px; border-radius: 12px;">
+                        <h3 style="margin-bottom: 15px;">🟣 Tier 1: Platform</h3>
+                        <p><strong>Purpose:</strong> Foundation everyone builds on</p>
+                        <p><strong>Size:</strong> Large (8+ hours)</p>
+                        <p><strong>Blocks:</strong> All Tier 2 work</p>
+                        <p><strong>Example:</strong> Read-only grid with API</p>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #fd7e14 0%, #ff8c32 100%); color: white; padding: 25px; border-radius: 12px;">
+                        <h3 style="margin-bottom: 15px;">🟠 Tier 2: Roles</h3>
+                        <p><strong>Purpose:</strong> Role-specific UI shells</p>
+                        <p><strong>Size:</strong> Medium (4-8 hours)</p>
+                        <p><strong>Blocks:</strong> Role features</p>
+                        <p><strong>Example:</strong> Processor action panel (empty)</p>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #20c997 0%, #3dd5a7 100%); color: white; padding: 25px; border-radius: 12px;">
+                        <h3 style="margin-bottom: 15px;">🟢 Tier 3: Features</h3>
+                        <p><strong>Purpose:</strong> Individual user capabilities</p>
+                        <p><strong>Size:</strong> Small (2-4 hours)</p>
+                        <p><strong>Blocks:</strong> Nothing (parallel work)</p>
+                        <p><strong>Example:</strong> Request documents button</p>
+                    </div>
+                </div>
+
+                <div class="callout" style="margin-top: 30px;">
+                    <div class="callout-title">✅ Success Criteria for This Strategy</div>
+                    <ul style="margin-left: 30px; margin-top: 10px;">
+                        <li>✓ Engineers never say "I'm blocked waiting on X"</li>
+                        <li>✓ Multiple teams can work on different roles simultaneously</li>
+                        <li>✓ Each tier delivers deployable, testable software</li>
+                        <li>✓ Dependencies are explicit and tracked in GitHub</li>
+                        <li>✓ Product team can prioritize features within a role independently</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="background: #f8f9fa; padding: 20px 40px; text-align: center; color: #666; border-top: 1px solid #ddd;">
+            <p><strong>Tract 01: Dependency Management Strategy</strong></p>
+            <p style="margin-top: 10px;">Created: January 2026</p>
+            <p style="margin-top: 10px;">
+                <a href="../dashboard.html" style="color: #1e3c72;">← Dashboard</a> |
+                <a href="tract-01-detailed-features.html" style="color: #1e3c72;">View Detailed POC Features →</a> |
+                <a href="index.html" style="color: #1e3c72;">Tracts Index</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

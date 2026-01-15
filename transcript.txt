@@ -1,0 +1,370 @@
+===================================================================================
+SARO DEVOPS TOOL & CLAUDE CODE PLUGIN DISCUSSION - RAW TRANSCRIPT
+===================================================================================
+
+Meeting about Saro's DevOps tool and Claude Code plugin for engineers and product teams
+Total Duration: 59 minutes 40 seconds
+Date: January 2026
+
+===================================================================================
+
+[00:01 --> 00:33]
+No. Sounds good. Okay. That's better. Cool. I think we gotta figure it out. Uh. Like again? Like, how do you want to do this? Like, do you want us to go through. And you had mentioned that maybe we create the repo for conditions portal and try to hit, like, work items there. Yeah. What do you think is best however you want to do it? If you want to, we can. You can maybe show off what you have. I don't know you. Yeah. I'll defer to you. Sure. Let me. Um, we'll do it off the plugin. Doesn't that'll be easier to, like, kind of show? Because ideally the product won't be created in the repo.
+
+[00:34 --> 01:01]
+Engineers will create the repo. Right. Um, and then. Yeah, when we leave, everyone who's on the project should ultimately be able to connect to that. All right. Oh, boy. This is, like, probably the worst way I could have done this. All right. Here you guys see cloud code, and it's actually in the plugin. You can see here my little cloud code actually shows that I'm in plugins. Do you mind doing a two minute, uh, explanation of what a plugin is? Yeah. That's a good question.
+
+[01:01 --> 01:32]
+So we'll plug in essentially is a collection. It's it's built into cloud code. Technically it's marketplaces are built into cloud code which, which point the plugins. Plugins are just collections of slash commands skills, sub agents. Um, I mean, there's a bunch of other stuff like templates and whatnot. And so it's like a way to bundle a bunch of stuff and delivery. The benefit of doing it as a plugin is that as we do the development on the plugin itself, anyone who has it installs, uh, installed auto updates. So if we make improvements to the way that we want the plugin to behave, now everyone gets it all at once.
+
+[01:32 --> 02:01]
+Let's say we improve the template that cloud always uses to generate a new work item. It auto updates for everyone that has a plugin installed, and now everyone's generating workloads in the new templated way. So that's the reason why we can you. Is there a way to switch from light to dark mode or dark to light mode? Can we actually even do that? I've never tried in Cloud Slash three. Yeah. Why is it better for me to do it in light mode? It's just. It was hard. It's hard to read. Yeah, I think that was it.
+
+[02:01 --> 02:30]
+Nope. Did it do it? Oh, that's just the tips. That's not going to do it. I'd have to, like, change. It's probably a mac. It's going to make the system come up. It's going to make everyone. Here. Uh, okay. Yeah. That's fine. It's more readable. Are we okay with this? You are 100% correct. I hope to see that it is 100% more readable. Okay. Uh, where were we at?
+
+[02:30 --> 03:05]
+So we have the plugin. So I'm working in the plugin. I'm in the repo itself. Um, and you guys can see it here. I'll show you, like, visual code real quick. So you just kind of know where it is. So this is Visual Studio Code. This is the plugin. You can see that there's like, many different files in here. Probably not that interesting to you, other than the fact that we have a couple of sub agents, uh, some slash commands. And you'll see here I have things called like work create work, item review. I'll go over all these with you guys in a second. Um, and then it has like scripts which help do things. Like when clod runs, it tries to figure out what repo you're in, and then that lets it the rest of the commands run and know exactly where to create the issue.
+
+[03:05 --> 03:33]
+As a preflight check, the plugin actually checks a lot of the stuff that it's based on as well. It's entirely based on GitHub. And so one of the things that it does, right, when you install a plugin, if you start a new session, it basically checks to make sure that you have GitHub installed and authenticated. It'll tell you like, hey, you don't have the client Alder hey, you need to authenticate and it gives you the command to run. Um, we have other skills. Uh, these have to do with, like when the engineering people are actually doing work, it'll actually make sure that there's enough tests when we actually build out software.
+
+[03:33 --> 04:02]
+Um, and again, like, you don't actually have to know, like you're going to install the plugin. You don't have to know all this individual stuff. I'll show you how you're going to react or how you're going to interact with it. But the idea is that, like as we do development on the plugin itself, let's say we like tweak a certain prompt. Um, it's a little hard to see it here. So we tweak the way that this kind of reacts or works. Um, again, everyone gets auto updated. That's kind of like the premise of what a plugin is used for. It's a way to distribute things across an enterprise in a more uniform way, rather than everyone doing something a little bit differently.
+
+[04:03 --> 04:32]
+Does that mean that, um, as a CMG employee, I might over time have multiple plugins like your plugin, maybe does some other plugins? Yeah. So that's a that's a good point. So, uh, yes, the answer is yes. You'll have many plugins I can show you what like anthropic puts out plugins for doing like code reviews and things that they have opinions on. Um, there is another thing that I, I built out. So Emily has a slash command that she used to build out birds and SS birds.
+
+[04:32 --> 05:01]
+I moved that, so that's less to do with an SDLC and more to do like how product is going to work internally. How are you guys whatever you guys end up choosing? Um, so there's a repo that's just built out as a product, a team plugin that you guys could like if you guys found that, like, hey, this man lets me do my job a little bit better and I want to distribute amongst yourselves. You guys have your own plugins. managed. This one is based for like making sure that like both product and engineering have a certain uniform set of expectations like between both of us. Like we should be using the same workout of template.
+
+[05:01 --> 05:35]
+Like there shouldn't be any like engineering should expect it in the same format that product is creating it. And so if we bundle it all together, we make sure that cloud is always doing it in the exact same way. Well, support for like internal to company data. So for example, like like like the tables that we have invite or things like that. Because some of the products workflow is including some of the technical mapping information. Right. Like I see that you have something for code equals, but I'm not sure about. So this isn't going to be. So it's not going to be something that's so specific to a project because the that's what we use Claude for.
+
+[05:35 --> 06:12]
+A lot of there's different ways to actually get stuff like that done. Like what this is not going to be it's not going to be opinionated on how to do work in very specific ways, because how you do engineering inside of the clear two repositories is different than how you do engineering inside of, I don't know, some new greenfield development application or you know, there's a million different ways to do it. And so there's different mechanisms for, um, there's different mechanisms for, for accounting for like very specific technical contexts like that, which this plugin is not going to offer, that it may be in the future that we can say like, hey, you know, we want to have some sort of knowledge base where maybe we had maybe we had a skill that says it knows how to go look up flight knowledge.
+
+[06:12 --> 06:44]
+And so it would go and say like, look at this knowledge base and go figure stuff out. We're not there yet. This is like again, alpha, very bare bones, but it's going to have the mechanics of like how to produce work items and then how to work on those work items. Could we, could we do the same, like prototyping in such a way that we build a knowledge base or repo, sorts of different components and stuff that you use, let's say for clear, for the home portal, whatever context we're working in, we want prototype so that the thing that we generate, at least on the product side, we're not fighting with getting it to.
+
+[06:45 --> 07:03]
+Yeah, kind of set of standards there I agree. You know. Yeah. Yes. I think you could do that. That seems to me like maybe that would be more internal to, like, the product. The product looking like you guys could end up. Yeah, we could figure out a way to to basically. I don't know if you're talking about, like, embedding like a design system and then trying to teach Claude to use that design system.
+
+[07:03 --> 07:30]
+So like when you go guys go to like whoever has the product, you know, plugin installed when they go to actually like spit out a prototype that it always knows how to go and look at and utilize that design system. Yeah. You tell it. What context? I'm working on clear. Okay. Well I'm going to look at the clear system and go pull these standard things to go. So you get something that's a little bit more intelligible first go around. Yeah. All right. I see you have your hand up. What's up? Yeah. Uh, can you get him? Yeah, I can hear him. But we all. Yeah.
+
+[07:30 --> 08:00]
+Yeah. Thank you. Okay. So, is the unit of work here a ticket or, you know, one work item? Or does this take into account the whole feature? So, like, you know, when we apply this to conditions portal, you know, I'm assuming there would be, you know, let's say 100 tickets out there. Is it a way of the other parts of the feature or the project? Or is it working solely in the context of, you know, one one work item created by the product and is unaware of the other ones?
+
+[08:00 --> 08:34]
+Uh, yes and no. I think there is probably a larger conversation. There is like, what is an actual workout? So to answer your question plainly, it works off of one work item. Now, in the future, I think we anticipate that work items end up being much larger, more akin to what you what you think of as a feature, rather than needing to break it down into, like, so many different user stories. Um, so can I ask a clarification question? So like go forth. So let's say, you know, the workshop, the conditions portal is we've got a list, we've got a docs component and then we have a review wizard.
+
+[08:34 --> 09:04]
+So those are kind of like three three multiple searches. Yeah. So in the in a manual world a real world will have three features. And each feature will organize user stories. And typically, because a user story can build upon another one will have feature one user story one feature one user story two. User story two is dependent on user story one. User story three is only dependent on user story one, but not on two uses.
+
+[09:04 --> 09:31]
+Story four is dependent on one and three. So like when we write requirements, we try to kind of break, break the work down so that a user story is small enough for us to actually code and test. We feel good about it, kind of forget about it, move on to the next one, but code and test and forget about it and move on to the next thing. Is that level of thinking still applicable in this model? Or we need to rethink how we do things.
+
+[09:31 --> 10:00]
+I would I would slightly rethink it. I think that we probably what we should attempt is, is creating a work item that represents the future, in which case the entire future. It could be huge. I mean, it depends on what it is, but it could. But it is worth mentioning that cloud can do a lot of work. Uh, and I think that we need to, like, leverage that that idea that that it can do a lot of work. And what used to be huge to humans needing to break down a problem, it's a very small task.
+
+[10:01 --> 10:31]
+I think Claude could swallow and work on completely. Do we have a sense of that scope? We don't like what's what's what's too big or too small? Yeah. What's the largest unit of work that we can work on? Right. Yeah. Yeah, yeah. It really just depends. No, I wouldn't say that. We have a clear, defined, like scope of that. Like we have like in certain cases right now, we break down user stories by like here, a front end that's going to work on this. And then there's another user story for the back end. And maybe there's dependencies. We don't really need to do that. Cloud doesn't care whether it's front end or back end. So like we already know that we can merge those things together.
+
+[10:31 --> 11:06]
+I would also I would like to add that if we if, if we're telling a if product tells a story and it's a big story with a lot of features. That still doesn't mean that engineering can't break it down and come up with a plan and execute on it. In a spoon fed mechanism. Anyways. Like we, I think we can tell in the story and execute on our work can be separate things. I think the reason why I, I mean, I understand that the front end Japanese have emerged with the reason I like to break it down is so that I can test it and feel good, as opposed to getting a ticket, spending three days trying to figure out how to test it.
+
+[11:06 --> 11:30]
+I'm trying to figure out how to do the whole test plan for it. So it's really around testing. Yeah. And also being able to jump ahead of what it is doing. So you know, to give an example, would you call partners total one work unit like the old partner code. No, no of course like no. It definitely means you can't. Like you're not going to one shot an entire application. I mean that's not really feasible.
+
+[11:30 --> 12:06]
+And to to Josephine's point, like it's not really going to be testable. I think that what we should aim to deliver is something that provides value, like in and of itself, but doesn't have to be the entire app. Like, you're not just saying like, here's the MVP one issue and here just go like one shot, the whole thing. I mean, we have to break it down further than that. So it feels like we'd say, hey, here's here's the just using conditions called framework. Yeah. For context, the table just the main table view. That itself is then you have review doc before we before we speculate, let's get the demo.
+
+[12:06 --> 12:30]
+Because I think that I think there's so much in the demo that it will get us to start thinking right now we're kind of guessing. Uh, I think that that'll just provide more context so that we can apply a better strategy. Is that a fair? Yeah, sure. Yeah, yeah. So let's let's go with that. So I did create I don't know if you guys saw, but I did create a, a prompt earlier. I was asking Claude, what is a minor change we can make to the plugin.
+
+[12:30 --> 13:00]
+That might be nice. Um, do you prefer that we use a particular model of this, or you should. Yeah, I would recommend everyone use opus unless you need to for some reason otherwise, but by default you should. You should use opus. It is the smarter model. It is not the default. It is worth mentioning. You need to check. Yeah. And anybody knew you can use slash moral like he's doing here. And you can pick from a drop down. Why don't you just build it into a plugin. You can. That's a that's just to say like that's a that's a setting for you. Like your cloud code.
+
+[13:00 --> 13:36]
+Okay. Um, a lot of what I didn't get into, like, the specifics of it, but like, when it calls sub agents, you can tell it to inherit, which will just inherit what you have it set to. But you need to do that yourself. So just like make that make that it's the plugin is not a bunch of settings for your cloud. It's a bunch of capabilities for your cloud. So that is worth mentioning. Um, I haven't found a good reason to switch from office to to one inside five content. I just it hasn't happened yet. I know some people use opus for planning, and it's not signed up for implementation so that they have the higher context window, but I haven't found it necessary.
+
+[13:36 --> 14:05]
+I would say that as a as a blanket statement, which is not always the case, but as a blanket statement, if you can't get what you're trying to get done in the context window of opus, you should probably look at breaking down what you're trying to get done a little bit more. Try to. In some cases, you might have to do more work that you can go through. You can go because the problem is you run into compaction and then like all bets are off at that point, whether or not it's going to impact and keep the fidelity of what you're trying to get done to the level of like what you had, you had had it before compaction.
+
+[14:06 --> 14:37]
+But again, your mileage may vary. But I would say like try to keep it within one topic. Okay. So I'm going to show I talked a lot about like there's different slash commands. And Mark kind of talked about this too. It's like what if we could just distill everything that we need to do into a few slash commands so that we just kind of interact with clod and walk through things? It is worth mentioning that Claude very recently merged slash commands and skills. Skills previously were things where it would glean what skill needed to use based on what you were saying, so you could say things like, I want to use, I want to create a workout.
+
+[14:38 --> 15:00]
+Whereas slash commands you have to do like slash great workout. Like they were two different things. Now they're the same thing, which means that depending on what you're doing and how you're talking to cloud, it will actually prompt you to be like, hey, do you want to use this new slash command that's in the plugin? I'm gonna I'm gonna explicitly call it out right now and actually use the commands directly. But I could do the same thing where I can say, hey, create me a work item and it'll know to like, go use the create work item slash command for you.
+
+[15:00 --> 15:30]
+But I'm going to do it myself. So I'm going to go to Create work item. Uh, and then I'm going to say take. So there's a few things that this thing does. You can do many different. You can use it many different ways. It's a whole workflow, but it does a lot of interviewing and actually you'll see it start asking me questions. But the idea is like, you could you could give it an idea and it'll interview you to flesh it out. You could give it a file and take a look at this and go create work items from that. Um, it's not really prescriptive in that regard. Uh, there's recommendations here.
+
+[15:30 --> 16:01]
+You can see you can tell it like it's a feature. You can say what the title is. But again it's going to it'll try to do its best and we'll recommend things that you leave anything out. So I'll say take a look at I think I created it. Come on. Is it. It's probably. Yeah. And that's pretty great I'll work for it. So the first thing it did, it executes this this last command, it looks in it loads the feature template and the bug template depending on what you asked it to do. And then in this case I told it to read new item.
+
+[16:02 --> 16:30]
+Um, so the next thing it's doing is asking me like, hey, what are you in? I'm currently working on the SDLC plugin, so it runs a little command, which tells it what repo that I'm in to know where it's going to go and create the work item. Uh, one thing that I did add is actually because I know Mark does this and I know the rest of you, if you do, not everyone works in the actual repo like you might have a clone. Or maybe you want your your elsewhere on your computer and you're running cloud. You really want to create a work item for this like application over here. Um, it'll, like, try to glean it from where you are.
+
+[16:30 --> 17:00]
+And if it doesn't know, you can just tell it. And you can tell it in ways like you could copy and paste the GitHub URL into it if you want. Or you can say this is what it's called. In this case I'm in the repo. So it just says here, I recommend you to use the exact application that you're already running. And to confirm we're not. Your tool is not creating a repo that requires a little bit more sophisticated work. Yeah. It assumes that you already have a repository. That's correct. Side note for the team, what's the what's the recommended way to get a repo? Is it to come talk to an engineer?
+
+[17:00 --> 17:30]
+Yeah, I would say that for now. I don't think we have an official like process for how we create new repos or when we create new repos, but I would say just I mean, you can also, just for now, ping me. I don't want to be the one that creates every repo, but I can help out with that. Until we come up with a formal process, either me or rusty, and we can kind of, like, delegate from that. Uh, so I asked that, hey, I want to do this work. And it's saying, is it a new feature, bug or defect? Defect being something that's not before, uh, in UAT, before production? probably is something that's already in production. And then feature in this case is just an enhancement that I want to have.
+
+[17:31 --> 18:00]
+Now you'll notice that this is a very small, you know, quote unquote feature film. This is not the scope of which like a massive, massive feature like you were talking about. And that's one of the things that we want to see is like, try testing it out with a larger feature. Um, it asks you about priority. So that's something that we also have baked into it. Um, again, this actually ends up mapping to what standard labels that we're going to have on every repo so that our like reports and roll ups are all like uniform. What is new item and what's in it? Yeah, I probably should show that to you.
+
+[18:00 --> 18:31]
+That's a really good question. Let me show you. So I folded it. So I have feature bug and defect are the types I didn't have a template for for defect. So I told it give me give me something for us to add to this this plugin. And it told it looked through the code base and said hey, you don't have a template for defect, we should create one. So I said okay. So I put that in a file. And then you guys saw that I basically referenced the file and said, go create a work item for it.
+
+[18:31 --> 19:05]
+That's probably more akin to like what you guys probably do. There's different ways to use the great work item. You could just call the command and it'll be like, what do you want to do? And then you can describe what you want to do to it. Or in this case I had a file. Maybe you have a bird. Maybe you have, you know, some other artifact you're working with. You can tell it to go look at. Um, but in this case, I just had a file. It created its own doc in the edit. Yeah. So in this case, uh, so this is what it has. So it basically says like, hey, go create a defect template, figure this out, create a defect template, do it in the style of bug.
+
+[19:05 --> 19:35]
+And then here's like here's it showing what it's going to create inside of GitHub. So it actually shows like here's the repository I'm going to add it to. Here's the title that I'm going to add. Here's the summary. This is basically like kind of word for word what it's actually going to put in the issue itself. We don't have to go through every bit of this. But the idea is I like the idea is that then you would you would go like, oh, let me go look at it. Okay. Yeah. The acceptance criteria looks good. Maybe it does, maybe it doesn't. It actually does something as a sub agent called an issue validator, which has a whole prompt basically that says like go look at all the acceptance criteria.
+
+[19:35 --> 20:01]
+Make sure that it follows the right template, make sure that it is testable for the engineering team. Um, this is particularly interesting and useful because the issue validator actually runs on the engineering side too, and we go to accept work so that we both are working on the same template and the same opinions on what should be in that workout, which really hone in on making sure that our work items are, uh, are going to have like the best outcomes and more consistent outcomes when we do work.
+
+[20:01 --> 20:30]
+And a lot of it has to do with like making sure that whatever we produce from an issue perspective is most useful for flawed code to then go and engineer. Right. Like there are probably different ways of doing work, but the idea is that, like Claude is doing, Claude is creating the work items and it's doing the work. So we should try to optimize for what Claude needs to make sure it's most successful. So I went through and said, hey, I did a great job. The next thing it does is it tries to do a suggestion on how big of a ticket it is. We have t shirt sizing.
+
+[20:30 --> 21:00]
+We have small, medium and large. Um, there's two things that will happen here. One is that it will make a suggestion and it'll just put it in the issue on the engineering side when we go and we'll see like a there's a command to review the queue of work that needs to be essentially groomed. It'll ask the engineer, hey, it's suggested that it's small, but we're going to give you the opportunity to like, change it in case that, you know, maybe Claude thinks it's a small thing, but in reality, it's not. Um, in this case, I'm happy with it. But you could do things like edit first. You could cancel and say, don't create it yet. I have, I want to work on it some more.
+
+[21:00 --> 21:34]
+You can just type to it and say, no, that's wrong. Change this, that thing or the other thing. This is where you guys are going to be workshopping basically to figure out, make sure that it's, you know, up to snuff. I have a theoretical question for you. You said earlier, like, you know, cloud can do a lot more than an engineer. So I'm wondering, just a thought exercise is still relevant, is it? Would it not be more of like risk? You know what I mean? Because, like, who cares if it's small or medium? If God is doing the work anyway. I wonder if I wonder if size almost should be rethought of like more of like a risk.
+
+[21:34 --> 22:02]
+How? How likely is it that cloud will be successful at completing the task due to its complexity? Maybe complexity is a better term. Just a thought, because yeah, I don't think it's three hours versus five hours, but even then. Well, those yeah, those two numbers probably don't matter as much. But I would I wouldn't say I would push back on that. I think that like the, the risk assessment is probably something we can do in addition to sizing. Yeah. I think sizing like Claude is faster at writing code.
+
+[22:02 --> 22:30]
+It spits out code very quickly. At least we should say. Um, that isn't to say that it doesn't take time to engineer a solution, and we do want to know whether or not small solutions take four hours versus large solutions take a couple of days, which is still like, maybe dramatically faster than what an engineer should have to do anyway. Sure. So I still think it applies. We just continuously like the background for a couple of days. Uh, no, it's not. It's not that good. It tends to check in. It's not there yet. It came with the harvest.
+
+[22:30 --> 23:01]
+But we don't. We're not good. There's. There's some interesting plugins from anthropic that force it to like, it'll, like, stick it in a sort of like loop. Always press one. Well, no, it's called Ralph Wiggum, which is like some it's it's based off The Simpsons character, but I don't know why, but it's a, it's a plugin that basically you basically give it a task and say like you have to here's like your end state, and then it'll force itself to keep running until it actually gets to a point where it hits that state. Um, so like they've seen it like run for a long periods of time, but like the normal vanilla experience is that it doesn't typically doesn't run for several days at a time.
+
+[23:02 --> 23:30]
+You might be able to get it to run for like half an hour and do a bunch of work, but you do have to, like, watch it and make sure that it is. You know, some of the important for sizing is also testing. We've been talking about a little bit how testing can often take longer than code. Write code is cheap, so the size should is not just including the software development, it's including the time it's going to take to validate. And that is something that, you know, we talked about like why? Why use a plugin?
+
+[23:30 --> 24:07]
+Who cares about the plugin? It's like, okay, so that is a good point. I don't think I have it in the prompt to really look at how difficult it is going to be to test it, but that is a easy change I can make to the plugin. And now the sizing that it tries the size and guess that it does will now take effect for everything, right? Like now that's going to take into account every time someone wants it. The plugin is that you can, you can, you can just deploy it to everybody. So everyone auto updates. Yeah. So the next work item that gets created now suddenly has the updated logic, right. Yeah. And for sizing, it's also a useful metric to use when we're trying to see how much more efficient um, we've become as a team.
+
+[24:07 --> 24:31]
+And also, you know, if we're noticing the larger sizes are the Tickets. Lot is coming back with more defects, and we can look at that and then adjust based on the pattern to recognize. Yeah. So in this case we'll continue on. I'm just going to say yep that size looks good and it's going to go and create the issue. And I'll show you guys soon I'll get it pulled up on the side and I'll show it on the screen.
+
+[24:34 --> 25:04]
+Is there while we're waiting is there I guess you're going to say it depends, but is there a concept of like conditions? Portal. Let's assume we have Leslie and Josephine entering tickets, and we have Annie and Scott receiving the tickets. Do we. Is there assignment like do just like like do we like just. Joseph? Are you going to give stuff to a person or are you guys just going to pull something off the top and then it bounce back if there's any bounce back or you know, yeah, I prefer the latter.
+
+[25:04 --> 25:32]
+I prefer this us pulling things that we want because that ends up getting more people, um, experience in different parts of the app. Uh, but it's because, like Josephine said, like, let's say I'll pick on like, like any, any works on a thing, checks it in. Josephine looks at it and says, okay, phase two like we want. It's probably more efficient to go back to the same engineer than a random other person who doesn't have the context of the history.
+
+[25:32 --> 26:07]
+So again, I'm just trying to think of like like as we throw things back and forth, do we care about stickiness of assignment? I would, I would say for now, what what makes sense to me is like, no, we don't we don't have plots and things. But I think realistically, like there's only like three people in this process or people in this process, and you guys can coordinate amongst each other. You know, when you go to look at the queue of items and be like, okay, that one makes sense to me, but you can tell, like assign this to app. You could try to, but it's going to I would say that it's probably going to be less I don't know, maybe it'll be able to do it.
+
+[26:07 --> 26:30]
+But but introducing that level of like, hey, go look at all the previous like issues and see if kind of like close an issue that was similar to this one and then reassign to them. Like maybe you get it right most of the time, but I think it's oh, I mean, I just got that dashboard right. So I was just going to just say give this to build this, okay. Assign this to get to to Annie because I want her to work on it. Like, that's a big part of what she was working.
+
+[26:30 --> 27:01]
+Right. You can say that. Yeah, like you can. I mean, this whole process, like, at any point you could just be like, no, don't do that. Do this instead, and it'll like go and do that. So if you said like, no, I really want to do this, and you probably would go query GitHub and look at other issues and see and try to assign it and then clear what it should be that way. But I do I do think this AI and cloud allow us to, to not care as much, um, as one. And I do like the idea of like, you know, a project not getting installed because somebody has it on vacation or something or something happens.
+
+[27:01 --> 27:33]
+Um, but like the barrier to entry on a ticket, though now it is super close. Supervisor like you. Having worked on it before, it doesn't matter nearly as much as it happens. I almost need somebody to prove to me like that. That's not reasonable, right? Like, my default is anybody can pick up a ticket at any time until I prove it right. Um, and I think that we're going to be working. I would venture a guess that it's going to be much faster, and so it doesn't. There's not as much like time lost to just, like, have someone pick it up from the queue and just start working on it.
+
+[27:33 --> 28:08]
+But again, let's, let's I honestly, it's going to be part of the exploration of this totally new way of work here. Um, this is the issue that it made. So I'm in the actual plugin repo and then you can see it went through. Here's the summary. The problem motivation, all the different acceptance criteria according to the template that we gave it. Um boundaries. It does do technical context because it's running in the repo, which is something that I think we want to encourage when you create work items, if you know what happened, it's part of the repository is part of run it in that repository because it will explore the repository and try to give some level of like guidance.
+
+[28:08 --> 28:30]
+Ultimately, it comes up to the engineering to actually fully like, explore and figure out what needs to be done. But it's always good to have that context. You want to be vetting the technical assumptions or suggestions. Not very. I generally wanted to stay out of the solution part and more of just like the acceptance criteria is much more about like it's not like change this. Yeah.
+
+[28:30 --> 29:00]
+It's not like change this line in this file. It's like, here's functionally what I want to get done. Just make sure that's testable. Yeah. For data mapping we specify data mapping to you I feel to this API method to this extract this element if that makes sense. In in that case then try it out I mean sure, but you're not. But you're also not saying like what clod will do if you let it is, it'll be like, go add this snippet of code in this file. Right? It's like not something we want.
+
+[29:00 --> 29:33]
+Right, right. What you're explaining is as lower level, like business logic. Like this field needs to be this, like that. That still makes sense for you guys to define that because like engineering something to know especially concerning. Yeah we talked about product having a, uh. A proof of concept or a repo for source code that could be used to help tell a story. Um, so that I would, I would defer, like, you know, it's not here, but, uh, let's see if I can let me pull it away and I'll show you guys exactly what it has.
+
+[29:33 --> 30:02]
+So, yes, uh, in the case that you do have a, a, um, a prototype and you want to check that in because that becomes context for Claude to kind of derive, you know, maybe some functionality or, you know, maybe the design language is correct on that, that we want to make sure it translates into how we actually build a real production application. Um, what we did is we created a let me see here, we created a little folder in the repo called product reference.
+
+[30:03 --> 30:31]
+The idea that we haven't really built the controls around it, but the idea is like, what if this was a well known folder inside of the repo that you guys, you being the product, so you have the ability to like easily check stuff into. That would contain things like, uh, prototypes. And then engineering can just basically say in there they're kind of d, which kind of instructs everything that cloud does and says, look at product reference for context, but don't don't just copy and paste anything out of it. And it allows a lot to like just have additional reference so you guys can check those in.
+
+[30:31 --> 31:00]
+Awesome. Yeah, I think Carlos had his hand up. Oh, cool. Yeah, yeah, yeah. I was just wondering, like, how do we handle, uh, like, non-functional requirements? So, like, things like, um, performance. Right? Like, we need something to return the status in, like, less than two seconds or. Or we need to be able to store data for a year for some type of compliance reasoning, like, um, how does that come into play?
+
+[31:00 --> 31:30]
+Because I know we don't want to necessarily affect the solution, but like, um, cloud may start suggesting certain things as part of the solution. Um, I'm just curious. I don't think I've heard anyone really talk about performance and things like that and, and any of these conversations. So, um, yeah, I don't really have an answer for that. I think that's incredibly important, though. Uh, I would recommend, like, let's see what it ends up creating.
+
+[31:30 --> 32:01]
+If it ends up creating like an acceptance criteria off of it, or if we need to amend the the template to have a non-functional requirements section. Um, I think that's reasonable. So that we have that. The only problem with that is like some of that non-functional requirement is not something that cloud really needs to be concerned about, like the archival process and how long we keep data is not necessarily a code that needs to be written. Um, but it is important for the future itself. So we'll have to figure out how it kind of like maps to other engineering like disciplines. But I think that's a that's a good call. point. I think with the project that I did, in part it always thinks about performance.
+
+[32:01 --> 32:31]
+I don't even have to say anything. That's what I think. It also means it also makes it up though like it said. Oh it should. It should. Everything should be subsecond. Oh, yeah. And then you tell it like, oh, but it could be generating a million records a day. And then it's like, oh, well, let me go look at your code. Oh yeah. That's not going to work like it. It will make it up. But I think it's good to call out that kind of stuff. I don't really have a solution for, like how that ends up playing out, because it's not necessarily code that gets written all the time. But again, good call out.
+
+[32:31 --> 33:00]
+Maybe we add it to the template so it's at least captured. And then we can figure out like what to do with it after that. So if a constant condition score is going to touch Wolverhampton is going to touch dots. It's going to touch byte APIs. It's going to have its own data that's outside right. Um and it's going to have emails. So what what is the context that's in our VSCode. I mean, there's like five videos. Yeah. Your context is going to be just the app.
+
+[33:00 --> 33:33]
+We haven't really solved. It is a it is a open item for me to kind of figure out a good process. Uh, like I think what you're, what you're talking about, and I thought about this a little bit is like, what if we end up getting an item? That conditional portal is very specific, but let's say that we get some item from the business and it's like, hey, we want to make this this little change. It looks like a little change to us, right? And then we're like, okay, fine, but what does that actually mean from an engineering perspective? We have to go like actually that touches on 12 different systems. And like there's nothing that's going to right now. There's nothing that's just going to crawl on all of our code bases to figure out, like all the the changes that need to be made.
+
+[33:34 --> 34:04]
+Um, I don't have a solution. I mean, honestly, I know a lot of this is why don't you build up, like, a documentation type folder that is referenced in the repo that has big little architecture like that as a high level index or roadmap. It you could, you could. So at least it's aware you could do that. Like you could. You could have a file inside of each application where it says, this is what I depend on. And then maybe clod like, you know, cleans it from that and says, okay, I need to go crawl all this other repositories and figure out changes that would be made there.
+
+[34:04 --> 34:37]
+But that doesn't happen. Like if you have a new a new dependency that you need to add, that's a repository. So if you do that, it's better if it has the product all set up on each one of those. So it's worth it. So you admit it so that like EPs has that information has that information as well. I mean that's something that I need to work with like. And I think from an architectural perspective, it's like, how do we get Claude to look to be able to like zoom out to 10,000ft and make these kind of like, intelligent decisions on how we actually should affect the whole ecosystem and not necessarily just like just this one app.
+
+[34:37 --> 35:08]
+When the BSA uses this, do they have a reference? Sorry, etc.. But that we can they can dump information in but they like okay. So here's information about byte mapping. Here's information I have about whether there is a spreadsheet I put together for. Everybody kind of like rah rah rah rah and dump it as a reference. It might be an agent. It's like I could probably have that set up in this workflow, but I think one of the practices would be you have a folder of like raw data, like a dump, and then they can pull it in.
+
+[35:08 --> 35:30]
+So the PSA for now manually pulls the data like your, you know, your data, but they can dump it as a reference type. And then prod refers to that reference guide to go about the requirements. I mean so there's nothing prescribed. I try to keep the plug in not as prescriptive about how people like come to it. So this is more concerned about like how it actually comes to the conclusion, which is the work item.
+
+[35:31 --> 36:00]
+It's less it's less prescriptive about like how you get to that point. So like if you want to run plot and you want to create a bunch of documentation or you have a bunch of documentation, it will help you like, summarize that and then get to what we want is a work item. But like how what reference material you use or how you get your reference material. It's not something that I've built into this plugin. Now there's like other plugins that brought to you, you can create and maintain that helps facilitate that type of work. But that's not what this does right there. It's more focused on like here's the end state. How do we help like facilitate getting to that end state.
+
+[36:01 --> 36:31]
+But I agree that there's like ideally there would be a way for us to to identify dependencies from an application to like, I mean, if it's a broad feature, it could touch, like you said, like many different applications, we don't have like a solution for that. I mean, I think I think it's straightforward though, like you just have a pool, you don't need to make a change. You just put a yeah, just put all your screenshots and stuff in a, in a folder. When you're using this plugin, just say, hey, cloud this folder I have in my project and then it should be able to scan it.
+
+[36:31 --> 37:00]
+So that's probably it can. But you have to figure out how to let go and create issues in multiple different repositories. And also like is it is it I mean there's a million questions you probably get into. It's like, is that the right. Like is that the right dependency chain? Is it should we be creating changes in that API, API or should we certainly have like I think it's like a, I don't know, a project summary or cover page. That product builds that says to your point conditions, portal is blah, blah, blah, blah, blah. It touches these systems and that's just there.
+
+[37:00 --> 37:33]
+And then you create all your issues here. But at least it's aware it doesn't necessarily I don't think we're expecting it to go like octopus out to other repos and like, oh, go into bite and build all these bite controls. I don't think that's the ask, but at least if you have sort of a page that's sort of a product map like any other because. Yeah, because it it brings up another question which is like product, I want the product people to be thinking about this. Does this issue need these are it's almost a Carlos point non-functional requirements.
+
+[37:34 --> 38:00]
+What is the will this have release notes. Does this need to be trained by the training team. Is there a do we need to train it with app support. Like there's all these social questions around a ticket and and is it at the ticket level or is it at like a larger feature level. Like, like I would love us to be in a spot where when this is all done, it's very easy to know, like like, okay, what what are we how are we socially advertising this?
+
+[38:00 --> 38:31]
+Does this, you know, is it a bug? We don't care. Is it a huge feature? All right. We need to give it the white glove treatment etc.. Like those are those are other things that are like outside of the code that help us deliver this ultimately to production. You know, you showed a screenshot earlier that had like a, like a, like a cap and you said we could dump our prototypes in there. Yeah. That was uh, that's that's the AI hub. So, so I think, you know, I think that's both. You could. Yeah. It's right there.
+
+[38:31 --> 39:02]
+Okay. So how do you imagine, you know, a work item that spans across not just multiple systems owned by CNG, but going out with that to the outside vendors like getting API or closing or or, you know, even to the credit vendors or the, you know, the vessels. Uh, how do we make a work item complete enough that it basically, you know, just walk straight from the UI all the way up to the third party member?
+
+[39:03 --> 39:37]
+Well, maybe I don't I don't quite understand. Like, what would be I mean, I guess what is your what is your concern there? I guess that it's that it's not going to have the technical context to know what the third party vendors like API reference like, looks like, or anything like that. But I think those are not just the API reference. Even the API reference is not accurate to begin with. You know, we have, you know, uh, follow up meetings with them where, you know, sometimes Josephine has actually educated them on what their API does not do and how it is how their documentation is inaccurate.
+
+[39:37 --> 40:01]
+So, you know, to create a work item and let's say, you know, I'm going to reference our old project, you know, through with the integration. And we are kind of looking for verification of employment. And, you know, as we are talking with the vendor, we are kind of discussing which API we're going to use. And, you know, uh, what what are the limitations of those APIs. So how do we incorporate that into the work?
+
+[40:02 --> 40:30]
+So I'm assuming that we're still writing those nitty gritty requirements. But sorry, we're we're telling Claude, knowing everything that we know about how these APIs are supposed to work the cloud. Right. Yeah. But we're still doing all that pre-work thinking it through almost solution. I know you use that word, but we're pretty much solution researching. Yeah, yeah. The law's not going to interview the vendor. We still have to do that.
+
+[40:31 --> 41:08]
+We're still going to we're still going to specify I don't want to use the the the register pricing. Yeah. Sorry I'm not going to use a lot API request. I'm going to use a registered API request because I'm actually they both actually blocked, but the other one is a registered. All right. So we still have to be prescriptive right. Where it makes sense for sure. Yeah. Potentially could be can we provide the documentation in some place where it can refer back to the documentation that the vendor has provided and the URL for the, you know, how we are going to call them with the different methods of calling.
+
+[41:08 --> 41:32]
+Yeah, you can capture that. I mean, a work item is like I mean, maybe I don't understand your question, but like nothing nothing stops you. This is this is a description of all of the requirements. And maybe there's like, hey, you need to go use this endpoint. I mean, different endpoints have different functionality. So it makes sense. Like if it's prescribed like this is the endpoint you need to go hit. If you guys know that you've done the research, that makes sense. But also if there's like supplementary like documentation that you want to add, you can just drag and drop it inside of the actual log.
+
+[41:32 --> 42:02]
+So, Sean, are you saying that we can dump the API guide or the vendor square Yeah. And then you figure it out. I don't think so. Yeah. Yeah. No, no. Like, only in the documentation. If they're not accurate and you say use this end point like that could come to a point where, hey, it's not working, right. We gotta go talk to the vendor. Yeah. Um, we gotta get to that point. Yeah. You can take our strategy as well in the dev environment and drop it in your folder and then have it analyze it, too.
+
+[42:02 --> 42:31]
+So, like, for your guests to know what I'm doing. Yeah, exactly. You can download it. There's an insider button to download it. And you just put it in there. Yeah. And you can have that kind of help a little bit too. It's not going to be you can't trust it for you, right. Yeah. Yeah. Yeah. I think I think my opinion is the is the, the generally the approach is that you can pass whatever you want. Whatever we do today, we're already doing this today. We're just trying to gather it and put it into this tool and let the tool help us like do the grunt work of writing it out.
+
+[42:31 --> 43:03]
+But we're still going to have to do the research. Whatever the I think the value here is, it can be an Excel. It can be a word document. It can be a transcript or whatever. We throw that artifact here, reference it. However we do that, it sounds like a tool doesn't care. Um, and then have it reference that when we generate. And then as long as engineering has access to our requirements plus the reference material, and as long as that is accurate, then we should be able to get a better spot than we are today. It's also worth mentioning that what it does help with too is like it creates acceptance criteria and that does focus.
+
+[43:04 --> 43:30]
+Remember, it can be as opinionated as we want it to be, and so we can make sure that not only does it follow a template, but it can assess like the quality of what the acceptance criteria is. So maybe you create an acceptance criteria and you think it's complete, but we have it opinion enough to like read it and say, actually, it's not really testable for an engineer who's actually going to write code and it'll like give you that feedback. It's like, hey, like, do you want to work on this more? Maybe it asks you a couple of questions about it so you can hone it like it can help you kind of workshop the issue in that case.
+
+[43:30 --> 44:02]
+It seems like even with the example you brought up in practice, I'm wrong. But what I'm Yeah. You could go to Claude Code and say, hey, here's the two endpoints. Um, which one do you recommend if you're trying to figure out which one is best? Look at the documentation. Tell me which one's best. You go back and forth so you don't have to just. Yeah. You only have on the side. You just have to validate the output, I think. Yeah. Make sure it's accurate based upon the information that you know. Is that so? Any of you guys know how I write before?
+
+[44:02 --> 44:32]
+I mean, I know we're breaking. I break things down between front end and back end, but at some point, that's all going to get merged. And knowing how I write with each. I don't know if you actually see it. I actually have a feature. I have a bunch of user stories and I have things in order. You know, this is for one, two, three, four, five, six. And knowing what you've seen yesterday on this portal. Do I continue to to do that or not? Or maybe I can merge tickets together. That I did merge before because I was trying to break down.
+
+[44:34 --> 45:05]
+Well, um. But that's why I break it down. I was, uh, I broke it down so that I can test it and forget about it, and then do the next thing, test and forget it. But what is. I mean, if I think about it further acceptance criteria is a form of describing what to test. Given a situation when I do this, then this should happen is like that is a way for you to like describe like how it should functionally work. So your testing is essentially like it would just be a different format to what like clod actually understands and is opinionated about.
+
+[45:05 --> 45:33]
+But like functionally it should be exactly the same. You shouldn't lose any like resolution of what you're producing. I guess it's just probably too much testing. It's too big of a ticket. So I have too many scenarios I have to do. Like, I don't know, professionals look at these like acceptance criteria. The answer is yes. And maybe maybe that ends up making it a high write a high ticket. So when you start taking, saying anything like that is like haha, I should probably be broken down into mediums.
+
+[45:33 --> 46:06]
+I don't know. Maybe we end up in somewhere. I think it's gonna be a feedback loop, and it's going to be depending on the developers and the project, and each team is going to have to adjust what big means, just like in our current strategy. Right? Like we use points and system looks very different than the areas, right? So if a developer comes back and says, oh, I have to like break this into a million subtasks, right? It's too big. If they come back and say, oh, this finish and I knock that out real fast, you can make it bigger. Right. So you'll adjust and find whatever that medium is as you go for your split command.
+
+[46:06 --> 46:30]
+Split this issue into two smaller issues and a merge. So, you know, going back to a geofence question and I'm going to refer back to, you know, some of the projects that we did with Josephine. Josephine. Not only have, you know, a certain style of writing the tickets, she also maintains a separate folder somewhere in Google Sheets or some other place where you know all the reference documentation is there.
+
+[46:30 --> 47:01]
+So the way I see this working, Josephine, is, you know, your folder there now becomes a part of the repository and plot is looking into it to kind of figure out what is the best approach to take to, you know, solve a problem, make sense to the cloud will go out and URL. If it's in there, it's the information. But then you can also reference it inside of the issue itself. There's some documentation that's behind a user account right. Like optimal APIs.
+
+[47:01 --> 47:31]
+Yes. Yeah. Like the same thing. Because what would you give Claude then like username and password. Yeah I don't know. You would, you would have to download the documentation if you did the problem. Just make a little or you use plot and and generate requirements spelling out exactly what needs to be done. And you don't have to deliver the API documentation directly, but you can even use Claude, the MCP for from and he'll probably say, give me the same type of in yourself.
+
+[47:31 --> 48:02]
+Hit log in and say, okay, now it's the one. Go screen, scrape it, bring it back to the local copy and then you have it. Okay, I anticipated that we're probably going to end up like talking about it mostly then actually showing the new one. That's good. Are we doing anything? I'm fine with it. Honestly, like, the feedback is good. You know, like I said, this is an alpha plugin. It has, like, its bare bones right now I would say. Um, and we're going to iterate on it. You know, I think this is a cool I'm, I'm happy with how we're I think these are good questions.
+
+[48:02 --> 48:33]
+Yeah. I 100% agree. Um, so I guess the kind of like, snap back to what we were talking about. So right now we've created an issue. Uh, it it proposed a preview of it. It created it. Um, it assigned it to me because I'm the one that created the issue. And then at this point, there are two things to do. One is that we can say, yes, I'm all done with it and I'll mark it is ready. I can go into the actual stock of like how? What? Labels are required and whatnot, but the functional way that it works is basically I can say, yes, I'm ready.
+
+[48:33 --> 49:00]
+This is done now or now. I need to workshop it a little bit, maybe like talk with Claude, maybe a reference, different material or whatever. Um, and then you eventually market it. Ready? You tell a lot that you're ready to market is ready and the market is ready. The other thing you can do is actually you can say like it needs design. So now it's it's sitting there, it's assigned to me. It's you can see over here the SDLC project board, which is where we have like a broad view of all the tickets in the system. It's still market. It's in the requirements phase right now.
+
+[49:00 --> 49:31]
+But I can say needs design first and it should still label a subject. So you can see it pop up. Right. So now it's design view. And the bot that's running, we have a whole bot that runs and moves like tickets in the right state. So you'll see now it's in design. So this is where like the design design folks would take, you know, they would go look for this label and be able to like, do their work, check it in, and then once they're done, um, essentially they would put in, I think it's design ready.
+
+[49:33 --> 50:10]
+This might be a GitHub question. Yeah. And I apologize if it's an amateur question. Yeah. Uh, how would how would, uh, Tim know? Would that just happen. See, can you subscribe to. No, I don't I don't honestly don't know. Like you have to look for those labels again. We can probably figure out a command that we can just. So ideally you'd have a plan that would just review like go through all the repos and look for anything else, okay. Or just assign to himself. Right. Like we could end up depending on what we do here, we can have design like I think you can have teams so you can assign it to a team, and then you guys can have a team that just like fills, looks for anything that's so, so, so that TBD is how we know that there's new things to work on.
+
+[50:11 --> 50:31]
+Yes. So are these issues or are these in a project? Yes, there are issues. GitHub is not there. Nomenclature is kind of funky. Uh issues. Yeah. Yes, they have a project, one where you can put more larger items in there. For my project that was putting everything under issues because it just seems easier. So these things are projects.
+
+[50:31 --> 51:00]
+So projects are an abstraction for a view on issues. And they can go like they can go wide over multiple repos. Issues have to belong to a repo. So they have to belong to an app. But projects can span everything. So in this case this is the organizational level. I have it set by default to just look at the last week of things that have been updated. But you can see like this is the that's Mac. So they want to work on issues that yes, everything is an issue. Everything is an issue. That's where like everything gets defined and gets worked on.
+
+[51:00 --> 51:30]
+This is reporting. So there's no there's no epic. There's no story. There is bugs. But there are actually these features. But they're all yeah, there, there, there are issues like the organization of like the it's the object. Is it the work? It's the work. Yeah. It's a work where you can call it a feature label. Whatever. Yeah. That's nice. Okay, so I have a question. Go for it. Um, when projects get too big, I like to organize user stories under a feature title. So more of a grouping.
+
+[51:30 --> 52:01]
+Do you have that in here? Uh, you do have some. We don't really leverage it again. The idea is that we'll have a larger issue, like an issue that has a connotation, but we have larger issues, so you wouldn't have to. You wouldn't need as many like, uh, buckets. Like, you don't have to roll up so many times. Um, you might have like an initiative which is like a larger, let's say, like broadly, maybe a multiple application work. Um, but other than that, like, it could just be a collection of features, like, we should be able to get off, but just using just the features.
+
+[52:02 --> 52:30]
+Yeah. So my question is more like the process after you get the story created. So let's say spread the story. Yes. Afterwards we send it to actually for the person who's going to work on it to do technical refinement. Yes. And they add the technical details onto it. And then we're like, you know, like the files that need to change and all that stuff. I don't yeah. No there's not that doesn't that is not here. Let me let me go into.
+
+[52:30 --> 53:04]
+I do cover some of that in the plugin. But it is not something where we persist like a technical plan for other people to take care of. Like there isn't just someone lording over the issues that then decides, like, here's the technical plan. Now just go implement it with like other people watching, um, the like the grooming. Like there's nothing that that is something that I think the engineer, at least the way that it works right now is that the engineer should come up with their own implementation plan and then just go vote it and then deliver it. If that makes sense. Would we would the engineer put the implementation plan inside of the story or.
+
+[53:04 --> 53:35]
+No, no, unless you think that it absolutely needs to, but it doesn't by default. Let me let me go through it. Let's, let's discuss a little bit more after. But, um, I'm actually curious if this thing will actually, because that's what I've done on my stories. I just didn't having the business requirement implementation and the testing notes all in one and then I in one do I see implement? It just goes to show I'm going to take the design stuff off because I was just showing how life flows through design.
+
+[53:35 --> 54:02]
+But I think there's some stuff we need to add there. I'm going to Market is ready, which is what the other option was. You normally wouldn't have to do this. You just start a clock. But I'm just looking. Is there a. Sorry, I don't want to distract. Is there like a like let's take Josephine like. Oh, she's got 30 things she wants to add, but she, she has her own hierarchy or whatever. Whatever. Can it go in but not be ready for engineering. Is there like a gathering requirements.
+
+[54:02 --> 54:31]
+Yeah. Yeah. So the, the before I put it in design needed it asks if you want to market as ready. So without doing that then you're just like in like hey we created the issue. Okay. So but it's not marked as right. And it's worth mentioning because there are other commands on the engineering site to go review things, and the queries that it uses are specifically looking for labels like right. So like it won't be exact, it's looking for. Right. So if it's not marked as ready like they won't see it, you can continue. So that's good. I mean it's important but it's good to know. Yeah. Uh, so between all these commands like the order.
+
+[54:32 --> 55:02]
+No, that's a that's good feedback. It's got very good documentation. Yeah. It should. It's flash help. Yeah. What order? Yeah, that's the awful part. The documentation is incomplete for this plugin. Um, so the next part again, that wasn't big. It wasn't being sarcastic. It's good. It is on flux. There's a lot of stuff that I need to document. Like there's the there's the flow of which, like what commands you use, but then there's also the flow of, like what labels lead to which status is in which way that they work through. Um, but anyway, so I'll go through and I'll show the book.
+
+[55:02 --> 55:30]
+So I marked that, that, uh, issue that I had as ready, which is the equivalent of you guys saying, like, I have workshop that the issue, it looks good. The acceptance criteria is good. It passes all of our qualities. We're gonna hand it off to engineering and you'll end up seeing that. Actually, one of the things that we see is it's actually in the development stage. Um, this is kind of a what we found is a kind of a forcing function. So now that product is said, hey, it's ready. We want to be able to work on it right now. Now it's in like if we start the clock on, hey, it's in the development gate.
+
+[55:30 --> 56:00]
+Like, why is why is that taking so long to actually look at something? Um, that's why we move into the development stage ahead of time. Question. Did you add we you mean keep kit talk earlier about like a concept of like a gatekeeping where if product provided a requirement and it didn't pass kosher, it would get kicked out. Yeah. Make sure that okay. So that that's part of this. Yes okay. So part of it and I'll show you that because that part actually works. Uh it's going to review all the tickets. It found one and now it's going to validate it.
+
+[56:00 --> 56:30]
+It's going to use the same validation agent that the product person used when they were creating a ticket. The reason why it does this twice is uh, one the context may be different on the engineering side, but two also like people can create issues manually and label them or whatever. Maybe they're not using code for whatever reason. It's still going to run through the same level of quality gate, so we can make sure we capture it on both sides. Nothing's going to get through. That's not passing what we say. It's like high quality. Perfect. Um, and then we'll see here. But yes, there is a way to reject it on the engineering side.
+
+[56:30 --> 57:01]
+And you triggered this by marketing this. Ready? Yeah. Yeah, exactly. Don't worry about the review queue. I ran dev review. So on this side it's now. So it's past product. Right. Product has created the issue. They've said it's ready. And now on the left side there's a review queue. There's a product one two. And I'll show you that in a second. So we'll go through that workflow because it should work. So it went through and it looked at here's here. Imagine, you know, if this is you you're looking through, you want to groom the backlog of things that are ready but haven't been accepted yet. The idea is that there's there's two stages for engineering to do work.
+
+[57:01 --> 57:32]
+So product goes through and creates an issue that they mark is ready. Then engineering goes through and grooms it. It says yes, I accept it. It's good to work. I'm not going to work on it, but it's good to work on. Everything is in here. And then the third step is basically the engineer actually looking through the queue of things that are accepted and then working on it. Um, mark your point of like, hey, actually, maybe it found some issue, or maybe the engineer read it and, you know, it thinks it passed all the quality, but the engineer reads it and goes, no, we're missing something else, right? Like we're missing some form of documentation so I can reject it. I hope it works.
+
+[57:32 --> 58:02]
+This is a live demo, and you better have a good excuse why you're rejected. So what's missing or unclear about this task? Uh, documentation is missing out. So it's kind of like it's going to say. No, it's not. Uh, maybe. So you'll see that. Edit it. It added an engineering review. We'll go look at it right now, and then it's going to edit it and remove the label. It's asking me to do it. So it removes the ready level.
+
+[58:02 --> 58:30]
+So this is I like this too because the plugins sort of obfuscates all of the IO on GitHub and all these things. You don't have to. This is all happening. You don't technically have to be in here. So like here's like a label that needs clarification. Then we can go to the bottom and you'll see it says engineering review documentation missing. Please clarify with documentation. Yeah it added this part just part of it. I might want to add like a confirmation. So it actually knows exactly what it's going to be adding to the comment. But the idea is that like they can reject it and say what's missing.
+
+[58:31 --> 59:01]
+Um, and so that's, that's that workflow, right? So now we're we're here. So is it the expectation for product going. And look at I mean they'll yes I will show you that. I did think about that. I thought about a few things. Uh so right now it's looking so one of the things that the review from the engineering side is that like so someone's going and grooving and it goes one by one and actually like look at the issue, validate it, and then you can accept it or reject it for a certain reason. And then it goes to the next one. So you can review a whole backlog if you really want to with cloud code. So in this case we're going to we're going to.
+
+[59:02 --> 59:40]
+Yeah I have a quick Question related to my question at large. Um, so, like what Josephine was saying, how she writes her tickets is sometimes the next one will piggyback off of the first one. Um, I was wondering, in the dev review process, is there a way we can maybe add a flag and that flag be a feature name? And then what then goes to do is look at all the tickets, um, in that feature to make sure that the ticket it's reviewing is not maybe contradicting a previous ticket, like identifying a gap in a requirement.
+
+===================================================================================
+END OF TRANSCRIPT
+===================================================================================

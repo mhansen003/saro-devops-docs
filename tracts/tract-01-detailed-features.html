@@ -315,6 +315,23 @@
             color: #c4b5fd;
             margin-top: 8px;
         }
+
+        .permissions-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .permissions-table th {
+            background: #2d3348;
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        .permissions-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid #3d4557;
+        }
     </style>
 </head>
 <body>
@@ -674,6 +691,44 @@
                     <h4>Overview</h4>
                     <p>Creates the Processor role view with specific filters and permission checks. This shell establishes the foundation for all processor-specific features (CP-101 through CP-126).</p>
 
+                    <h4>Processor Role Distinctions (Day 1)</h4>
+                    <table class="permissions-table">
+                        <thead>
+                            <tr>
+                                <th>Role</th>
+                                <th>Can Clear Conditions?</th>
+                                <th>Permissions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Processor I & II</strong></td>
+                                <td>❌ NO</td>
+                                <td>Document prep only, cannot clear ANY conditions</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Processor III</strong></td>
+                                <td>✅ YES</td>
+                                <td>Can ONLY clear conditions with class="Processor 3"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="day1-insight">
+                        <strong>Day 1 Quote - Kelly Mattox:</strong><br>
+                        "A processor is allowed to sign off on some conditions because they do have processor 3 conditions, but the other two processor roles will not be allowed to sign off on any conditions."
+                    </div>
+
+                    <h4>Processor Permissions Matrix</h4>
+                    <ul>
+                        <li><strong>Document Management:</strong> Upload from Clear Docs, local files, email; split, merge, rotate documents; work with both DRAFT and FINAL document statuses</li>
+                        <li><strong>Stage Movement:</strong> Can ONLY mark loan as "Ready for Underwriting" (cannot move between all stages)</li>
+                        <li><strong>Status Changes:</strong> New, Need Bar Request, Ready for UW, Not Ready</li>
+                        <li><strong>Borrower Communication:</strong> Full email generation, templates, auto-reminders</li>
+                        <li><strong>Condition Creation:</strong> Generally CANNOT create conditions (that's the UW role)</li>
+                        <li><strong>Clearing Conditions:</strong> Only Processor III can clear conditions with class="Processor 3"</li>
+                    </ul>
+
                     <h4>Components</h4>
                     <ul>
                         <li>Processor-specific filter pills container (5 filters)</li>
@@ -779,6 +834,58 @@
 
                     <h4>Overview</h4>
                     <p>Creates the Underwriter role view with simplified filters focused on approval/rejection decisions. This shell establishes the foundation for all underwriter-specific features (CP-201 through CP-204).</p>
+
+                    <h4>Underwriter Core Capabilities (Day 1)</h4>
+                    <ul>
+                        <li><strong>Create Conditions:</strong> Access to ~700 pre-defined condition library + ability to create custom conditions</li>
+                        <li><strong>Clearing:</strong> Can clear conditions with class="Underwriter"</li>
+                        <li><strong>Document Review:</strong> Can accept/reject documents and add annotations; CANNOT upload documents; FINAL docs only (no DRAFT access)</li>
+                        <li><strong>Stage Movement:</strong> Can move loans between ALL stages (SUSP, PTD, PTF, PTP, POST, TRAIL)</li>
+                        <li><strong>Rules Engine:</strong> Can run on-demand, add/remove conditions via automated rules</li>
+                    </ul>
+
+                    <h4>Underwriter vs Processor Comparison</h4>
+                    <table class="permissions-table">
+                        <thead>
+                            <tr>
+                                <th>Action</th>
+                                <th>Underwriter</th>
+                                <th>Processor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Create Conditions</strong></td>
+                                <td>✅ YES (~700 library + custom)</td>
+                                <td>❌ NO (generally)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Upload Documents</strong></td>
+                                <td>❌ NO</td>
+                                <td>✅ YES</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Clear Conditions</strong></td>
+                                <td>✅ YES (class=UW)</td>
+                                <td>✅ P3 only (class=P3)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Work with Draft Docs</strong></td>
+                                <td>❌ NO (final only)</td>
+                                <td>✅ YES</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Move All Stages</strong></td>
+                                <td>✅ YES</td>
+                                <td>❌ NO (only Ready for UW)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="day1-insight">
+                        <strong>Day 1 Quote:</strong><br>
+                        "If the logged in person is their security profile matches the profile that is in that class. They can do whatever they want to it."
+                    </div>
 
                     <h4>Components</h4>
                     <ul>

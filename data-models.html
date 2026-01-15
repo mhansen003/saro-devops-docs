@@ -123,6 +123,155 @@
       margin: 2rem 0 1rem 0;
     }
 
+    /* ERD Diagram Styles */
+    .erd-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 3rem;
+      margin: 3rem 0;
+      overflow-x: auto;
+    }
+
+    .erd-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent-teal);
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .erd-legend {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      padding: 1rem;
+      background: rgba(59, 130, 246, 0.05);
+      border-radius: 8px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .legend-box {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      border: 2px solid;
+    }
+
+    .legend-box.byte {
+      background: rgba(59, 130, 246, 0.2);
+      border-color: var(--accent-blue);
+    }
+
+    .legend-box.portal {
+      background: rgba(20, 184, 166, 0.2);
+      border-color: var(--accent-teal);
+    }
+
+    .legend-box.hybrid {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(20, 184, 166, 0.3) 100%);
+      border-color: var(--accent-amber);
+    }
+
+    .erd-svg {
+      width: 100%;
+      height: auto;
+      min-height: 600px;
+    }
+
+    /* System Architecture Info */
+    .architecture-info {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(20, 184, 166, 0.1));
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 12px;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+
+    .architecture-info h4 {
+      color: var(--accent-teal);
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .architecture-info ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .architecture-info li {
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      color: var(--text-secondary);
+    }
+
+    .architecture-info li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent-blue);
+      font-weight: bold;
+    }
+
+    /* System Badges */
+    .system-badges {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .system-badge {
+      display: inline-block;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border: 2px solid;
+    }
+
+    .system-badge.byte {
+      background: rgba(59, 130, 246, 0.15);
+      border-color: var(--accent-blue);
+      color: var(--accent-blue);
+    }
+
+    .system-badge.portal {
+      background: rgba(20, 184, 166, 0.15);
+      border-color: var(--accent-teal);
+      color: var(--accent-teal);
+    }
+
+    .system-badge.hybrid {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(20, 184, 166, 0.2));
+      border-color: var(--accent-amber);
+      color: var(--accent-amber);
+    }
+
+    /* Entity Summary */
+    .entity-summary {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      margin: 1rem 0 1.5rem 0;
+      line-height: 1.7;
+      padding: 1rem;
+      background: rgba(59, 130, 246, 0.05);
+      border-radius: 8px;
+      border-left: 3px solid var(--accent-blue);
+    }
+
     .entity-card {
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
@@ -254,6 +403,11 @@
       .field-table {
         font-size: 0.8rem;
       }
+
+      .erd-legend {
+        flex-direction: column;
+        gap: 1rem;
+      }
     }
   </style>
 </head>
@@ -269,11 +423,218 @@
     <h1>🗄️ Data Models & Relationships</h1>
     <p class="subtitle">Complete entity definitions, field specifications, and database schema</p>
 
+    <!-- Hybrid Architecture Overview -->
+    <div class="architecture-info">
+      <h4>Hybrid Architecture Model</h4>
+      <ul>
+        <li><strong>Core Condition Data:</strong> Lives in Byte LOS (existing system) for Domo reporting compatibility and enterprise data consistency</li>
+        <li><strong>Metadata & Workflow:</strong> Lives in Conditions Portal/Clear (new system) for enhanced functionality and user experience</li>
+        <li><strong>Bidirectional Sync:</strong> ~30 second synchronization between systems is acceptable for operational workflow</li>
+        <li><strong>Source of Truth:</strong> Conditions Portal is the authoritative source for its metadata entities (Notes, DocumentRequests, StatusHistory, ExceptionRequests, Flags)</li>
+      </ul>
+    </div>
+
+    <!-- ERD Diagram -->
+    <div class="erd-container">
+      <div class="erd-title">Entity Relationship Diagram</div>
+
+      <div class="erd-legend">
+        <div class="legend-item">
+          <div class="legend-box byte"></div>
+          <span><strong>BYTE CORE</strong> - Existing Byte LOS entities</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-box portal"></div>
+          <span><strong>CONDITIONS PORTAL</strong> - New metadata entities</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-box hybrid"></div>
+          <span><strong>HYBRID</strong> - Split between both systems</span>
+        </div>
+      </div>
+
+      <svg class="erd-svg" viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+        <!-- Definitions for gradients and patterns -->
+        <defs>
+          <linearGradient id="hybridGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.3" />
+            <stop offset="100%" style="stop-color:#14b8a6;stop-opacity:0.3" />
+          </linearGradient>
+        </defs>
+
+        <!-- Central Condition Entity (HYBRID) -->
+        <g id="condition">
+          <rect x="380" y="250" width="240" height="200" rx="8"
+                fill="url(#hybridGradient)" stroke="#f59e0b" stroke-width="3"/>
+          <text x="500" y="280" text-anchor="middle" font-size="18" font-weight="bold" fill="#f59e0b">
+            CONDITION
+          </text>
+          <text x="500" y="300" text-anchor="middle" font-size="11" fill="#f59e0b" font-weight="600">
+            [HYBRID]
+          </text>
+          <line x1="390" y1="310" x2="610" y2="310" stroke="#f59e0b" stroke-width="1" opacity="0.5"/>
+          <text x="400" y="330" font-size="12" fill="#f1f5f9" font-family="monospace">id: UUID</text>
+          <text x="400" y="348" font-size="12" fill="#f1f5f9" font-family="monospace">loanId: UUID</text>
+          <text x="400" y="366" font-size="12" fill="#f1f5f9" font-family="monospace">conditionNumber</text>
+          <text x="400" y="384" font-size="12" fill="#f1f5f9" font-family="monospace">name, description</text>
+          <text x="400" y="402" font-size="12" fill="#f1f5f9" font-family="monospace">category, status</text>
+          <text x="400" y="420" font-size="12" fill="#f1f5f9" font-family="monospace">stage, class, type</text>
+          <text x="400" y="438" font-size="11" fill="#94a3b8" font-style="italic">Core in Byte + Portal</text>
+        </g>
+
+        <!-- DocumentRequest (PORTAL) -->
+        <g id="documentRequest">
+          <rect x="50" y="50" width="200" height="140" rx="8"
+                fill="rgba(20, 184, 166, 0.2)" stroke="#14b8a6" stroke-width="2"/>
+          <text x="150" y="75" text-anchor="middle" font-size="14" font-weight="bold" fill="#14b8a6">
+            DocumentRequest
+          </text>
+          <text x="150" y="92" text-anchor="middle" font-size="9" fill="#14b8a6" font-weight="600">
+            [CONDITIONS PORTAL]
+          </text>
+          <line x1="60" y1="100" x2="240" y2="100" stroke="#14b8a6" stroke-width="1" opacity="0.5"/>
+          <text x="65" y="118" font-size="11" fill="#f1f5f9" font-family="monospace">id: UUID</text>
+          <text x="65" y="133" font-size="11" fill="#f1f5f9" font-family="monospace">conditionId: UUID</text>
+          <text x="65" y="148" font-size="11" fill="#f1f5f9" font-family="monospace">documentType</text>
+          <text x="65" y="163" font-size="11" fill="#f1f5f9" font-family="monospace">requestedFrom[]</text>
+          <text x="65" y="178" font-size="11" fill="#f1f5f9" font-family="monospace">status, dates</text>
+        </g>
+
+        <!-- Note (PORTAL) -->
+        <g id="note">
+          <rect x="50" y="230" width="200" height="120" rx="8"
+                fill="rgba(20, 184, 166, 0.2)" stroke="#14b8a6" stroke-width="2"/>
+          <text x="150" y="255" text-anchor="middle" font-size="14" font-weight="bold" fill="#14b8a6">
+            Note
+          </text>
+          <text x="150" y="272" text-anchor="middle" font-size="9" fill="#14b8a6" font-weight="600">
+            [CONDITIONS PORTAL]
+          </text>
+          <line x1="60" y1="280" x2="240" y2="280" stroke="#14b8a6" stroke-width="1" opacity="0.5"/>
+          <text x="65" y="298" font-size="11" fill="#f1f5f9" font-family="monospace">id: UUID</text>
+          <text x="65" y="313" font-size="11" fill="#f1f5f9" font-family="monospace">conditionId: UUID</text>
+          <text x="65" y="328" font-size="11" fill="#f1f5f9" font-family="monospace">content: RichText</text>
+          <text x="65" y="343" font-size="11" fill="#f1f5f9" font-family="monospace">createdAt, createdBy</text>
+        </g>
+
+        <!-- StatusHistory (PORTAL) -->
+        <g id="statusHistory">
+          <rect x="50" y="390" width="200" height="140" rx="8"
+                fill="rgba(20, 184, 166, 0.2)" stroke="#14b8a6" stroke-width="2"/>
+          <text x="150" y="415" text-anchor="middle" font-size="14" font-weight="bold" fill="#14b8a6">
+            StatusHistory
+          </text>
+          <text x="150" y="432" text-anchor="middle" font-size="9" fill="#14b8a6" font-weight="600">
+            [CONDITIONS PORTAL]
+          </text>
+          <line x1="60" y1="440" x2="240" y2="440" stroke="#14b8a6" stroke-width="1" opacity="0.5"/>
+          <text x="65" y="458" font-size="11" fill="#f1f5f9" font-family="monospace">id: UUID</text>
+          <text x="65" y="473" font-size="11" fill="#f1f5f9" font-family="monospace">conditionId: UUID</text>
+          <text x="65" y="488" font-size="11" fill="#f1f5f9" font-family="monospace">fromStatus</text>
+          <text x="65" y="503" font-size="11" fill="#f1f5f9" font-family="monospace">toStatus</text>
+          <text x="65" y="518" font-size="11" fill="#f1f5f9" font-family="monospace">changedAt, changedBy</text>
+        </g>
+
+        <!-- ExceptionRequest (PORTAL) -->
+        <g id="exceptionRequest">
+          <rect x="750" y="50" width="200" height="160" rx="8"
+                fill="rgba(20, 184, 166, 0.2)" stroke="#14b8a6" stroke-width="2"/>
+          <text x="850" y="75" text-anchor="middle" font-size="14" font-weight="bold" fill="#14b8a6">
+            ExceptionRequest
+          </text>
+          <text x="850" y="92" text-anchor="middle" font-size="9" fill="#14b8a6" font-weight="600">
+            [CONDITIONS PORTAL]
+          </text>
+          <line x1="760" y1="100" x2="940" y2="100" stroke="#14b8a6" stroke-width="1" opacity="0.5"/>
+          <text x="765" y="118" font-size="11" fill="#f1f5f9" font-family="monospace">id: UUID</text>
+          <text x="765" y="133" font-size="11" fill="#f1f5f9" font-family="monospace">conditionId: UUID</text>
+          <text x="765" y="148" font-size="11" fill="#f1f5f9" font-family="monospace">reason: Text</text>
+          <text x="765" y="163" font-size="11" fill="#f1f5f9" font-family="monospace">status: Enum</text>
+          <text x="765" y="178" font-size="11" fill="#f1f5f9" font-family="monospace">requestedBy</text>
+          <text x="765" y="193" font-size="11" fill="#f1f5f9" font-family="monospace">reviewedBy, dates</text>
+        </g>
+
+        <!-- Flag (PORTAL) -->
+        <g id="flag">
+          <rect x="750" y="250" width="200" height="140" rx="8"
+                fill="rgba(20, 184, 166, 0.2)" stroke="#14b8a6" stroke-width="2"/>
+          <text x="850" y="275" text-anchor="middle" font-size="14" font-weight="bold" fill="#14b8a6">
+            Flag
+          </text>
+          <text x="850" y="292" text-anchor="middle" font-size="9" fill="#14b8a6" font-weight="600">
+            [CONDITIONS PORTAL]
+          </text>
+          <line x1="760" y1="300" x2="940" y2="300" stroke="#14b8a6" stroke-width="1" opacity="0.5"/>
+          <text x="765" y="318" font-size="11" fill="#f1f5f9" font-family="monospace">id: UUID</text>
+          <text x="765" y="333" font-size="11" fill="#f1f5f9" font-family="monospace">conditionId: UUID</text>
+          <text x="765" y="348" font-size="11" fill="#f1f5f9" font-family="monospace">userId: UUID</text>
+          <text x="765" y="363" font-size="11" fill="#f1f5f9" font-family="monospace">color: Enum</text>
+          <text x="765" y="378" font-size="11" fill="#f1f5f9" font-family="monospace">setAt: DateTime</text>
+        </g>
+
+        <!-- Loan (BYTE) -->
+        <g id="loan">
+          <rect x="400" y="550" width="200" height="100" rx="8"
+                fill="rgba(59, 130, 246, 0.2)" stroke="#3b82f6" stroke-width="2"/>
+          <text x="500" y="575" text-anchor="middle" font-size="14" font-weight="bold" fill="#3b82f6">
+            Loan
+          </text>
+          <text x="500" y="592" text-anchor="middle" font-size="9" fill="#3b82f6" font-weight="600">
+            [BYTE CORE]
+          </text>
+          <line x1="410" y1="600" x2="590" y2="600" stroke="#3b82f6" stroke-width="1" opacity="0.5"/>
+          <text x="415" y="618" font-size="11" fill="#f1f5f9" font-family="monospace">id: UUID</text>
+          <text x="415" y="633" font-size="11" fill="#f1f5f9" font-family="monospace">loanNumber</text>
+        </g>
+
+        <!-- Relationship Lines -->
+
+        <!-- DocumentRequest -> Condition (1:many) -->
+        <path d="M 250 120 L 380 300" stroke="#14b8a6" stroke-width="2" fill="none" marker-end="url(#arrowTeal)"/>
+        <text x="280" y="200" font-size="10" fill="#14b8a6" font-weight="600">1:many</text>
+
+        <!-- Note -> Condition (1:many) -->
+        <path d="M 250 290 L 380 330" stroke="#14b8a6" stroke-width="2" fill="none" marker-end="url(#arrowTeal)"/>
+        <text x="290" y="310" font-size="10" fill="#14b8a6" font-weight="600">1:many</text>
+
+        <!-- StatusHistory -> Condition (1:many) -->
+        <path d="M 250 460 L 380 370" stroke="#14b8a6" stroke-width="2" fill="none" marker-end="url(#arrowTeal)"/>
+        <text x="290" y="420" font-size="10" fill="#14b8a6" font-weight="600">1:many</text>
+
+        <!-- ExceptionRequest -> Condition (0..1:1) -->
+        <path d="M 750 130 L 620 300" stroke="#14b8a6" stroke-width="2" fill="none" marker-end="url(#arrowTeal)"/>
+        <text x="680" y="210" font-size="10" fill="#14b8a6" font-weight="600">0..1:1</text>
+
+        <!-- Flag -> Condition (1:many) -->
+        <path d="M 750 320 L 620 340" stroke="#14b8a6" stroke-width="2" fill="none" marker-end="url(#arrowTeal)"/>
+        <text x="680" y="330" font-size="10" fill="#14b8a6" font-weight="600">1:many</text>
+
+        <!-- Condition -> Loan (many:1) -->
+        <path d="M 500 450 L 500 550" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrowBlue)"/>
+        <text x="510" y="500" font-size="10" fill="#3b82f6" font-weight="600">many:1</text>
+
+        <!-- Arrow markers -->
+        <defs>
+          <marker id="arrowTeal" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L0,6 L9,3 z" fill="#14b8a6" />
+          </marker>
+          <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L0,6 L9,3 z" fill="#3b82f6" />
+          </marker>
+        </defs>
+      </svg>
+    </div>
+
     <h2>Core Entities</h2>
 
     <div class="entity-card">
+      <div class="system-badges">
+        <span class="system-badge hybrid">HYBRID</span>
+      </div>
       <h3>Condition</h3>
-      <p>The primary entity representing a loan condition that must be satisfied before closing.</p>
+      <div class="entity-summary">
+        The primary entity representing a loan condition that must be satisfied before closing. Core condition data (name, status, category, stage) lives in Byte LOS for enterprise reporting compatibility, while enhanced metadata (notes, document requests, status history) lives in the Conditions Portal. This hybrid model enables ~30 second bidirectional sync while maintaining data integrity across both systems.
+      </div>
 
       <div class="relationship-box">
         <h4>Relationships</h4>
@@ -399,8 +760,13 @@
     </div>
 
     <div class="entity-card">
+      <div class="system-badges">
+        <span class="system-badge portal">CONDITIONS PORTAL</span>
+      </div>
       <h3>DocumentRequest</h3>
-      <p>Represents a request for a specific document from the borrower to satisfy a condition.</p>
+      <div class="entity-summary">
+        Represents a structured request for specific documents from borrowers to satisfy a condition. Each request specifies the document type (from 16 predefined types), target borrowers, and detailed instructions. Tracks the complete lifecycle from request creation through document receipt and review, enabling clear communication and audit trails between processors, underwriters, and borrowers.
+      </div>
 
       <div class="relationship-box">
         <h4>Relationships</h4>
@@ -473,8 +839,13 @@
     </div>
 
     <div class="entity-card">
+      <div class="system-badges">
+        <span class="system-badge portal">CONDITIONS PORTAL</span>
+      </div>
       <h3>Note</h3>
-      <p>Free-form notes attached to a condition by processors or underwriters.</p>
+      <div class="entity-summary">
+        Free-form notes attached to conditions by processors or underwriters for collaboration and documentation. Supports rich text formatting to enable clear communication of complex information, follow-up items, or clarifications. Each note is timestamped and attributed to its creator for full auditability and team coordination.
+      </div>
 
       <div class="relationship-box">
         <h4>Relationships</h4>
@@ -528,8 +899,13 @@
     </div>
 
     <div class="entity-card">
+      <div class="system-badges">
+        <span class="system-badge portal">CONDITIONS PORTAL</span>
+      </div>
       <h3>StatusHistory</h3>
-      <p>Audit trail of all status changes for a condition.</p>
+      <div class="entity-summary">
+        Complete audit trail of all status transitions for a condition throughout its lifecycle. Captures who made each change and when, enabling compliance reporting, performance analysis, and issue investigation. Critical for understanding bottlenecks in the conditions clearance workflow and maintaining regulatory documentation requirements.
+      </div>
 
       <div class="relationship-box">
         <h4>Relationships</h4>
@@ -589,8 +965,13 @@
     </div>
 
     <div class="entity-card">
+      <div class="system-badges">
+        <span class="system-badge portal">CONDITIONS PORTAL</span>
+      </div>
       <h3>ExceptionRequest</h3>
-      <p>Request to make an exception to standard underwriting rules for a condition.</p>
+      <div class="entity-summary">
+        Formal request by a processor to make an exception to standard underwriting rules for a specific condition. Enables documented escalation workflow where processors can request and underwriters can approve/deny exceptions with full audit trail. Each condition can have at most one active exception request to maintain clear decision-making authority.
+      </div>
 
       <div class="relationship-box">
         <h4>Relationships</h4>
@@ -662,8 +1043,13 @@
     </div>
 
     <div class="entity-card">
+      <div class="system-badges">
+        <span class="system-badge portal">CONDITIONS PORTAL</span>
+      </div>
       <h3>Flag</h3>
-      <p>Personal flag set by a user to prioritize or categorize conditions (not shared).</p>
+      <div class="entity-summary">
+        Personal, user-specific flags that allow processors and underwriters to prioritize or categorize conditions using color-coded markers. Flags are private to each user (not shared) and enable personalized workflow management without affecting team visibility. Supports Red, Blue, Yellow, Green, and None values for flexible prioritization strategies.
+      </div>
 
       <div class="relationship-box">
         <h4>Relationships</h4>
